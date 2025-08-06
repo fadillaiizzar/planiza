@@ -17,6 +17,9 @@ export default {
         'cool-gray': '#64748B',
         'border-gray': '#CBD5E1',
       },
+      transitionProperty: {
+        'width': 'width',
+      },
     },
   },
   plugins: [],
