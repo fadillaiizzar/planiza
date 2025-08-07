@@ -9,7 +9,7 @@
             <!-- Heading -->
             <div class="mb-12">
                 <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 flex flex-wrap justify-center items-center gap-2 sm:gap-3">
-                    Hai, <span class="text-slate-navy">{{ $user->name }}</span> 
+                    Hai, <span class="text-slate-navy">{{ $user->name }}</span>
                     <span class="text-3xl sm:text-4xl">👋</span>
                 </h1>
                 <p class="text-base sm:text-lg text-cool-gray font-medium">siap belajar dan menjelajahi karier hari ini?</p>
@@ -116,11 +116,11 @@
 
                 <form id="rencanaForm" method="POST" action="{{ route('siswa.simpan.rencana') }}" class="space-y-3 overflow-auto max-h-[70vh] pr-1">
                     @csrf
-                    
+
                     <!-- Nama -->
                     <div>
                         <label class="text-xs font-medium text-cool-gray mb-0.5 block">Nama</label>
-                        <input type="text" name="name" value="{{ $user->name }}" 
+                        <input type="text" name="name" value="{{ $user->name }}"
                             class="w-full px-3 py-1.5 border border-gray-200 rounded-md text-sm bg-gray-100"
                             @if($user->role->nama_role === 'Siswa') readonly @endif>
                     </div>
@@ -129,13 +129,13 @@
                     <div class="grid grid-cols-2 gap-2">
                         <div>
                             <label class="text-xs font-medium text-cool-gray mb-0.5 block">Kelas</label>
-                            <input type="text" name="kelas" value="{{ $user->siswa->kelas->nama_kelas ?? '-' }}" 
+                            <input type="text" name="kelas" value="{{ $user->siswa->kelas->nama_kelas ?? '-' }}"
                                 class="w-full px-3 py-1.5 border border-gray-200 rounded-md text-sm bg-gray-100"
                                 readonly>
                         </div>
                         <div>
                             <label class="text-xs font-medium text-cool-gray mb-0.5 block">Jurusan</label>
-                            <input type="text" name="jurusan" value="{{ $user->siswa->jurusan->nama_jurusan ?? '-' }}" 
+                            <input type="text" name="jurusan" value="{{ $user->siswa->jurusan->nama_jurusan ?? '-' }}"
                                 class="w-full px-3 py-1.5 border border-gray-200 rounded-md text-sm bg-gray-100"
                                 readonly>
                         </div>
@@ -177,15 +177,6 @@
 
 @push('scripts')
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const hamburger = document.getElementById("hamburger-dashboard");
-            const mobileMenu = document.getElementById("mobileMenuDashboard");
-
-            hamburger.addEventListener("click", function () {
-                mobileMenu.classList.toggle("hidden");
-            });
-        });
-
         document.addEventListener('DOMContentLoaded', function () {
             const noHpInput = document.querySelector('input[name="no_hp"]');
             const rencanaSelect = document.querySelector('select[name="rencana"]');

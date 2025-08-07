@@ -3,10 +3,11 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MateriController;
 use App\Http\Controllers\SiswaController;
 
 Route::get('/', function () {
-    return view('beranda'); 
+    return view('beranda');
 });
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -19,8 +20,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/redirect', [AuthController::class, 'redirectByRole'])->name('redirect');
 
     Route::get('/dashboard/pages/admin', [AdminController::class, 'index'])->middleware('auth');
-    Route::get('/dashboard/pages/siswa', [SiswaController::class, 'index'])->name('<dashboard class="pages"></dashboard>siswa')->middleware('auth');
+    Route::get('/dashboard/pages/siswa', [SiswaController::class, 'index'])->name('siswa.dashboard')->middleware('auth');
+
+    Route::get('/materi/pages/siswa', [MateriController::class, 'index'])->name('siswa.materi')->middleware('auth');
 });
 
 Route::post('/siswa/simpan-rencana', [SiswaController::class, 'simpanRencana'])->name('siswa.simpan.rencana');
-

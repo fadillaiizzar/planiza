@@ -15,6 +15,19 @@
 
         @include('siswa.components.footer.footer')
 
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const hamburger = document.getElementById("hamburger-dashboard");
+                const mobileMenu = document.getElementById("mobileMenuDashboard");
+
+                if (hamburger && mobileMenu) {
+                    hamburger.addEventListener("click", function () {
+                        mobileMenu.classList.toggle("hidden");
+                    });
+                }
+            });
+        </script>
+
         @stack('scripts')
     </body>
 </html>

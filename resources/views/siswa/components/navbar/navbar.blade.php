@@ -11,7 +11,7 @@
 
             <!-- Navigation Links (desktop) -->
             <div id="navLinksDashboard" class="hidden md:flex space-x-6 font-medium">
-                <a href="#materi" class="text-cool-gray hover:text-slate-navy transition">Materi</a>
+                <a href="{{ route('siswa.materi') }}" class="text-cool-gray hover:text-slate-navy transition">Materi</a>
                 <a href="#eksplorasi" class="text-cool-gray hover:text-slate-navy transition">Eksplorasi</a>
                 <a href="#kenali-karier" class="text-cool-gray hover:text-slate-navy transition">Kenali Karir</a>
                 <a href="#bincang-karier" class="text-cool-gray hover:text-slate-navy transition">Bincang Karir</a>
@@ -20,7 +20,7 @@
 
         <!-- Logo (center) -->
         <div class="text-xl font-bold text-slate-navy">
-            Planiza
+            <a href="{{ route('siswa.dashboard') }}">Planiza</a>
         </div>
 
         <!-- Profile & Logout (right) -->
@@ -28,9 +28,9 @@
             <div class="relative group">
                 <button class="flex items-center space-x-2 text-cool-gray hover:text-slate-navy transition-colors duration-200">
                     <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                        <span class="text-white text-sm font-semibold">{{ substr($user->name, 0, 1) }}</span>
+                        <span class="text-white text-sm font-semibold">{{ substr(auth()->user()->name, 0, 1) }}</span>
                     </div>
-                    <span class="hidden sm:block font-medium">{{ $user->name }}</span>
+                    <span class="hidden sm:block font-medium">{{ auth()->user()->name }}</span>
                     <i class="fas fa-chevron-down text-xs"></i>
                 </button>
 
@@ -57,7 +57,7 @@
 
     <!-- Mobile Menu Dropdown -->
     <div id="mobileMenuDashboard" class="md:hidden hidden px-6 pb-4">
-        <a href="#materi" class="block py-2 text-cool-gray hover:text-slate-navy">Materi</a>
+        <a href="{{ route('siswa.materi') }}" class="block py-2 text-cool-gray hover:text-slate-navy">Materi</a>
         <a href="#eksplorasi" class="block py-2 text-cool-gray hover:text-slate-navy">Eksplorasi</a>
         <a href="#kenali-karier" class="block py-2 text-cool-gray hover:text-slate-navy">Kenali Karir</a>
         <a href="#bincang-karier" class="block py-2 text-cool-gray hover:text-slate-navy">Bincang Karir</a>
