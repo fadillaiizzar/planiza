@@ -34,7 +34,7 @@
         </select>
 
         <!-- Form Tambahan Jika Role = Siswa -->
-        <div id="siswaFields" style="display: none;">
+        <div id="siswaFields" style="{{ old('role_id') && $roles->find(old('role_id'))->nama_role === 'Siswa' ? '' : 'display: none;' }}">
             <select name="kelas_id">
                 <option value="">Pilih Kelas</option>
                 @foreach($kelas as $kelas)

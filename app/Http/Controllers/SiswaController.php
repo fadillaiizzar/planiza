@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request; 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Rencana;
 
@@ -22,7 +22,7 @@ class SiswaController extends Controller
         ]);
 
         $user = Auth::user();
-        
+
     if ($user->role->nama_role === 'Siswa') {
         $siswa = $user->siswa;
 
@@ -36,6 +36,6 @@ class SiswaController extends Controller
         $siswa->rencana_id = $rencana->id;
         $siswa->save();
     }
-        return redirect()->route('dashboard.pages.siswa')->with('success', 'Rencana berhasil disimpan.');
+        return redirect()->route('siswa.dashboard')->with('success', 'Rencana berhasil disimpan.');
     }
 }
