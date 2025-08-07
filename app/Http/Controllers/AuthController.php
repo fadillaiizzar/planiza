@@ -94,7 +94,7 @@ class AuthController extends Controller
             ]);
         }
 
-        return redirect('/dashboard/admin')->with('success', 'Registrasi berhasil');
+        return redirect('/dashboard/pages/admin')->with('success', 'Registrasi berhasil');
     }
 
     public function redirectByRole()
@@ -102,15 +102,15 @@ class AuthController extends Controller
         $user = Auth::user();
 
         if ($user->role->nama_role === 'Admin') {
-            return redirect('/dashboard/admin');
+            return redirect('/dashboard/pages/admin');
         } elseif ($user->role->nama_role === 'Siswa') {
             $siswa = $user->siswa;
 
             if (is_null($siswa->no_hp) || is_null($siswa->rencana)) {
-                return redirect('/dashboard/siswa')->with('loginSuccess', true);
+                return redirect('/dashboard/pages/siswa')->with('loginSuccess', true);
             }
 
-            return redirect('/dashboard/siswa');
+            return redirect('/dashboard/pages/siswa');
         } else {
             return redirect('/');
         }

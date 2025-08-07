@@ -9,11 +9,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
     <body class="font-poppins bg-off-white min-h-screen">
-        @include('components.navbar')
+        @include('siswa.components.navbar.navbar')
 
         @yield('content')
 
-        @include('components.footer')
+        @include('siswa.components.footer.footer')
 
         @stack('scripts')
     </body>

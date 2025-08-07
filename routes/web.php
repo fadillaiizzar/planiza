@@ -18,8 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::get('/redirect', [AuthController::class, 'redirectByRole'])->name('redirect');
 
-    Route::get('/dashboard/admin', [AdminController::class, 'index'])->middleware('auth');
-    Route::get('/dashboard/siswa', [SiswaController::class, 'index'])->name('dashboard.siswa')->middleware('auth');
+    Route::get('/dashboard/pages/admin', [AdminController::class, 'index'])->middleware('auth');
+    Route::get('/dashboard/pages/siswa', [SiswaController::class, 'index'])->name('<dashboard class="pages"></dashboard>siswa')->middleware('auth');
 });
 
 Route::post('/siswa/simpan-rencana', [SiswaController::class, 'simpanRencana'])->name('siswa.simpan.rencana');
+

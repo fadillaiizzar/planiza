@@ -11,7 +11,7 @@ class SiswaController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('siswa.dashboard', compact('user'));
+        return view('siswa.pages.dashboard', compact('user'));
     }
 
     public function simpanRencana(Request $request)
@@ -36,6 +36,6 @@ class SiswaController extends Controller
         $siswa->rencana_id = $rencana->id;
         $siswa->save();
     }
-        return redirect()->route('dashboard.siswa')->with('success', 'Rencana berhasil disimpan.');
+        return redirect()->route('dashboard.pages.siswa')->with('success', 'Rencana berhasil disimpan.');
     }
 }
