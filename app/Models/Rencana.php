@@ -12,8 +12,13 @@ class Rencana extends Model
 
     protected $fillable = ['nama_rencana'];
 
-    public function siswas(): HasMany 
+    public function siswas(): HasMany
     {
         return $this->hasMany(Siswa::class);
+    }
+
+    public function topikMateris(): HasMany
+    {
+        return $this->hasMany(TopikMateri::class);
     }
 }
