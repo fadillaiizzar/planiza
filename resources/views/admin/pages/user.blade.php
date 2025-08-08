@@ -7,86 +7,122 @@
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-30 z-30 hidden md:hidden" onclick="toggleSidebar()"></div>
 
     <!-- Main -->
-    <main class="flex-1 p-6">
-        <div class="md:hidden flex justify-between items-center mb-4">
-            <button onclick="toggleSidebar()" class="text-2xl">
-                <i class="fas fa-bars"></i>
-            </button>
-            <a href="{{ route('register') }}" class="text-xl text-slate-navy hover:text-blue-600">
-                <i class="fas fa-user-plus"></i>
-            </a>
-        </div>
+    <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
+        <div class="mx-auto max-w-7xl space-y-6">
 
-        <div class="hidden md:flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-semibold">User</h2>
-            <a href="{{ route('register') }}" class="px-4 py-2 bg-white text-slate-navy hover:bg-slate-navy hover:text-white border border-slate-navy rounded transition">
-                Tambah Akun
-            </a>
-        </div>
+           @include('admin.components.header.header', [
+                'pageTitle' => 'User Management',
+                'addButtonText' => 'Tambah User',
+                'addUserRoute' => route('register'),
+                'userCount' => $userCount,
+                'users' => $users,
+                'stats' => [
+                    ['label' => 'Total User', 'count' => $userCount, 'icon' => 'fas fa-users', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
+                    ['label' => 'Admin', 'count' => $users->where('role.nama_role', 'admin')->count(), 'icon' => 'fas fa-shield-alt', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
+                    ['label' => 'Siswa', 'count' => $users->where('role.nama_role', 'siswa')->count(), 'icon' => 'fas fa-graduation-cap', 'bg' => 'from-emerald-500 to-emerald-600', 'textColor' => 'text-emerald-100'],
+                ],
+                'roles' => ['admin', 'siswa']
+            ])
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div class="bg-white shadow rounded-lg p-4">
-                <p class="text-cool-gray">Total User</p>
-                <h3 class="text-2xl font-bold">{{ $userCount }}</h3>
-            </div>
-        </div>
+            <!-- Enhanced Users Table -->
+            <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border-0 overflow-visible">
+                <div class="p-6 border-b border-slate-100">
+                    <h3 class="text-xl font-semibold text-slate-800">Daftar User</h3>
+                </div>
 
-        <div class="bg-white shadow rounded-lg p-4">
-            <h3 class="text-xl font-semibold mb-4">Daftar User</h3>
-            <table class="w-full table-auto text-left text-sm">
-                <thead>
-                    <tr class="border-b border-border-gray text-cool-gray">
-                        <th class="p-2 w-12">ID</th>
-                        <th class="p-2 w-1/4">Nama</th>
-                        <th class="p-2 w-1/5">Username</th>
-                        <th class="p-2 w-1/5">Password</th>
-                        <th class="p-2 w-1/6">Role</th>
-                        <th class="p-2 text-center w-16">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($users as $u)
-                    <tr class="border-b hover:bg-off-white">
-                        <td class="p-2">{{ $u->id }}</td>
-                        <td class="p-2 font-medium">{{ $u->name }}</td>
-                        <td class="p-2">{{ $u->username }}</td>
-                        <td class="p-2 truncate" title="{{ $u->password }}">
-                            {{ \Illuminate\Support\Str::limit($u->password, 10) }}
-                        </td>
-                        <td class="p-2">{{ $u->role->nama_role ?? '-' }}</td>
-                        <td class="p-2 text-center relative">
-                            <!-- Tombol utama -->
-                            <button onclick="toggleDropdown({{ $u->id }})"
-                                class="p-1 rounded hover:bg-gray-100 focus:outline-none">
-                                <i class="fas fa-cog"></i>
-                            </button>
+                <div class="overflow-x-auto">
+                    <table class="w-full table-auto text-left text-sm" id="usersTable">
+                        <thead>
+                            <tr class="bg-slate-50/50 border-b border-slate-200">
+                                <th class="p-4 font-semibold text-slate-700">ID</th>
+                                <th class="p-4 font-semibold text-slate-700">Pengguna</th>
+                                <th class="p-4 font-semibold text-slate-700">Username</th>
+                                <th class="p-4 font-semibold text-slate-700">Password</th>
+                                <th class="p-4 font-semibold text-slate-700">Role</th>
+                                <th class="p-4 font-semibold text-slate-700 text-center ">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $u)
+                            <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition-colors user-row" data-role="{{ strtolower($u->role->nama_role ?? '') }}" data-name="{{ strtolower($u->name) }}" data-username="{{ strtolower($u->username) }}">
+                                <td class="p-4 text-slate-600">{{ $u->id }}</td>
+                                <td class="p-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                                            {{ strtoupper(substr($u->name, 0, 1)) }}{{ strtoupper(substr(explode(' ', $u->name)[1] ?? '', 0, 1)) }}
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-slate-900">{{ $u->name }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="p-4 text-slate-700">{{ $u->username }}</td>
+                                <td class="p-4">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-slate-600 font-mono text-xs px-2 py-1 rounded">
+                                            {{ \Illuminate\Support\Str::limit($u->password, 10) }}
+                                        </span>
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    @php
+                                        $roleColors = [
+                                            'admin' => 'bg-gradient-to-r from-purple-500 to-purple-600 text-white',
+                                            'guru' => 'bg-gradient-to-r from-blue-500 to-blue-600 text-white',
+                                            'siswa' => 'bg-gradient-to-r from-green-500 to-green-600 text-white'
+                                        ];
+                                        $roleIcons = [
+                                            'admin' => 'fas fa-shield-alt',
+                                            'guru' => 'fas fa-chalkboard-teacher',
+                                            'siswa' => 'fas fa-graduation-cap'
+                                        ];
+                                        $roleName = strtolower($u->role->nama_role ?? '');
+                                    @endphp
 
-                            <!-- Dropdown aksi -->
-                            <div id="dropdown-{{ $u->id }}"
-                                class="hidden absolute right-0 mt-2 bg-white border border-gray-200 rounded shadow-lg z-10 flex flex-col text-left">
-                                @if($u->role->nama_role === 'siswa')
-                                    <button onclick="alert('Detail Siswa: {{ $u->name }}')"
-                                        class="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 text-blue-500">
-                                        <i class="fas fa-eye"></i> Detail
+                                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium {{ $roleColors[$roleName] ?? 'bg-gray-500 text-white' }}">
+                                        <i class="{{ $roleIcons[$roleName] ?? 'fas fa-user' }}"></i>
+                                        {{ $u->role->nama_role ?? '-' }}
+                                    </span>
+                                </td>
+                                <td class="p-4 text-center relative overflow-visible"> <!-- pastikan overflow visible -->
+                                    <button onclick="toggleDropdown({{ $u->id }})"
+                                            class="p-2 rounded-lg hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all">
+                                        <i class="fas fa-cog text-slate-600"></i>
                                     </button>
-                                @endif
-                                <button onclick="alert('Edit Data: {{ $u->name }}')"
-                                    class="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 text-yellow-500">
-                                    <i class="fas fa-edit"></i> Edit
-                                </button>
-                                <button onclick="confirm('Yakin hapus {{ $u->name }}?')"
-                                    class="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 text-red-500">
-                                    <i class="fas fa-trash-alt"></i> Hapus
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
 
-            <div class="mt-4">
-                {{ $users->links() }}
+                                    <!-- Dropdown -->
+                                    <div id="dropdown-{{ $u->id }}"
+                                        class="hidden absolute right-8 mt-2 bg-white border border-slate-200 rounded-lg shadow-xl z-20 min-w-[180px] w-auto overflow-visible">
+                                        @if(strtolower($u->role->nama_role) === 'siswa')
+                                            <button onclick="alert('Detail Siswa: {{ $u->name }}')"
+                                                    class="w-full px-5 py-3 hover:bg-blue-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
+                                                <i class="fas fa-eye w-5 h-5"></i>
+                                                <span>Detail Siswa</span>
+                                            </button>
+                                        @endif
+                                        <button onclick="alert('Edit Data: {{ $u->name }}')"
+                                                class="w-full px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-yellow-600 transition-colors text-base">
+                                            <i class="fas fa-edit w-5 h-5"></i>
+                                            <span>Edit Data</span>
+                                        </button>
+                                        <div class="border-t border-slate-100"></div>
+                                        <button onclick="confirm('Yakin hapus {{ $u->name }}?')"
+                                                class="w-full px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base">
+                                            <i class="fas fa-trash-alt w-5 h-5"></i>
+                                            <span>Hapus User</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="px-6 py-4 border-t border-slate-200 bg-slate-50/30">
+                    {{ $users->links() }}
+                </div>
             </div>
         </div>
     </main>
@@ -94,14 +130,13 @@
 
 @push('scripts')
 <script>
+    // Existing functions
     function toggleSidebarSize() {
         const sidebar = document.getElementById('sidebar');
         const isCollapsed = sidebar.classList.toggle('w-20');
         sidebar.classList.toggle('w-64', !isCollapsed);
-
         const profileSection = document.getElementById('profileSection');
         const userName = document.getElementById('userName');
-
         if (isCollapsed) {
             profileSection.classList.replace('gap-3', 'gap-2');
             userName.classList.add('opacity-0', 'w-0', 'overflow-hidden');
@@ -109,18 +144,15 @@
             profileSection.classList.replace('gap-2', 'gap-3');
             userName.classList.remove('opacity-0', 'w-0', 'overflow-hidden');
         }
-
         document.querySelectorAll('.sidebar-label').forEach(label => {
             label.classList.toggle('opacity-0', isCollapsed);
             label.classList.toggle('w-0', isCollapsed);
             label.classList.toggle('overflow-hidden', isCollapsed);
         });
-
         document.querySelectorAll('.icon-wrapper').forEach(wrapper => {
             wrapper.classList.toggle('justify-center', isCollapsed);
             wrapper.classList.toggle('justify-start', !isCollapsed);
         });
-
         const icon = document.getElementById('sidebarToggleIcon');
         icon.classList.toggle('fa-angle-left', !isCollapsed);
         icon.classList.toggle('fa-angle-right', isCollapsed);
@@ -129,7 +161,6 @@
     function toggleSidebar() {
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
-
         const isOpen = sidebar.classList.contains('-translate-x-full');
         if (isOpen) {
             sidebar.classList.remove('-translate-x-full');
@@ -145,10 +176,49 @@
         document.querySelectorAll('[id^="dropdown-"]').forEach(el => {
             if (el.id !== `dropdown-${id}`) el.classList.add('hidden');
         });
-
         // Toggle dropdown yang diklik
         const dropdown = document.getElementById(`dropdown-${id}`);
         dropdown.classList.toggle('hidden');
+    }
+
+    // Enhanced search and filter functionality
+    function initializeFilters() {
+        const searchInput = document.getElementById('searchInput');
+        const roleFilter = document.getElementById('roleFilter');
+        const resultCount = document.getElementById('resultCount');
+        const userRows = document.querySelectorAll('.user-row');
+
+        function filterUsers() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedRole = roleFilter.value.toLowerCase();
+            let visibleCount = 0;
+
+            userRows.forEach(row => {
+                const name = row.dataset.name;
+                const username = row.dataset.username;
+                const role = row.dataset.role;
+
+                const matchesSearch = name.includes(searchTerm) || username.includes(searchTerm);
+                const matchesRole = !selectedRole || role === selectedRole;
+
+                if (matchesSearch && matchesRole) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            resultCount.textContent = visibleCount;
+        }
+
+        searchInput.addEventListener('input', filterUsers);
+        roleFilter.addEventListener('change', filterUsers);
+    }
+
+    function togglePassword(userId) {
+        // Placeholder for password toggle functionality
+        alert('Toggle password visibility for user ID: ' + userId);
     }
 
     // Klik di luar dropdown -> tutup
@@ -156,6 +226,11 @@
         if (!e.target.closest('[id^="dropdown-"]') && !e.target.closest('button')) {
             document.querySelectorAll('[id^="dropdown-"]').forEach(el => el.classList.add('hidden'));
         }
+    });
+
+    // Initialize filters when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeFilters();
     });
 </script>
 @endpush
