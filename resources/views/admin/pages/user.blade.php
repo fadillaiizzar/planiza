@@ -91,26 +91,23 @@
                                     </button>
 
                                     <!-- Dropdown -->
-                                    <div id="dropdown-{{ $u->id }}"
-                                        class="hidden absolute right-8 mt-2 bg-white border border-slate-200 rounded-lg shadow-xl z-20 min-w-[180px] w-auto overflow-visible">
-                                        @if(strtolower($u->role->nama_role) === 'siswa')
-                                            <button onclick="alert('Detail Siswa: {{ $u->name }}')"
-                                                    class="w-full px-5 py-3 hover:bg-blue-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
-                                                <i class="fas fa-eye w-5 h-5"></i>
-                                                <span>Detail Siswa</span>
-                                            </button>
-                                        @endif
-                                        <button onclick="alert('Edit Data: {{ $u->name }}')"
-                                                class="w-full px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-yellow-600 transition-colors text-base">
-                                            <i class="fas fa-edit w-5 h-5"></i>
-                                            <span>Edit Data</span>
-                                        </button>
+                                    <div id="dropdown-{{ $u->id }}" class="hidden absolute right-8 mt-2 bg-white border border-slate-200 rounded-lg shadow-xl z-20 min-w-[180px] w-auto overflow-visible">
+                                        <a href="{{ route('admin.users.detail', $u->id) }}" class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
+                                            <i class="fas fa-eye w-5 h-5"></i>
+                                            <span>Detail User</span>
+                                        </a>
+
                                         <div class="border-t border-slate-100"></div>
-                                        <button onclick="confirm('Yakin hapus {{ $u->name }}?')"
-                                                class="w-full px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base">
-                                            <i class="fas fa-trash-alt w-5 h-5"></i>
-                                            <span>Hapus User</span>
-                                        </button>
+
+                                        <form action="{{ route('admin.users.delete', $u->id) }}" method="POST" onsubmit="return confirm('Yakin hapus {{ $u->name }}?')" class="m-0 p-0">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base border-none bg-transparent cursor-pointer">
+                                                <i class="fas fa-trash-alt w-5 h-5"></i>
+                                                <span>Hapus User</span>
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
