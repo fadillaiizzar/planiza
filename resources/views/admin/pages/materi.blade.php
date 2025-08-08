@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Dashboard Admin - Planiza')
+@section('title', 'Materi Admin - Planiza')
 
 @section('content')
     <!-- Overlay (mobile) -->
@@ -18,10 +18,10 @@
         </div>
 
         <div class="hidden md:flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-semibold">Selamat Datang, {{ $user->name }} 👋</h2>
-            {{-- <a href="{{ route('register') }}" class="px-4 py-2 bg-white text-slate-navy hover:bg-slate-navy hover:text-white border border-slate-navy rounded transition">
+            <h2 class="text-2xl font-semibold">Materi</h2>
+            <a href="{{ route('register') }}" class="px-4 py-2 bg-white text-slate-navy hover:bg-slate-navy hover:text-white border border-slate-navy rounded transition">
                 Tambah Akun
-            </a> --}}
+            </a>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">

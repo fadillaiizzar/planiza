@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function showLogin() 
+    public function showLogin()
     {
         return view('auth.login');
     }
@@ -94,7 +94,7 @@ class AuthController extends Controller
             ]);
         }
 
-        return redirect('/dashboard/pages/admin')->with('success', 'Registrasi berhasil');
+        return redirect('/user/pages/admin')->with('success', 'Registrasi berhasil');
     }
 
     public function redirectByRole()

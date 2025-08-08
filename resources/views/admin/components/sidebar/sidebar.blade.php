@@ -23,18 +23,18 @@
         <nav class="space-y-4" id="navWrapper">
             @php
                 $sidebarItems = [
-                    ['icon' => 'fa-home', 'label' => 'Dashboard'],
-                    ['icon' => 'fa-users', 'label' => 'User'],
-                    ['icon' => 'fa-book', 'label' => 'Materi'],
-                    ['icon' => 'fa-globe', 'label' => 'Eksplorasi'],
-                    ['icon' => 'fa-briefcase', 'label' => 'Kenali Karier'],
-                    ['icon' => 'fa-leaf', 'label' => 'Kontribusi SDGs'],
-                    ['icon' => 'fa-comments', 'label' => 'Bincang Karier'],
+                    ['icon' => 'fa-home', 'label' => 'Dashboard', 'route' => 'admin.dashboard'],
+                    ['icon' => 'fa-users', 'label' => 'User', 'route' => 'admin.user'],
+                    ['icon' => 'fa-book', 'label' => 'Materi', 'route' => 'admin.materi'],
+                    ['icon' => 'fa-globe', 'label' => 'Eksplorasi', 'route' => 'admin.eksplorasi'],
+                    ['icon' => 'fa-briefcase', 'label' => 'Kenali Karier', 'route' => 'admin.kenali-karier'],
+                    ['icon' => 'fa-leaf', 'label' => 'Kontribusi SDGs', 'route' => 'admin.kontribusi-sdgs'],
+                    ['icon' => 'fa-comments', 'label' => 'Bincang Karier', 'route' => 'admin.bincang-karier'],
                 ];
             @endphp
 
             @foreach ($sidebarItems as $item)
-                <a href="#" class="flex items-center p-2 rounded hover:bg-off-white hover:text-slate-navy transition-all duration-300 nav-item">
+                <a href="{{ route($item['route']) }}" class="flex items-center p-2 rounded hover:bg-off-white hover:text-slate-navy transition-all duration-300 nav-item">
                     <div class="icon-wrapper w-7 flex items-center justify-start">
                         <i class="fas {{ $item['icon'] }} text-lg"></i>
                     </div>
