@@ -26,10 +26,10 @@
                     ['icon' => 'fa-home', 'label' => 'Dashboard', 'route' => 'admin.dashboard'],
                     ['icon' => 'fa-users', 'label' => 'User', 'route' => 'admin.user'],
                     ['icon' => 'fa-book', 'label' => 'Materi', 'route' => 'admin.materi'],
-                    ['icon' => 'fa-globe', 'label' => 'Eksplorasi', 'route' => 'admin.eksplorasi'],
-                    ['icon' => 'fa-briefcase', 'label' => 'Kenali Karier', 'route' => 'admin.kenali-karier'],
+                    ['icon' => 'fa-globe', 'label' => 'Eksplorasi', 'route' => 'admin.dashboard'],
+                    ['icon' => 'fa-briefcase', 'label' => 'Kenali Karier', 'route' => 'admin.dashboard'],
                     ['icon' => 'fa-leaf', 'label' => 'Kontribusi SDGs', 'route' => 'admin.kontribusi-sdgs'],
-                    ['icon' => 'fa-comments', 'label' => 'Bincang Karier', 'route' => 'admin.bincang-karier'],
+                    ['icon' => 'fa-comments', 'label' => 'Bincang Karier', 'route' => 'admin.dashboard'],
                 ];
             @endphp
 

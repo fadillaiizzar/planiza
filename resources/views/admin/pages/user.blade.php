@@ -36,43 +36,58 @@
             <table class="w-full table-auto text-left text-sm">
                 <thead>
                     <tr class="border-b border-border-gray text-cool-gray">
-                        <th class="p-2">ID</th>
-                        <th class="p-2">Nama</th>
-                        <th class="p-2">Username</th>
-                        <th class="p-2">Password</th>
-                        <th class="p-2">Role</th>
-                        <th class="p-2 text-center">Aksi</th>
+                        <th class="p-2 w-12">ID</th>
+                        <th class="p-2 w-1/4">Nama</th>
+                        <th class="p-2 w-1/5">Username</th>
+                        <th class="p-2 w-1/5">Password</th>
+                        <th class="p-2 w-1/6">Role</th>
+                        <th class="p-2 text-center w-16">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($users as $u)
                     <tr class="border-b hover:bg-off-white">
                         <td class="p-2">{{ $u->id }}</td>
-                        <td class="p-2">{{ $u->name }}</td>
+                        <td class="p-2 font-medium">{{ $u->name }}</td>
                         <td class="p-2">{{ $u->username }}</td>
-                        <td class="p-2 max-w-[150px] truncate" title="{{ $u->password }}">
-                            {{ \Illuminate\Support\Str::limit($u->password, 15) }}
+                        <td class="p-2 truncate" title="{{ $u->password }}">
+                            {{ \Illuminate\Support\Str::limit($u->password, 10) }}
                         </td>
                         <td class="p-2">{{ $u->role->nama_role ?? '-' }}</td>
-                        <td class="p-2 text-center">
-                            <div class="relative inline-block text-left">
-                                <button class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">
-                                    Aksi
+                        <td class="p-2 text-center relative">
+                            <!-- Tombol utama -->
+                            <button onclick="toggleDropdown({{ $u->id }})"
+                                class="p-1 rounded hover:bg-gray-100 focus:outline-none">
+                                <i class="fas fa-cog"></i>
+                            </button>
+
+                            <!-- Dropdown aksi -->
+                            <div id="dropdown-{{ $u->id }}"
+                                class="hidden absolute right-0 mt-2 bg-white border border-gray-200 rounded shadow-lg z-10 flex flex-col text-left">
+                                @if($u->role->nama_role === 'siswa')
+                                    <button onclick="alert('Detail Siswa: {{ $u->name }}')"
+                                        class="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 text-blue-500">
+                                        <i class="fas fa-eye"></i> Detail
+                                    </button>
+                                @endif
+                                <button onclick="alert('Edit Data: {{ $u->name }}')"
+                                    class="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 text-yellow-500">
+                                    <i class="fas fa-edit"></i> Edit
                                 </button>
-                                <div class="absolute right-0 mt-1 w-28 bg-white shadow-lg rounded hidden group-hover:block">
-                                    <a href="" class="block px-3 py-1 hover:bg-gray-100">Edit</a>
-                                    <form action="" method="POST" onsubmit="return confirm('Yakin hapus user ini?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="w-full text-left px-3 py-1 hover:bg-gray-100">Hapus</button>
-                                    </form>
-                                </div>
+                                <button onclick="confirm('Yakin hapus {{ $u->name }}?')"
+                                    class="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 text-red-500">
+                                    <i class="fas fa-trash-alt"></i> Hapus
+                                </button>
                             </div>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
+
+            <div class="mt-4">
+                {{ $users->links() }}
+            </div>
         </div>
     </main>
 @endsection
@@ -124,5 +139,23 @@
             overlay.classList.add('hidden');
         }
     }
+
+    function toggleDropdown(id) {
+        // Tutup semua dropdown dulu
+        document.querySelectorAll('[id^="dropdown-"]').forEach(el => {
+            if (el.id !== `dropdown-${id}`) el.classList.add('hidden');
+        });
+
+        // Toggle dropdown yang diklik
+        const dropdown = document.getElementById(`dropdown-${id}`);
+        dropdown.classList.toggle('hidden');
+    }
+
+    // Klik di luar dropdown -> tutup
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('[id^="dropdown-"]') && !e.target.closest('button')) {
+            document.querySelectorAll('[id^="dropdown-"]').forEach(el => el.classList.add('hidden'));
+        }
+    });
 </script>
 @endpush
