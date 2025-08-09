@@ -11,6 +11,8 @@ class TopikMateri extends Model
 {
     use HasFactory;
 
+    protected $table = 'topik_materis';
+
     protected $fillable = [
         'kelas_id',
         'jurusan_id',

@@ -1,31 +1,9 @@
 @php
     $pageTitle = $pageTitle ?? 'Dashboard';
-    $addButtonText = $addButtonText ?? 'Tambah User';
-    $addUserRoute = $addUserRoute ?? route('register');
-    $stats = [
-        [
-            'label' => 'Total User',
-            'count' => $userCount,
-            'icon' => 'fas fa-users',
-            'bg' => 'from-blue-500 to-blue-600',
-            'textColor' => 'text-blue-100'
-        ],
-        [
-            'label' => 'Admin',
-            'count' => $adminCount,
-            'icon' => 'fas fa-shield-alt',
-            'bg' => 'from-green-500 to-green-600',
-            'textColor' => 'text-green-100'
-        ],
-        [
-            'label' => 'Siswa',
-            'count' => $siswaCount,
-            'icon' => 'fas fa-graduation-cap',
-            'bg' => 'from-emerald-500 to-emerald-600',
-            'textColor' => 'text-emerald-100'
-        ],
-    ];
-    $roles = $roles ?? ['admin', 'siswa'];
+    $addButtonText = $addButtonText ?? 'Tambah Data';
+    $addUserRoute = $addUserRoute ?? '#';
+    $stats = $stats ?? [];
+    $roles = $roles ?? [];
 @endphp
 
 <!-- Mobile header -->
@@ -64,8 +42,9 @@
     </div>
 </div>
 
-<!-- Enhanced Stats Cards -->
-<div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+<!-- Stats Cards -->
+@if(count($stats) > 0)
+<div class="grid grid-cols-2 gap-4 md:grid-cols-4 mb-6">
     @foreach ($stats as $stat)
         <div class="bg-gradient-to-br {{ $stat['bg'] }} text-white rounded-xl p-4 shadow-lg">
             <div class="flex items-center justify-between">
@@ -80,9 +59,11 @@
         </div>
     @endforeach
 </div>
+@endif
 
-<!-- Search and Filter Section -->
-<div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border-0 p-6">
+<!-- Optional search and filter (jika roles tidak kosong) -->
+@if(count($roles) > 0)
+<div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border-0 p-6 mb-6">
     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div class="flex flex-col gap-4 md:flex-row md:items-center">
             <!-- Search Input -->
@@ -100,14 +81,12 @@
             <div class="flex gap-2">
                 <div class="relative inline-block w-48">
                     <select id="roleFilter" class="appearance-none w-full px-4 py-2 pr-10 bg-white border border-gray-300 rounded-lg shadow-sm
-                        focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition
-                        cursor-pointer">
+                        focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition cursor-pointer">
                         <option value="">Semua Role</option>
                         @foreach ($roles as $role)
                             <option value="{{ strtolower($role) }}">{{ ucfirst($role) }}</option>
                         @endforeach
                     </select>
-
                     <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -123,3 +102,4 @@
         </div>
     </div>
 </div>
+@endif

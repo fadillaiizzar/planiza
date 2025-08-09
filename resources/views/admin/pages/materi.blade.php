@@ -1,114 +1,101 @@
 @extends('layouts.admin')
 
-@section('title', 'Materi Admin - Planiza')
+@section('title', 'Manajemen Materi - Planiza')
 
 @section('content')
-    <!-- Overlay (mobile) -->
-    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-30 z-30 hidden md:hidden" onclick="toggleSidebar()"></div>
+<main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
+    <div class="mx-auto max-w-7xl space-y-6">
 
-    <!-- Main -->
-    <main class="flex-1 p-6">
-        <div class="md:hidden flex justify-between items-center mb-4">
-            <button onclick="toggleSidebar()" class="text-2xl">
-                <i class="fas fa-bars"></i>
-            </button>
-            <a href="{{ route('register') }}" class="text-xl text-slate-navy hover:text-blue-600">
-                <i class="fas fa-user-plus"></i>
-            </a>
-        </div>
+        @include('admin.components.header.header', [
+            'pageTitle' => 'Manajemen Materi',
+            'addButtonText' => 'Tambah Materi',
+            'addUserRoute' => route('topik-materi.create'),
+            'userCount' => $userCount,
+            'stats' => [
+                ['label' => 'Total Materi', 'count' => $materiCount, 'icon' => 'fas fa-book', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
+                ['label' => 'Materi per Kelas', 'count' => $materiPerKelas->sum(), 'icon' => 'fas fa-layer-group', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
+                ['label' => 'Materi per Jurusan', 'count' => $materiPerJurusan->sum(), 'icon' => 'fas fa-university', 'bg' => 'from-purple-500 to-purple-600', 'textColor' => 'text-purple-100'],
+            ],
+            'roles' => [] // tidak dipakai di halaman ini
+        ])
 
-        <div class="hidden md:flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-semibold">Materi</h2>
-            <a href="{{ route('register') }}" class="px-4 py-2 bg-white text-slate-navy hover:bg-slate-navy hover:text-white border border-slate-navy rounded transition">
-                Tambah Akun
-            </a>
-        </div>
+        <!-- Statistik detail per kelas -->
+        <section class="bg-white rounded-xl shadow p-6">
+            <h3 class="text-lg font-semibold mb-4">Materi per Kelas</h3>
+            <ul>
+                @foreach($materiPerKelas as $kelas => $count)
+                    <li class="mb-1">{{ $kelas }} : <strong>{{ $count }}</strong> materi</li>
+                @endforeach
+            </ul>
+        </section>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div class="bg-white shadow rounded-lg p-4">
-                <p class="text-cool-gray">Total User</p>
-                <h3 class="text-2xl font-bold">{{ $userCount }}</h3>
+        <!-- Statistik detail per jurusan -->
+        <section class="bg-white rounded-xl shadow p-6 mt-6">
+            <h3 class="text-lg font-semibold mb-4">Materi per Jurusan</h3>
+            <ul>
+                @foreach($materiPerJurusan as $jurusan => $count)
+                    <li class="mb-1">{{ $jurusan }} : <strong>{{ $count }}</strong> materi</li>
+                @endforeach
+            </ul>
+        </section>
+
+        <!-- Daftar Topik Materi -->
+        <section class="bg-white rounded-xl shadow p-6 mt-6">
+            <h3 class="text-xl font-semibold mb-4">Daftar Topik Materi</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm table-auto">
+                    <thead class="bg-slate-50 border-b border-slate-200">
+                        <tr>
+                            <th class="p-4 font-semibold text-slate-700">ID</th>
+                            <th class="p-4 font-semibold text-slate-700">Judul Topik</th>
+                            <th class="p-4 font-semibold text-slate-700">Kelas</th>
+                            <th class="p-4 font-semibold text-slate-700">Jurusan</th>
+                            <th class="p-4 font-semibold text-slate-700">Rencana</th>
+                            <th class="p-4 font-semibold text-slate-700 text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($topikMateris as $topik)
+                        <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
+                            <td class="p-4">{{ $topik->id }}</td>
+                            <td class="p-4 font-medium">{{ $topik->judul_topik }}</td>
+                            <td class="p-4">{{ $topik->kelas->nama_kelas ?? '-' }}</td>
+                            <td class="p-4">{{ $topik->jurusan->nama_jurusan ?? '-' }}</td>
+                            <td class="p-4">{{ $topik->rencana->nama_rencana ?? '-' }}</td>
+                            <td class="p-4 text-center space-x-2">
+                                <a href="{{ route('topik-materi.show', $topik->id) }}" class="text-blue-600 hover:underline">Detail</a>
+                                <a href="{{ route('topik-materi.edit', $topik->id) }}" class="text-green-600 hover:underline">Edit</a>
+                                <form action="{{ route('topik-materi.destroy', $topik->id) }}" method="POST" class="inline" onsubmit="return confirm('Yakin hapus topik materi ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:underline">Hapus</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-            <div class="bg-white shadow rounded-lg p-4">
-                <p class="text-cool-gray">Jumlah Materi</p>
-                <h3 class="text-2xl font-bold">{{ $materiCount }}</h3>
-            </div>
-            <div class="bg-white shadow rounded-lg p-4">
-                <p class="text-cool-gray">Jumlah Eksplorasi</p>
-                <h3 class="text-2xl font-bold">{{ $eksplorasiCount }}</h3>
-            </div>
-        </div>
+        </section>
 
-        <div class="bg-white shadow rounded-lg p-4">
-            <h3 class="text-xl font-semibold mb-4">Aktivitas Terbaru</h3>
-            <table class="w-full table-auto text-left">
-                <thead>
-                    <tr class="border-b border-border-gray text-cool-gray">
-                        <th class="p-2">Waktu</th>
-                        <th class="p-2">Nama</th>
-                        <th class="p-2">Aktivitas</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($aktivitas as $log)
-                    <tr class="border-b hover:bg-off-white">
-                        <td class="p-2 text-sm">{{ $log->created_at->format('d M Y H:i') }}</td>
-                        <td class="p-2 text-sm">{{ $log->user?->name ?? '-' }}</td>
-                        <td class="p-2 text-sm">{{ $log->aktivitas }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </main>
+    </div>
+</main>
 @endsection
 
 @push('scripts')
-    <script>
-        function toggleSidebarSize() {
-            const sidebar = document.getElementById('sidebar');
-            const isCollapsed = sidebar.classList.toggle('w-20');
-            sidebar.classList.toggle('w-64', !isCollapsed);
-
-            const profileSection = document.getElementById('profileSection');
-            const userName = document.getElementById('userName');
-
-            if (isCollapsed) {
-                profileSection.classList.replace('gap-3', 'gap-2');
-                userName.classList.add('opacity-0', 'w-0', 'overflow-hidden');
-            } else {
-                profileSection.classList.replace('gap-2', 'gap-3');
-                userName.classList.remove('opacity-0', 'w-0', 'overflow-hidden');
-            }
-
-            document.querySelectorAll('.sidebar-label').forEach(label => {
-                label.classList.toggle('opacity-0', isCollapsed);
-                label.classList.toggle('w-0', isCollapsed);
-                label.classList.toggle('overflow-hidden', isCollapsed);
-            });
-
-            document.querySelectorAll('.icon-wrapper').forEach(wrapper => {
-                wrapper.classList.toggle('justify-center', isCollapsed);
-                wrapper.classList.toggle('justify-start', !isCollapsed);
-            });
-
-            const icon = document.getElementById('sidebarToggleIcon');
-            icon.classList.toggle('fa-angle-left', !isCollapsed);
-            icon.classList.toggle('fa-angle-right', isCollapsed);
+<script>
+    // Sidebar toggle dan fungsi lain jika ada (sama seperti sebelumnya)
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const isOpen = sidebar.classList.contains('-translate-x-full');
+        if (isOpen) {
+            sidebar.classList.remove('-translate-x-full');
+            overlay.classList.remove('hidden');
+        } else {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
         }
-
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-
-            const isOpen = sidebar.classList.contains('-translate-x-full');
-            if (isOpen) {
-                sidebar.classList.remove('-translate-x-full');
-                overlay.classList.remove('hidden');
-            } else {
-                sidebar.classList.add('-translate-x-full');
-                overlay.classList.add('hidden');
-            }
-        }
-    </script>
+    }
+</script>
 @endpush

@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\KontribusiSdgsController;
+use App\Http\Controllers\TopikMateriController;
 use App\Models\KontribusiSdgs;
 
 Route::get('/', function () {
@@ -27,14 +28,16 @@ Route::middleware(['auth', RoleMiddleware::class.':admin'])->group(function () {
     Route::get('/register', [AdminController::class, 'showRegister'])->name('register');
     Route::post('/register', [AdminController::class, 'register']);
 
+    Route::get('/dashboard/pages/admin', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/users/{user}/detail', [AdminController::class, 'detailUser'])->name('admin.users.detail');
     Route::patch('/admin/users/{user}', [AdminController::class, 'updateUser'])->name('admin.users.update');
     Route::post('/admin/users/{user}/reset-password', [AdminController::class, 'resetPassword'])->name('admin.users.reset-password');
     Route::delete('/admin/users/{user}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
 
-    Route::get('/dashboard/pages/admin', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/user/pages/admin', [UserController::class, 'index'])->name('admin.user');
-    Route::get('/materi/pages/admin', [MateriController::class, 'index'])->name('admin.materi');
+
+    Route::resource('topik-materi', TopikMateriController::class);
+
     Route::get('/kontribusi-sdgs/pages/admin', [KontribusiSdgsController::class, 'index'])->name('admin.kontribusi-sdgs');
 });
 

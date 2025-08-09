@@ -10,6 +10,8 @@ class Materi extends Model
 {
     use HasFactory;
 
+    protected $table = 'materis';
+
     protected $fillable = [
         'topik_materi_id',
         'nama_materi',
