@@ -97,14 +97,16 @@
                     type="password"
                     value="********"
                     disabled
+                    readonly
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100 cursor-not-allowed text-gray-500"
                 />
                 <p class="mt-1">
                     <button
+                        id="resetPasswordBtn"
                         type="button"
                         onclick="showResetPasswordModal()"
+                        class="text-gray-400 cursor-not-allowed text-sm font-medium"
                         disabled
-                        class="text-blue-600 hover:underline text-sm font-medium"
                     >
                         Reset Password
                     </button>
@@ -210,8 +212,43 @@
     </div>
 
     {{-- Modal Reset Password --}}
-    <div id="resetPasswordModal" class="hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50">
-        <!-- modal content tetap sama -->
+    <div id="resetPasswordModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white p-6 rounded shadow-md w-96">
+            <h3 class="text-lg font-bold mb-4">Reset Password</h3>
+
+            {{-- Opsi Reset Password --}}
+            <div class="mb-4">
+                <label class="block font-semibold mb-2">Pilih Metode Reset</label>
+                <select id="resetType" class="border rounded w-full p-2" onchange="toggleCustomPassword()">
+                    <option value="default">Default Password (12345678)</option>
+                    <option value="custom">Custom Password</option>
+                </select>
+            </div>
+
+            <form action="{{ route('admin.users.reset-password', $user->id) }}" method="POST">
+                @csrf
+
+                {{-- Field Custom Password --}}
+                <div id="customPasswordFields" class="hidden">
+                    <div class="mb-3">
+                        <label>Password Baru</label>
+                        <input type="password" name="password" class="border rounded w-full p-2">
+                    </div>
+                    <div class="mb-3">
+                        <label>Konfirmasi Password</label>
+                        <input type="password" name="password_confirmation" class="border rounded w-full p-2">
+                    </div>
+                </div>
+
+                {{-- Hidden input untuk kirim tipe reset --}}
+                <input type="hidden" name="reset_type" id="reset_type_input" value="default">
+
+                <div class="flex justify-center gap-2 mt-4">
+                    <button type="button" onclick="document.getElementById('resetPasswordModal').classList.add('hidden')" class="text-slate-navy px-4 py-2 rounded">Batal</button>
+                    <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded">Simpan</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script>
@@ -244,19 +281,30 @@
         });
 
         function setEditMode(isEdit) {
-            // Semua input/select/button reset password
-            const inputs = form.querySelectorAll(
-                'input, select, textarea, button[type="button"][onclick="showResetPasswordModal()"]'
-            );
-
+            // Semua input, select, textarea
+            const inputs = form.querySelectorAll('input, select, textarea');
             inputs.forEach((input) => {
-                if (input.type === 'button' && input.onclick) {
-                    input.disabled = !isEdit;
-                } else if (input.type !== 'submit' && input.type !== 'button') {
+                if (input.type !== 'submit' && input.type !== 'button') {
                     input.disabled = !isEdit;
                 }
             });
 
+            // Tombol reset password (gunakan id biar jelas)
+            const resetBtn = document.getElementById('resetPasswordBtn');
+            if (resetBtn) {
+                resetBtn.disabled = !isEdit;
+
+                // Atur style saat aktif / nonaktif
+                if (isEdit) {
+                    resetBtn.classList.remove('text-gray-400', 'cursor-not-allowed');
+                    resetBtn.classList.add('text-blue-600', 'hover:underline');
+                } else {
+                    resetBtn.classList.add('text-gray-400', 'cursor-not-allowed');
+                    resetBtn.classList.remove('text-blue-600', 'hover:underline');
+                }
+            }
+
+            // Toggle tombol simpan, batal, dan edit
             saveBtn.classList.toggle('hidden', !isEdit);
             cancelBtn.classList.toggle('hidden', !isEdit);
             editToggleBtn.classList.toggle('hidden', isEdit);
@@ -270,6 +318,24 @@
                 window.location.href = "{{ route('admin.user') }}";
             }, 300);
         });
+
+        function showResetPasswordModal() {
+            document.getElementById('resetPasswordModal').classList.remove('hidden');
+        }
+
+        function toggleCustomPassword() {
+            const resetType = document.getElementById('resetType').value;
+            const customFields = document.getElementById('customPasswordFields');
+            const hiddenInput = document.getElementById('reset_type_input');
+
+            if (resetType === 'custom') {
+                customFields.classList.remove('hidden');
+                hiddenInput.value = 'custom';
+            } else {
+                customFields.classList.add('hidden');
+                hiddenInput.value = 'default';
+            }
+        }
     </script>
 </body>
 </html>

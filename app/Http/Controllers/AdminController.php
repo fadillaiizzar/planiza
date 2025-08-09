@@ -150,20 +150,25 @@ class AdminController extends Controller
             if ($user->siswa) $user->siswa->delete();
         }
 
-        return redirect()->route('admin.user')->with('success', 'user berhasil diperbarui');
+        return redirect()->route('admin.users.detail', $user->id)->with('success', 'user berhasil diperbarui');
     }
 
     public function resetPassword(Request $request, User $user)
     {
-        $validated = $request->validate([
-            'password' => 'required|confirmed|min:6',
-        ]);
+        if ($request->reset_type === 'default') {
+            $newPassword = '12345678';
+        } else {
+            $validated = $request->validate([
+                'password' => 'required|confirmed|min:6',
+            ]);
+            $newPassword = $validated['password'];
+        }
 
         $user->update([
-            'password' => Hash::make($validated['password']),
+            'password' => Hash::make($newPassword),
         ]);
 
-        return redirect()->route('admin.users.edit', $user->id)->with('success', 'Password berhasil direset');
+        return redirect()->route('admin.users.detail', $user->id)->with('success', 'password berhasil direset');
     }
 
     public function deleteUser(User $user)

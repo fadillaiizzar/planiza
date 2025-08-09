@@ -102,8 +102,7 @@
                                         <form action="{{ route('admin.users.delete', $u->id) }}" method="POST" onsubmit="return confirm('Yakin hapus {{ $u->name }}?')" class="m-0 p-0">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit"
-                                                class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base border-none bg-transparent cursor-pointer">
+                                            <button type="button" onclick="showDeleteModal({{ $u->id }}, '{{ $u->name }}')" class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base border-none bg-transparent cursor-pointer">
                                                 <i class="fas fa-trash-alt w-5 h-5"></i>
                                                 <span>Hapus User</span>
                                             </button>
@@ -123,111 +122,147 @@
             </div>
         </div>
     </main>
+
+    <!-- Modal Konfirmasi Delete -->
+    <div id="deleteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-96 shadow-xl">
+            <h3 class="text-lg font-semibold text-slate-800 mb-4">Hapus User</h3>
+            <p class="text-slate-600 mb-6">
+                Apakah Anda yakin ingin menghapus <span id="deleteUserName" class="font-bold"></span>?
+                Tindakan ini tidak dapat dibatalkan
+            </p>
+
+            <!-- Action akan diubah via JavaScript -->
+            <form id="deleteForm" method="POST" class="flex justify-center gap-2">
+                @csrf
+                @method('DELETE')
+                <button type="button" onclick="closeDeleteModal()" class="px-4 py-2 rounded">
+                    Batal
+                </button>
+                <button type="submit" class="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700">
+                    Hapus
+                </button>
+            </form>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
-<script>
-    // Existing functions
-    function toggleSidebarSize() {
-        const sidebar = document.getElementById('sidebar');
-        const isCollapsed = sidebar.classList.toggle('w-20');
-        sidebar.classList.toggle('w-64', !isCollapsed);
-        const profileSection = document.getElementById('profileSection');
-        const userName = document.getElementById('userName');
-        if (isCollapsed) {
-            profileSection.classList.replace('gap-3', 'gap-2');
-            userName.classList.add('opacity-0', 'w-0', 'overflow-hidden');
-        } else {
-            profileSection.classList.replace('gap-2', 'gap-3');
-            userName.classList.remove('opacity-0', 'w-0', 'overflow-hidden');
-        }
-        document.querySelectorAll('.sidebar-label').forEach(label => {
-            label.classList.toggle('opacity-0', isCollapsed);
-            label.classList.toggle('w-0', isCollapsed);
-            label.classList.toggle('overflow-hidden', isCollapsed);
-        });
-        document.querySelectorAll('.icon-wrapper').forEach(wrapper => {
-            wrapper.classList.toggle('justify-center', isCollapsed);
-            wrapper.classList.toggle('justify-start', !isCollapsed);
-        });
-        const icon = document.getElementById('sidebarToggleIcon');
-        icon.classList.toggle('fa-angle-left', !isCollapsed);
-        icon.classList.toggle('fa-angle-right', isCollapsed);
-    }
-
-    function toggleSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-        const isOpen = sidebar.classList.contains('-translate-x-full');
-        if (isOpen) {
-            sidebar.classList.remove('-translate-x-full');
-            overlay.classList.remove('hidden');
-        } else {
-            sidebar.classList.add('-translate-x-full');
-            overlay.classList.add('hidden');
-        }
-    }
-
-    function toggleDropdown(id) {
-        // Tutup semua dropdown dulu
-        document.querySelectorAll('[id^="dropdown-"]').forEach(el => {
-            if (el.id !== `dropdown-${id}`) el.classList.add('hidden');
-        });
-        // Toggle dropdown yang diklik
-        const dropdown = document.getElementById(`dropdown-${id}`);
-        dropdown.classList.toggle('hidden');
-    }
-
-    // Enhanced search and filter functionality
-    function initializeFilters() {
-        const searchInput = document.getElementById('searchInput');
-        const roleFilter = document.getElementById('roleFilter');
-        const resultCount = document.getElementById('resultCount');
-        const userRows = document.querySelectorAll('.user-row');
-
-        function filterUsers() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const selectedRole = roleFilter.value.toLowerCase();
-            let visibleCount = 0;
-
-            userRows.forEach(row => {
-                const name = row.dataset.name;
-                const username = row.dataset.username;
-                const role = row.dataset.role;
-
-                const matchesSearch = name.includes(searchTerm) || username.includes(searchTerm);
-                const matchesRole = !selectedRole || role === selectedRole;
-
-                if (matchesSearch && matchesRole) {
-                    row.style.display = '';
-                    visibleCount++;
-                } else {
-                    row.style.display = 'none';
-                }
+    <script>
+        // Existing functions
+        function toggleSidebarSize() {
+            const sidebar = document.getElementById('sidebar');
+            const isCollapsed = sidebar.classList.toggle('w-20');
+            sidebar.classList.toggle('w-64', !isCollapsed);
+            const profileSection = document.getElementById('profileSection');
+            const userName = document.getElementById('userName');
+            if (isCollapsed) {
+                profileSection.classList.replace('gap-3', 'gap-2');
+                userName.classList.add('opacity-0', 'w-0', 'overflow-hidden');
+            } else {
+                profileSection.classList.replace('gap-2', 'gap-3');
+                userName.classList.remove('opacity-0', 'w-0', 'overflow-hidden');
+            }
+            document.querySelectorAll('.sidebar-label').forEach(label => {
+                label.classList.toggle('opacity-0', isCollapsed);
+                label.classList.toggle('w-0', isCollapsed);
+                label.classList.toggle('overflow-hidden', isCollapsed);
             });
-
-            resultCount.textContent = visibleCount;
+            document.querySelectorAll('.icon-wrapper').forEach(wrapper => {
+                wrapper.classList.toggle('justify-center', isCollapsed);
+                wrapper.classList.toggle('justify-start', !isCollapsed);
+            });
+            const icon = document.getElementById('sidebarToggleIcon');
+            icon.classList.toggle('fa-angle-left', !isCollapsed);
+            icon.classList.toggle('fa-angle-right', isCollapsed);
         }
 
-        searchInput.addEventListener('input', filterUsers);
-        roleFilter.addEventListener('change', filterUsers);
-    }
-
-    function togglePassword(userId) {
-        // Placeholder for password toggle functionality
-        alert('Toggle password visibility for user ID: ' + userId);
-    }
-
-    // Klik di luar dropdown -> tutup
-    document.addEventListener('click', function (e) {
-        if (!e.target.closest('[id^="dropdown-"]') && !e.target.closest('button')) {
-            document.querySelectorAll('[id^="dropdown-"]').forEach(el => el.classList.add('hidden'));
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const isOpen = sidebar.classList.contains('-translate-x-full');
+            if (isOpen) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
         }
-    });
 
-    // Initialize filters when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-        initializeFilters();
-    });
-</script>
+        function toggleDropdown(id) {
+            // Tutup semua dropdown dulu
+            document.querySelectorAll('[id^="dropdown-"]').forEach(el => {
+                if (el.id !== `dropdown-${id}`) el.classList.add('hidden');
+            });
+            // Toggle dropdown yang diklik
+            const dropdown = document.getElementById(`dropdown-${id}`);
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Enhanced search and filter functionality
+        function initializeFilters() {
+            const searchInput = document.getElementById('searchInput');
+            const roleFilter = document.getElementById('roleFilter');
+            const resultCount = document.getElementById('resultCount');
+            const userRows = document.querySelectorAll('.user-row');
+
+            function filterUsers() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const selectedRole = roleFilter.value.toLowerCase();
+                let visibleCount = 0;
+
+                userRows.forEach(row => {
+                    const name = row.dataset.name;
+                    const username = row.dataset.username;
+                    const role = row.dataset.role;
+
+                    const matchesSearch = name.includes(searchTerm) || username.includes(searchTerm);
+                    const matchesRole = !selectedRole || role === selectedRole;
+
+                    if (matchesSearch && matchesRole) {
+                        row.style.display = '';
+                        visibleCount++;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+
+                resultCount.textContent = visibleCount;
+            }
+
+            searchInput.addEventListener('input', filterUsers);
+            roleFilter.addEventListener('change', filterUsers);
+        }
+
+        function togglePassword(userId) {
+            // Placeholder for password toggle functionality
+            alert('Toggle password visibility for user ID: ' + userId);
+        }
+
+        // Klik di luar dropdown -> tutup
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('[id^="dropdown-"]') && !e.target.closest('button')) {
+                document.querySelectorAll('[id^="dropdown-"]').forEach(el => el.classList.add('hidden'));
+            }
+        });
+
+        // Initialize filters when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeFilters();
+        });
+
+        function showDeleteModal(userId, userName) {
+            document.getElementById('deleteModal').classList.remove('hidden');
+            document.getElementById('deleteUserName').textContent = userName;
+
+            // Set action sesuai route admin.users.delete
+            const form = document.getElementById('deleteForm');
+            form.action = `/admin/users/${userId}`;
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').classList.add('hidden');
+        }
+    </script>
 @endpush

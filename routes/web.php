@@ -27,10 +27,10 @@ Route::middleware(['auth', RoleMiddleware::class.':admin'])->group(function () {
     Route::get('/register', [AdminController::class, 'showRegister'])->name('register');
     Route::post('/register', [AdminController::class, 'register']);
 
-    Route::get('/users/{user}/detail', [AdminController::class, 'detailUser'])->name('admin.users.detail');
-    Route::patch('/users/{user}', [AdminController::class, 'updateUser'])->name('admin.users.update');
-    Route::post('/users/{user}/reset-password', [AdminController::class, 'resetPassword'])->name('admin.users.reset-password');
-    Route::delete('/users/{user}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
+    Route::get('/admin/users/{user}/detail', [AdminController::class, 'detailUser'])->name('admin.users.detail');
+    Route::patch('/admin/users/{user}', [AdminController::class, 'updateUser'])->name('admin.users.update');
+    Route::post('/admin/users/{user}/reset-password', [AdminController::class, 'resetPassword'])->name('admin.users.reset-password');
+    Route::delete('/admin/users/{user}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
 
     Route::get('/dashboard/pages/admin', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/user/pages/admin', [UserController::class, 'index'])->name('admin.user');
