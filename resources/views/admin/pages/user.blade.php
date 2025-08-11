@@ -82,23 +82,19 @@
                                         <i class="fas fa-cog text-cool-gray"></i>
                                     </button>
 
-                                    <div id="dropdown-{{ $u->id }}"
-                                        class="hidden absolute right-20 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
+                                    <div id="dropdown-{{ $u->id }}" class="hidden absolute right-20 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
                                         <a href="{{ route('admin.users.detail', $u->id) }}"
                                             class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
                                             <i class="fas fa-eye w-5 h-5"></i>
                                             <span>Detail</span>
                                         </a>
                                         <div class="border-t border-border-gray"></div>
-                                        <form action="{{ route('admin.users.delete', $u->id) }}" method="POST" onsubmit="return confirm('Yakin hapus {{ $u->name }}?')" class="m-0 p-0">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base border-none bg-transparent cursor-pointer">
-                                                <i class="fas fa-trash-alt w-5 h-5"></i>
-                                                <span>Hapus</span>
-                                            </button>
-                                        </form>
+                                        <!-- Tombol hapus sekarang bukan form submit -->
+                                        <button type="button" onclick="showDeleteModal({{ $u->id }}, '{{ addslashes($u->name) }}')"
+                                            class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base border-none bg-transparent cursor-pointer">
+                                            <i class="fas fa-trash-alt w-5 h-5"></i>
+                                            <span>Hapus</span>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -125,11 +121,10 @@
                 Tindakan ini tidak dapat dibatalkan
             </p>
 
-            <!-- Action akan diubah via JavaScript -->
             <form id="deleteForm" method="POST" class="flex justify-center gap-2">
                 @csrf
                 @method('DELETE')
-                <button type="button" onclick="closeDeleteModal()" class="px-4 py-2 rounded">
+                <button type="button" onclick="closeDeleteModal()" class="px-4 py-2 hover:underline">
                     Batal
                 </button>
                 <button type="submit" class="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700">
@@ -195,17 +190,42 @@
             initializeFilters();
         });
 
-        function showDeleteModal(userId, userName) {
-            document.getElementById('deleteModal').classList.remove('hidden');
-            document.getElementById('deleteUserName').textContent = userName;
+        function toggleDropdown(id) {
+        document.querySelectorAll('[id^="dropdown-"]').forEach(drop => {
+            if (drop.id === `dropdown-${id}`) {
+                drop.classList.toggle('hidden');
+            } else {
+                drop.classList.add('hidden');
+            }
+        });
+    }
 
-            // Set action sesuai route admin.users.delete
-            const form = document.getElementById('deleteForm');
-            form.action = `/admin/users/${userId}`;
-        }
+    // Tampilkan modal hapus, set nama dan action form hapus sesuai user id
+    function showDeleteModal(userId, userName) {
+        document.getElementById('deleteModal').classList.remove('hidden');
+        document.getElementById('deleteUserName').textContent = userName;
+        const form = document.getElementById('deleteForm');
+        form.action = `/admin/users/${userId}`;
+    }
 
-        function closeDeleteModal() {
-            document.getElementById('deleteModal').classList.add('hidden');
+    // Tutup modal hapus
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.add('hidden');
+    }
+
+    // Klik di luar modal tutup modal hapus
+    window.addEventListener('click', function(e) {
+        const modal = document.getElementById('deleteModal');
+        if (!modal.classList.contains('hidden') && e.target === modal) {
+            closeDeleteModal();
         }
+    });
+
+    // Klik di luar dropdown -> tutup dropdown
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('[id^="dropdown-"]') && !e.target.closest('button')) {
+            document.querySelectorAll('[id^="dropdown-"]').forEach(el => el.classList.add('hidden'));
+        }
+    });
     </script>
 @endpush

@@ -80,28 +80,24 @@
                                     <i class="fas fa-cog text-cool-gray"></i>
                                 </button>
 
-                                <div id="dropdown-{{ $item->id }}"
-                                    class="hidden absolute right-20 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
+                                <div id="dropdown-{{ $item->id }}" class="hidden absolute right-20 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
                                     <a href="{{ route('admin.materi.show', $item->id) }}"
                                         class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
                                         <i class="fas fa-eye w-5 h-5"></i>
                                         <span>Detail</span>
                                     </a>
+                                    <div class="border-t border-border-gray"></div>
                                     <a href="{{ route('admin.materi.edit', $item->id) }}"
                                         class="px-5 py-3 hover:bg-green-50 flex items-center gap-3 text-green-600 transition-colors text-base">
                                         <i class="fas fa-edit w-5 h-5"></i>
                                         <span>Edit</span>
                                     </a>
                                     <div class="border-t border-border-gray"></div>
-                                    <form action="{{ route('admin.materi.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin hapus?')" class="m-0 p-0">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base border-none bg-transparent cursor-pointer">
-                                            <i class="fas fa-trash-alt w-5 h-5"></i>
-                                            <span>Hapus</span>
-                                        </button>
-                                    </form>
+                                    <button type="button" onclick="showDeleteModal({{ $item->id }}, '{{ addslashes($item->judul_topik) }}', '{{ route('admin.materi.destroy', $item->id) }}')"
+                                        class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base border-none bg-transparent cursor-pointer">
+                                        <i class="fas fa-trash-alt w-5 h-5"></i>
+                                        <span>Hapus</span>
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -111,3 +107,63 @@
         </div>
     </section>
 </div>
+
+<!-- Modal Konfirmasi Delete -->
+<div id="deleteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 w-96 shadow-xl">
+        <h3 class="text-lg font-semibold text-slate-800 mb-4">Hapus Materi</h3>
+        <p class="text-slate-600 mb-6">
+            Apakah Anda yakin ingin menghapus <span id="deleteUserName" class="font-bold"></span>?
+            Tindakan ini tidak dapat dibatalkan
+        </p>
+
+        <form id="deleteForm" method="POST" class="flex justify-center gap-2">
+            @csrf
+            @method('DELETE')
+            <button type="button" onclick="closeDeleteModal()" class="px-4 py-2 rounded hover:underline">
+                Batal
+            </button>
+            <button type="submit" class="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700">
+                Hapus
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function toggleDropdown(id) {
+        document.querySelectorAll('[id^="dropdown-"]').forEach(drop => {
+            if (drop.id === `dropdown-${id}`) {
+                drop.classList.toggle('hidden');
+            } else {
+                drop.classList.add('hidden');
+            }
+        });
+    }
+
+    function showDeleteModal(id, name, action) {
+        document.getElementById('deleteModal').classList.remove('hidden');
+        document.getElementById('deleteUserName').textContent = name;
+        const form = document.getElementById('deleteForm');
+        form.action = action;
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.add('hidden');
+    }
+
+    // Klik di luar modal tutup modal
+    window.addEventListener('click', function(e) {
+        const modal = document.getElementById('deleteModal');
+        if (!modal.classList.contains('hidden') && e.target === modal) {
+            closeDeleteModal();
+        }
+    });
+
+    // Klik di luar dropdown tutup dropdown
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('[id^="dropdown-"]') && !e.target.closest('button')) {
+            document.querySelectorAll('[id^="dropdown-"]').forEach(el => el.classList.add('hidden'));
+        }
+    });
+</script>
