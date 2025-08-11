@@ -25,44 +25,37 @@
             ])
 
             <!-- Enhanced Users Table -->
-            <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border-0 overflow-visible">
-                <div class="p-6 border-b border-slate-100">
-                    <h3 class="text-xl font-semibold text-slate-800">Daftar User</h3>
-                </div>
-
+            <section class="bg-white rounded-xl shadow p-6 mt-6">
+                <h3 class="text-xl font-bold mb-6 text-slate-navy">Daftar User</h3>
                 <div class="overflow-x-auto">
-                    <table class="w-full table-auto text-left text-sm" id="usersTable">
-                        <thead>
-                            <tr class="bg-slate-50/50 border-b border-slate-200">
-                                <th class="p-4 font-semibold text-slate-700">ID</th>
-                                <th class="p-4 font-semibold text-slate-700">Pengguna</th>
-                                <th class="p-4 font-semibold text-slate-700">Username</th>
-                                <th class="p-4 font-semibold text-slate-700">Password</th>
-                                <th class="p-4 font-semibold text-slate-700">Role</th>
-                                <th class="p-4 font-semibold text-slate-700">Aksi</th>
+                    <table class="w-full text-left text-sm table-auto">
+                        <thead class="bg-off-white border-b border-border-gray">
+                            <tr>
+                                <th class="p-4 font-semibold text-slate-navy">ID</th>
+                                <th class="p-4 font-semibold text-slate-navy">Pengguna</th>
+                                <th class="p-4 font-semibold text-slate-navy">Username</th>
+                                <th class="p-4 font-semibold text-slate-navy">Password</th>
+                                <th class="p-4 font-semibold text-slate-navy">Role</th>
+                                <th class="p-4 font-semibold text-slate-navy">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($users as $u)
-                            <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition-colors user-row" data-role="{{ strtolower($u->role->nama_role ?? '') }}" data-name="{{ strtolower($u->name) }}" data-username="{{ strtolower($u->username) }}">
-                                <td class="p-4 text-slate-600">{{ $u->id }}</td>
-                                <td class="p-4">
+                            <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors">
+                                <td class="p-4">{{ $u->id }}</td>
+                                <td class="p-4 font-medium text-slate-navy">
                                     <div class="flex items-center gap-3">
                                         <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
                                             {{ strtoupper(substr($u->name, 0, 1)) }}{{ strtoupper(substr(explode(' ', $u->name)[1] ?? '', 0, 1)) }}
                                         </div>
-                                        <div>
-                                            <p class="font-semibold text-slate-900">{{ $u->name }}</p>
-                                        </div>
+                                        <span>{{ $u->name }}</span>
                                     </div>
                                 </td>
-                                <td class="p-4 text-slate-700">{{ $u->username }}</td>
+                                <td class="p-4">{{ $u->username }}</td>
                                 <td class="p-4">
-                                    <div class="flex items-center gap-2">
-                                        <span class="text-slate-600 font-mono text-xs px-2 py-1 rounded">
-                                            {{ \Illuminate\Support\Str::limit($u->password, 10) }}
-                                        </span>
-                                    </div>
+                                    <span class="text-slate-600 font-mono text-xs px-2 py-1 rounded">
+                                        {{ \Illuminate\Support\Str::limit($u->password, 10) }}
+                                    </span>
                                 </td>
                                 <td class="p-4">
                                     @php
@@ -78,33 +71,32 @@
                                         ];
                                         $roleName = strtolower($u->role->nama_role ?? '');
                                     @endphp
-
                                     <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium {{ $roleColors[$roleName] ?? 'bg-gray-500 text-white' }}">
                                         <i class="{{ $roleIcons[$roleName] ?? 'fas fa-user' }}"></i>
                                         {{ $u->role->nama_role ?? '-' }}
                                     </span>
                                 </td>
-                                <td class="p-4 relative overflow-visible"> <!-- pastikan overflow visible -->
+                                <td class="p-4 relative overflow-visible">
                                     <button onclick="toggleDropdown({{ $u->id }})"
-                                            class="p-2 rounded-lg hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all">
-                                        <i class="fas fa-cog text-slate-600"></i>
+                                        class="p-2 rounded-lg hover:bg-off-white focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all">
+                                        <i class="fas fa-cog text-cool-gray"></i>
                                     </button>
 
-                                    <!-- Dropdown -->
-                                    <div id="dropdown-{{ $u->id }}" class="hidden absolute right-12 mt-2 bg-white border border-slate-200 rounded-lg shadow-xl z-20 min-w-[180px] w-auto overflow-visible">
-                                        <a href="{{ route('admin.users.detail', $u->id) }}" class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
+                                    <div id="dropdown-{{ $u->id }}"
+                                        class="hidden absolute right-20 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
+                                        <a href="{{ route('admin.users.detail', $u->id) }}"
+                                            class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
                                             <i class="fas fa-eye w-5 h-5"></i>
-                                            <span>Detail User</span>
+                                            <span>Detail</span>
                                         </a>
-
-                                        <div class="border-t border-slate-100"></div>
-
+                                        <div class="border-t border-border-gray"></div>
                                         <form action="{{ route('admin.users.delete', $u->id) }}" method="POST" onsubmit="return confirm('Yakin hapus {{ $u->name }}?')" class="m-0 p-0">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button" onclick="showDeleteModal({{ $u->id }}, '{{ $u->name }}')" class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base border-none bg-transparent cursor-pointer">
+                                            <button type="submit"
+                                                class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base border-none bg-transparent cursor-pointer">
                                                 <i class="fas fa-trash-alt w-5 h-5"></i>
-                                                <span>Hapus User</span>
+                                                <span>Hapus</span>
                                             </button>
                                         </form>
                                     </div>
@@ -114,6 +106,7 @@
                         </tbody>
                     </table>
                 </div>
+            </section>
 
                 <!-- Pagination -->
                 <div class="px-6 py-4 border-t border-slate-200 bg-slate-50/30">

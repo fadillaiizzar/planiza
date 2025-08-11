@@ -15,12 +15,13 @@ class TopikMateriController extends Controller
 {
     public function index()
     {
+        $allMateris = TopikMateri::with(['kelas', 'jurusan', 'rencana'])->get();
 
-        $topikMateris = TopikMateri::with(['kelas', 'jurusan', 'rencana'])->get();
+        $materiPerKelas = $allMateris->groupBy(fn($item) => $item->kelas->nama_kelas ?? '-')->map->count();
+        $materiPerJurusan = $allMateris->groupBy(fn($item) => $item->jurusan->nama_jurusan ?? '-')->map->count();
+        $materiPerRencana = $allMateris->groupBy(fn($item) => $item->rencana->nama_rencana ?? '-')->map->count();
 
-        $materiPerKelas = $topikMateris->groupBy(fn($item) => $item->kelas->nama_kelas ?? '-')->map->count();
-
-        $materiPerJurusan = $topikMateris->groupBy(fn($item) => $item->jurusan->nama_jurusan ?? '-')->map->count();
+        $topikMateris = TopikMateri::with(['kelas', 'jurusan', 'rencana'])->paginate(10);
 
         $materiCount = $topikMateris->count();
 
@@ -33,6 +34,7 @@ class TopikMateriController extends Controller
             'materiCount',
             'materiPerKelas',
             'materiPerJurusan',
+            'materiPerRencana',
             'user',
             'userCount',
         ));
