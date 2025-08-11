@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TopikMateri;
 use App\Models\User;
+use App\Models\Kelas;
+use App\Models\Jurusan;
+use App\Models\Rencana;
+use App\Models\TopikMateri;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -12,21 +15,17 @@ class TopikMateriController extends Controller
 {
     public function index()
     {
-        // Ambil semua topik materi dengan relasi yang diperlukan
+
         $topikMateris = TopikMateri::with(['kelas', 'jurusan', 'rencana'])->get();
 
-        // Hitung materi per kelas (nama kelas => jumlah materi)
         $materiPerKelas = $topikMateris->groupBy(fn($item) => $item->kelas->nama_kelas ?? '-')->map->count();
 
-        // Hitung materi per jurusan (nama jurusan => jumlah materi)
         $materiPerJurusan = $topikMateris->groupBy(fn($item) => $item->jurusan->nama_jurusan ?? '-')->map->count();
 
-        // Total materi
         $materiCount = $topikMateris->count();
 
         $user = Auth::user();
 
-        // Jumlah user (jika diperlukan)
         $userCount = User::count();
 
         return view('admin.pages.materi', compact(
@@ -39,9 +38,18 @@ class TopikMateriController extends Controller
         ));
     }
 
+    private function getDropdownData()
+    {
+        return [
+            'kelasList' => Kelas::all(),
+            'jurusanList' => Jurusan::all(),
+            'rencanaList' => Rencana::all(),
+        ];
+    }
+
     public function create()
     {
-        return view('admin.materi.create');
+        return view('admin.materi.create', $this->getDropdownData());
     }
 
     public function store(Request $request)
@@ -55,7 +63,7 @@ class TopikMateriController extends Controller
 
         TopikMateri::create($request->all());
 
-        return redirect()->route('topik-materi.index')->with('success', 'topik materi berhasil ditambahkan');
+        return redirect()->route('admin.materi.index')->with('success', 'topik materi berhasil ditambahkan');
     }
 
     public function show($id)
@@ -67,7 +75,10 @@ class TopikMateriController extends Controller
     public function edit($id)
     {
         $topik = TopikMateri::findOrFail($id);
-        return view('admin.materi.edit', compact('topik'));
+        return view('admin.materi.edit', array_merge(
+            compact('topik'),
+            $this->getDropdownData()
+        ));
     }
 
     public function update(Request $request, $id)
@@ -82,7 +93,7 @@ class TopikMateriController extends Controller
         $topik = TopikMateri::findOrFail($id);
         $topik->update($request->all());
 
-        return redirect()->route('topik-materi.index')->with('success', 'topik materi berhasil diupdate');
+        return redirect()->route('admin.materi.index')->with('success', 'topik materi berhasil diupdate');
     }
 
     public function destroy($id)
@@ -90,6 +101,6 @@ class TopikMateriController extends Controller
         $topik = TopikMateri::findOrFail($id);
         $topik->delete();
 
-        return redirect()->route('topik-materi.index')->with('success', 'topik materi berhasil dihapus');
+        return redirect()->route('admin.materi.index')->with('success', 'topik materi berhasil dihapus');
     }
 }

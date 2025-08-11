@@ -6,7 +6,7 @@
 <main class="p-6 bg-slate-50 min-h-screen">
     <h1 class="text-2xl font-bold mb-6">Edit Topik Materi</h1>
 
-    <form action="{{ route('topik-materi.update', $topik->id) }}" method="POST" class="max-w-lg bg-white p-6 rounded shadow">
+    <form action="{{ route('admin.materi.update', $topik->id) }}" method="POST" class="max-w-lg bg-white p-6 rounded shadow">
         @csrf
         @method('PUT')
 
@@ -68,7 +68,7 @@
         </div>
 
         <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition">Update</button>
-        <a href="{{ route('topik-materi.index') }}" class="ml-4 text-gray-600 hover:underline">Batal</a>
+        <a href="{{ route('admin.materi.index') }}" class="ml-4 text-gray-600 hover:underline">Batal</a>
     </form>
 </main>
 @endsection

@@ -39,7 +39,7 @@
                                 <th class="p-4 font-semibold text-slate-700">Username</th>
                                 <th class="p-4 font-semibold text-slate-700">Password</th>
                                 <th class="p-4 font-semibold text-slate-700">Role</th>
-                                <th class="p-4 font-semibold text-slate-700 text-center ">Aksi</th>
+                                <th class="p-4 font-semibold text-slate-700">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -84,14 +84,14 @@
                                         {{ $u->role->nama_role ?? '-' }}
                                     </span>
                                 </td>
-                                <td class="p-4 text-center relative overflow-visible"> <!-- pastikan overflow visible -->
+                                <td class="p-4 relative overflow-visible"> <!-- pastikan overflow visible -->
                                     <button onclick="toggleDropdown({{ $u->id }})"
                                             class="p-2 rounded-lg hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all">
                                         <i class="fas fa-cog text-slate-600"></i>
                                     </button>
 
                                     <!-- Dropdown -->
-                                    <div id="dropdown-{{ $u->id }}" class="hidden absolute right-8 mt-2 bg-white border border-slate-200 rounded-lg shadow-xl z-20 min-w-[180px] w-auto overflow-visible">
+                                    <div id="dropdown-{{ $u->id }}" class="hidden absolute right-12 mt-2 bg-white border border-slate-200 rounded-lg shadow-xl z-20 min-w-[180px] w-auto overflow-visible">
                                         <a href="{{ route('admin.users.detail', $u->id) }}" class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
                                             <i class="fas fa-eye w-5 h-5"></i>
                                             <span>Detail User</span>
@@ -148,58 +148,8 @@
 @endsection
 
 @push('scripts')
+    <script src="{{ asset('js/app.js') }}"></script>
     <script>
-        // Existing functions
-        function toggleSidebarSize() {
-            const sidebar = document.getElementById('sidebar');
-            const isCollapsed = sidebar.classList.toggle('w-20');
-            sidebar.classList.toggle('w-64', !isCollapsed);
-            const profileSection = document.getElementById('profileSection');
-            const userName = document.getElementById('userName');
-            if (isCollapsed) {
-                profileSection.classList.replace('gap-3', 'gap-2');
-                userName.classList.add('opacity-0', 'w-0', 'overflow-hidden');
-            } else {
-                profileSection.classList.replace('gap-2', 'gap-3');
-                userName.classList.remove('opacity-0', 'w-0', 'overflow-hidden');
-            }
-            document.querySelectorAll('.sidebar-label').forEach(label => {
-                label.classList.toggle('opacity-0', isCollapsed);
-                label.classList.toggle('w-0', isCollapsed);
-                label.classList.toggle('overflow-hidden', isCollapsed);
-            });
-            document.querySelectorAll('.icon-wrapper').forEach(wrapper => {
-                wrapper.classList.toggle('justify-center', isCollapsed);
-                wrapper.classList.toggle('justify-start', !isCollapsed);
-            });
-            const icon = document.getElementById('sidebarToggleIcon');
-            icon.classList.toggle('fa-angle-left', !isCollapsed);
-            icon.classList.toggle('fa-angle-right', isCollapsed);
-        }
-
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-            const isOpen = sidebar.classList.contains('-translate-x-full');
-            if (isOpen) {
-                sidebar.classList.remove('-translate-x-full');
-                overlay.classList.remove('hidden');
-            } else {
-                sidebar.classList.add('-translate-x-full');
-                overlay.classList.add('hidden');
-            }
-        }
-
-        function toggleDropdown(id) {
-            // Tutup semua dropdown dulu
-            document.querySelectorAll('[id^="dropdown-"]').forEach(el => {
-                if (el.id !== `dropdown-${id}`) el.classList.add('hidden');
-            });
-            // Toggle dropdown yang diklik
-            const dropdown = document.getElementById(`dropdown-${id}`);
-            dropdown.classList.toggle('hidden');
-        }
-
         // Enhanced search and filter functionality
         function initializeFilters() {
             const searchInput = document.getElementById('searchInput');
