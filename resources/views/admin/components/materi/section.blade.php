@@ -5,7 +5,9 @@
         'addUserRoute' => $addUserRoute,
         'userCount' => $userCount,
         'stats' => $stats,
-        'roles' => []
+        'filterOptions' => $filterOptions ?? [],
+        'searchPlaceholder' => $searchPlaceholder ?? 'Cari...',
+        'itemCount' => $itemCount ?? 0,
     ])
 
     <!-- Statistik -->
@@ -17,7 +19,7 @@
             <div class="bg-white rounded-xl border border-border-gray shadow-sm p-5 hover:shadow-md transition-shadow duration-300">
                 <h4 class="text-lg font-semibold text-slate-navy mb-4">{{ $iconKelas ?? '📚' }} {{ $labelKelas }}</h4>
                 <ul class="space-y-2 text-cool-gray">
-                    @foreach($dataPerKelas as $kelas => $count)
+                    @foreach(($materiPerKelas ?? []) as $kelas => $count)
                         <li class="flex justify-between items-center border-b border-border-gray pb-1 last:border-none last:pb-0">
                             <span>{{ $kelas }}</span>
                             <strong class="text-slate-navy">{{ $count }}</strong>
@@ -30,7 +32,7 @@
             <div class="bg-white rounded-xl border border-border-gray shadow-sm p-5 hover:shadow-md transition-shadow duration-300">
                 <h4 class="text-lg font-semibold text-slate-navy mb-4">{{ $iconJurusan ?? '🏫' }} {{ $labelJurusan }}</h4>
                 <ul class="space-y-2 text-cool-gray">
-                    @foreach($dataPerJurusan as $jurusan => $count)
+                    @foreach(($materiPerJurusan ?? []) as $jurusan => $count)
                         <li class="flex justify-between items-center border-b border-border-gray pb-1 last:border-none last:pb-0">
                             <span>{{ $jurusan }}</span>
                             <strong class="text-slate-navy">{{ $count }}</strong>
@@ -43,7 +45,7 @@
             <div class="bg-white rounded-xl border border-border-gray shadow-sm p-5 hover:shadow-md transition-shadow duration-300">
                 <h4 class="text-lg font-semibold text-slate-navy mb-4">{{ $iconRencana ?? '🗂' }} {{ $labelRencana }}</h4>
                 <ul class="space-y-2 text-cool-gray">
-                    @foreach($dataPerRencana as $rencana => $count)
+                    @foreach(($materiPerRencana ?? []) as $rencana => $count)
                         <li class="flex justify-between items-center border-b border-border-gray pb-1 last:border-none last:pb-0">
                             <span>{{ $rencana }}</span>
                             <strong class="text-slate-navy">{{ $count }}</strong>
@@ -68,7 +70,12 @@
                 </thead>
                 <tbody>
                     @foreach ($items as $item)
-                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors">
+                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors topik-row"
+                        data-judul="{{ strtolower($item->judul_topik) }}"
+                        data-kelas="{{ strtolower($item->kelas->nama_kelas ?? '') }}"
+                        data-jurusan="{{ strtolower($item->jurusan->nama_jurusan ?? '') }}"
+                        data-rencana="{{ strtolower($item->rencana->nama_rencana ?? '') }}"
+                        >
                             <td class="p-4">{{ $item->id }}</td>
                             <td class="p-4 font-medium text-slate-navy">{{ $item->judul_topik }}</td>
                             <td class="p-4">{{ $item->kelas->nama_kelas ?? '-' }}</td>
@@ -113,7 +120,7 @@
     <div class="bg-white rounded-lg p-6 w-96 shadow-xl">
         <h3 class="text-lg font-semibold text-slate-800 mb-4">Hapus Materi</h3>
         <p class="text-slate-600 mb-6">
-            Apakah Anda yakin ingin menghapus <span id="deleteUserName" class="font-bold"></span>?
+            Apakah Anda yakin ingin menghapus topik materi berjudul <span id="deleteUserName" class="font-bold"></span>?
             Tindakan ini tidak dapat dibatalkan
         </p>
 

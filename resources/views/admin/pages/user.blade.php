@@ -14,14 +14,17 @@
                 'pageTitle' => 'User Management',
                 'addButtonText' => 'Tambah User',
                 'addUserRoute' => route('register'),
-                'userCount' => $userCount,
-                'users' => $users,
                 'stats' => [
                     ['label' => 'Total User', 'count' => $userCount, 'icon' => 'fas fa-users', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
                     ['label' => 'Admin', 'count' => $users->where('role.nama_role', 'admin')->count(), 'icon' => 'fas fa-shield-alt', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
                     ['label' => 'Siswa', 'count' => $users->where('role.nama_role', 'siswa')->count(), 'icon' => 'fas fa-graduation-cap', 'bg' => 'from-emerald-500 to-emerald-600', 'textColor' => 'text-emerald-100'],
                 ],
-                'roles' => ['admin', 'siswa']
+                'filterOptions' => [
+                    ['label' => 'Admin', 'value' => 'admin'],
+                    ['label' => 'Siswa', 'value' => 'siswa'],
+                ],
+                'searchPlaceholder' => 'Cari berdasarkan nama atau username',
+                'itemCount' => $users->count(),
             ])
 
             <!-- Enhanced Users Table -->
@@ -41,7 +44,11 @@
                         </thead>
                         <tbody>
                             @foreach ($users as $u)
-                            <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors">
+                            <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors user-row"
+                                data-name="{{ strtolower($u->name) }}"
+                                data-username="{{ strtolower($u->username) }}"
+                                data-role="{{ strtolower($u->role->nama_role ?? '') }}"
+                            >
                                 <td class="p-4">{{ $u->id }}</td>
                                 <td class="p-4 font-medium text-slate-navy">
                                     <div class="flex items-center gap-3">
@@ -82,14 +89,13 @@
                                         <i class="fas fa-cog text-cool-gray"></i>
                                     </button>
 
-                                    <div id="dropdown-{{ $u->id }}" class="hidden absolute right-20 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
+                                    <div id="dropdown-{{ $u->id }}" class="hidden absolute right-12 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
                                         <a href="{{ route('admin.users.detail', $u->id) }}"
                                             class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
                                             <i class="fas fa-eye w-5 h-5"></i>
                                             <span>Detail</span>
                                         </a>
                                         <div class="border-t border-border-gray"></div>
-                                        <!-- Tombol hapus sekarang bukan form submit -->
                                         <button type="button" onclick="showDeleteModal({{ $u->id }}, '{{ addslashes($u->name) }}')"
                                             class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base border-none bg-transparent cursor-pointer">
                                             <i class="fas fa-trash-alt w-5 h-5"></i>
@@ -104,10 +110,9 @@
                 </div>
             </section>
 
-                <!-- Pagination -->
-                <div class="px-6 py-4 border-t border-slate-200 bg-slate-50/30">
-                    {{ $users->links() }}
-                </div>
+            <!-- Pagination -->
+            <div class="px-6 py-4 border-t border-slate-200 bg-slate-50/30">
+                {{ $users->links() }}
             </div>
         </div>
     </main>
@@ -136,61 +141,44 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script>
-        // Enhanced search and filter functionality
-        function initializeFilters() {
-            const searchInput = document.getElementById('searchInput');
-            const roleFilter = document.getElementById('roleFilter');
-            const resultCount = document.getElementById('resultCount');
-            const userRows = document.querySelectorAll('.user-row');
+<script>
+    // Inisialisasi filter search & select role
+    function initializeFilters() {
+        const searchInput = document.getElementById('searchInput');
+        const roleFilter = document.getElementById('roleFilter');
+        const resultCount = document.getElementById('resultCount');
+        const userRows = document.querySelectorAll('.user-row');
 
-            function filterUsers() {
-                const searchTerm = searchInput.value.toLowerCase();
-                const selectedRole = roleFilter.value.toLowerCase();
-                let visibleCount = 0;
+        function filterUsers() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedRole = roleFilter.value.toLowerCase();
+            let visibleCount = 0;
 
-                userRows.forEach(row => {
-                    const name = row.dataset.name;
-                    const username = row.dataset.username;
-                    const role = row.dataset.role;
+            userRows.forEach(row => {
+                const name = row.dataset.name;
+                const username = row.dataset.username;
+                const role = row.dataset.role;
 
-                    const matchesSearch = name.includes(searchTerm) || username.includes(searchTerm);
-                    const matchesRole = !selectedRole || role === selectedRole;
+                const matchesSearch = name.includes(searchTerm) || username.includes(searchTerm);
+                const matchesRole = !selectedRole || role === selectedRole;
 
-                    if (matchesSearch && matchesRole) {
-                        row.style.display = '';
-                        visibleCount++;
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
+                if (matchesSearch && matchesRole) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
 
-                resultCount.textContent = visibleCount;
-            }
-
-            searchInput.addEventListener('input', filterUsers);
-            roleFilter.addEventListener('change', filterUsers);
+            resultCount.textContent = visibleCount;
         }
 
-        function togglePassword(userId) {
-            // Placeholder for password toggle functionality
-            alert('Toggle password visibility for user ID: ' + userId);
-        }
+        searchInput.addEventListener('input', filterUsers);
+        roleFilter.addEventListener('change', filterUsers);
+    }
 
-        // Klik di luar dropdown -> tutup
-        document.addEventListener('click', function (e) {
-            if (!e.target.closest('[id^="dropdown-"]') && !e.target.closest('button')) {
-                document.querySelectorAll('[id^="dropdown-"]').forEach(el => el.classList.add('hidden'));
-            }
-        });
-
-        // Initialize filters when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeFilters();
-        });
-
-        function toggleDropdown(id) {
+    // Toggle dropdown action button
+    function toggleDropdown(id) {
         document.querySelectorAll('[id^="dropdown-"]').forEach(drop => {
             if (drop.id === `dropdown-${id}`) {
                 drop.classList.toggle('hidden');
@@ -200,7 +188,7 @@
         });
     }
 
-    // Tampilkan modal hapus, set nama dan action form hapus sesuai user id
+    // Tampilkan modal hapus user
     function showDeleteModal(userId, userName) {
         document.getElementById('deleteModal').classList.remove('hidden');
         document.getElementById('deleteUserName').textContent = userName;
@@ -208,24 +196,26 @@
         form.action = `/admin/users/${userId}`;
     }
 
-    // Tutup modal hapus
+    // Tutup modal hapus user
     function closeDeleteModal() {
         document.getElementById('deleteModal').classList.add('hidden');
     }
 
-    // Klik di luar modal tutup modal hapus
-    window.addEventListener('click', function(e) {
+    // Klik di luar modal dan dropdown, tutup mereka
+    document.addEventListener('click', function (e) {
+        // Tutup dropdown jika klik di luar tombol dan dropdown
+        if (!e.target.closest('[id^="dropdown-"]') && !e.target.closest('button[onclick^="toggleDropdown"]')) {
+            document.querySelectorAll('[id^="dropdown-"]').forEach(el => el.classList.add('hidden'));
+        }
+        // Tutup modal jika klik di luar modal konten
         const modal = document.getElementById('deleteModal');
         if (!modal.classList.contains('hidden') && e.target === modal) {
             closeDeleteModal();
         }
     });
 
-    // Klik di luar dropdown -> tutup dropdown
-    document.addEventListener('click', function (e) {
-        if (!e.target.closest('[id^="dropdown-"]') && !e.target.closest('button')) {
-            document.querySelectorAll('[id^="dropdown-"]').forEach(el => el.classList.add('hidden'));
-        }
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeFilters();
     });
-    </script>
+</script>
 @endpush

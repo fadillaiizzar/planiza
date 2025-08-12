@@ -99,12 +99,8 @@
 
                     <!-- Button -->
                     <div class="flex justify-center">
-                        <a href="{{ route('admin.materi.index') }}"
-                            class="text-slate-600 hover:underline px-6 py-3">
-                            Batal
-                        </a>
                         <button type="submit"
-                            class="bg-slate-700 hover:bg-slate-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
+                            class="bg-slate-700 hover:bg-slate-800 text-white font-semibold w-full py-3 px-6 rounded-lg transition-colors focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
                             Simpan
                         </button>
                     </div>

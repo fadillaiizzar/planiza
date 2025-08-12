@@ -38,6 +38,30 @@
                 ['label' => 'Topik per Jurusan', 'count' => $materiPerJurusan->sum(), 'icon' => 'fas fa-university', 'bg' => 'from-purple-500 to-purple-600', 'textColor' => 'text-purple-100'],
                 ['label' => 'Topik per Rencana', 'count' => $materiPerRencana->sum(), 'icon' => 'fas fa-tasks', 'bg' => 'from-yellow-500 to-yellow-600', 'textColor' => 'text-yellow-100'],
             ],
+           'filterOptions' => [
+                // Kelas
+                ['label' => 'X',    'value' => 'x'],
+                ['label' => 'XI',   'value' => 'xi'],
+                ['label' => 'XII',  'value' => 'xii'],
+                ['label' => 'XIII', 'value' => 'xiii'],
+
+                // Jurusan
+                ['label' => 'TKR',  'value' => 'tkr'],
+                ['label' => 'SIJA', 'value' => 'sija'],
+                ['label' => 'TAV',  'value' => 'tav'],
+                ['label' => 'TITL', 'value' => 'titl'],
+                ['label' => 'TP',   'value' => 'tp'],
+                ['label' => 'DPIB', 'value' => 'dpib'],
+                ['label' => 'KGSP', 'value' => 'kgsp'],
+                ['label' => 'DKV',  'value' => 'dkv'],
+                ['label' => 'GEO',  'value' => 'geo'],
+
+                // Rencana
+                ['label' => 'Kerja',  'value' => 'kerja'],
+                ['label' => 'Kuliah', 'value' => 'kuliah'],
+            ],
+            'searchPlaceholder' => 'Cari berdasarkan judul topik',
+            'itemCount' => $topikMateris->total(),
             'statistikTitle' => 'Statistik Topik',
             'iconKelas' => '📚',
             'labelKelas' => 'Topik per Kelas',
@@ -45,9 +69,9 @@
             'labelJurusan' => 'Topik per Jurusan',
             'iconRencana' => '🗂',
             'labelRencana' => 'Topik per Rencana',
-            'dataPerKelas' => $materiPerKelas,
-            'dataPerJurusan' => $materiPerJurusan,
-            'dataPerRencana' => $materiPerRencana,
+            'materiPerKelas' => $materiPerKelas,
+            'materiPerJurusan' => $materiPerJurusan,
+            'materiPerRencana' => $materiPerRencana,
             'tableTitle' => 'Daftar Topik Materi',
             'tableHeaders' => ['ID', 'Judul Topik', 'Kelas', 'Jurusan', 'Rencana', 'Aksi'],
             'items' => $topikMateris,

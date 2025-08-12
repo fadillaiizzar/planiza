@@ -3,7 +3,9 @@
     $addButtonText = $addButtonText ?? 'Tambah Data';
     $addUserRoute = $addUserRoute ?? '#';
     $stats = $stats ?? [];
-    $roles = $roles ?? [];
+    $filterOptions = $filterOptions ?? [];
+    $searchPlaceholder = $searchPlaceholder ?? 'Cari...';
+    $itemCount = $itemCount ?? 0;
 @endphp
 
 <!-- Mobile header -->
@@ -59,8 +61,8 @@
 </div>
 @endif
 
-<!-- Optional search and filter (jika roles tidak kosong) -->
-@if(count($roles) > 0)
+<!-- Search & Filter -->
+@if(count($filterOptions) > 0)
 <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border-0 p-6 mb-6">
     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div class="flex flex-col gap-4 md:flex-row md:items-center">
@@ -70,19 +72,19 @@
                 <input
                     type="text"
                     id="searchInput"
-                    placeholder="cari berdasarkan nama atau username"
+                    placeholder="{{ $searchPlaceholder }}"
                     class="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                 >
             </div>
 
-            <!-- Role Filter -->
+            <!-- Dynamic Filter Select -->
             <div class="flex gap-2">
                 <div class="relative inline-block w-48">
-                    <select id="roleFilter" class="appearance-none w-full px-4 py-2 pr-10 bg-white border border-gray-300 rounded-lg shadow-sm
+                    <select id="filterSelect" class="appearance-none w-full px-4 py-2 pr-10 bg-white border border-gray-300 rounded-lg shadow-sm
                         focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition cursor-pointer">
-                        <option value="">Semua Role</option>
-                        @foreach ($roles as $role)
-                            <option value="{{ strtolower($role) }}">{{ ucfirst($role) }}</option>
+                        <option value="">Semua</option>
+                        @foreach ($filterOptions as $option)
+                            <option value="{{ strtolower($option['value']) }}">{{ $option['label'] }}</option>
                         @endforeach
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
@@ -96,8 +98,71 @@
         </div>
 
         <div class="text-sm text-slate-600">
-            <span id="resultCount">{{ $users->count() ?? 0 }}</span> pengguna ditemukan
+            <span id="resultCount">{{ $itemCount }}</span> data ditemukan
         </div>
     </div>
 </div>
 @endif
+
+@push('scripts')
+<script>
+    function initializeFilters() {
+        const searchInput = document.getElementById('searchInput');
+        const filterSelect = document.getElementById('filterSelect');
+        const resultCount = document.getElementById('resultCount');
+
+        // Cari baris data, cek kelas user-row / topik-row, dll sesuai konvensi data
+        let rows = [];
+        if (document.querySelectorAll('.user-row').length > 0) {
+            rows = document.querySelectorAll('.user-row');
+        } else if (document.querySelectorAll('.topik-row').length > 0) {
+            rows = document.querySelectorAll('.topik-row');
+        } else {
+            return; // Tidak ada data untuk difilter
+        }
+
+        function filterItems() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            const selectedFilter = filterSelect.value.toLowerCase();
+
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                let matchesSearch = false;
+                let matchesFilter = false;
+
+                if (row.classList.contains('user-row')) {
+                    const name = row.dataset.name || '';
+                    const username = row.dataset.username || '';
+                    const role = row.dataset.role || '';
+
+                    matchesSearch = name.includes(searchTerm) || username.includes(searchTerm);
+                    matchesFilter = !selectedFilter || role === selectedFilter;
+                } else if (row.classList.contains('topik-row')) {
+                    const judul = row.dataset.judul || '';
+                    const kelas = row.dataset.kelas || '';
+                    const jurusan = row.dataset.jurusan || '';
+                    const rencana = row.dataset.rencana || '';
+
+                    matchesSearch = judul.includes(searchTerm);
+                    matchesFilter = !selectedFilter || kelas === selectedFilter || jurusan === selectedFilter || rencana === selectedFilter;
+                }
+
+                if (matchesSearch && matchesFilter) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            resultCount.textContent = visibleCount;
+        }
+
+        searchInput.addEventListener('input', filterItems);
+        filterSelect.addEventListener('change', filterItems);
+    }
+
+    document.addEventListener('DOMContentLoaded', initializeFilters);
+</script>
+@endpush

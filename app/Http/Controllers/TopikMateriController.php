@@ -23,13 +23,14 @@ class TopikMateriController extends Controller
 
         $topikMateris = TopikMateri::with(['kelas', 'jurusan', 'rencana'])->paginate(10);
 
-        $materiCount = $topikMateris->count();
+        $materiCount = TopikMateri::count();
 
         $user = Auth::user();
 
         $userCount = User::count();
 
         return view('admin.pages.materi', compact(
+            'allMateris',
             'topikMateris',
             'materiCount',
             'materiPerKelas',
