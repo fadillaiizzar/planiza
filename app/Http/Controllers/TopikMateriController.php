@@ -13,32 +13,117 @@ use Illuminate\Support\Facades\Auth;
 
 class TopikMateriController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $allMateris = TopikMateri::with(['kelas', 'jurusan', 'rencana'])->get();
+       $topikMateris = TopikMateri::with(['kelas', 'jurusan', 'rencana'])
+        ->oldest()
+        ->paginate(10);
 
+        $topikMaterisCount = TopikMateri::count();
+
+        // Hitung berdasarkan kelas
+        $kelasXCount = TopikMateri::whereHas('kelas', function($query) {
+            $query->where('nama_kelas', 'X');
+        })->count();
+
+        $kelasXICount = TopikMateri::whereHas('kelas', function($query) {
+            $query->where('nama_kelas', 'XI');
+        })->count();
+
+        $kelasXIICount = TopikMateri::whereHas('kelas', function($query) {
+            $query->where('nama_kelas', 'XII');
+        })->count();
+
+        $kelasXIIICount = TopikMateri::whereHas('kelas', function($query) {
+            $query->where('nama_kelas', 'XIII');
+        })->count();
+
+        // Hitung berdasarkan jurusan
+        $jurusanTKRCount = TopikMateri::whereHas('jurusan', function($query) {
+            $query->where('nama_jurusan', 'TKR');
+        })->count();
+
+        $jurusanSIJACount = TopikMateri::whereHas('jurusan', function($query) {
+            $query->where('nama_jurusan', 'SIJA');
+        })->count();
+
+        $jurusanTAVCount = TopikMateri::whereHas('jurusan', function($query) {
+            $query->where('nama_jurusan', 'TAV');
+        })->count();
+
+        $jurusanTITLCount = TopikMateri::whereHas('jurusan', function($query) {
+            $query->where('nama_jurusan', 'TITL');
+        })->count();
+
+        $jurusanTPCount = TopikMateri::whereHas('jurusan', function($query) {
+            $query->where('nama_jurusan', 'TP');
+        })->count();
+
+        $jurusanDPIBCount = TopikMateri::whereHas('jurusan', function($query) {
+            $query->where('nama_jurusan', 'DPIB');
+        })->count();
+
+        $jurusanKGSPCount = TopikMateri::whereHas('jurusan', function($query) {
+            $query->where('nama_jurusan', 'KGSP');
+        })->count();
+
+        $jurusanDKVCount = TopikMateri::whereHas('jurusan', function($query) {
+            $query->where('nama_jurusan', 'DKV');
+        })->count();
+
+        $jurusanGEOCount = TopikMateri::whereHas('jurusan', function($query) {
+            $query->where('nama_jurusan', 'GEO');
+        })->count();
+
+        // Hitung berdasarkan rencana
+        $rencanaKuliahCount = TopikMateri::whereHas('rencana', function($query) {
+            $query->where('nama_rencana', 'Kuliah');
+        })->count();
+
+        $rencanaKerjaCount = TopikMateri::whereHas('rencana', function($query) {
+            $query->where('nama_rencana', 'Kerja');
+        })->count();
+
+        // Data untuk statistik
+        $allMateris = TopikMateri::with(['kelas', 'jurusan', 'rencana'])->get();
         $materiPerKelas = $allMateris->groupBy(fn($item) => $item->kelas->nama_kelas ?? '-')->map->count();
         $materiPerJurusan = $allMateris->groupBy(fn($item) => $item->jurusan->nama_jurusan ?? '-')->map->count();
         $materiPerRencana = $allMateris->groupBy(fn($item) => $item->rencana->nama_rencana ?? '-')->map->count();
 
-        $topikMateris = TopikMateri::with(['kelas', 'jurusan', 'rencana'])->paginate(10);
-
-        $materiCount = TopikMateri::count();
-
         $user = Auth::user();
-
         $userCount = User::count();
 
-        return view('admin.pages.materi', compact(
-            'allMateris',
-            'topikMateris',
-            'materiCount',
-            'materiPerKelas',
-            'materiPerJurusan',
-            'materiPerRencana',
-            'user',
-            'userCount',
-        ));
+       return view('admin.pages.materi', [
+            'topikMateris' => $topikMateris,
+            'allMateris' => $allMateris,
+            'topikMaterisCount' => $topikMaterisCount,
+            'materiPerKelas' => $materiPerKelas,
+            'materiPerJurusan' => $materiPerJurusan,
+            'materiPerRencana' => $materiPerRencana,
+            'user' => $user,
+            'userCount' => $userCount,
+
+            // Count berdasarkan kelas
+            'kelasXCount' => $kelasXCount,
+            'kelasXICount' => $kelasXICount,
+            'kelasXIICount' => $kelasXIICount,
+            'kelasXIIICount' => $kelasXIIICount,
+
+            // Count berdasarkan jurusan
+            'jurusanTKRCount' => $jurusanTKRCount,
+            'jurusanSIJACount' => $jurusanSIJACount,
+            'jurusanTAVCount' => $jurusanTAVCount,
+            'jurusanTITLCount' => $jurusanTITLCount,
+            'jurusanTPCount' => $jurusanTPCount,
+            'jurusanDPIBCount' => $jurusanDPIBCount,
+            'jurusanKGSPCount' => $jurusanKGSPCount,
+            'jurusanDKVCount' => $jurusanDKVCount,
+            'jurusanGEOCount' => $jurusanGEOCount,
+
+            // Count berdasarkan rencana
+            'rencanaKuliahCount' => $rencanaKuliahCount,
+            'rencanaKerjaCount' => $rencanaKerjaCount,
+        ]);
     }
 
     private function getDropdownData()

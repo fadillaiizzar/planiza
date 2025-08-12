@@ -24,6 +24,8 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $with = ['role', 'siswa'];
+
     protected function casts(): array
     {
         return [
@@ -31,7 +33,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function role(): BelongsTo  
+    public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
     }

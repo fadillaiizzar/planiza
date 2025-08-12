@@ -33,35 +33,32 @@
             'addUserRoute' => route('admin.materi.create'),
             'userCount' => $userCount,
             'stats' => [
-                ['label' => 'Total Topik', 'count' => $materiCount, 'icon' => 'fas fa-book', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
+                ['label' => 'Total Topik', 'count' => $topikMaterisCount, 'icon' => 'fas fa-book', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
                 ['label' => 'Topik per Kelas', 'count' => $materiPerKelas->sum(), 'icon' => 'fas fa-layer-group', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
                 ['label' => 'Topik per Jurusan', 'count' => $materiPerJurusan->sum(), 'icon' => 'fas fa-university', 'bg' => 'from-purple-500 to-purple-600', 'textColor' => 'text-purple-100'],
                 ['label' => 'Topik per Rencana', 'count' => $materiPerRencana->sum(), 'icon' => 'fas fa-tasks', 'bg' => 'from-yellow-500 to-yellow-600', 'textColor' => 'text-yellow-100'],
             ],
            'filterOptions' => [
-                // Kelas
-                ['label' => 'X',    'value' => 'x'],
-                ['label' => 'XI',   'value' => 'xi'],
-                ['label' => 'XII',  'value' => 'xii'],
-                ['label' => 'XIII', 'value' => 'xiii'],
+                ['label' => 'X', 'value' => 'X'],
+                ['label' => 'XI', 'value' => 'XI'],
+                ['label' => 'XII', 'value' => 'XII'],
+                ['label' => 'XIII', 'value' => 'XIII'],
 
-                // Jurusan
-                ['label' => 'TKR',  'value' => 'tkr'],
-                ['label' => 'SIJA', 'value' => 'sija'],
-                ['label' => 'TAV',  'value' => 'tav'],
-                ['label' => 'TITL', 'value' => 'titl'],
-                ['label' => 'TP',   'value' => 'tp'],
-                ['label' => 'DPIB', 'value' => 'dpib'],
-                ['label' => 'KGSP', 'value' => 'kgsp'],
-                ['label' => 'DKV',  'value' => 'dkv'],
-                ['label' => 'GEO',  'value' => 'geo'],
+                ['label' => 'TKR', 'value' => 'TKR'],
+                ['label' => 'SIJA', 'value' => 'SIJA'],
+                ['label' => 'TAV', 'value' => 'TAV'],
+                ['label' => 'TITL', 'value' => 'TITL'],
+                ['label' => 'TP', 'value' => 'TP'],
+                ['label' => 'DPIB', 'value' => 'DPIB'],
+                ['label' => 'KGSP', 'value' => 'KGSP'],
+                ['label' => 'DKV', 'value' => 'DKV'],
+                ['label' => 'GEO', 'value' => 'GEO'],
 
-                // Rencana
-                ['label' => 'Kerja',  'value' => 'kerja'],
-                ['label' => 'Kuliah', 'value' => 'kuliah'],
+                ['label' => 'Kuliah', 'value' => 'Kuliah'],
+                ['label' => 'Kerja', 'value' => 'Kerja'],
             ],
             'searchPlaceholder' => 'Cari berdasarkan judul topik',
-            'itemCount' => $topikMateris->total(),
+            'itemCount' =>  $topikMaterisCount,
             'statistikTitle' => 'Statistik Topik',
             'iconKelas' => '📚',
             'labelKelas' => 'Topik per Kelas',
@@ -78,7 +75,7 @@
         ])
         @endcomponent
 
-        @component('admin.components.materi.section', [
+        {{-- @component('admin.components.materi.section', [
             'id' => 'sectionMateri',
             'hidden' => 'hidden',
             'pageTitle' => 'Materi Management',
@@ -86,7 +83,7 @@
             'addUserRoute' => route('admin.materi.create'),
             'userCount' => $userCount,
             'stats' => [
-                ['label' => 'Total Materi', 'count' => $materiCount, 'icon' => 'fas fa-book', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
+                ['label' => 'Total Materi', 'count' => $itemCount, 'icon' => 'fas fa-book', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
                 ['label' => 'Materi per Kelas', 'count' => $materiPerKelas->sum(), 'icon' => 'fas fa-layer-group', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
                 ['label' => 'Materi per Jurusan', 'count' => $materiPerJurusan->sum(), 'icon' => 'fas fa-university', 'bg' => 'from-purple-500 to-purple-600', 'textColor' => 'text-purple-100'],
                 ['label' => 'Materi per Rencana', 'count' => $materiPerRencana->sum(), 'icon' => 'fas fa-tasks', 'bg' => 'from-yellow-500 to-yellow-600', 'textColor' => 'text-yellow-100'],
@@ -98,14 +95,14 @@
             'labelJurusan' => 'Materi per Jurusan',
             'iconRencana' => '🗂',
             'labelRencana' => 'Materi per Rencana',
-            'dataPerKelas' => $materiPerKelas,
-            'dataPerJurusan' => $materiPerJurusan,
-            'dataPerRencana' => $materiPerRencana,
+            'materiPerKelas' => $materiPerKelas,
+            'materiPerJurusan' => $materiPerJurusan,
+            'materiPerRencana' => $materiPerRencana,
             'tableTitle' => 'Daftar Materi',
             'tableHeaders' => ['ID', 'Judul Materi', 'Kelas', 'Jurusan', 'Rencana', 'Aksi'],
             'items' => $topikMateris,
         ])
-        @endcomponent
+        @endcomponent --}}
 
         <!-- Pagination -->
         <div class="px-6 py-4 border-t border-slate-200 bg-slate-50/30">

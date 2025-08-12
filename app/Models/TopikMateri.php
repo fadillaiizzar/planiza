@@ -20,6 +20,8 @@ class TopikMateri extends Model
         'judul_topik',
     ];
 
+    protected $with = ['kelas', 'jurusan', 'rencana'];
+
     public function materis(): HasMany {
         return $this->hasMany(Materi::class);
     }
