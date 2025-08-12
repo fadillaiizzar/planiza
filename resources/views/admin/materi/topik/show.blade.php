@@ -14,7 +14,7 @@
 
             <!-- Header -->
             <div class="flex items-center mb-6 px-6">
-                <a href="{{ route('admin.materi.index') }}" class="p-2 text-slate-600 hover:text-slate-800 transition-colors">
+                <a href="{{ route('admin.topik.materi.index') }}" class="p-2 text-slate-600 hover:text-slate-800 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>

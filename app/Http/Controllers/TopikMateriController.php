@@ -15,74 +15,39 @@ class TopikMateriController extends Controller
 {
     public function index(Request $request)
     {
-       $topikMateris = TopikMateri::with(['kelas', 'jurusan', 'rencana'])
-        ->oldest()
-        ->paginate(10);
+        $topikMateris = TopikMateri::with(['kelas', 'jurusan', 'rencana'])
+            ->oldest()
+            ->paginate(10);
 
         $topikMaterisCount = TopikMateri::count();
 
-        // Hitung berdasarkan kelas
-        $kelasXCount = TopikMateri::whereHas('kelas', function($query) {
-            $query->where('nama_kelas', 'X');
-        })->count();
+        // List kategori untuk filter
+        $kelasList   = ['X', 'XI', 'XII', 'XIII'];
+        $jurusanList = ['TKR', 'SIJA', 'TAV', 'TITL', 'TP', 'DPIB', 'KGSP', 'DKV', 'GEO'];
+        $rencanaList = ['Kuliah', 'Kerja'];
 
-        $kelasXICount = TopikMateri::whereHas('kelas', function($query) {
-            $query->where('nama_kelas', 'XI');
-        })->count();
+        // Hitung jumlah per kategori
+        $kelasCounts = collect($kelasList)->mapWithKeys(function ($nama) {
+            return [$nama => TopikMateri::whereHas('kelas', fn($q) => $q->where('nama_kelas', $nama))->count()];
+        });
 
-        $kelasXIICount = TopikMateri::whereHas('kelas', function($query) {
-            $query->where('nama_kelas', 'XII');
-        })->count();
+        $jurusanCounts = collect($jurusanList)->mapWithKeys(function ($nama) {
+            return [$nama => TopikMateri::whereHas('jurusan', fn($q) => $q->where('nama_jurusan', $nama))->count()];
+        });
 
-        $kelasXIIICount = TopikMateri::whereHas('kelas', function($query) {
-            $query->where('nama_kelas', 'XIII');
-        })->count();
+        $rencanaCounts = collect($rencanaList)->mapWithKeys(function ($nama) {
+            return [$nama => TopikMateri::whereHas('rencana', fn($q) => $q->where('nama_rencana', $nama))->count()];
+        });
 
-        // Hitung berdasarkan jurusan
-        $jurusanTKRCount = TopikMateri::whereHas('jurusan', function($query) {
-            $query->where('nama_jurusan', 'TKR');
-        })->count();
+        // Gabungkan filterOptions (label & value tetap sama)
+        $filterOptions = collect([$kelasList, $jurusanList, $rencanaList])
+            ->flatten()
+            ->map(fn($item) => ['label' => $item, 'value' => $item])
+            ->toArray();
 
-        $jurusanSIJACount = TopikMateri::whereHas('jurusan', function($query) {
-            $query->where('nama_jurusan', 'SIJA');
-        })->count();
-
-        $jurusanTAVCount = TopikMateri::whereHas('jurusan', function($query) {
-            $query->where('nama_jurusan', 'TAV');
-        })->count();
-
-        $jurusanTITLCount = TopikMateri::whereHas('jurusan', function($query) {
-            $query->where('nama_jurusan', 'TITL');
-        })->count();
-
-        $jurusanTPCount = TopikMateri::whereHas('jurusan', function($query) {
-            $query->where('nama_jurusan', 'TP');
-        })->count();
-
-        $jurusanDPIBCount = TopikMateri::whereHas('jurusan', function($query) {
-            $query->where('nama_jurusan', 'DPIB');
-        })->count();
-
-        $jurusanKGSPCount = TopikMateri::whereHas('jurusan', function($query) {
-            $query->where('nama_jurusan', 'KGSP');
-        })->count();
-
-        $jurusanDKVCount = TopikMateri::whereHas('jurusan', function($query) {
-            $query->where('nama_jurusan', 'DKV');
-        })->count();
-
-        $jurusanGEOCount = TopikMateri::whereHas('jurusan', function($query) {
-            $query->where('nama_jurusan', 'GEO');
-        })->count();
-
-        // Hitung berdasarkan rencana
-        $rencanaKuliahCount = TopikMateri::whereHas('rencana', function($query) {
-            $query->where('nama_rencana', 'Kuliah');
-        })->count();
-
-        $rencanaKerjaCount = TopikMateri::whereHas('rencana', function($query) {
-            $query->where('nama_rencana', 'Kerja');
-        })->count();
+        $filterKelas = array_filter($filterOptions, fn($opt) => in_array($opt['value'], $kelasList));
+        $filterJurusan = array_filter($filterOptions, fn($opt) => in_array($opt['value'], $jurusanList));
+        $filterRencana = array_filter($filterOptions, fn($opt) => in_array($opt['value'], $rencanaList));
 
         // Data untuk statistik
         $allMateris = TopikMateri::with(['kelas', 'jurusan', 'rencana'])->get();
@@ -93,7 +58,7 @@ class TopikMateriController extends Controller
         $user = Auth::user();
         $userCount = User::count();
 
-       return view('admin.pages.materi', [
+       return view('admin.pages.topik', [
             'topikMateris' => $topikMateris,
             'allMateris' => $allMateris,
             'topikMaterisCount' => $topikMaterisCount,
@@ -103,26 +68,13 @@ class TopikMateriController extends Controller
             'user' => $user,
             'userCount' => $userCount,
 
-            // Count berdasarkan kelas
-            'kelasXCount' => $kelasXCount,
-            'kelasXICount' => $kelasXICount,
-            'kelasXIICount' => $kelasXIICount,
-            'kelasXIIICount' => $kelasXIIICount,
-
-            // Count berdasarkan jurusan
-            'jurusanTKRCount' => $jurusanTKRCount,
-            'jurusanSIJACount' => $jurusanSIJACount,
-            'jurusanTAVCount' => $jurusanTAVCount,
-            'jurusanTITLCount' => $jurusanTITLCount,
-            'jurusanTPCount' => $jurusanTPCount,
-            'jurusanDPIBCount' => $jurusanDPIBCount,
-            'jurusanKGSPCount' => $jurusanKGSPCount,
-            'jurusanDKVCount' => $jurusanDKVCount,
-            'jurusanGEOCount' => $jurusanGEOCount,
-
-            // Count berdasarkan rencana
-            'rencanaKuliahCount' => $rencanaKuliahCount,
-            'rencanaKerjaCount' => $rencanaKerjaCount,
+            'kelasCounts'   => $kelasCounts,
+            'jurusanCounts' => $jurusanCounts,
+            'rencanaCounts' => $rencanaCounts,
+            'filterOptions' => $filterOptions,
+            'filterKelas'   => $filterKelas,
+            'filterJurusan' => $filterJurusan,
+            'filterRencana' => $filterRencana,
         ]);
     }
 
@@ -137,7 +89,7 @@ class TopikMateriController extends Controller
 
     public function create()
     {
-        return view('admin.materi.create', $this->getDropdownData());
+        return view('admin.materi.topik.create', $this->getDropdownData());
     }
 
     public function store(Request $request)
@@ -151,19 +103,19 @@ class TopikMateriController extends Controller
 
         TopikMateri::create($request->all());
 
-        return redirect()->route('admin.materi.index')->with('success', 'topik materi berhasil ditambahkan');
+        return redirect()->route('admin.topik.materi.index')->with('success', 'topik materi berhasil ditambahkan');
     }
 
     public function show($id)
     {
         $topik = TopikMateri::findOrFail($id);
-        return view('admin.materi.show', compact('topik'));
+        return view('admin.materi.topik.show', compact('topik'));
     }
 
     public function edit($id)
     {
         $topik = TopikMateri::findOrFail($id);
-        return view('admin.materi.edit', array_merge(
+        return view('admin.materi.topik.edit', array_merge(
             compact('topik'),
             $this->getDropdownData()
         ));
@@ -181,7 +133,7 @@ class TopikMateriController extends Controller
         $topik = TopikMateri::findOrFail($id);
         $topik->update($request->all());
 
-        return redirect()->route('admin.materi.index')->with('success', 'topik materi berhasil diupdate');
+        return redirect()->route('admin.topik.materi.index')->with('success', 'topik materi berhasil diupdate');
     }
 
     public function destroy($id)
@@ -189,6 +141,6 @@ class TopikMateriController extends Controller
         $topik = TopikMateri::findOrFail($id);
         $topik->delete();
 
-        return redirect()->route('admin.materi.index')->with('success', 'topik materi berhasil dihapus');
+        return redirect()->route('admin.topik.materi.index')->with('success', 'topik materi berhasil dihapus');
     }
 }

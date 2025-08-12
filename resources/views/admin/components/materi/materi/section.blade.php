@@ -88,19 +88,19 @@
                                 </button>
 
                                 <div id="dropdown-{{ $item->id }}" class="hidden absolute right-20 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
-                                    <a href="{{ route('admin.materi.show', $item->id) }}"
+                                    <a href="{{ route('admin.topik.materi.show', $item->id) }}"
                                         class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
                                         <i class="fas fa-eye w-5 h-5"></i>
                                         <span>Detail</span>
                                     </a>
                                     <div class="border-t border-border-gray"></div>
-                                    <a href="{{ route('admin.materi.edit', $item->id) }}"
+                                    <a href="{{ route('admin.topik.materi.edit', $item->id) }}"
                                         class="px-5 py-3 hover:bg-green-50 flex items-center gap-3 text-green-600 transition-colors text-base">
                                         <i class="fas fa-edit w-5 h-5"></i>
                                         <span>Edit</span>
                                     </a>
                                     <div class="border-t border-border-gray"></div>
-                                    <button type="button" onclick="showDeleteModal({{ $item->id }}, '{{ addslashes($item->judul_topik) }}', '{{ route('admin.materi.destroy', $item->id) }}')"
+                                    <button type="button" onclick="showDeleteModal({{ $item->id }}, '{{ addslashes($item->judul_topik) }}', '{{ route('admin.topik.materi.destroy', $item->id) }}')"
                                         class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base border-none bg-transparent cursor-pointer">
                                         <i class="fas fa-trash-alt w-5 h-5"></i>
                                         <span>Hapus</span>

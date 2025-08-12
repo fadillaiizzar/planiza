@@ -36,7 +36,9 @@ Route::middleware(['auth', RoleMiddleware::class.':admin'])->group(function () {
 
     Route::get('/user/pages/admin', [UserController::class, 'index'])->name('admin.user');
 
-    Route::resource('materi/pages/admin', TopikMateriController::class) ->names('admin.materi');
+    Route::resource('topik-materi/pages/admin', TopikMateriController::class) ->names('admin.topik.materi');
+
+    Route::resource('materi/pages/admin', MateriController::class) ->names('admin.materi');
 
     Route::get('/kontribusi-sdgs/pages/admin', [KontribusiSdgsController::class, 'index'])->name('admin.kontribusi-sdgs');
 });
