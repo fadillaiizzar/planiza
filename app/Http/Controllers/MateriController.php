@@ -80,13 +80,36 @@ class MateriController extends Controller
             'topik_materi_id' => 'required|exists:topik_materis,id',
             'nama_materi' => 'required|string|max:255',
             'deskripsi_materi' => 'required|string',
-            'tipe_file' => 'required|string|max:20',
-            'file_materi' => 'required|string|max:255',
+            'tipe_file' => 'required|in:pdf,img,video',
+            'file_materi' => 'required',
         ]);
 
-        Materi::create($request->all());
+        $uploadedFiles = [];
+        if ($request->hasFile('file_materi')) {
+            foreach ($request->file('file_materi') as $file) {
+                $ext = strtolower($file->getClientOriginalExtension());
+                if ($request->tipe_file === 'pdf' && $ext !== 'pdf') {
+                    return back()->withErrors(['file_materi'=>'Semua file harus PDF']);
+                }
+                if ($request->tipe_file === 'img' && !in_array($ext,['jpg','jpeg','png','gif'])) {
+                    return back()->withErrors(['file_materi'=>'Semua file harus gambar']);
+                }
+                if ($request->tipe_file === 'video' && !in_array($ext,['mp4','avi','mov','mkv'])) {
+                    return back()->withErrors(['file_materi'=>'Semua file harus video']);
+                }
+                $uploadedFiles[] = $file->store('materi_files','public');
+            }
+        }
 
-        return redirect()->route('admin.materi.index')->with('success', 'materi berhasil ditambahkan');
+        Materi::create([
+            'topik_materi_id'=>$request->topik_materi_id,
+            'nama_materi'=>$request->nama_materi,
+            'deskripsi_materi'=>$request->deskripsi_materi,
+            'tipe_file'=>$request->tipe_file,
+            'file_materi'=>json_encode($uploadedFiles),
+        ]);
+
+        return redirect()->route('admin.materi.index')->with('success', 'Materi berhasil ditambahkan');
     }
 
     public function show($id)
@@ -110,12 +133,26 @@ class MateriController extends Controller
             'topik_materi_id' => 'required|exists:topik_materis,id',
             'nama_materi' => 'required|string|max:255',
             'deskripsi_materi' => 'required|string',
-            'tipe_file' => 'required|string|max:20',
-            'file_materi' => 'required|string|max:255',
+            'tipe_file' => 'required|in:pdf,img,video',
+            'file_materi' => 'required',
         ]);
 
         $materi = Materi::findOrFail($id);
-        $materi->update($request->all());
+
+        $uploadedFiles = json_decode($materi->file_materi,true) ?: [];
+        if ($request->hasFile('file_materi')) {
+            foreach ($request->file('file_materi') as $file) {
+                $uploadedFiles[] = $file->store('materi_files','public');
+            }
+        }
+
+        $materi->update([
+            'topik_materi_id'=>$request->topik_materi_id,
+            'nama_materi'=>$request->nama_materi,
+            'deskripsi_materi'=>$request->deskripsi_materi,
+            'tipe_file'=>$request->tipe_file,
+            'file_materi'=>json_encode($uploadedFiles),
+        ]);
 
         return redirect()->route('admin.materi.index')->with('success', 'materi berhasil diupdate');
     }
