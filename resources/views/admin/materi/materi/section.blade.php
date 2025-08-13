@@ -1,4 +1,4 @@
-<div id="{{ $id }}" class="mx-auto max-w-7xl space-y-6 {{ $hidden ?? '' }}">
+<div class="mx-auto max-w-7xl space-y-6">
     @include('admin.components.header.header', [
         'pageTitle' => $pageTitle,
         'addButtonText' => $addButtonText,
@@ -70,37 +70,37 @@
                 </thead>
                 <tbody>
                     @foreach ($items as $item)
-                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors topik-row"
-                        data-judul="{{ strtolower($item->judul_topik) }}"
-                        data-kelas="{{ strtolower($item->kelas->nama_kelas ?? '') }}"
-                        data-jurusan="{{ strtolower($item->jurusan->nama_jurusan ?? '') }}"
-                        data-rencana="{{ strtolower($item->rencana->nama_rencana ?? '') }}"
-                        >
+                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors materi-row"
+                            data-nama="{{ strtolower($item->nama_materi) }}"
+                            data-topik="{{ strtolower($item->topikMateri->judul_topik ?? '') }}">
                             <td class="p-4">{{ $item->id }}</td>
-                            <td class="p-4 font-medium text-slate-navy">{{ $item->judul_topik }}</td>
-                            <td class="p-4">{{ $item->kelas->nama_kelas ?? '-' }}</td>
-                            <td class="p-4">{{ $item->jurusan->nama_jurusan ?? '-' }}</td>
-                            <td class="p-4">{{ $item->rencana->nama_rencana ?? '-' }}</td>
+                            <td class="p-4 font-medium text-slate-navy">{{ $item->nama_materi }}</td>
+                            <td class="p-4">{{ $item->topikMateri->judul_topik ?? '-' }}</td>
+                            <td class="p-4">{{ $item->deskripsi_materi }}</td>
+                            <td class="p-4">{{ $item->tipe_file }}</td>
+                            <td class="p-4">{{ $item->file_materi }}</td>
                             <td class="p-4 relative overflow-visible">
                                 <button onclick="toggleDropdown({{ $item->id }})"
                                     class="p-2 rounded-lg hover:bg-off-white focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all">
                                     <i class="fas fa-cog text-cool-gray"></i>
                                 </button>
 
-                                <div id="dropdown-{{ $item->id }}" class="hidden absolute right-20 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
-                                    <a href="{{ route('admin.topik.materi.show', $item->id) }}"
+                                <div id="dropdown-{{ $item->id }}"
+                                    class="hidden absolute right-20 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
+                                    <a href="{{ route('admin.materi.show', $item->id) }}"
                                         class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
                                         <i class="fas fa-eye w-5 h-5"></i>
                                         <span>Detail</span>
                                     </a>
                                     <div class="border-t border-border-gray"></div>
-                                    <a href="{{ route('admin.topik.materi.edit', $item->id) }}"
+                                    <a href="{{ route('admin.materi.edit', $item->id) }}"
                                         class="px-5 py-3 hover:bg-green-50 flex items-center gap-3 text-green-600 transition-colors text-base">
                                         <i class="fas fa-edit w-5 h-5"></i>
                                         <span>Edit</span>
                                     </a>
                                     <div class="border-t border-border-gray"></div>
-                                    <button type="button" onclick="showDeleteModal({{ $item->id }}, '{{ addslashes($item->judul_topik) }}', '{{ route('admin.topik.materi.destroy', $item->id) }}')"
+                                    <button type="button"
+                                        onclick="showDeleteModal({{ $item->id }}, '{{ addslashes($item->nama_materi) }}', '{{ route('admin.materi.destroy', $item->id) }}')"
                                         class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base border-none bg-transparent cursor-pointer">
                                         <i class="fas fa-trash-alt w-5 h-5"></i>
                                         <span>Hapus</span>
@@ -120,7 +120,7 @@
     <div class="bg-white rounded-lg p-6 w-96 shadow-xl">
         <h3 class="text-lg font-semibold text-slate-800 mb-4">Hapus Materi</h3>
         <p class="text-slate-600 mb-6">
-            Apakah Anda yakin ingin menghapus topik materi berjudul <span id="deleteUserName" class="font-bold"></span>?
+            Apakah Anda yakin ingin menghapus materi bernama <span id="deleteUserName" class="font-bold"></span>?
             Tindakan ini tidak dapat dibatalkan
         </p>
 

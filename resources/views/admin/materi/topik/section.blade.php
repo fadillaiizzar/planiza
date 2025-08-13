@@ -1,4 +1,4 @@
-<div id="{{ $id }}" class="mx-auto max-w-7xl space-y-6 {{ $hidden ?? '' }}">
+<div class="mx-auto max-w-7xl space-y-6">
     @include('admin.components.header.header', [
         'pageTitle' => $pageTitle,
         'addButtonText' => $addButtonText,
@@ -56,7 +56,7 @@
         </div>
     </section>
 
-    <!-- Daftar Materi -->
+    <!-- Daftar Topik Materi -->
     <section class="bg-white rounded-xl shadow p-6 mt-6">
         <h3 class="text-xl font-bold mb-6 text-slate-navy">{{ $tableTitle }}</h3>
         <div class="overflow-x-auto">
@@ -118,7 +118,7 @@
 <!-- Modal Konfirmasi Delete -->
 <div id="deleteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
     <div class="bg-white rounded-lg p-6 w-96 shadow-xl">
-        <h3 class="text-lg font-semibold text-slate-800 mb-4">Hapus Materi</h3>
+        <h3 class="text-lg font-semibold text-slate-800 mb-4">Hapus Topik Materi</h3>
         <p class="text-slate-600 mb-6">
             Apakah Anda yakin ingin menghapus topik materi berjudul <span id="deleteUserName" class="font-bold"></span>?
             Tindakan ini tidak dapat dibatalkan

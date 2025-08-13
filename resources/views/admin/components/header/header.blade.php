@@ -1,27 +1,34 @@
 @php
     $pageTitle = $pageTitle ?? 'Dashboard';
-    $addButtonText = $addButtonText ?? 'Tambah Data';
-    $addUserRoute = $addUserRoute ?? '#';
+    $addButtonText = $addButtonText ?? '';
+    $addUserRoute = $addUserRoute ?? '';
     $stats = $stats ?? [];
     $filterOptions = $filterOptions ?? [];
-    $searchPlaceholder = $searchPlaceholder ?? 'Cari...';
+    $searchPlaceholder = $searchPlaceholder ?? '';
     $itemCount = $itemCount ?? 0;
 @endphp
 
 <!-- Mobile header -->
 <div class="md:hidden flex justify-between items-center mb-4">
-    <button onclick="toggleSidebar()" class="text-2xl text-slate-navy hover:text-cool-gray transition-colors">
-        <i class="fas fa-bars"></i>
-    </button>
+    <div class="flex items-center gap-2">
+        <button onclick="toggleSidebar()" class="text-2xl text-slate-navy hover:text-cool-gray transition-colors">
+            <i class="fas fa-bars"></i>
+        </button>
+        <h1 class="text-lg ml-3 md:ml-0 font-semibold bg-gradient-to-r from-slate-navy to-cool-gray bg-clip-text text-transparent">
+            {{ $pageTitle }}
+        </h1>
+    </div>
+
+    @if(!empty($addButtonText) && !empty($addUserRoute))
     <div class="flex gap-2">
         <button class="px-3 py-2 bg-off-white/80 backdrop-blur-sm text-slate-navy hover:bg-off-white border border-border-gray rounded-lg transition-all shadow-sm hover:shadow-md">
             <i class="fas fa-download"></i>
         </button>
-        <a href="{{ $addUserRoute }}" class="bg-gradient-to-r from-slate-navy to-cool-gray text-off-white px-4 py-2 rounded-lg hover:from-cool-gray hover:to-slate-navy transition-all shadow-lg hover:shadow-xl">
+        <button onclick="openModal()"  class="bg-gradient-to-r from-slate-navy to-cool-gray text-off-white px-4 py-2 rounded-lg hover:from-cool-gray hover:to-slate-navy transition-all shadow-lg hover:shadow-xl">
             <i class="fas fa-user-plus mr-0 sm:mr-2"></i>
-            <span class="hidden sm:inline">{{ $addButtonText }}</span>
-        </a>
+        </button>
     </div>
+    @endif
 </div>
 
 <!-- Desktop Header -->
@@ -29,17 +36,20 @@
     <h1 class="text-3xl font-bold bg-gradient-to-r from-slate-navy to-cool-gray bg-clip-text text-transparent">
         {{ $pageTitle }}
     </h1>
+
+    @if(!empty($addButtonText) && !empty($addUserRoute))
     <div class="flex gap-2">
         <button class="px-4 py-2 bg-off-white/80 backdrop-blur-sm text-slate-navy hover:bg-off-white border border-border-gray rounded-lg transition-all shadow-sm hover:shadow-md">
             <i class="fas fa-download mr-2"></i>
             Export
         </button>
 
-        <a href="{{ $addUserRoute }}" class="px-6 py-2 bg-gradient-to-r from-slate-navy to-cool-gray text-off-white hover:from-cool-gray hover:to-slate-navy rounded-lg transition-all shadow-lg hover:shadow-xl">
+        <button onclick="openModal()"  class="px-6 py-2 bg-gradient-to-r from-slate-navy to-cool-gray text-off-white hover:from-cool-gray hover:to-slate-navy rounded-lg transition-all shadow-lg hover:shadow-xl">
             <i class="fas fa-plus mr-2"></i>
             {{ $addButtonText }}
-        </a>
+        </button>
     </div>
+    @endif
 </div>
 
 <!-- Stats Cards -->

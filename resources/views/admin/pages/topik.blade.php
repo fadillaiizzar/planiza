@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Manajemen Materi - Planiza')
+@section('title', 'Manajemen Topik Materi - Planiza')
 
 @section('content')
     <!-- Overlay (mobile) -->
@@ -9,24 +9,16 @@
     <!-- Main -->
     <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
         <div class="flex justify-center mb-8 gap-4 flex-wrap">
-            <button id="btnTopik"
-                class="px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300
-                    bg-gradient-to-r from-slate-navy to-cool-gray text-off-white
-                    hover:scale-105 hover:from-cool-gray hover:to-slate-navy
-                    focus:ring-4 focus:ring-cool-gray">
+            <a href="{{ route('admin.topik.materi.index') }}" class="px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300 bg-gradient-to-r from-slate-navy to-cool-gray text-off-white hover:scale-105 hover:from-cool-gray hover:to-slate-navy focus:ring-4 focus:ring-cool-gray">
                 📚 Topik Materi
-            </button>
+            </a>
 
-            <button id="btnMateri"
-                class="px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300
-                    bg-off-white text-slate-navy border border-border-gray
-                    hover:bg-cool-gray hover:text-off-white hover:scale-105
-                    focus:ring-4 focus:ring-border-gray">
+            <a href="{{ route('admin.materi.index') }}" class="px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300 bg-off-white text-slate-navy border border-border-gray hover:bg-cool-gray hover:text-off-white hover:scale-105 focus:ring-4 focus:ring-border-gray">
                 📄 Materi
-            </button>
+            </a>
         </div>
 
-        @component('admin.components.materi.topik.section', [
+        @component('admin.materi.topik.section', [
             'id' => 'sectionTopik',
             'pageTitle' => 'Topik Materi Management',
             'addButtonText' => 'Tambah Topik',
@@ -181,45 +173,6 @@
 @push('scripts')
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
-        const btnTopik = document.getElementById('btnTopik');
-        const btnMateri = document.getElementById('btnMateri');
-        const sectionTopik = document.getElementById('sectionTopik');
-        const sectionMateri = document.getElementById('sectionMateri');
-
-        btnTopik.addEventListener('click', () => {
-            sectionTopik.classList.remove('hidden');
-            sectionMateri.classList.add('hidden');
-            btnTopik.classList.add('bg-blue-600', 'text-white');
-            btnTopik.classList.remove('bg-gray-200', 'text-gray-700');
-            btnMateri.classList.remove('bg-blue-600', 'text-white');
-            btnMateri.classList.add('bg-gray-200', 'text-gray-700');
-        });
-
-        btnMateri.addEventListener('click', () => {
-            sectionMateri.classList.remove('hidden');
-            sectionTopik.classList.add('hidden');
-            btnMateri.classList.add('bg-blue-600', 'text-white');
-            btnMateri.classList.remove('bg-gray-200', 'text-gray-700');
-            btnTopik.classList.remove('bg-blue-600', 'text-white');
-            btnTopik.classList.add('bg-gray-200', 'text-gray-700');
-        });
-
-        btnTopik.addEventListener('click', () => {
-            sectionTopik.classList.remove('hidden');
-            sectionMateri.classList.add('hidden');
-
-            btnTopik.className = "px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300 bg-gradient-to-r from-slate-navy to-cool-gray text-off-white hover:scale-105 hover:from-cool-gray hover:to-slate-navy focus:ring-4 focus:ring-cool-gray";
-            btnMateri.className = "px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300 bg-off-white text-slate-navy border border-border-gray hover:bg-cool-gray hover:text-off-white hover:scale-105 focus:ring-4 focus:ring-border-gray";
-        });
-
-        btnMateri.addEventListener('click', () => {
-            sectionMateri.classList.remove('hidden');
-            sectionTopik.classList.add('hidden');
-
-            btnMateri.className = "px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300 bg-gradient-to-r from-slate-navy to-cool-gray text-off-white hover:scale-105 hover:from-cool-gray hover:to-slate-navy focus:ring-4 focus:ring-cool-gray";
-            btnTopik.className = "px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300 bg-off-white text-slate-navy border border-border-gray hover:bg-cool-gray hover:text-off-white hover:scale-105 focus:ring-4 focus:ring-border-gray";
-        });
-
         function toggleDropdown(id) {
             document.querySelectorAll('[id^="dropdown-"]').forEach(drop => {
                 if (drop.id === `dropdown-${id}`) {

@@ -141,81 +141,82 @@
 @endsection
 
 @push('scripts')
-<script>
-    // Inisialisasi filter search & select role
-    function initializeFilters() {
-        const searchInput = document.getElementById('searchInput');
-        const roleFilter = document.getElementById('roleFilter');
-        const resultCount = document.getElementById('resultCount');
-        const userRows = document.querySelectorAll('.user-row');
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        // Inisialisasi filter search & select role
+        function initializeFilters() {
+            const searchInput = document.getElementById('searchInput');
+            const roleFilter = document.getElementById('roleFilter');
+            const resultCount = document.getElementById('resultCount');
+            const userRows = document.querySelectorAll('.user-row');
 
-        function filterUsers() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const selectedRole = roleFilter.value.toLowerCase();
-            let visibleCount = 0;
+            function filterUsers() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const selectedRole = roleFilter.value.toLowerCase();
+                let visibleCount = 0;
 
-            userRows.forEach(row => {
-                const name = row.dataset.name;
-                const username = row.dataset.username;
-                const role = row.dataset.role;
+                userRows.forEach(row => {
+                    const name = row.dataset.name;
+                    const username = row.dataset.username;
+                    const role = row.dataset.role;
 
-                const matchesSearch = name.includes(searchTerm) || username.includes(searchTerm);
-                const matchesRole = !selectedRole || role === selectedRole;
+                    const matchesSearch = name.includes(searchTerm) || username.includes(searchTerm);
+                    const matchesRole = !selectedRole || role === selectedRole;
 
-                if (matchesSearch && matchesRole) {
-                    row.style.display = '';
-                    visibleCount++;
+                    if (matchesSearch && matchesRole) {
+                        row.style.display = '';
+                        visibleCount++;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+
+                resultCount.textContent = visibleCount;
+            }
+
+            searchInput.addEventListener('input', filterUsers);
+            roleFilter.addEventListener('change', filterUsers);
+        }
+
+        // Toggle dropdown action button
+        function toggleDropdown(id) {
+            document.querySelectorAll('[id^="dropdown-"]').forEach(drop => {
+                if (drop.id === `dropdown-${id}`) {
+                    drop.classList.toggle('hidden');
                 } else {
-                    row.style.display = 'none';
+                    drop.classList.add('hidden');
                 }
             });
-
-            resultCount.textContent = visibleCount;
         }
 
-        searchInput.addEventListener('input', filterUsers);
-        roleFilter.addEventListener('change', filterUsers);
-    }
+        // Tampilkan modal hapus user
+        function showDeleteModal(userId, userName) {
+            document.getElementById('deleteModal').classList.remove('hidden');
+            document.getElementById('deleteUserName').textContent = userName;
+            const form = document.getElementById('deleteForm');
+            form.action = `/admin/users/${userId}`;
+        }
 
-    // Toggle dropdown action button
-    function toggleDropdown(id) {
-        document.querySelectorAll('[id^="dropdown-"]').forEach(drop => {
-            if (drop.id === `dropdown-${id}`) {
-                drop.classList.toggle('hidden');
-            } else {
-                drop.classList.add('hidden');
+        // Tutup modal hapus user
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').classList.add('hidden');
+        }
+
+        // Klik di luar modal dan dropdown, tutup mereka
+        document.addEventListener('click', function (e) {
+            // Tutup dropdown jika klik di luar tombol dan dropdown
+            if (!e.target.closest('[id^="dropdown-"]') && !e.target.closest('button[onclick^="toggleDropdown"]')) {
+                document.querySelectorAll('[id^="dropdown-"]').forEach(el => el.classList.add('hidden'));
+            }
+            // Tutup modal jika klik di luar modal konten
+            const modal = document.getElementById('deleteModal');
+            if (!modal.classList.contains('hidden') && e.target === modal) {
+                closeDeleteModal();
             }
         });
-    }
 
-    // Tampilkan modal hapus user
-    function showDeleteModal(userId, userName) {
-        document.getElementById('deleteModal').classList.remove('hidden');
-        document.getElementById('deleteUserName').textContent = userName;
-        const form = document.getElementById('deleteForm');
-        form.action = `/admin/users/${userId}`;
-    }
-
-    // Tutup modal hapus user
-    function closeDeleteModal() {
-        document.getElementById('deleteModal').classList.add('hidden');
-    }
-
-    // Klik di luar modal dan dropdown, tutup mereka
-    document.addEventListener('click', function (e) {
-        // Tutup dropdown jika klik di luar tombol dan dropdown
-        if (!e.target.closest('[id^="dropdown-"]') && !e.target.closest('button[onclick^="toggleDropdown"]')) {
-            document.querySelectorAll('[id^="dropdown-"]').forEach(el => el.classList.add('hidden'));
-        }
-        // Tutup modal jika klik di luar modal konten
-        const modal = document.getElementById('deleteModal');
-        if (!modal.classList.contains('hidden') && e.target === modal) {
-            closeDeleteModal();
-        }
-    });
-
-    document.addEventListener('DOMContentLoaded', () => {
-        initializeFilters();
-    });
-</script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeFilters();
+        });
+    </script>
 @endpush
