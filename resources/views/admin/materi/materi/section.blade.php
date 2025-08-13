@@ -74,11 +74,30 @@
                             data-nama="{{ strtolower($item->nama_materi) }}"
                             data-topik="{{ strtolower($item->topikMateri->judul_topik ?? '') }}">
                             <td class="p-4">{{ $item->id }}</td>
-                            <td class="p-4 font-medium text-slate-navy">{{ $item->nama_materi }}</td>
-                            <td class="p-4">{{ $item->topikMateri->judul_topik ?? '-' }}</td>
-                            <td class="p-4">{{ $item->deskripsi_materi }}</td>
+                            <td class="p-4">
+                                <span title="{{ $item->nama_materi }}">
+                                    {{ \Illuminate\Support\Str::limit($item->nama_materi, 10) }}
+                                </span>
+                            </td>
+                            <td class="p-4">
+                                <span title="{{ $item->topikMateri->judul_topik ?? '-' }}">
+                                    {{ \Illuminate\Support\Str::limit($item->topikMateri->judul_topik ?? '-', 10) }}
+                                </span>
+                            </td>
+                            <td class="p-4">
+                                <span title="{{ $item->deskripsi_materi }}">
+                                    {{ \Illuminate\Support\Str::limit($item->deskripsi_materi, 10) }}
+                                </span>
+                            </td>
                             <td class="p-4">{{ $item->tipe_file }}</td>
-                            <td class="p-4">{{ $item->file_materi }}</td>
+                            <td class="p-4">
+                                <span title="{{ implode(', ', json_decode($item->file_materi, true) ?? []) }}">
+                                    {{ \Illuminate\Support\Str::limit(
+                                        implode(', ', array_map(fn($f) => basename($f), json_decode($item->file_materi, true) ?? [])),
+                                        10
+                                    ) }}
+                                </span>
+                            </td>
                             <td class="p-4 relative overflow-visible">
                                 <button onclick="toggleDropdown({{ $item->id }})"
                                     class="p-2 rounded-lg hover:bg-off-white focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all">
@@ -86,7 +105,7 @@
                                 </button>
 
                                 <div id="dropdown-{{ $item->id }}"
-                                    class="hidden absolute right-20 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
+                                    class="hidden absolute right-10 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
                                     <a href="{{ route('admin.materi.show', $item->id) }}"
                                         class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
                                         <i class="fas fa-eye w-5 h-5"></i>
