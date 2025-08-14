@@ -1,7 +1,6 @@
 @php
     $pageTitle = $pageTitle ?? 'Dashboard';
     $addButtonText = $addButtonText ?? '';
-    $addUserRoute = $addUserRoute ?? '';
     $stats = $stats ?? [];
     $filterOptions = $filterOptions ?? [];
     $searchPlaceholder = $searchPlaceholder ?? '';
@@ -19,7 +18,6 @@
         </h1>
     </div>
 
-    @if(!empty($addButtonText) && !empty($addUserRoute))
     <div class="flex gap-2">
         <button class="px-3 py-2 bg-off-white/80 backdrop-blur-sm text-slate-navy hover:bg-off-white border border-border-gray rounded-lg transition-all shadow-sm hover:shadow-md">
             <i class="fas fa-download"></i>
@@ -28,7 +26,6 @@
             <i class="fas fa-user-plus mr-0 sm:mr-2"></i>
         </button>
     </div>
-    @endif
 </div>
 
 <!-- Desktop Header -->
@@ -37,7 +34,7 @@
         {{ $pageTitle }}
     </h1>
 
-    @if(!empty($addButtonText) && !empty($addUserRoute))
+    @if(!empty($addButtonText))
     <div class="flex gap-2">
         <button class="px-4 py-2 bg-off-white/80 backdrop-blur-sm text-slate-navy hover:bg-off-white border border-border-gray rounded-lg transition-all shadow-sm hover:shadow-md">
             <i class="fas fa-download mr-2"></i>

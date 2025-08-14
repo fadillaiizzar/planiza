@@ -22,7 +22,6 @@
             'id' => 'sectionMateri',
             'pageTitle' => 'Materi Management',
             'addButtonText' => 'Tambah Materi',
-            'addUserRoute' => route('admin.materi.create'),
             'userCount' => $userCount,
             'stats' => [
                 ['label' => 'Total Materi', 'count' => $materisCount, 'icon' => 'fas fa-book', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],

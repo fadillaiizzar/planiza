@@ -2,7 +2,6 @@
     @include('admin.components.header.header', [
         'pageTitle' => $pageTitle,
         'addButtonText' => $addButtonText,
-        'addUserRoute' => $addUserRoute,
         'userCount' => $userCount,
         'stats' => $stats,
         'filterOptions' => $filterOptions ?? [],

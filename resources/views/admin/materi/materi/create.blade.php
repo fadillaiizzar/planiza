@@ -87,9 +87,9 @@
             <!-- Action Buttons -->
             <div class="flex items-center justify-center pt-4 gap-3">
                 <div class="flex items-center justify-center gap-5">
-                    <a href="{{ route('admin.materi.index') }}" class="text-slate-600 hover:text-slate-800 font-medium transition-all duration-200 hover:underline">
+                    <button onclick="closeModal()" class="text-slate-600 hover:text-slate-800 font-medium transition-all duration-200 hover:underline">
                         Batal
-                    </a>
+                    </button>
                     <button type="submit" class="bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-semibold px-6 py-2 rounded-xl transition-all duration-200">
                         Simpan Materi
                     </button>

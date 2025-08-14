@@ -22,7 +22,6 @@
             'id' => 'sectionTopik',
             'pageTitle' => 'Topik Materi Management',
             'addButtonText' => 'Tambah Topik',
-            'addUserRoute' => route('admin.topik.materi.create'),
             'userCount' => $userCount,
             'stats' => [
                 ['label' => 'Total Topik', 'count' => $topikMaterisCount, 'icon' => 'fas fa-book', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],

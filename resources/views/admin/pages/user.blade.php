@@ -13,7 +13,6 @@
            @include('admin.components.header.header', [
                 'pageTitle' => 'User Management',
                 'addButtonText' => 'Tambah User',
-                'addUserRoute' => route('register'),
                 'stats' => [
                     ['label' => 'Total User', 'count' => $userCount, 'icon' => 'fas fa-users', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
                     ['label' => 'Admin', 'count' => $users->where('role.nama_role', 'admin')->count(), 'icon' => 'fas fa-shield-alt', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
