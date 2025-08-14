@@ -22,7 +22,7 @@
         <button class="px-3 py-2 bg-off-white/80 backdrop-blur-sm text-slate-navy hover:bg-off-white border border-border-gray rounded-lg transition-all shadow-sm hover:shadow-md">
             <i class="fas fa-download"></i>
         </button>
-        <button onclick="openModal()"  class="bg-gradient-to-r from-slate-navy to-cool-gray text-off-white px-4 py-2 rounded-lg hover:from-cool-gray hover:to-slate-navy transition-all shadow-lg hover:shadow-xl">
+        <button onclick="openModal()" class="bg-gradient-to-r from-slate-navy to-cool-gray text-off-white px-4 py-2 rounded-lg hover:from-cool-gray hover:to-slate-navy transition-all shadow-lg hover:shadow-xl">
             <i class="fas fa-user-plus mr-0 sm:mr-2"></i>
         </button>
     </div>
@@ -171,5 +171,19 @@
     }
 
     document.addEventListener('DOMContentLoaded', initializeFilters);
+
+    function openModal() {
+        const modal = document.getElementById('modalCreate');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('modalCreate');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.classList.remove('overflow-hidden');
+    }
 </script>
 @endpush

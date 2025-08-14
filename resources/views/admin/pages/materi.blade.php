@@ -49,7 +49,7 @@
         @endcomponent
 
         <!-- Modal Create -->
-        <div id="modalCreate" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div id="modalCreate" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
             @include('admin.materi.materi.create', ['topikMateriList' => $topikMateriList])
         </div>
 
@@ -71,20 +71,6 @@
                     drop.classList.add('hidden');
                 }
             });
-        }
-
-        function openModal() {
-            const modal = document.getElementById('modalCreate');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex'); // pastikan muncul dengan display flex
-            document.body.classList.add('overflow-hidden');
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('modalCreate');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            document.body.classList.remove('overflow-hidden');
         }
     </script>
 @endpush

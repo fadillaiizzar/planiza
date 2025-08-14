@@ -66,101 +66,14 @@
         ])
         @endcomponent
 
-        {{-- @component('admin.components.materi.section', [
-            'id' => 'sectionMateri',
-            'pageTitle' => 'Materi Management',
-            'addButtonText' => 'Tambah Materi',
-            'addUserRoute' => route('admin.materi.create'),
-            'userCount' => $userCount,
-            'stats' => [
-                ['label' => 'Total Materi', 'count' => $topikMaterisCount, 'icon' => 'fas fa-book', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
-            ],
-           'filterOptions' => [
-                ['label' => 'X', 'value' => 'X'],
-                ['label' => 'XI', 'value' => 'XI'],
-                ['label' => 'XII', 'value' => 'XII'],
-                ['label' => 'XIII', 'value' => 'XIII'],
-
-                ['label' => 'TKR', 'value' => 'TKR'],
-                ['label' => 'SIJA', 'value' => 'SIJA'],
-                ['label' => 'TAV', 'value' => 'TAV'],
-                ['label' => 'TITL', 'value' => 'TITL'],
-                ['label' => 'TP', 'value' => 'TP'],
-                ['label' => 'DPIB', 'value' => 'DPIB'],
-                ['label' => 'KGSP', 'value' => 'KGSP'],
-                ['label' => 'DKV', 'value' => 'DKV'],
-                ['label' => 'GEO', 'value' => 'GEO'],
-
-                ['label' => 'Kuliah', 'value' => 'Kuliah'],
-                ['label' => 'Kerja', 'value' => 'Kerja'],
-            ],
-            'searchPlaceholder' => 'Cari berdasarkan judul topik',
-            'itemCount' =>  $topikMaterisCount,
-            'statistikTitle' => 'Statistik Topik',
-            'iconKelas' => '📚',
-            'labelKelas' => 'Topik per Kelas',
-            'iconJurusan' => '🏫',
-            'labelJurusan' => 'Topik per Jurusan',
-            'iconRencana' => '🗂',
-            'labelRencana' => 'Topik per Rencana',
-            'materiPerKelas' => $materiPerKelas,
-            'materiPerJurusan' => $materiPerJurusan,
-            'materiPerRencana' => $materiPerRencana,
-            'tableTitle' => 'Daftar Topik Materi',
-            'tableHeaders' => ['ID', 'Judul Topik', 'Kelas', 'Jurusan', 'Rencana', 'Aksi'],
-            'items' => $topikMateris,
-        ])
-        @endcomponent --}}
-        {{-- @component('admin.components.materi.section', [
-            'id' => 'sectionMateri',
-            'hidden' => 'hidden',
-            'pageTitle' => 'Materi Management',
-            'addButtonText' => 'Tambah Materi',
-            'addUserRoute' => route('admin.materi.create'),
-            'userCount' => $userCount,
-            'stats' => [
-                ['label' => 'Total Materi', 'count' => $materisCount, 'icon' => 'fas fa-book', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
-                ['label' => 'Materi per Kelas', 'count' => $materiPerKelas->sum(), 'icon' => 'fas fa-layer-group', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
-                ['label' => 'Materi per Jurusan', 'count' => $materiPerJurusan->sum(), 'icon' => 'fas fa-university', 'bg' => 'from-purple-500 to-purple-600', 'textColor' => 'text-purple-100'],
-                ['label' => 'Materi per Rencana', 'count' => $materiPerRencana->sum(), 'icon' => 'fas fa-tasks', 'bg' => 'from-yellow-500 to-yellow-600', 'textColor' => 'text-yellow-100'],
-            ],
-            'filterOptions' => [
-                // Gabungkan list kelas, jurusan, rencana seperti di controller
-                ['label' => 'X', 'value' => 'X'],
-                ['label' => 'XI', 'value' => 'XI'],
-                ['label' => 'XII', 'value' => 'XII'],
-                ['label' => 'XIII', 'value' => 'XIII'],
-
-                ['label' => 'TKR', 'value' => 'TKR'],
-                ['label' => 'SIJA', 'value' => 'SIJA'],
-                ['label' => 'TAV', 'value' => 'TAV'],
-                ['label' => 'TITL', 'value' => 'TITL'],
-                ['label' => 'TP', 'value' => 'TP'],
-                ['label' => 'DPIB', 'value' => 'DPIB'],
-                ['label' => 'KGSP', 'value' => 'KGSP'],
-                ['label' => 'DKV', 'value' => 'DKV'],
-                ['label' => 'GEO', 'value' => 'GEO'],
-
-                ['label' => 'Kuliah', 'value' => 'Kuliah'],
-                ['label' => 'Kerja', 'value' => 'Kerja'],
-            ],
-            'searchPlaceholder' => 'Cari berdasarkan nama materi',
-            'itemCount' => $materisCount,
-            'statistikTitle' => 'Statistik Materi',
-            'iconKelas' => '📚',
-            'labelKelas' => 'Materi per Kelas',
-            'iconJurusan' => '🏫',
-            'labelJurusan' => 'Materi per Jurusan',
-            'iconRencana' => '🗂',
-            'labelRencana' => 'Materi per Rencana',
-            'materiPerKelas' => $materiPerKelas,
-            'materiPerJurusan' => $materiPerJurusan,
-            'materiPerRencana' => $materiPerRencana,
-            'tableTitle' => 'Daftar Materi',
-            'tableHeaders' => ['ID', 'Nama Materi', 'Topik', 'Kelas', 'Jurusan', 'Rencana', 'Aksi'],
-            'items' => $materis,
-        ])
-        @endcomponent --}}
+        <!-- Modal Create -->
+        <div id="modalCreate" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+            @include('admin.materi.topik.create', [
+                'kelas' => $kelas,
+                'jurusan' => $jurusan,
+                'rencana' => $rencana,
+            ])
+        </div>
 
         <!-- Pagination -->
         <div class="px-6 py-4 border-t border-slate-200 bg-slate-50/30">

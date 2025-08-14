@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Role;
 use App\Models\User;
+use App\Models\Kelas;
+use App\Models\Jurusan;
+use App\Models\Rencana;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -21,13 +26,22 @@ class UserController extends Controller
             $query->where('nama_role', 'siswa');
         })->count();
 
+        $roles = Role::all();
+        $kelas = Kelas::all();
+        $jurusans = Jurusan::all();
+        $rencanas = Rencana::all();
+
         return view('admin.pages.user', [
             'user' => Auth::user(),
             'userCount' => $userCount,
             'adminCount' => $adminCount,
             'siswaCount' => $siswaCount,
             'aktivitas' => User::latest()->get(),
-            'users' => $users
+            'users' => $users,
+            'roles' => $roles,
+            'kelas' => $kelas,
+            'jurusans' => $jurusans,
+            'rencanas' => $rencanas,
         ]);
     }
 }

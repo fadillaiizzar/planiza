@@ -16,6 +16,11 @@ class AdminController extends Controller
 {
     public function index()
     {
+        $roles = Role::all();
+        $kelas = Kelas::all();
+        $jurusans = Jurusan::all();
+        $rencanas = Rencana::all();
+
         return view('admin.pages.dashboard', [
             'user' => Auth::user(),
             'userCount' => User::count(),
@@ -38,6 +43,10 @@ class AdminController extends Controller
                     'aktivitas' => 'Menghapus akun user',
                 ],
             ],
+            'roles' => $roles,
+            'kelas' => $kelas,
+            'jurusans' => $jurusans,
+            'rencanas' => $rencanas,
         ]);
     }
 
@@ -49,11 +58,9 @@ class AdminController extends Controller
             abort(403);
         }
 
-        $roles = Role::all();
-        $kelas = Kelas::all();
-        $jurusans = Jurusan::all();
-        $rencanas = Rencana::all();
-        return view('auth.register', compact('roles', 'kelas', 'jurusans', 'rencanas'));
+        return view('auth.register', [
+            'user' => $user,
+        ]);
     }
 
     public function register(Request $request)

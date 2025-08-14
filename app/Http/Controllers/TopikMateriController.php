@@ -21,6 +21,10 @@ class TopikMateriController extends Controller
 
         $topikMaterisCount = TopikMateri::count();
 
+        $kelas = Kelas::all();
+        $jurusan = Jurusan::all();
+        $rencana = Rencana::all();
+
         // List kategori untuk filter
         $kelasList   = ['X', 'XI', 'XII', 'XIII'];
         $jurusanList = ['TKR', 'SIJA', 'TAV', 'TITL', 'TP', 'DPIB', 'KGSP', 'DKV', 'GEO'];
@@ -68,6 +72,9 @@ class TopikMateriController extends Controller
             'user' => $user,
             'userCount' => $userCount,
 
+            'kelas' => $kelas,
+            'jurusan' => $jurusan,
+            'rencana' => $rencana,
             'kelasCounts'   => $kelasCounts,
             'jurusanCounts' => $jurusanCounts,
             'rencanaCounts' => $rencanaCounts,

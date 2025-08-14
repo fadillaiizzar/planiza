@@ -116,6 +116,16 @@
         </div>
     </main>
 
+    <!-- Modal Create -->
+    <div id="modalCreate" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+        @include('auth.register', [
+            'roles' => $roles,
+            'kelas' => $kelas,
+            'jurusans' => $jurusans,
+            'rencanas' => $rencanas,
+        ])
+    </div>
+
     <!-- Modal Konfirmasi Delete -->
     <div id="deleteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div class="bg-white rounded-lg p-6 w-96 shadow-xl">
