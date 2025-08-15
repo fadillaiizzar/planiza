@@ -115,7 +115,7 @@ class TopikMateriController extends Controller
 
     public function show($id)
     {
-        $topik = TopikMateri::findOrFail($id);
+        $topik = TopikMateri::with(['kelas', 'jurusan', 'rencana'])->findOrFail($id);
         return view('admin.materi.topik.show', compact('topik'));
     }
 

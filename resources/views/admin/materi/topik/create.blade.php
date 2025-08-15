@@ -1,4 +1,4 @@
-<div class="w-full max-w-2xl bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+<div class="w-full max-w-2xl bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden max-h-[90vh] overflow-y-auto scrollbar-none">
 
     <!-- Form Header -->
     <div class="bg-gradient-to-r from-slate-700 to-slate-800 px-6 py-4">

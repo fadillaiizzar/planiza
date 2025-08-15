@@ -152,7 +152,6 @@
     </div>
 </div>
 
-
 <script>
     function toggleDropdown(id) {
         document.querySelectorAll('[id^="dropdown-"]').forEach(drop => {
@@ -189,29 +188,6 @@
             document.querySelectorAll('[id^="dropdown-"]').forEach(el => el.classList.add('hidden'));
         }
     });
-
-    function showDetail(id) {
-        fetch(`/topik-materi/pages/admin/${id}`)
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById('modalContent').innerHTML = html;
-                openModalShow();
-        });
-    }
-
-    function openModalShow() {
-        const modal = document.getElementById('modalShow');
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        document.body.classList.add('overflow-hidden');
-    }
-
-    function closeModalShow() {
-        const modal = document.getElementById('modalShow');
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-        document.body.classList.remove('overflow-hidden');
-    }
 
     function showEdit(id) {
         fetch(`/topik-materi/pages/admin/${id}/edit`)
