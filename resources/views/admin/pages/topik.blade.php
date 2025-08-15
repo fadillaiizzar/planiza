@@ -75,6 +75,11 @@
             ])
         </div>
 
+        <!-- Modal Edit -->
+        <div id="modalEdit" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+            <div id="modalContentEdit" class="w-full mx-auto flex items-center justify-center"></div>
+        </div>
+
         <!-- Pagination -->
         <div class="px-6 py-4 border-t border-slate-200 bg-slate-50/30">
             {{ $topikMateris->links() }}

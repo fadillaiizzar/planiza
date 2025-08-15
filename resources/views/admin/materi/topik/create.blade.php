@@ -83,7 +83,7 @@
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex items-center justify-center pt-4 gap-3">
+            <div class="flex items-center justify-center pt-4 gap-5">
                 <div class="flex items-center justify-center gap-5">
                     <button onclick="closeModal()" type="button" class="text-slate-600 hover:text-slate-800 font-medium transition-all duration-200 hover:underline">
                         Batal
