@@ -126,7 +126,7 @@
                     Batal
                 </button>
                 <button type="submit" class="bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-semibold px-6 py-2 rounded-xl">
-                    Simpan User
+                    Simpan
                 </button>
             </div>
         </form>
