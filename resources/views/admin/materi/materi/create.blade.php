@@ -1,4 +1,4 @@
-<div class="w-full max-w-2xl bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+<div class="w-full max-w-2xl bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden max-h-[90vh] overflow-y-auto scrollbar-none">
 
     <!-- Form Header -->
     <div class="bg-gradient-to-r from-slate-700 to-slate-800 px-6 py-4">
@@ -85,13 +85,13 @@
             <div id="preview" class="mt-3 space-y-2"></div>
 
             <!-- Action Buttons -->
-            <div class="flex items-center justify-center pt-4 gap-3">
+            <div class="flex items-center justify-center pt-4 gap-5">
                 <div class="flex items-center justify-center gap-5">
                     <button onclick="closeModal()" class="text-slate-600 hover:text-slate-800 font-medium transition-all duration-200 hover:underline">
                         Batal
                     </button>
                     <button type="submit" class="bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-semibold px-6 py-2 rounded-xl transition-all duration-200">
-                        Simpan Materi
+                        Simpan
                     </button>
                 </div>
             </div>
