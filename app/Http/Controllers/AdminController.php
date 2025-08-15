@@ -54,18 +54,25 @@ class AdminController extends Controller
     {
         $user = Auth::user();
 
-        if (!$user || $user->role->nama_role !== 'Admin') {
+        if (!$user || !in_array($user->role->nama_role, ['Administrator', 'Admin'])) {
             abort(403);
         }
 
+        $roles = Role::where('nama_role', '!=', 'Administrator')->get();
+
         return view('auth.register', [
             'user' => $user,
+            'roles' => $roles
         ]);
     }
 
     public function register(Request $request)
     {
         $role = Role::findOrFail($request->role_id);
+
+        if ($role->nama_role === 'Administrator') {
+            abort(403, 'Tidak dapat membuat akun Administrator baru');
+        }
 
         $rules = [
             'name' => 'required',
@@ -180,6 +187,10 @@ class AdminController extends Controller
 
     public function deleteUser(User $user)
     {
+        if ($user->role->nama_role === 'Administrator') {
+            return redirect()->back()->with('error', 'Super Admin tidak dapat dihapus.');
+        }
+
         if ($user->siswa) {
             $user->siswa->delete();
         }

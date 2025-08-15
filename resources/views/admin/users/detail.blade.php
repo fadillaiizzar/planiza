@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Detail User - {{ $user->name }}')
+@section('title', 'Detail User - Planiza')
 
 @section('content')
     <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-6 md:p-8">
@@ -178,7 +178,7 @@
                             Password
                         </label>
                         <div class="w-full px-5 py-4 border border-slate-200 rounded-2xl text-sm text-slate-900 bg-slate-50 shadow-sm">
-                            ********
+                            ****
                         </div>
                         <div class="mt-2">
                             <button

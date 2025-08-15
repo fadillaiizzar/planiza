@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/redirect', [AuthController::class, 'redirectByRole'])->name('redirect');
 });
 
-Route::middleware(['auth', RoleMiddleware::class.':admin'])->group(function () {
+Route::middleware(['auth', RoleMiddleware::class.':administrator,admin'])->group(function () {
     Route::get('/register', [AdminController::class, 'showRegister'])->name('register');
     Route::post('/register', [AdminController::class, 'register']);
 

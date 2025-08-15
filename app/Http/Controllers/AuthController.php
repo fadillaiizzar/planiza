@@ -39,7 +39,7 @@ class AuthController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->role->nama_role === 'Admin') {
+        if (in_array($user->role->nama_role, ['Administrator', 'Admin'])) {
             return redirect('/dashboard/pages/admin');
         } elseif ($user->role->nama_role === 'Siswa') {
             $siswa = $user->siswa;

@@ -66,14 +66,15 @@
                                 <td class="p-4">
                                     @php
                                         $roleColors = [
-                                            'admin' => 'bg-gradient-to-r from-purple-500 to-purple-600 text-white',
-                                            'guru' => 'bg-gradient-to-r from-blue-500 to-blue-600 text-white',
-                                            'siswa' => 'bg-gradient-to-r from-green-500 to-green-600 text-white'
+                                            'administrator' => 'bg-gradient-to-r from-red-500 to-red-600 text-white',
+                                            'admin'         => 'bg-gradient-to-r from-purple-500 to-purple-600 text-white',
+                                            'siswa'         => 'bg-gradient-to-r from-green-500 to-green-600 text-white'
                                         ];
+
                                         $roleIcons = [
-                                            'admin' => 'fas fa-shield-alt',
-                                            'guru' => 'fas fa-chalkboard-teacher',
-                                            'siswa' => 'fas fa-graduation-cap'
+                                            'administrator' => 'fas fa-crown',
+                                            'admin'         => 'fas fa-shield-alt',
+                                            'siswa'         => 'fas fa-graduation-cap'
                                         ];
                                         $roleName = strtolower($u->role->nama_role ?? '');
                                     @endphp
@@ -94,12 +95,15 @@
                                             <i class="fas fa-eye w-5 h-5"></i>
                                             <span>Detail</span>
                                         </a>
-                                        <div class="border-t border-border-gray"></div>
-                                        <button type="button" onclick="showDeleteModal({{ $u->id }}, '{{ addslashes($u->name) }}')"
-                                            class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base border-none bg-transparent cursor-pointer">
-                                            <i class="fas fa-trash-alt w-5 h-5"></i>
-                                            <span>Hapus</span>
-                                        </button>
+
+                                        @if($u->role->nama_role !== 'Administrator')
+                                            <div class="border-t border-border-gray"></div>
+                                            <button type="button" onclick="showDeleteModal({{ $u->id }}, '{{ addslashes($u->name) }}')"
+                                                class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base border-none bg-transparent cursor-pointer">
+                                                <i class="fas fa-trash-alt w-5 h-5"></i>
+                                                <span>Hapus</span>
+                                            </button>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>
