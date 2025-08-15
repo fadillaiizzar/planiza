@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Materi;
+use App\Models\KontribusiSdgs;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\AuthController;
@@ -8,9 +9,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\MateriController;
-use App\Http\Controllers\KontribusiSdgsController;
+use App\Http\Controllers\MateriSiswaController;
 use App\Http\Controllers\TopikMateriController;
-use App\Models\KontribusiSdgs;
+use App\Http\Controllers\KontribusiSdgsController;
 
 Route::get('/', function () {
     return view('beranda');
@@ -46,5 +47,5 @@ Route::middleware(['auth', RoleMiddleware::class.':administrator,admin'])->group
 Route::middleware(['auth', RoleMiddleware::class.':siswa'])->group(function () {
     Route::get('/dashboard/pages/siswa', [SiswaController::class, 'index'])->name('siswa.dashboard');
     Route::post('/siswa/simpan-rencana', [SiswaController::class, 'simpanRencana'])->name('siswa.simpan.rencana');
-    Route::get('/materi/pages/siswa', [MateriController::class, 'index'])->name('siswa.materi');
+    Route::get('/materi/pages/siswa', [MateriSiswaController::class, 'index'])->name('siswa.materi');
 });

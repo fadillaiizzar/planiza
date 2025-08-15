@@ -17,18 +17,22 @@
 
     {{-- Info Siswa --}}
     <div class="flex flex-wrap items-center gap-4 text-sm text-slate-700 mb-6">
-        <div class="flex items-center space-x-2">
-            <i class="fas fa-graduation-cap text-blue-500"></i>
-            <span>XI RPL 2</span>
-        </div>
-        <div class="flex items-center space-x-2">
-            <i class="fas fa-chalkboard-teacher text-green-500"></i>
-            <span>Rekayasa Perangkat Lunak</span>
-        </div>
-        <div class="flex items-center space-x-2">
-            <i class="fas fa-rocket text-purple-500"></i>
-            <span>Rencana Belajar Semester Ganjil</span>
-        </div>
+        @if($siswa)
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-graduation-cap text-blue-500"></i>
+                <span>{{ $siswa->kelas->nama_kelas ?? '-' }}</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-chalkboard-teacher text-green-500"></i>
+                <span>{{ $siswa->jurusan->nama_jurusan ?? '-' }}</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-rocket text-purple-500"></i>
+                <span>{{ $siswa->rencana->nama_rencana ?? '-' }}</span>
+            </div>
+        @else
+            <span>Data siswa tidak ditemukan</span>
+        @endif
     </div>
 
     {{-- Search Bar --}}
@@ -39,74 +43,28 @@
 
     {{-- Topik Materi Grid --}}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-
-        @php
-            $materi = [
-                [
-                    'id' => 'materi-1',
-                    'judul' => 'Pemrograman Web',
-                    'jumlah' => 5,
-                    'daftar' => ['HTML Dasar', 'CSS Layout', 'Javascript DOM', 'Laravel Dasar', 'Blade Template']
-                ],
-                [
-                    'id' => 'materi-2',
-                    'judul' => 'Jaringan Komputer',
-                    'jumlah' => 3,
-                    'daftar' => ['Topologi Jaringan', 'IP Addressing', 'Subnetting']
-                ],
-                [
-                    'id' => 'materi-3',
-                    'judul' => 'Basis Data',
-                    'jumlah' => 4,
-                    'daftar' => ['SQL Dasar', 'Relasi Tabel', 'Query Select', 'Normalisasi']
-                ],
-                [
-                    'id' => 'materi-4',
-                    'judul' => 'Pemrograman Mobile',
-                    'jumlah' => 3,
-                    'daftar' => ['Android Studio Dasar', 'Layout XML', 'Firebase CRUD']
-                ],
-                [
-                    'id' => 'materi-5',
-                    'judul' => 'Desain UI/UX',
-                    'jumlah' => 3,
-                    'daftar' => ['Figma Dasar', 'Wireframe vs Prototype', 'Design System']
-                ],
-                [
-                    'id' => 'materi-6',
-                    'judul' => 'Internet of Things (IoT)',
-                    'jumlah' => 4,
-                    'daftar' => ['Mikrokontroler ESP8266', 'Sensor DHT11', 'Adafruit IO', 'Blynk App']
-                ],
-                [
-                    'id' => 'materi-7',
-                    'judul' => 'Keamanan Jaringan',
-                    'jumlah' => 3,
-                    'daftar' => ['Firewall', 'Enkripsi Data', 'Ethical Hacking Dasar']
-                ],
-            ];
-        @endphp
-
-        @foreach($materi as $item)
-        <div class="bg-white shadow-md rounded-lg p-4 text-center relative h-full">
-            <div class="text-2xl mb-2 text-blue-600">
-                <i class="fas fa-book-open"></i>
+        @foreach($topikMateris as $item)
+            @php
+                $slug = strtolower(str_replace(' ', '-', $item->judul_topik));
+            @endphp
+            <div class="bg-white shadow-md rounded-lg p-4 text-center relative h-full" data-judul="{{ strtolower($item->judul_topik) }}">
+                <div class="text-2xl mb-2 text-blue-600">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h2 class="text-lg font-semibold mb-1">{{ $item->judul_topik }}</h2>
+                <p class="text-sm text-slate-600 mb-2">{{ $item->materis->count() ?? 0 }} Materi</p>
+                <button onclick="toggleMateri('{{ $slug }}', this)" class="text-blue-500 text-sm">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="{{ $slug }}" class="hidden mt-4 text-left">
+                    <ul class="text-sm list-disc list-inside space-y-1">
+                        @foreach($item->materis ?? [] as $sub)
+                            <li>{{ $sub->nama_materi }}</li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
-            <h2 class="text-lg font-semibold mb-1">{{ $item['judul'] }}</h2>
-            <p class="text-sm text-slate-600 mb-2">{{ $item['jumlah'] }} Materi</p>
-            <button onclick="toggleMateri('{{ $item['id'] }}', this)" class="text-blue-500 text-sm">
-                <i class="fas fa-chevron-down"></i>
-            </button>
-            <div id="{{ $item['id'] }}" class="hidden mt-4 text-left">
-                <ul class="text-sm list-disc list-inside space-y-1">
-                    @foreach($item['daftar'] as $materi)
-                        <li>{{ $materi }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
         @endforeach
-
     </div>
 </div>
 @endsection
