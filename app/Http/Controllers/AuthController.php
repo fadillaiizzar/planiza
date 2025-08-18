@@ -40,15 +40,15 @@ class AuthController extends Controller
         $user = Auth::user();
 
         if (in_array($user->role->nama_role, ['Administrator', 'Admin'])) {
-            return redirect('/dashboard/pages/admin');
+            return redirect()->route('admin.dashboard');
         } elseif ($user->role->nama_role === 'Siswa') {
             $siswa = $user->siswa;
 
             if (is_null($siswa->no_hp) || is_null($siswa->rencana)) {
-                return redirect('/dashboard/pages/siswa')->with('loginSuccess', true);
+                return redirect()->route('siswa.dashboard')->with('loginSuccess', true);
             }
 
-            return redirect('/dashboard/pages/siswa');
+            return redirect()->route('siswa.dashboard');
         } else {
             return redirect('/');
         }
