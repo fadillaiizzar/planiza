@@ -25,34 +25,6 @@ class TopikMateriController extends Controller
         $jurusan = Jurusan::all();
         $rencana = Rencana::all();
 
-        // List kategori untuk filter
-        $kelasList   = ['X', 'XI', 'XII', 'XIII'];
-        $jurusanList = ['TKR', 'SIJA', 'TAV', 'TITL', 'TP', 'DPIB', 'KGSP', 'DKV', 'GEO'];
-        $rencanaList = ['Kuliah', 'Kerja'];
-
-        // Hitung jumlah per kategori
-        $kelasCounts = collect($kelasList)->mapWithKeys(function ($nama) {
-            return [$nama => TopikMateri::whereHas('kelas', fn($q) => $q->where('nama_kelas', $nama))->count()];
-        });
-
-        $jurusanCounts = collect($jurusanList)->mapWithKeys(function ($nama) {
-            return [$nama => TopikMateri::whereHas('jurusan', fn($q) => $q->where('nama_jurusan', $nama))->count()];
-        });
-
-        $rencanaCounts = collect($rencanaList)->mapWithKeys(function ($nama) {
-            return [$nama => TopikMateri::whereHas('rencana', fn($q) => $q->where('nama_rencana', $nama))->count()];
-        });
-
-        // Gabungkan filterOptions (label & value tetap sama)
-        $filterOptions = collect([$kelasList, $jurusanList, $rencanaList])
-            ->flatten()
-            ->map(fn($item) => ['label' => $item, 'value' => $item])
-            ->toArray();
-
-        $filterKelas = array_filter($filterOptions, fn($opt) => in_array($opt['value'], $kelasList));
-        $filterJurusan = array_filter($filterOptions, fn($opt) => in_array($opt['value'], $jurusanList));
-        $filterRencana = array_filter($filterOptions, fn($opt) => in_array($opt['value'], $rencanaList));
-
         // Data untuk statistik
         $allMateris = TopikMateri::with(['kelas', 'jurusan', 'rencana'])->get();
         $materiPerKelas = $allMateris->groupBy(fn($item) => $item->kelas->nama_kelas ?? '-')->map->count();
@@ -75,13 +47,6 @@ class TopikMateriController extends Controller
             'kelas' => $kelas,
             'jurusan' => $jurusan,
             'rencana' => $rencana,
-            'kelasCounts'   => $kelasCounts,
-            'jurusanCounts' => $jurusanCounts,
-            'rencanaCounts' => $rencanaCounts,
-            'filterOptions' => $filterOptions,
-            'filterKelas'   => $filterKelas,
-            'filterJurusan' => $filterJurusan,
-            'filterRencana' => $filterRencana,
         ]);
     }
 
