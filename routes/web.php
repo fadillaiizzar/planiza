@@ -25,27 +25,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/redirect', [AuthController::class, 'redirectByRole'])->name('redirect');
 });
 
-Route::middleware(['auth', RoleMiddleware::class.':administrator,admin'])->group(function () {
-    Route::get('/register', [AdminController::class, 'showRegister'])->name('register');
-    Route::post('/register', [AdminController::class, 'register']);
+Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrator,admin'])->group(function () {
+    Route::get('/register', [UserController::class, 'create'])->name('register');
+    Route::post('/register', [UserController::class, 'store']);
 
-    Route::get('/dashboard/pages/admin', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/users/{user}/detail', [AdminController::class, 'detailUser'])->name('admin.users.detail');
-    Route::patch('/admin/users/{user}', [AdminController::class, 'updateUser'])->name('admin.users.update');
-    Route::post('/admin/users/{user}/reset-password', [AdminController::class, 'resetPassword'])->name('admin.users.reset-password');
-    Route::delete('/admin/users/{user}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
-    Route::get('/user/pages/admin', [UserController::class, 'index'])->name('admin.user');
+    Route::resource('users', UserController::class)->names('admin.user');
+    Route::post('/users/{user}/reset-password', [UserController::class, 'resetPassword'])->name('admin.user.reset-password');
 
-    Route::resource('topik-materi/pages/admin', TopikMateriController::class) ->names('admin.topik.materi');
+    Route::resource('topik-materi', TopikMateriController::class)->names('admin.topik.materi');
 
-    Route::resource('materi/pages/admin', MateriController::class) ->names('admin.materi');
+    Route::resource('materi', MateriController::class)->names('admin.materi');
 
-    Route::get('/kontribusi-sdgs/pages/admin', [KontribusiSdgsController::class, 'index'])->name('admin.kontribusi-sdgs');
+    Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('admin.kontribusi-sdgs');
 });
 
-Route::middleware(['auth', RoleMiddleware::class.':siswa'])->group(function () {
-    Route::get('/dashboard/pages/siswa', [SiswaController::class, 'index'])->name('siswa.dashboard');
-    Route::post('/siswa/simpan-rencana', [SiswaController::class, 'simpanRencana'])->name('siswa.simpan.rencana');
-    Route::get('/materi/pages/siswa', [MateriSiswaController::class, 'index'])->name('siswa.materi');
+Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->group(function () {
+    Route::get('/dashboard/', [SiswaController::class, 'index'])->name('siswa.dashboard');
+    Route::post('/simpan-rencana', [SiswaController::class, 'simpanRencana'])->name('siswa.simpan.rencana');
+    Route::get('/materi', [MateriSiswaController::class, 'index'])->name('siswa.materi');
 });
