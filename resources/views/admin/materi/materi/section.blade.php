@@ -209,7 +209,7 @@
     });
 
     function showEditMateri(id) {
-        fetch(`/materi/${id}/edit`)
+        fetch(`/admin/materi/${id}/edit`)
             .then(res => res.text())
             .then(html => {
                 document.getElementById('modalContentEditMateri').innerHTML = html;
