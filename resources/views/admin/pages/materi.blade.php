@@ -67,15 +67,4 @@
 
 @push('scripts')
     <script src="{{ asset('js/app.js') }}"></script>
-    <script>
-        function toggleDropdown(id) {
-            document.querySelectorAll('[id^="dropdown-"]').forEach(drop => {
-                if (drop.id === `dropdown-${id}`) {
-                    drop.classList.toggle('hidden');
-                } else {
-                    drop.classList.add('hidden');
-                }
-            });
-        }
-    </script>
 @endpush

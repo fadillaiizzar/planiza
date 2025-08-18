@@ -190,7 +190,7 @@
     });
 
     function showEdit(id) {
-        fetch(`/topik-materi/pages/admin/${id}/edit`)
+        fetch(`/topik-materi/${id}/edit`)
             .then(res => res.text())
             .then(html => {
                 document.getElementById('modalContentEdit').innerHTML = html;

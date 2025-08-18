@@ -15,10 +15,12 @@
                 'addButtonText' => 'Tambah User',
                 'stats' => [
                     ['label' => 'Total User', 'count' => $userCount, 'icon' => 'fas fa-users', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
-                    ['label' => 'Admin', 'count' => $users->where('role.nama_role', 'admin')->count(), 'icon' => 'fas fa-shield-alt', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
-                    ['label' => 'Siswa', 'count' => $users->where('role.nama_role', 'siswa')->count(), 'icon' => 'fas fa-graduation-cap', 'bg' => 'from-emerald-500 to-emerald-600', 'textColor' => 'text-emerald-100'],
+                    ['label' => 'Administrator', 'count' => $administratorCount, 'icon' => 'fas fa-crown', 'bg' => 'from-red-500 to-red-600', 'textColor' => 'text-red-100'],
+                    ['label' => 'Admin', 'count' => $adminCount, 'icon' => 'fas fa-shield-alt', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
+                    ['label' => 'Siswa', 'count' => $siswaCount, 'icon' => 'fas fa-graduation-cap', 'bg' => 'from-emerald-500 to-emerald-600', 'textColor' => 'text-emerald-100'],
                 ],
                 'filterOptions' => [
+                    ['label' => 'Administrator', 'value' => 'administrator'],
                     ['label' => 'Admin', 'value' => 'admin'],
                     ['label' => 'Siswa', 'value' => 'siswa'],
                 ],
@@ -83,22 +85,38 @@
                                         {{ $u->role->nama_role ?? '-' }}
                                     </span>
                                 </td>
+
                                 <td class="p-4 relative overflow-visible">
+                                    <!-- Tombol toggle -->
                                     <button onclick="toggleDropdown({{ $u->id }})"
                                         class="p-2 rounded-lg hover:bg-off-white focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all">
                                         <i class="fas fa-cog text-cool-gray"></i>
                                     </button>
 
-                                    <div id="dropdown-{{ $u->id }}" class="hidden absolute right-12 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
-                                        <a href="{{ route('admin.users.detail', $u->id) }}"
+                                    <!-- Dropdown -->
+                                    <div id="dropdown-{{ $u->id }}"
+                                        class="hidden absolute right-12 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
+
+                                        <!-- Detail -->
+                                        <a href="{{ route('admin.user.show', $u->id) }}"
                                             class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
                                             <i class="fas fa-eye w-5 h-5"></i>
                                             <span>Detail</span>
                                         </a>
 
+                                        <!-- Hapus (jangan tampilkan jika Administrator) -->
                                         @if($u->role->nama_role !== 'Administrator')
+                                            <!-- Edit -->
                                             <div class="border-t border-border-gray"></div>
-                                            <button type="button" onclick="showDeleteModal({{ $u->id }}, '{{ addslashes($u->name) }}')"
+                                            <button type="button" onclick="showEditUser({{ $u->id }})"
+                                                class="px-5 py-3 hover:bg-green-50 flex items-center gap-3 text-green-600 transition-colors text-base border-none bg-transparent cursor-pointer">
+                                                <i class="fas fa-edit w-5 h-5"></i>
+                                                <span>Edit</span>
+                                            </button>
+
+                                            <div class="border-t border-border-gray"></div>
+                                            <button type="button"
+                                                onclick="showDeleteModal({{ $u->id }}, '{{ addslashes($u->name) }}', '{{ route('admin.user.destroy', $u->id) }}')"
                                                 class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base border-none bg-transparent cursor-pointer">
                                                 <i class="fas fa-trash-alt w-5 h-5"></i>
                                                 <span>Hapus</span>
@@ -130,6 +148,11 @@
         ])
     </div>
 
+    <!-- Modal User -->
+    <div id="modalEditUser" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+        <div id="modalContentEditUser" class="w-full mx-auto flex items-center justify-center"></div>
+    </div>
+
     <!-- Modal Konfirmasi Delete User -->
     <div id="deleteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-sm p-4">
         <div class="bg-white rounded-2xl p-8 w-full max-w-lg shadow-2xl border border-[#CBD5E1] relative overflow-hidden">
@@ -137,7 +160,6 @@
             <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-red-600"></div>
 
             <div class="text-center">
-                <!-- Icon warning -->
                 <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -145,18 +167,14 @@
                     </svg>
                 </div>
 
-                <!-- Title -->
                 <h3 class="text-xl font-bold text-[#1E293B] mb-2">Hapus User</h3>
-
-                <!-- Message -->
                 <p class="text-[#64748B] mb-6 leading-relaxed text-sm sm:text-base">
                     Apakah Anda yakin ingin menghapus user bernama
-                    <span id="deleteUserName"></span>?
+                    <span id="deleteUserName"></span> ?
                     <br>
                     <span class="text-sm text-red-500 mt-2 block">Tindakan ini tidak dapat dibatalkan</span>
                 </p>
 
-                <!-- Buttons -->
                 <form id="deleteForm" method="POST" class="flex flex-row justify-center gap-5">
                     @csrf
                     @method('DELETE')
@@ -173,77 +191,29 @@
         </div>
     </div>
 
+
 @endsection
 
 @push('scripts')
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
-        // Inisialisasi filter search & select role
-        function initializeFilters() {
-            const searchInput = document.getElementById('searchInput');
-            const roleFilter = document.getElementById('roleFilter');
-            const resultCount = document.getElementById('resultCount');
-            const userRows = document.querySelectorAll('.user-row');
-
-            function filterUsers() {
-                const searchTerm = searchInput.value.toLowerCase();
-                const selectedRole = roleFilter.value.toLowerCase();
-                let visibleCount = 0;
-
-                userRows.forEach(row => {
-                    const name = row.dataset.name;
-                    const username = row.dataset.username;
-                    const role = row.dataset.role;
-
-                    const matchesSearch = name.includes(searchTerm) || username.includes(searchTerm);
-                    const matchesRole = !selectedRole || role === selectedRole;
-
-                    if (matchesSearch && matchesRole) {
-                        row.style.display = '';
-                        visibleCount++;
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-
-                resultCount.textContent = visibleCount;
-            }
-
-            searchInput.addEventListener('input', filterUsers);
-            roleFilter.addEventListener('change', filterUsers);
-        }
-
-        // Toggle dropdown action button
-        function toggleDropdown(id) {
-            document.querySelectorAll('[id^="dropdown-"]').forEach(drop => {
-                if (drop.id === `dropdown-${id}`) {
-                    drop.classList.toggle('hidden');
-                } else {
-                    drop.classList.add('hidden');
-                }
-            });
-        }
-
-        // Tampilkan modal hapus user
-        function showDeleteModal(userId, userName) {
+        // Modal Popup Hapus User
+        function showDeleteModal(id, name, action) {
             document.getElementById('deleteModal').classList.remove('hidden');
-            document.getElementById('deleteUserName').textContent = userName;
+            document.getElementById('deleteUserName').textContent = name;
             const form = document.getElementById('deleteForm');
-            form.action = `/admin/users/${userId}`;
+            form.action = action;
         }
 
-        // Tutup modal hapus user
         function closeDeleteModal() {
             document.getElementById('deleteModal').classList.add('hidden');
         }
 
-        // Klik di luar modal dan dropdown, tutup mereka
         document.addEventListener('click', function (e) {
-            // Tutup dropdown jika klik di luar tombol dan dropdown
             if (!e.target.closest('[id^="dropdown-"]') && !e.target.closest('button[onclick^="toggleDropdown"]')) {
                 document.querySelectorAll('[id^="dropdown-"]').forEach(el => el.classList.add('hidden'));
             }
-            // Tutup modal jika klik di luar modal konten
+
             const modal = document.getElementById('deleteModal');
             if (!modal.classList.contains('hidden') && e.target === modal) {
                 closeDeleteModal();
@@ -253,5 +223,29 @@
         document.addEventListener('DOMContentLoaded', () => {
             initializeFilters();
         });
+
+        // Modal Popup Edit User
+        function showEditUser(id) {
+            fetch(`/users/${id}/edit`)
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById('modalContentEditUser').innerHTML = html;
+                    openModalEditUser();
+            });
+        }
+
+        function openModalEditUser() {
+            const modal = document.getElementById('modalEditUser');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeModalEditUser() {
+            const modal = document.getElementById('modalEditUser');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.classList.remove('overflow-hidden');
+        }
     </script>
 @endpush

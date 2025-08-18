@@ -118,12 +118,14 @@
         const filterSelect = document.getElementById('filterSelect');
         const resultCount = document.getElementById('resultCount');
 
-        // Cari baris data, cek kelas user-row / topik-row, dll sesuai konvensi data
+        // Cari baris data: user-row, topik-row, atau materi-row
         let rows = [];
         if (document.querySelectorAll('.user-row').length > 0) {
             rows = document.querySelectorAll('.user-row');
         } else if (document.querySelectorAll('.topik-row').length > 0) {
             rows = document.querySelectorAll('.topik-row');
+        } else if (document.querySelectorAll('.materi-row').length > 0) {
+            rows = document.querySelectorAll('.materi-row');
         } else {
             return; // Tidak ada data untuk difilter
         }
@@ -145,7 +147,8 @@
 
                     matchesSearch = name.includes(searchTerm) || username.includes(searchTerm);
                     matchesFilter = !selectedFilter || role === selectedFilter;
-                } else if (row.classList.contains('topik-row')) {
+                }
+                else if (row.classList.contains('topik-row')) {
                     const judul = row.dataset.judul || '';
                     const kelas = row.dataset.kelas || '';
                     const jurusan = row.dataset.jurusan || '';
@@ -153,6 +156,14 @@
 
                     matchesSearch = judul.includes(searchTerm);
                     matchesFilter = !selectedFilter || kelas === selectedFilter || jurusan === selectedFilter || rencana === selectedFilter;
+                }
+                else if (row.classList.contains('materi-row')) {
+                    const nama = row.dataset.nama || '';
+                    const topik = row.dataset.topik || '';
+
+                    matchesSearch = nama.includes(searchTerm) || topik.includes(searchTerm);
+                    matchesFilter = !selectedFilter || topik === selectedFilter;
+                    // kalau filter mau berdasarkan topik
                 }
 
                 if (matchesSearch && matchesFilter) {
@@ -169,7 +180,7 @@
         searchInput.addEventListener('input', filterItems);
         filterSelect.addEventListener('change', filterItems);
     }
-
+    
     document.addEventListener('DOMContentLoaded', initializeFilters);
 
     function openModal() {

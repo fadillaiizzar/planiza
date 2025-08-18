@@ -24,7 +24,7 @@
             @php
                 $sidebarItems = [
                     ['icon' => 'fa-home', 'label' => 'Dashboard', 'route' => 'admin.dashboard'],
-                    ['icon' => 'fa-users', 'label' => 'User', 'route' => 'admin.user'],
+                    ['icon' => 'fa-users', 'label' => 'User', 'route' => 'admin.user.index'],
                     ['icon' => 'fa-book', 'label' => 'Materi', 'route' => 'admin.topik.materi.index'],
                     ['icon' => 'fa-globe', 'label' => 'Eksplorasi', 'route' => 'admin.dashboard'],
                     ['icon' => 'fa-briefcase', 'label' => 'Kenali Karier', 'route' => 'admin.dashboard'],

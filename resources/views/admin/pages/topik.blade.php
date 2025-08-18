@@ -34,19 +34,6 @@
                 ['label' => 'XI', 'value' => 'XI'],
                 ['label' => 'XII', 'value' => 'XII'],
                 ['label' => 'XIII', 'value' => 'XIII'],
-
-                ['label' => 'TKR', 'value' => 'TKR'],
-                ['label' => 'SIJA', 'value' => 'SIJA'],
-                ['label' => 'TAV', 'value' => 'TAV'],
-                ['label' => 'TITL', 'value' => 'TITL'],
-                ['label' => 'TP', 'value' => 'TP'],
-                ['label' => 'DPIB', 'value' => 'DPIB'],
-                ['label' => 'KGSP', 'value' => 'KGSP'],
-                ['label' => 'DKV', 'value' => 'DKV'],
-                ['label' => 'GEO', 'value' => 'GEO'],
-
-                ['label' => 'Kuliah', 'value' => 'Kuliah'],
-                ['label' => 'Kerja', 'value' => 'Kerja'],
             ],
             'searchPlaceholder' => 'Cari berdasarkan judul topik',
             'itemCount' =>  $topikMaterisCount,
@@ -89,15 +76,4 @@
 
 @push('scripts')
     <script src="{{ asset('js/app.js') }}"></script>
-    <script>
-        function toggleDropdown(id) {
-            document.querySelectorAll('[id^="dropdown-"]').forEach(drop => {
-                if (drop.id === `dropdown-${id}`) {
-                    drop.classList.toggle('hidden');
-                } else {
-                    drop.classList.add('hidden');
-                }
-            });
-        }
-    </script>
 @endpush
