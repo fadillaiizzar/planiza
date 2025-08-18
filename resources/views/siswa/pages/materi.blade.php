@@ -42,24 +42,40 @@
     </div>
 
     {{-- Topik Materi Grid --}}
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
         @foreach($topikMateris as $item)
             @php
                 $slug = strtolower(str_replace(' ', '-', $item->judul_topik));
             @endphp
-            <div class="bg-white shadow-md rounded-lg p-4 text-center relative h-full" data-judul="{{ strtolower($item->judul_topik) }}">
-                <div class="text-2xl mb-2 text-blue-600">
+            <div class="relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 cursor-pointer bg-off-white border border-border-gray p-5 flex flex-col items-center h-full">
+                {{-- Icon --}}
+                <div class="text-3xl mb-3 text-slate-navy">
                     <i class="fas fa-book-open"></i>
                 </div>
-                <h2 class="text-lg font-semibold mb-1">{{ $item->judul_topik }}</h2>
-                <p class="text-sm text-slate-600 mb-2">{{ $item->materis->count() ?? 0 }} Materi</p>
-                <button onclick="toggleMateri('{{ $slug }}', this)" class="text-blue-500 text-sm">
-                    <i class="fas fa-chevron-down"></i>
+
+                {{-- Judul Topik --}}
+                <h2 class="text-lg font-bold mb-2 line-clamp-2 text-slate-navy text-center">{{ $item->judul_topik }}</h2>
+
+                {{-- Jumlah Materi --}}
+                <span class="bg-slate-navy text-off-white font-semibold text-sm px-3 py-1 rounded-full mb-3 shadow">
+                    {{ $item->materis->count() ?? 0 }} Materi
+                </span>
+
+                {{-- Toggle Materi --}}
+                <button onclick="toggleMateri('{{ $slug }}', this)" class="mt-auto inline-flex items-center gap-1 text-slate-navy font-medium hover:text-cool-gray">
+                    <i class="fas fa-chevron-down"></i> Lihat Materi
                 </button>
-                <div id="{{ $slug }}" class="hidden mt-4 text-left">
-                    <ul class="text-sm list-disc list-inside space-y-1">
+
+                {{-- Daftar Materi --}}
+                <div id="{{ $slug }}" class="hidden mt-4 w-full text-left bg-off-white text-slate-navy rounded-lg p-3 shadow-inner max-h-48 overflow-y-auto">
+                    <ul class="list-disc list-inside space-y-1 text-sm">
                         @foreach($item->materis ?? [] as $sub)
-                            <li>{{ $sub->nama_materi }}</li>
+                            <li>
+                                <a href="{{ route('siswa.materi.show', $sub->id) }}"
+                                class="hover:text-cool-gray font-medium transition">
+                                    {{ $sub->nama_materi }}
+                                </a>
+                            </li>
                         @endforeach
                     </ul>
                 </div>

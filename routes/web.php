@@ -44,5 +44,8 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
 Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->group(function () {
     Route::get('/dashboard/', [SiswaController::class, 'index'])->name('siswa.dashboard');
     Route::post('/simpan-rencana', [SiswaController::class, 'simpanRencana'])->name('siswa.simpan.rencana');
+
     Route::get('/materi', [MateriSiswaController::class, 'index'])->name('siswa.materi');
+    Route::get('/materi/{id}', [MateriSiswaController::class, 'show'])->name('siswa.materi.show');
+
 });
