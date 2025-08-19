@@ -45,10 +45,10 @@
                     @foreach ($items as $item)
                         <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors">
                             <td class="p-4">{{ $item->id }}</td>
-                            <td class="p-4">{{ $item->nama_profesi_kerja }}</td>
+                            <td class="p-4">{{ Str::limit($item->nama_profesi_kerja, 15) }}</td>
                             <td class="p-4">Rp{{ number_format($item->gaji, 0, ',', '.') }}</td>
-                            <td class="p-4">{{ Str::limit($item->info_skill, 30) }}</td>
-                            <td class="p-4">{{ $item->info_jurusan }}</td>
+                            <td class="p-4">{{ Str::limit($item->info_skill, 15) }}</td>
+                            <td class="p-4">{{ Str::limit($item->info_jurusan, 15) }}</td>
                             <td class="p-4 relative overflow-visible">
                                 <button onclick="toggleDropdown({{ $item->id }})"
                                     class="p-2 rounded-lg hover:bg-off-white focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all">
