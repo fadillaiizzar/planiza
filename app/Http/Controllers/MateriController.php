@@ -7,13 +7,11 @@ use App\Models\Materi;
 use App\Models\TopikMateri;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class MateriController extends Controller
 {
     public function index()
     {
-        // Ambil data materi dengan relasi topikMateri dan paginasi
         $materis = Materi::with(['topikMateri'])->oldest()->paginate(10);
 
         $materisCount = Materi::count();

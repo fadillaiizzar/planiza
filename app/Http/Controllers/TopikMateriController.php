@@ -15,9 +15,7 @@ class TopikMateriController extends Controller
 {
     public function index(Request $request)
     {
-        $topikMateris = TopikMateri::with(['kelas', 'jurusan', 'rencana'])
-            ->oldest()
-            ->paginate(10);
+        $topikMateris = TopikMateri::with(['kelas', 'jurusan', 'rencana'])->oldest()->paginate(10);
 
         $topikMaterisCount = TopikMateri::count();
 
