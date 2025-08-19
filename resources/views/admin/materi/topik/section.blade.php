@@ -76,7 +76,7 @@
                         data-rencana="{{ strtolower($item->rencana->nama_rencana ?? '') }}"
                         >
                             <td class="p-4">{{ $item->id }}</td>
-                            <td class="p-4">{{ $item->judul_topik }}</td>
+                            <td class="p-4">{{ Str::limit($item->judul_topik, 15) }}</td>
                             <td class="p-4">{{ $item->kelas->nama_kelas ?? '-' }}</td>
                             <td class="p-4">{{ $item->jurusan->nama_jurusan ?? '-' }}</td>
                             <td class="p-4">{{ $item->rencana->nama_rencana ?? '-' }}</td>

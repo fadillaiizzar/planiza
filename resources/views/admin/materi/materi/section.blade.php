@@ -85,7 +85,7 @@
                             </td>
                             <td class="p-4">
                                 <span title="{{ $item->deskripsi_materi }}">
-                                    {{ \Illuminate\Support\Str::limit($item->deskripsi_materi, 10) }}
+                                    {{ \Illuminate\Support\Str::limit($item->deskripsi_materi, 15) }}
                                 </span>
                             </td>
                             <td class="p-4">{{ $item->tipe_file }}</td>
