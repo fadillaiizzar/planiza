@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_industri');
             $table->string('website');
-            $table->string('alamat');    
+            $table->text('alamat');
             $table->timestamps();
         });
     }

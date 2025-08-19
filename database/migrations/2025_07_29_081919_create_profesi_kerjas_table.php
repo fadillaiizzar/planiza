@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('profesi_kerjas', function (Blueprint $table) {
             $table->id();
             $table->string('nama_profesi_kerja');
-            $table->string('gambar');
-            $table->string('gaji');
+            $table->string('gambar')->nullable();
+            $table->decimal('gaji', 15, 2);
             $table->text('deskripsi');
             $table->text('info_skill');
             $table->text('info_jurusan');
