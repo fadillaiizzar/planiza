@@ -95,7 +95,9 @@ class MateriController extends Controller
                 if ($request->tipe_file === 'video' && !in_array($ext,['mp4','avi','mov','mkv'])) {
                     return back()->withErrors(['file_materi'=>'Semua file harus video']);
                 }
-                $uploadedFiles[] = $file->store('materi_files','public');
+
+                $filename = time().'_'.$file->getClientOriginalName();
+                $uploadedFiles[] = $file->storeAs('materi_files', $filename, 'public');
             }
         }
 
@@ -140,7 +142,9 @@ class MateriController extends Controller
         $uploadedFiles = json_decode($materi->file_materi,true) ?: [];
         if ($request->hasFile('file_materi')) {
             foreach ($request->file('file_materi') as $file) {
-                $uploadedFiles[] = $file->store('materi_files','public');
+                // Nama asli + timestamp
+                $filename = time().'_'.$file->getClientOriginalName();
+                $uploadedFiles[] = $file->storeAs('materi_files', $filename, 'public');
             }
         }
 
