@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Materi;
+use App\Models\ProfesiKerja;
 use App\Models\KontribusiSdgs;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
@@ -11,6 +12,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\MateriSiswaController;
 use App\Http\Controllers\TopikMateriController;
+use App\Http\Controllers\ProfesiKerjaController;
 use App\Http\Controllers\KontribusiSdgsController;
 
 Route::get('/', function () {
@@ -38,6 +40,8 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
 
     Route::resource('materi', MateriController::class)->names('admin.materi');
 
+    Route::resource('profesi-kerja', ProfesiKerjaController::class)->names('admin.profesi-kerja');
+
     Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('admin.kontribusi-sdgs');
 });
 
@@ -47,5 +51,4 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->gr
 
     Route::get('/materi', [MateriSiswaController::class, 'index'])->name('siswa.materi');
     Route::get('/materi/{id}', [MateriSiswaController::class, 'show'])->name('siswa.materi.show');
-
 });
