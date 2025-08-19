@@ -55,7 +55,7 @@
                                     <i class="fas fa-cog text-cool-gray"></i>
                                 </button>
 
-                                <div id="dropdown-{{ $item->id }}" class="hidden absolute right-20 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
+                                <div id="dropdown-{{ $item->id }}" class="hidden absolute right-12 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
                                     <a href="{{ route('admin.profesi-kerja.show', $item->id) }}"
                                         class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
                                         <i class="fas fa-eye w-5 h-5"></i>
