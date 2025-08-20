@@ -13,8 +13,6 @@
     <section class="bg-off-white rounded-2xl shadow-lg p-6">
         <h3 class="text-xl font-bold text-slate-navy mb-6">{{ $statistikTitle }}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-            <!-- Profesi per Industri -->
             <div class="bg-white rounded-xl border border-border-gray shadow-sm p-5 hover:shadow-md transition-shadow duration-300">
                 <h4 class="text-lg font-semibold text-slate-navy mb-4">{{ $iconKelas ?? '💼' }} {{ $labelKelas }}</h4>
                 <ul class="space-y-2 text-cool-gray">
