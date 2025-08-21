@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany; 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class ProfesiKerja extends Model
 {
@@ -21,6 +21,6 @@ class ProfesiKerja extends Model
 
     public function industris(): BelongsToMany
     {
-        return $this->belongsToMany(Industri::class, 'industri_profesis');
+        return $this->belongsToMany(Industri::class, 'industri_profesis', 'profesi_kerja_id', 'industri_id');
     }
 }

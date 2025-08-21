@@ -17,15 +17,15 @@ class IndustriProfesi extends Model
         'industri_id',
     ];
 
-    protected $with = ['profesi_kerja', 'industri'];
+    protected $with = ['profesiKerja', 'industri'];
 
     public function profesiKerja(): BelongsTo
     {
-        return $this->belongsTo(ProfesiKerja::class);
+        return $this->belongsTo(ProfesiKerja::class, 'profesi_kerja_id');
     }
 
     public function industri(): BelongsTo
     {
-        return $this->belongsTo(Industri::class);
+        return $this->belongsTo(Industri::class, 'industri_id');
     }
 }
