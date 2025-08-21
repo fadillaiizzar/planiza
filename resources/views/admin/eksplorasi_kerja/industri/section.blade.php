@@ -42,19 +42,19 @@
                 <tbody>
                     @forelse ($items as $item)
                         <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors">
-                            <td class="p-4">{{ $item->id }}</td>
-                            <td class="p-4">{{ Str::limit($item->nama_industri, 20) }}</td>
-                            <td class="p-4">
+                            <td class="p-4 w-[5%]">{{ $item->id }}</td>
+                            <td class="p-4 w-[20%]">{{ Str::limit($item->nama_industri, 20) }}</td>
+                            <td class="p-4 w-[30%]">
                                 @if($item->website)
                                     <a href="{{ $item->website }}" target="_blank" class="text-blue-500 hover:underline">
-                                        {{ Str::limit($item->website, 30) }}
+                                        {{ Str::limit($item->website, 35) }}
                                     </a>
                                 @else
                                     <span class="text-gray-400">-</span>
                                 @endif
                             </td>
-                            <td class="p-4">{{ Str::limit($item->alamat, 35) }}</td>
-                            <td class="p-4 relative overflow-visible">
+                            <td class="p-4 w-[30%]">{{ Str::limit($item->alamat, 35) }}</td>
+                            <td class="p-4 relative overflow-visible w-[10%]">
                                 <button onclick="toggleDropdown({{ $item->id }})"
                                     class="p-2 rounded-lg hover:bg-off-white focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all">
                                     <i class="fas fa-cog text-cool-gray"></i>
