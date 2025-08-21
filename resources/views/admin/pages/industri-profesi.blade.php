@@ -47,7 +47,7 @@
             'profesiPerIndustri' => $profesiPerIndustri,
             'industriPerProfesi' => $industriPerProfesi,
             'tableTitle' => 'Daftar Relasi Industri - Profesi',
-            'tableHeaders' => ['ID', 'Nama Industri', 'Profesi Terkait', 'Aksi'],
+            'tableHeaders' => ['ID', 'Nama Profesi', 'Industri Terkait', 'Aksi'],
             'items' => $allRelations,
         ])
         @endcomponent

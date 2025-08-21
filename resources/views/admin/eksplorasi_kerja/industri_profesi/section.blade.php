@@ -10,21 +10,6 @@
     <section class="bg-off-white rounded-2xl shadow-lg p-6">
         <h3 class="text-xl font-bold text-slate-navy mb-6">{{ $statistikTitle }}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-            <!-- Profesi per Industri -->
-            <div class="bg-white rounded-xl border border-border-gray shadow-sm p-5 hover:shadow-md transition-shadow duration-300">
-                <h4 class="text-lg font-semibold text-slate-navy mb-4">{{ $iconIndustri ?? '🏭' }} {{ $labelIndustri }}</h4>
-                <ul class="space-y-2 text-cool-gray max-h-60 overflow-y-auto">
-                    @foreach(($profesiPerIndustri ?? []) as $industri => $count)
-                        <li class="flex justify-between items-center border-b border-border-gray pb-1 last:border-none last:pb-0">
-                            <span>{{ $industri }}</span>
-                            <strong class="text-slate-navy">{{ $count }}</strong>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-
-            <!-- Industri per Profesi -->
             <div class="bg-white rounded-xl border border-border-gray shadow-sm p-5 hover:shadow-md transition-shadow duration-300">
                 <h4 class="text-lg font-semibold text-slate-navy mb-4">{{ $iconProfesi ?? '👨‍💼' }} {{ $labelProfesi }}</h4>
                 <ul class="space-y-2 text-cool-gray max-h-60 overflow-y-auto">
@@ -37,6 +22,17 @@
                 </ul>
             </div>
 
+            <div class="bg-white rounded-xl border border-border-gray shadow-sm p-5 hover:shadow-md transition-shadow duration-300">
+                <h4 class="text-lg font-semibold text-slate-navy mb-4">{{ $iconIndustri ?? '🏭' }} {{ $labelIndustri }}</h4>
+                <ul class="space-y-2 text-cool-gray max-h-60 overflow-y-auto">
+                    @foreach(($profesiPerIndustri ?? []) as $industri => $count)
+                        <li class="flex justify-between items-center border-b border-border-gray pb-1 last:border-none last:pb-0">
+                            <span>{{ $industri }}</span>
+                            <strong class="text-slate-navy">{{ $count }}</strong>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
     </section>
 
@@ -56,8 +52,8 @@
                    @forelse ($items  as $relasi)
                         <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors">
                             <td class="p-4 w-[5%]">{{ $relasi->id }}</td>
-                            <td class="p-4 w-[40%]">{{ Str::limit($relasi->industri->nama_industri, 50) }}</td>
                             <td class="p-4 w-[40%]">{{ Str::limit($relasi->profesiKerja->nama_profesi_kerja, 50) }}</td>
+                            <td class="p-4 w-[40%]">{{ Str::limit($relasi->industri->nama_industri, 50) }}</td>
                             <td class="p-4 relative overflow-visible w-[15%]">
                                 <button onclick="toggleDropdown({{ $relasi->id }})"
                                     class="p-2 rounded-lg hover:bg-off-white focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all">

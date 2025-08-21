@@ -39,20 +39,6 @@
         <form action="{{ route('admin.industri-profesi.store') }}" method="POST" class="space-y-4">
             @csrf
 
-            <!-- Pilih Industri -->
-            <div class="space-y-1">
-                <label for="industri_id" class="block text-sm font-semibold text-slate-700">Industri</label>
-                <select name="industri_id" id="industri_id"
-                    class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm text-slate-900 bg-white" required>
-                    <option value="">-- Pilih Industri --</option>
-                    @foreach ($industris as $industri)
-                        <option value="{{ $industri->id }}" {{ old('industri_id') == $industri->id ? 'selected' : '' }}>
-                            {{ $industri->nama_industri }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
             <!-- Pilih Profesi -->
             <div class="space-y-1">
                 <label for="profesi_kerja_id" class="block text-sm font-semibold text-slate-700">Profesi</label>
@@ -62,6 +48,20 @@
                     @foreach ($profesis as $profesi)
                         <option value="{{ $profesi->id }}" {{ old('profesi_kerja_id') == $profesi->id ? 'selected' : '' }}>
                             {{ $profesi->nama_profesi_kerja }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!-- Pilih Industri -->
+            <div class="space-y-1">
+                <label for="industri_id" class="block text-sm font-semibold text-slate-700">Industri</label>
+                <select name="industri_id" id="industri_id"
+                    class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm text-slate-900 bg-white" required>
+                    <option value="">-- Pilih Industri --</option>
+                    @foreach ($industris as $industri)
+                        <option value="{{ $industri->id }}" {{ old('industri_id') == $industri->id ? 'selected' : '' }}>
+                            {{ $industri->nama_industri }}
                         </option>
                     @endforeach
                 </select>

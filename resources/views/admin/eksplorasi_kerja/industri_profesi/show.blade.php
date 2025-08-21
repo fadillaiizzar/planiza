@@ -53,16 +53,6 @@
                 </div>
             </div>
 
-            <!-- Industri -->
-            <div class="group">
-                <label class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
-                    <i class="fas fa-industry mr-2 text-blue-500"></i> Industri
-                </label>
-                <div class="w-full px-5 py-4 border border-slate-200 rounded-2xl text-sm text-slate-900 bg-white shadow-sm">
-                    {{ $industriProfesi->industri->nama_industri ?? '-' }}
-                </div>
-            </div>
-
             <!-- Profesi Kerja -->
             <div class="group">
                 <label class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
@@ -70,6 +60,16 @@
                 </label>
                 <div class="w-full px-5 py-4 border border-slate-200 rounded-2xl text-sm text-slate-900 bg-white shadow-sm">
                     {{ $industriProfesi->profesiKerja->nama_profesi_kerja ?? '-' }}
+                </div>
+            </div>
+
+            <!-- Industri -->
+            <div class="group">
+                <label class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
+                    <i class="fas fa-industry mr-2 text-blue-500"></i> Industri
+                </label>
+                <div class="w-full px-5 py-4 border border-slate-200 rounded-2xl text-sm text-slate-900 bg-white shadow-sm">
+                    {{ $industriProfesi->industri->nama_industri ?? '-' }}
                 </div>
             </div>
         </div>
