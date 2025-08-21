@@ -40,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($items as $item)
+                    @forelse ($items as $item)
                         <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors">
                             <td class="p-4">{{ $item->id }}</td>
                             <td class="p-4">{{ Str::limit($item->nama_profesi_kerja, 15) }}</td>
@@ -74,11 +74,11 @@
                                         <span>Edit</span>
                                     </button>
                                     <div class="border-t border-border-gray"></div>
-                                    <form action="{{ route('admin.profesi-kerja.destroy', $item->id) }}" method="POST"
-                                        class="w-full">
+                                    <form action="{{ route('admin.profesi-kerja.destroy', $item->id) }}" method="POST" class="w-full">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" onclick="showDeleteModal({{ $item->id }}, '{{ addslashes($item->nama_profesi_kerja) }}', '{{ route('admin.profesi-kerja.destroy', $item->id) }}')"
+                                        <button type="button"
+                                            onclick="showDeleteModal({{ $item->id }}, '{{ addslashes($item->nama_profesi_kerja) }}', '{{ route('admin.profesi-kerja.destroy', $item->id) }}')"
                                             class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base">
                                             <i class="fas fa-trash-alt w-5 h-5"></i>
                                             <span>Hapus</span>
@@ -87,7 +87,25 @@
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="8" class="text-center py-10">
+                                <div class="flex flex-col items-center justify-center space-y-3">
+                                    <i class="fas fa-user-tie text-gray-400 text-4xl"></i>
+                                    <p class="text-gray-500 text-lg font-medium">
+                                       Belum ada profesi kerja. Tambahkan data
+                                    </p>
+                                    <button onclick="openModal()"
+                                        class="px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300
+                                            border border-cool-gray text-cool-gray
+                                            hover:bg-cool-gray hover:text-off-white hover:scale-105
+                                            focus:ring-4 focus:ring-cool-gray">
+                                        + Tambah Profesi
+                                </button>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
