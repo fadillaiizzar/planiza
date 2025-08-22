@@ -21,12 +21,23 @@ class IndustriController extends Controller
         $user = Auth::user();
         $userCount = User::count();
 
+        $filterOptions = Industri::select('alamat')
+            ->distinct()
+            ->orderBy('alamat', 'asc')
+            ->get()
+            ->map(fn($industri) => [
+                'label' => $industri->alamat,
+                'value' => $industri->alamat
+            ])
+            ->toArray();
+
         return view('admin.pages.industri', [
             'industris' => $industris,
             'industriCount' => $industriCount,
             'allIndustri' => $allIndustri,
             'user' => $user,
             'userCount' => $userCount,
+            'filterOptions' => $filterOptions,
         ]);
     }
 

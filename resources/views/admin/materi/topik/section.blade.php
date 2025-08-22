@@ -6,6 +6,7 @@
         'stats' => $stats,
         'filterOptions' => $filterOptions ?? [],
         'searchPlaceholder' => $searchPlaceholder ?? 'Cari...',
+        'defaultFilterText' => 'Semua Kelas',
         'itemCount' => $itemCount ?? 0,
     ])
 

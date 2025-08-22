@@ -31,7 +31,7 @@
                 ['label' => 'Materi per Jurusan', 'count' => $materiPerJurusan->sum(), 'icon' => 'fas fa-university', 'bg' => 'from-purple-500 to-purple-600', 'textColor' => 'text-purple-100'],
                 ['label' => 'Materi per Rencana', 'count' => $materiPerRencana->sum(), 'icon' => 'fas fa-tasks', 'bg' => 'from-yellow-500 to-yellow-600', 'textColor' => 'text-yellow-100'],
             ],
-           'filterOptions' => $filterOptions,
+            'filterOptions' => $filterOptions,
             'searchPlaceholder' => 'Cari berdasarkan nama materi',
             'itemCount' =>  $materisCount,
             'statistikTitle' => 'Statistik Materi',

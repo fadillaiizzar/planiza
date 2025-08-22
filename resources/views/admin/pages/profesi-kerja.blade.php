@@ -35,8 +35,8 @@
             'userCount' => $userCount,
             'stats' => [
                 ['label' => 'Total Profesi', 'count' => $profesiCount, 'icon' => 'fas fa-briefcase', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
-                ['label' => 'Profesi dengan Industri', 'count' => $allProfesi->where('industris')->count(), 'icon' => 'fas fa-industry', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
             ],
+            'filterOptions' => $filterOptions,
             'searchPlaceholder' => 'Cari berdasarkan nama profesi',
             'itemCount' => $profesiCount,
             'statistikTitle' => 'Statistik Profesi',

@@ -6,20 +6,9 @@
         'stats' => $stats,
         'filterOptions' => $filterOptions ?? [],
         'searchPlaceholder' => $searchPlaceholder ?? 'Cari...',
+        'defaultFilterText' => 'Semua Alamat',
         'itemCount' => $itemCount ?? 0,
     ])
-
-    <!-- Statistik -->
-    <section class="bg-off-white rounded-2xl shadow-lg p-6">
-        <x-h3>{{ $statistikTitle }}</x-h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <x-admin.eksplorasi_kerja.stat-card
-                icon="fas fa-industry"
-                :label="$labelIndustri"
-                :items="$allIndustri->groupBy('industri')"
-            />
-        </div>
-    </section>
 
     <!-- Daftar Industri -->
     <section class="bg-white rounded-xl shadow p-6 mt-6">
@@ -35,7 +24,9 @@
                 </thead>
                 <tbody>
                     @forelse ($items as $item)
-                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors">
+                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors industri-row"
+                            data-nama="{{ strtolower($item->nama_industri) }}"
+                            data-alamat="{{ strtolower($item->alamat) }}">
                             <td class="p-4 w-[5%]">{{ $item->id }}</td>
                             <td class="p-4 w-[20%]">{{ Str::limit($item->nama_industri, 20) }}</td>
                             <td class="p-4 w-[30%]">
@@ -137,17 +128,7 @@
 </div>
 
 <script>
-    function showDeleteModal(id, name, action) {
-        document.getElementById('deleteModal').classList.remove('hidden');
-        document.getElementById('deleteIndustriName').textContent = name;
-        const form = document.getElementById('deleteForm');
-        form.action = action;
-    }
-
-    function closeDeleteModal() {
-        document.getElementById('deleteModal').classList.add('hidden');
-    }
-
+    // Modal Edit
     function showEdit(id) {
         fetch(`/admin/industri/${id}/edit`)
             .then(res => res.text())
@@ -169,5 +150,17 @@
         modal.classList.add('hidden');
         modal.classList.remove('flex');
         document.body.classList.remove('overflow-hidden');
+    }
+
+    // Modal Delete
+    function showDeleteModal(id, name, action) {
+        document.getElementById('deleteModal').classList.remove('hidden');
+        document.getElementById('deleteIndustriName').textContent = name;
+        const form = document.getElementById('deleteForm');
+        form.action = action;
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.add('hidden');
     }
 </script>

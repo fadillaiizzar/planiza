@@ -4,6 +4,8 @@
         'addButtonText' => $addButtonText,
         'stats' => $stats,
         'searchPlaceholder' => $searchPlaceholder ?? 'Cari...',
+        'defaultFilterText' => 'Semua Profesi',
+        'itemCount' => $itemCount ?? 0,
     ])
 
     <!-- Statistik Industri - Profesi -->
@@ -38,7 +40,9 @@
                 </thead>
                 <tbody>
                    @forelse ($items  as $relasi)
-                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors">
+                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors industri-profesi-row"
+                            data-profesi="{{ strtolower($relasi->profesiKerja->nama_profesi_kerja) }}"
+                            data-industri="{{ strtolower($relasi->industri->nama_industri) }}">
                             <td class="p-4 w-[5%]">{{ $relasi->id }}</td>
                             <td class="p-4 w-[40%]">{{ Str::limit($relasi->profesiKerja->nama_profesi_kerja, 50) }}</td>
                             <td class="p-4 w-[40%]">{{ Str::limit($relasi->industri->nama_industri, 50) }}</td>

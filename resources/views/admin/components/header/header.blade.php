@@ -89,7 +89,7 @@
                 <div class="relative inline-block w-48">
                     <select id="filterSelect" class="appearance-none w-full px-4 py-2 pr-10 bg-white border border-gray-300 rounded-lg shadow-sm
                         focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition cursor-pointer">
-                        <option value="">Semua</option>
+                        <option value="">{{ $defaultFilterText ?? 'Semua' }}</option>
                         @foreach ($filterOptions as $option)
                             <option value="{{ strtolower($option['value']) }}">{{ $option['label'] }}</option>
                         @endforeach
@@ -126,6 +126,12 @@
             rows = document.querySelectorAll('.topik-row');
         } else if (document.querySelectorAll('.materi-row').length > 0) {
             rows = document.querySelectorAll('.materi-row');
+        } else if (document.querySelectorAll('.profesi-row').length > 0) {
+            rows = document.querySelectorAll('.profesi-row');
+        } else if (document.querySelectorAll('.industri-row').length > 0) {
+            rows = document.querySelectorAll('.industri-row');
+        } else if (document.querySelectorAll('.industri-profesi-row').length > 0) {
+            rows = document.querySelectorAll('.industri-profesi-row');
         } else {
             return;
         }
@@ -163,7 +169,27 @@
 
                     matchesSearch = nama.includes(searchTerm) || topik.includes(searchTerm);
                     matchesFilter = !selectedFilter || topik === selectedFilter;
-                    // kalau filter mau berdasarkan topik
+                }
+                else if (row.classList.contains('profesi-row')) {
+                    const nama = row.dataset.nama || '';
+                    const gaji = row.dataset.gaji || '';
+
+                    matchesSearch = nama.includes(searchTerm) || gaji.includes(searchTerm);
+                    matchesFilter = !selectedFilter || gaji === selectedFilter;
+                }
+                else if (row.classList.contains('industri-row')) {
+                    const nama = row.dataset.nama || '';
+                    const alamat = row.dataset.alamat || '';
+
+                    matchesSearch = nama.includes(searchTerm);
+                    matchesFilter = !selectedFilter || alamat === selectedFilter;
+                }
+                else if (row.classList.contains('industri-profesi-row')) {
+                    const profesi = row.dataset.profesi || '';
+                    const industri = row.dataset.industri || '';
+
+                    matchesSearch = profesi.includes(searchTerm) || industri.includes(searchTerm);
+                    matchesFilter = !selectedFilter || profesi === selectedFilter;
                 }
 
                 if (matchesSearch && matchesFilter) {

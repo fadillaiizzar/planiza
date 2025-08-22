@@ -30,6 +30,17 @@ class IndustriProfesiController extends Controller
         $industris = Industri::all();
         $profesis = ProfesiKerja::all();
 
+        $filterOptions = IndustriProfesi::with('profesiKerja')
+            ->get()
+            ->map(fn($relasi) => [
+                'label' => $relasi->profesiKerja->nama_profesi_kerja,
+                'value' => strtolower($relasi->profesiKerja->nama_profesi_kerja)
+            ])
+            ->unique('value')
+            ->sortBy('label')
+            ->values()
+            ->toArray();
+
         return view('admin.pages.industri-profesi', [
             'relations' => $relations,
             'relasiCount' => $relasiCount,
@@ -40,6 +51,7 @@ class IndustriProfesiController extends Controller
             'industriPerProfesi' => $industriPerProfesi,
             'industris' => $industris,
             'profesis' => $profesis,
+            'filterOptions' => $filterOptions,
         ]);
     }
 

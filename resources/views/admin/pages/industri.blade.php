@@ -35,8 +35,8 @@
             'userCount' => $userCount,
             'stats' => [
                 ['label' => 'Total Industri', 'count' => $industriCount, 'icon' => 'fas fa-industry', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
-                ['label' => 'Industri dengan Profesi', 'count' => $allIndustri->where('profesiKerjas')->count(), 'icon' => 'fas fa-briefcase', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-green-100'],
             ],
+            'filterOptions' => $filterOptions,
             'searchPlaceholder' => 'Cari berdasarkan nama industri',
             'itemCount' => $industriCount,
             'statistikTitle' => 'Statistik Industri',

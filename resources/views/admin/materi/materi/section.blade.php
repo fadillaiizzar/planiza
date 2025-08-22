@@ -6,6 +6,7 @@
         'stats' => $stats,
         'filterOptions' => $filterOptions ?? [],
         'searchPlaceholder' => $searchPlaceholder ?? 'Cari...',
+        'defaultFilterText' => 'Semua Topik',
         'itemCount' => $itemCount ?? 0,
     ])
 

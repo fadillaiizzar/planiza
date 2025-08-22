@@ -37,6 +37,7 @@
                 ['label' => 'Total Profesi', 'count' => $profesiCount, 'icon' => 'fas fa-briefcase', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
                 ['label' => 'Total Industri', 'count' => $industriCount, 'icon' => 'fas fa-industry', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
             ],
+            'filterOptions' => $filterOptions,
             'searchPlaceholder' => 'Cari berdasarkan industri atau profesi',
             'itemCount' =>  $relasiCount,
             'statistikTitle' => 'Statistik Relasi Industri - Profesi',
