@@ -44,88 +44,113 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $u)
-                            <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors user-row"
-                                data-name="{{ strtolower($u->name) }}"
-                                data-username="{{ strtolower($u->username) }}"
-                                data-role="{{ strtolower($u->role->nama_role ?? '') }}"
-                            >
-                                <td class="p-4">{{ $u->id }}</td>
-                                <td class="p-4 font-medium text-slate-navy">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
-                                            {{ strtoupper(substr($u->name, 0, 1)) }}{{ strtoupper(substr(explode(' ', $u->name)[1] ?? '', 0, 1)) }}
+                            @forelse ($users as $u)
+                                <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors user-row"
+                                    data-name="{{ strtolower($u->name) }}"
+                                    data-username="{{ strtolower($u->username) }}"
+                                    data-role="{{ strtolower($u->role->nama_role ?? '') }}"
+                                >
+                                    <td class="p-4">{{ $u->id }}</td>
+                                    <td class="p-4 font-medium text-slate-navy">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                                                {{ strtoupper(substr($u->name, 0, 1)) }}{{ strtoupper(substr(explode(' ', $u->name)[1] ?? '', 0, 1)) }}
+                                            </div>
+                                            <span>{{ $u->name }}</span>
                                         </div>
-                                        <span>{{ $u->name }}</span>
-                                    </div>
-                                </td>
-                                <td class="p-4">{{ $u->username }}</td>
-                                <td class="p-4">
-                                    <span class="text-slate-600 font-mono text-xs px-2 py-1 rounded">
-                                        {{ \Illuminate\Support\Str::limit($u->password, 10) }}
-                                    </span>
-                                </td>
-                                <td class="p-4">
-                                    @php
-                                        $roleColors = [
-                                            'administrator' => 'bg-gradient-to-r from-red-500 to-red-600 text-white',
-                                            'admin'         => 'bg-gradient-to-r from-purple-500 to-purple-600 text-white',
-                                            'siswa'         => 'bg-gradient-to-r from-green-500 to-green-600 text-white'
-                                        ];
+                                    </td>
+                                    <td class="p-4">{{ $u->username }}</td>
+                                    <td class="p-4">
+                                        <span class="text-slate-600 font-mono text-xs px-2 py-1 rounded">
+                                            {{ \Illuminate\Support\Str::limit($u->password, 10) }}
+                                        </span>
+                                    </td>
+                                    <td class="p-4">
+                                        @php
+                                            $roleColors = [
+                                                'administrator' => 'bg-gradient-to-r from-red-500 to-red-600 text-white',
+                                                'admin'         => 'bg-gradient-to-r from-purple-500 to-purple-600 text-white',
+                                                'siswa'         => 'bg-gradient-to-r from-green-500 to-green-600 text-white'
+                                            ];
 
-                                        $roleIcons = [
-                                            'administrator' => 'fas fa-crown',
-                                            'admin'         => 'fas fa-shield-alt',
-                                            'siswa'         => 'fas fa-graduation-cap'
-                                        ];
-                                        $roleName = strtolower($u->role->nama_role ?? '');
-                                    @endphp
-                                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium {{ $roleColors[$roleName] ?? 'bg-gray-500 text-white' }}">
-                                        <i class="{{ $roleIcons[$roleName] ?? 'fas fa-user' }}"></i>
-                                        {{ $u->role->nama_role ?? '-' }}
-                                    </span>
-                                </td>
+                                            $roleIcons = [
+                                                'administrator' => 'fas fa-crown',
+                                                'admin'         => 'fas fa-shield-alt',
+                                                'siswa'         => 'fas fa-graduation-cap'
+                                            ];
+                                            $roleName = strtolower($u->role->nama_role ?? '');
+                                        @endphp
+                                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium {{ $roleColors[$roleName] ?? 'bg-gray-500 text-white' }}">
+                                            <i class="{{ $roleIcons[$roleName] ?? 'fas fa-user' }}"></i>
+                                            {{ $u->role->nama_role ?? '-' }}
+                                        </span>
+                                    </td>
 
-                                <td class="p-4 relative overflow-visible">
-                                    <!-- Tombol toggle -->
-                                    <button onclick="toggleDropdown({{ $u->id }})"
-                                        class="p-2 rounded-lg hover:bg-off-white focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all">
-                                        <i class="fas fa-cog text-cool-gray"></i>
-                                    </button>
+                                    <td class="p-4 relative overflow-visible">
+                                        <!-- Tombol toggle -->
+                                        <button onclick="toggleDropdown({{ $u->id }})"
+                                            class="p-2 rounded-lg hover:bg-off-white focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all">
+                                            <i class="fas fa-cog text-cool-gray"></i>
+                                        </button>
 
-                                    <!-- Dropdown -->
-                                    <div id="dropdown-{{ $u->id }}"
-                                        class="hidden absolute right-12 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
+                                        <!-- Dropdown -->
+                                        <div id="dropdown-{{ $u->id }}"
+                                            class="hidden absolute right-12 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
 
-                                        <!-- Detail -->
-                                        <a href="{{ route('admin.user.show', $u->id) }}"
-                                            class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
-                                            <i class="fas fa-eye w-5 h-5"></i>
-                                            <span>Detail</span>
-                                        </a>
+                                            <!-- Detail -->
+                                            <a href="{{ route('admin.user.show', $u->id) }}"
+                                                class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
+                                                <i class="fas fa-eye w-5 h-5"></i>
+                                                <span>Detail</span>
+                                            </a>
 
-                                        <!-- Hapus (jangan tampilkan jika Administrator) -->
-                                        @if($u->role->nama_role !== 'Administrator')
-                                            <!-- Edit -->
-                                            <div class="border-t border-border-gray"></div>
-                                            <button type="button" onclick="showEditUser({{ $u->id }})"
-                                                class="px-5 py-3 hover:bg-green-50 flex items-center gap-3 text-green-600 transition-colors text-base border-none bg-transparent cursor-pointer">
-                                                <i class="fas fa-edit w-5 h-5"></i>
-                                                <span>Edit</span>
+                                            <!-- Hapus (jangan tampilkan jika Administrator) -->
+                                            @if($u->role->nama_role !== 'Administrator')
+                                                <!-- Edit -->
+                                                <div class="border-t border-border-gray"></div>
+                                                <button type="button" onclick="showEditUser({{ $u->id }})"
+                                                    class="px-5 py-3 hover:bg-green-50 flex items-center gap-3 text-green-600 transition-colors text-base border-none bg-transparent cursor-pointer">
+                                                    <i class="fas fa-edit w-5 h-5"></i>
+                                                    <span>Edit</span>
+                                                </button>
+
+                                                <div class="border-t border-border-gray"></div>
+                                                <button type="button"
+                                                    onclick="showDeleteModal({{ $u->id }}, '{{ addslashes($u->name) }}', '{{ route('admin.user.destroy', $u->id) }}')"
+                                                    class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base border-none bg-transparent cursor-pointer">
+                                                    <i class="fas fa-trash-alt w-5 h-5"></i>
+                                                    <span>Hapus</span>
+                                                </button>
+                                            @endif
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center py-10">
+                                        <div class="flex flex-col items-center justify-center space-y-3">
+                                            <i class="fas fa-user-slash text-gray-400 text-4xl"></i>
+                                            <p class="text-gray-500 text-lg font-medium">
+                                                Belum ada user. Tambahkan data
+                                            </p>
+                                            <button onclick="openModalUser()"
+                                                class="px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300 border border-cool-gray hover:bg-cool-gray text-cool-gray hover:text-off-white hover:scale-105 focus:ring-4 focus:ring-cool-gray">
+                                                + Tambah User
                                             </button>
-
-                                            <div class="border-t border-border-gray"></div>
-                                            <button type="button"
-                                                onclick="showDeleteModal({{ $u->id }}, '{{ addslashes($u->name) }}', '{{ route('admin.user.destroy', $u->id) }}')"
-                                                class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base border-none bg-transparent cursor-pointer">
-                                                <i class="fas fa-trash-alt w-5 h-5"></i>
-                                                <span>Hapus</span>
-                                            </button>
-                                        @endif
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforelse
+                            <tr id="noDataRow" class="hidden">
+                                <td colspan="6" class="text-center py-10">
+                                    <div class="flex flex-col items-center justify-center space-y-3">
+                                        <i class="fas fa-search text-gray-400 text-4xl"></i>
+                                        <p class="text-gray-500 text-lg font-medium">
+                                            Tidak ada data yang sesuai dengan pencarian atau filter
+                                        </p>
                                     </div>
                                 </td>
                             </tr>
-                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -197,6 +222,58 @@
 @push('scripts')
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeFilters();
+        });
+
+        // Modal Popup Edit User
+        function showEditUser(id) {
+            fetch(`/admin/users/${id}/edit`)
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById('modalContentEditUser').innerHTML = html;
+                    initEditUserForm();
+                    openModalEditUser();
+            });
+        }
+
+        // jika role siswa akan menampilkan form siswa
+        function initEditUserForm() {
+            const roleSelect = document.querySelector('#modalEditUser #roleSelect');
+            const siswaFields = document.querySelector('#modalEditUser #siswaFields');
+
+            if (!roleSelect || !siswaFields) return;
+
+            function toggleSiswaFields() {
+                const selectedText = roleSelect.options[roleSelect.selectedIndex].text;
+                if (selectedText === 'Siswa') {
+                    siswaFields.classList.remove('hidden');
+                } else {
+                    siswaFields.classList.add('hidden');
+                }
+            }
+
+            // cek awal
+            toggleSiswaFields();
+
+            // kalau dropdown berubah
+            roleSelect.addEventListener('change', toggleSiswaFields);
+        }
+
+        function openModalEditUser() {
+            const modal = document.getElementById('modalEditUser');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeModalEditUser() {
+            const modal = document.getElementById('modalEditUser');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.classList.remove('overflow-hidden');
+        }
+
         // Modal Popup Hapus User
         function showDeleteModal(id, name, action) {
             document.getElementById('deleteModal').classList.remove('hidden');
@@ -219,33 +296,5 @@
                 closeDeleteModal();
             }
         });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            initializeFilters();
-        });
-
-        // Modal Popup Edit User
-        function showEditUser(id) {
-            fetch(`/users/${id}/edit`)
-                .then(res => res.text())
-                .then(html => {
-                    document.getElementById('modalContentEditUser').innerHTML = html;
-                    openModalEditUser();
-            });
-        }
-
-        function openModalEditUser() {
-            const modal = document.getElementById('modalEditUser');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            document.body.classList.add('overflow-hidden');
-        }
-
-        function closeModalEditUser() {
-            const modal = document.getElementById('modalEditUser');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            document.body.classList.remove('overflow-hidden');
-        }
     </script>
 @endpush

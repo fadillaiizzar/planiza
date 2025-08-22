@@ -21,15 +21,15 @@ class UserController extends Controller
         $userCount = User::count();
 
         $administratorCount = User::whereHas('role', function ($query) {
-            $query->where('nama_role', 'administrator');
+            $query->where('nama_role', 'Administrator');
         })->count();
 
         $adminCount = User::whereHas('role', function ($query) {
-            $query->where('nama_role', 'admin');
+            $query->where('nama_role', 'Admin');
         })->count();
 
         $siswaCount = User::whereHas('role', function ($query) {
-            $query->where('nama_role', 'siswa');
+            $query->where('nama_role', 'Siswa');
         })->count();
 
         $roles = Role::all();
@@ -127,24 +127,31 @@ class UserController extends Controller
         ]);
     }
 
-    public function edit(User $user)
+    public function edit($id)
     {
+        $detailUser = User::with('role','siswa')->findOrFail($id);
         $roles = Role::all();
         $kelas = Kelas::all();
         $jurusans = Jurusan::all();
         $rencanas = Rencana::all();
-        $siswa = $user->role->nama_role === 'Siswa' ? $user->siswa : null;
 
-        return view('admin.user.edit', compact('user', 'roles', 'kelas', 'jurusans', 'rencanas', 'siswa'));
+        $siswa = null;
+        if ($detailUser->role && $detailUser->role->nama_role === 'Siswa') {
+            $siswa = $detailUser->siswa;
+        }
+
+        return view('admin.user.edit', compact(
+            'detailUser', 'roles', 'kelas', 'jurusans', 'rencanas', 'siswa'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
+        $detailUser = User::with('role','siswa')->findOrFail($id);
         $role = Role::findOrFail($request->role_id);
 
         $rules = [
             'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+            'username' => 'required|string|max:255|unique:users,username,' . $detailUser->id,
             'role_id' => 'required|exists:roles,id',
         ];
 
@@ -157,15 +164,15 @@ class UserController extends Controller
 
         $validated = $request->validate($rules);
 
-        $user->update([
+        $detailUser->update([
             'name' => $validated['name'],
             'username' => $validated['username'],
             'role_id' => $validated['role_id'],
         ]);
 
         if ($role->nama_role === 'Siswa') {
-            if ($user->siswa) {
-                $user->siswa->update([
+            if ($detailUser->siswa) {
+                $detailUser->siswa->update([
                     'kelas_id' => $validated['kelas_id'],
                     'jurusan_id' => $validated['jurusan_id'],
                     'rencana_id' => $validated['rencana_id'] ?? null,
@@ -173,7 +180,7 @@ class UserController extends Controller
                 ]);
             } else {
                 Siswa::create([
-                    'user_id' => $user->id,
+                    'user_id' => $detailUser->id,
                     'kelas_id' => $validated['kelas_id'],
                     'jurusan_id' => $validated['jurusan_id'],
                     'rencana_id' => $validated['rencana_id'] ?? null,
@@ -181,7 +188,7 @@ class UserController extends Controller
                 ]);
             }
         } else {
-            if ($user->siswa) $user->siswa->delete();
+            if ($detailUser->siswa) $detailUser->siswa->delete();
         }
 
         return redirect()->route('admin.user.index')->with('success', 'user berhasil diperbarui');
