@@ -17,7 +17,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with('role')->oldest()->paginate(10);
+        $users = User::with(['role', 'siswa.kelas', 'siswa.jurusan', 'siswa.rencana'])->oldest()->paginate(10);
         $userCount = User::count();
 
         $administratorCount = User::whereHas('role', function ($query) {
@@ -33,19 +33,23 @@ class UserController extends Controller
         })->count();
 
         $roles = Role::all();
+        $roleCounts = $roles->mapWithKeys(function($role) {
+            return [$role->nama_role => User::where('role_id', $role->id)->count()];
+        })->toArray();
+
         $kelas = Kelas::all();
         $jurusans = Jurusan::all();
         $rencanas = Rencana::all();
 
         return view('admin.pages.user', [
             'user' => Auth::user(),
+            'users' => $users,
             'userCount' => $userCount,
             'administratorCount' => $administratorCount,
             'adminCount' => $adminCount,
             'siswaCount' => $siswaCount,
-            'aktivitas' => User::latest()->get(),
-            'users' => $users,
             'roles' => $roles,
+            'roleCounts' => $roleCounts,
             'kelas' => $kelas,
             'jurusans' => $jurusans,
             'rencanas' => $rencanas,

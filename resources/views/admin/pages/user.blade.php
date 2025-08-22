@@ -25,8 +25,21 @@
                     ['label' => 'Siswa', 'value' => 'siswa'],
                 ],
                 'searchPlaceholder' => 'Cari berdasarkan nama atau username',
+                'defaultFilterText' => 'Semua Role',
                 'itemCount' => $users->count(),
             ])
+
+            <!-- Statistik -->
+            <section class="bg-off-white rounded-2xl shadow-lg p-6">
+                <x-h3>Statistik User</x-h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    @include('components.admin.materi.materi-card', [
+                        'icon' => 'fas fa-user-shield',
+                        'label' => 'Role',
+                        'items' => $roleCounts
+                    ])
+                </div>
+            </section>
 
             <!-- Enhanced Users Table -->
             <section class="bg-white rounded-xl shadow p-6 mt-6">
