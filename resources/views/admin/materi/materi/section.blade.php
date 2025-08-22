@@ -132,9 +132,9 @@
                                 <div class="flex flex-col items-center justify-center space-y-3">
                                     <i class="fas fa-book-open text-gray-400 text-4xl"></i>
                                     <p class="text-gray-500 text-lg font-medium">
-                                        Belum ada materi. Tambahkan data 
+                                        Belum ada materi. Tambahkan data
                                     </p>
-                                    <button onclick="openModalMateri()"
+                                    <button onclick="openModal()"
                                         class="px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300 border border-cool-gray hover:bg-cool-gray text-cool-gray hover:text-off-white hover:scale-105 focus:ring-4 focus:ring-cool-gray">
                                         + Tambah Materi
                                     </button>
@@ -142,6 +142,16 @@
                             </td>
                         </tr>
                     @endforelse
+                    <tr id="noDataRow" class="hidden">
+                        <td colspan="6" class="text-center py-10">
+                            <div class="flex flex-col items-center justify-center space-y-3">
+                                <i class="fas fa-search text-gray-400 text-4xl"></i>
+                                <p class="text-gray-500 text-lg font-medium">
+                                    Tidak ada data yang sesuai dengan pencarian atau filter
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -208,7 +218,6 @@
         document.getElementById('deleteModal').classList.add('hidden');
     }
 
-    // Klik di luar modal tutup modal
     window.addEventListener('click', function(e) {
         const modal = document.getElementById('deleteModal');
         if (!modal.classList.contains('hidden') && e.target === modal) {

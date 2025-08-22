@@ -127,7 +127,7 @@
         } else if (document.querySelectorAll('.materi-row').length > 0) {
             rows = document.querySelectorAll('.materi-row');
         } else {
-            return; // Tidak ada data untuk difilter
+            return;
         }
 
         function filterItems() {
@@ -175,12 +175,21 @@
             });
 
             resultCount.textContent = visibleCount;
+
+            const noDataRow = document.getElementById('noDataRow');
+            if (noDataRow) {
+                if (visibleCount === 0) {
+                    noDataRow.classList.remove('hidden');
+                } else {
+                    noDataRow.classList.add('hidden');
+                }
+            }
         }
 
         searchInput.addEventListener('input', filterItems);
         filterSelect.addEventListener('change', filterItems);
     }
-    
+
     document.addEventListener('DOMContentLoaded', initializeFilters);
 
     function openModal() {
