@@ -30,7 +30,7 @@
 
             <!-- Enhanced Users Table -->
             <section class="bg-white rounded-xl shadow p-6 mt-6">
-                <h3 class="text-xl font-bold mb-6 text-slate-navy">Daftar User</h3>
+                <x-h3>Daftar User</x-h3>
                 <div class="overflow-x-auto scrollbar-none">
                     <table class="w-full text-left text-sm table-auto">
                         <thead class="bg-off-white border-b border-border-gray">
