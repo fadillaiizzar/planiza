@@ -11,25 +11,19 @@
 
     <!-- Statistik -->
     <section class="bg-off-white rounded-2xl shadow-lg p-6">
-        <h3 class="text-xl font-bold text-slate-navy mb-6">{{ $statistikTitle }}</h3>
+        <x-h3>{{ $statistikTitle }}</x-h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-white rounded-xl border border-border-gray shadow-sm p-5 hover:shadow-md transition-shadow duration-300">
-                <h4 class="text-lg font-semibold text-slate-navy mb-4">{{ $iconIndustri ?? '💼' }} {{ $labelIndustri }}</h4>
-                <ul class="space-y-2 text-cool-gray">
-                    @foreach(($allIndustri->groupBy('industri') ?? []) as $profesi => $industri)
-                        <li class="flex justify-between items-center border-b border-border-gray pb-1 last:border-none last:pb-0">
-                            <span>{{ $profesi ?: 'Tidak ada profesi' }}</span>
-                            <strong class="text-slate-navy">{{ $industri->count() }}</strong>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
+            <x-admin.eksplorasi_kerja.stat-card
+                icon="fas fa-industry"
+                :label="$labelIndustri"
+                :items="$allIndustri->groupBy('industri')"
+            />
         </div>
     </section>
 
     <!-- Daftar Industri -->
     <section class="bg-white rounded-xl shadow p-6 mt-6">
-        <h3 class="text-xl font-bold mb-6 text-slate-navy">{{ $tableTitle }}</h3>
+        <x-h3>{{ $tableTitle }}</x-h3>
         <div class="overflow-x-auto scrollbar-none">
             <table class="w-full text-left text-sm table-auto">
                 <thead class="bg-off-white border-b border-border-gray">
