@@ -11,53 +11,31 @@
 
     <!-- Statistik -->
     <section class="bg-off-white rounded-2xl shadow-lg p-6">
-        <h3 class="text-xl font-bold text-slate-navy mb-6">{{ $statistikTitle }}</h3>
+        <x-h3>{{ $statistikTitle }}</x-h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            @include('components.admin.materi.materi-card', [
+                'icon' => 'fas fa-user-graduate',
+                'label' => $labelKelas,
+                'items' => $materiPerKelas ?? []
+            ])
 
-            <!-- Item per Kelas -->
-            <div class="bg-white rounded-xl border border-border-gray shadow-sm p-5 hover:shadow-md transition-shadow duration-300">
-                <h4 class="text-lg font-semibold text-slate-navy mb-4">{{ $iconKelas ?? '📚' }} {{ $labelKelas }}</h4>
-                <ul class="space-y-2 text-cool-gray">
-                    @foreach(($materiPerKelas ?? []) as $kelas => $count)
-                        <li class="flex justify-between items-center border-b border-border-gray pb-1 last:border-none last:pb-0">
-                            <span>{{ $kelas }}</span>
-                            <strong class="text-slate-navy">{{ $count }}</strong>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
+            @include('components.admin.materi.materi-card', [
+                'icon' => 'fas fa-school',
+                'label' => $labelJurusan,
+                'items' => $materiPerJurusan ?? []
+            ])
 
-            <!-- Item per Jurusan -->
-            <div class="bg-white rounded-xl border border-border-gray shadow-sm p-5 hover:shadow-md transition-shadow duration-300">
-                <h4 class="text-lg font-semibold text-slate-navy mb-4">{{ $iconJurusan ?? '🏫' }} {{ $labelJurusan }}</h4>
-                <ul class="space-y-2 text-cool-gray">
-                    @foreach(($materiPerJurusan ?? []) as $jurusan => $count)
-                        <li class="flex justify-between items-center border-b border-border-gray pb-1 last:border-none last:pb-0">
-                            <span>{{ $jurusan }}</span>
-                            <strong class="text-slate-navy">{{ $count }}</strong>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-
-            <!-- Item per Rencana -->
-            <div class="bg-white rounded-xl border border-border-gray shadow-sm p-5 hover:shadow-md transition-shadow duration-300">
-                <h4 class="text-lg font-semibold text-slate-navy mb-4">{{ $iconRencana ?? '🗂' }} {{ $labelRencana }}</h4>
-                <ul class="space-y-2 text-cool-gray">
-                    @foreach(($materiPerRencana ?? []) as $rencana => $count)
-                        <li class="flex justify-between items-center border-b border-border-gray pb-1 last:border-none last:pb-0">
-                            <span>{{ $rencana }}</span>
-                            <strong class="text-slate-navy">{{ $count }}</strong>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
+            @include('components.admin.materi.materi-card', [
+                'icon' => 'fas fa-folder-open',
+                'label' => $labelRencana,
+                'items' => $materiPerRencana ?? []
+            ])
         </div>
     </section>
 
     <!-- Daftar Materi -->
     <section class="bg-white rounded-xl shadow p-6 mt-6">
-        <h3 class="text-xl font-bold mb-6 text-slate-navy">{{ $tableTitle }}</h3>
+        <x-h3>{{ $tableTitle }}</x-h3>
         <div class="overflow-x-auto scrollbar-none">
             <table class="w-full text-left text-sm table-auto">
                 <thead class="bg-off-white border-b border-border-gray">
