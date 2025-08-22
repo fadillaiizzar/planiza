@@ -127,22 +127,16 @@
                             </td>
                         </tr>
                     @empty
-                        <tr>
-                            <td colspan="7" class="text-center py-10">
-                                <div class="flex flex-col items-center justify-center space-y-3">
-                                    <i class="fas fa-book-open text-gray-400 text-4xl"></i>
-                                    <p class="text-gray-500 text-lg font-medium">
-                                        Belum ada materi. Tambahkan data
-                                    </p>
-                                    <button onclick="openModal()"
-                                        class="px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300 border border-cool-gray hover:bg-cool-gray text-cool-gray hover:text-off-white hover:scale-105 focus:ring-4 focus:ring-cool-gray">
-                                        + Tambah Materi
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
+                        <x-empty-state
+                            colspan="7"
+                            icon="fas fa-book-open"
+                            message="Belum ada materi. Tambahkan data"
+                            button="true"
+                            buttonAction="openModal()"
+                            buttonText="+ Tambah Materi"
+                        />
                     @endforelse
-                    
+
                     <x-no-data-row />
                 </tbody>
             </table>

@@ -88,25 +88,16 @@
                             </td>
                         </tr>
                     @empty
-                        <tr>
-                            <td colspan="8" class="text-center py-10">
-                                <div class="flex flex-col items-center justify-center space-y-3">
-                                    <i class="fas fa-user-tie text-gray-400 text-4xl"></i>
-                                    <p class="text-gray-500 text-lg font-medium">
-                                       Belum ada profesi kerja. Tambahkan data
-                                    </p>
-                                    <button onclick="openModal()"
-                                        class="px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300
-                                            border border-cool-gray text-cool-gray
-                                            hover:bg-cool-gray hover:text-off-white hover:scale-105
-                                            focus:ring-4 focus:ring-cool-gray">
-                                        + Tambah Profesi
-                                </button>
-                                </div>
-                            </td>
-                        </tr>
+                        <x-empty-state
+                            colspan="8"
+                            icon="fas fa-user-tie"
+                            message="Belum ada profesi kerja. Tambahkan data"
+                            button="true"
+                            buttonAction="openModal()"
+                            buttonText="+ Tambah Profesi"
+                        />
                     @endforelse
-                    
+
                     <x-no-data-row />
                 </tbody>
             </table>

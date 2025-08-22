@@ -126,22 +126,16 @@
                                     </td>
                                 </tr>
                             @empty
-                                <tr>
-                                    <td colspan="5" class="text-center py-10">
-                                        <div class="flex flex-col items-center justify-center space-y-3">
-                                            <i class="fas fa-user-slash text-gray-400 text-4xl"></i>
-                                            <p class="text-gray-500 text-lg font-medium">
-                                                Belum ada user. Tambahkan data
-                                            </p>
-                                            <button onclick="openModalUser()"
-                                                class="px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300 border border-cool-gray hover:bg-cool-gray text-cool-gray hover:text-off-white hover:scale-105 focus:ring-4 focus:ring-cool-gray">
-                                                + Tambah User
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <x-empty-state
+                                    colspan="5"
+                                    icon="fas fa-user-slash"
+                                    message="Belum ada user. Tambahkan data"
+                                    button="true"
+                                    buttonAction="openModalUser()"
+                                    buttonText="+ Tambah User"
+                                />
                             @endforelse
-                            
+
                             <x-no-data-row />
                         </tbody>
                     </table>
