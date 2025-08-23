@@ -214,8 +214,6 @@
             </div>
         </div>
     </div>
-
-
 @endsection
 
 @push('scripts')
@@ -240,23 +238,29 @@
         function initEditUserForm() {
             const roleSelect = document.querySelector('#modalEditUser #roleSelect');
             const siswaFields = document.querySelector('#modalEditUser #siswaFields');
+            const toggleResetBtn = document.querySelector('#modalEditUser #toggleResetBtn');
+            const resetBox = document.querySelector('#modalEditUser #resetPasswordBox');
 
-            if (!roleSelect || !siswaFields) return;
-
-            function toggleSiswaFields() {
-                const selectedText = roleSelect.options[roleSelect.selectedIndex].text;
-                if (selectedText === 'Siswa') {
-                    siswaFields.classList.remove('hidden');
-                } else {
-                    siswaFields.classList.add('hidden');
+            // --- bagian siswa ---
+            if (roleSelect && siswaFields) {
+                function toggleSiswaFields() {
+                    const selectedText = roleSelect.options[roleSelect.selectedIndex].text;
+                    if (selectedText === 'Siswa') {
+                        siswaFields.classList.remove('hidden');
+                    } else {
+                        siswaFields.classList.add('hidden');
+                    }
                 }
+                toggleSiswaFields();
+                roleSelect.addEventListener('change', toggleSiswaFields);
             }
 
-            // cek awal
-            toggleSiswaFields();
-
-            // kalau dropdown berubah
-            roleSelect.addEventListener('change', toggleSiswaFields);
+            // --- bagian reset password ---
+            if (toggleResetBtn && resetBox) {
+                toggleResetBtn.addEventListener('click', () => {
+                    resetBox.classList.toggle('hidden');
+                });
+            }
         }
 
         function openModalEditUser() {

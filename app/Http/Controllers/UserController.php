@@ -212,8 +212,10 @@ class UserController extends Controller
         return redirect()->route('admin.user.index')->with('success', 'User berhasil dihapus');
     }
 
-    public function resetPassword(Request $request, User $user)
+    public function resetPassword(Request $request, $id)
     {
+        $detailUser = User::findOrFail($id);
+
         if ($request->reset_type === 'default') {
             $newPassword = '12345678';
         } else {
@@ -223,10 +225,10 @@ class UserController extends Controller
             $newPassword = $validated['password'];
         }
 
-        $user->update([
+        $detailUser->update([
             'password' => Hash::make($newPassword),
         ]);
 
-        return redirect()->route('admin.user.edit',$user->id)->with('success', 'password berhasil direset');
+        return redirect()->route('admin.user.index')->with('success', 'password berhasil direset');
     }
 }

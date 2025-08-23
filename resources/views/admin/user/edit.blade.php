@@ -56,6 +56,24 @@
                     class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm text-slate-900 bg-white" required>
             </div>
 
+            <!-- Password (dummy) -->
+            <div class="space-y-1">
+                <label class="block text-sm font-semibold text-slate-700">Password</label>
+                <input type="password" value="********" disabled
+                    class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm text-slate-900 bg-slate-100 cursor-not-allowed">
+                <button type="button" id="toggleResetBtn"
+                    class="text-xs text-blue-600 hover:underline mt-1">
+                    Reset password
+                </button>
+            </div>
+
+            <!-- Reset Password Section (hidden default) -->
+            <div id="resetPasswordBox" class="hidden">
+                @include('admin.user.reset-password')
+            </div>
+
+            <div class="h-3"></div>
+
             <!-- Role -->
             <div class="space-y-1">
                 <label for="role_id" class="block text-sm font-semibold text-slate-700">Role</label>
@@ -71,7 +89,7 @@
             </div>
 
             <!-- Fields untuk Siswa -->
-            <div id="siswaFields" class="{{ (isset($detailUser) && $detailUser->role->nama_role === 'Siswa') ? '' : 'hidden' }} space-y-4">
+            <div id="siswaFields" class="{{ (isset($detailUser) && $detailUser->role->nama_role === 'Siswa') ? '' : 'hidden' }} space-y-4 mt-4">
                 <div class="space-y-1">
                     <label for="kelas_id" class="block text-sm font-semibold text-slate-700">Kelas</label>
                     <select name="kelas_id" id="kelas_id"
@@ -118,6 +136,9 @@
                         class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm text-slate-900 bg-white">
                 </div>
             </div>
+
+            <!-- Reset Password Section -->
+            {{-- @include('admin.user.reset-password') --}}
 
             <!-- Action Buttons -->
             <div class="flex items-center justify-center pt-4 gap-5">

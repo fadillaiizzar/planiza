@@ -373,57 +373,6 @@
             </form>
         </div>
     </main>
-
-    {{-- Modal Reset Password --}}
-    <div id="resetPasswordModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div class="bg-white p-8 rounded-3xl shadow-2xl w-96 border border-slate-100">
-            <div class="flex items-center mb-6">
-                <div class="w-10 h-10 bg-yellow-100 rounded-2xl flex items-center justify-center mr-3">
-                    <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-bold text-slate-800">Reset Password</h3>
-            </div>
-
-            {{-- Opsi Reset Password --}}
-            <div class="mb-6">
-                <label class="block text-sm font-semibold text-slate-700 mb-3">Pilih Metode Reset</label>
-                <select id="resetType" class="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-slate-500 focus:border-slate-500" onchange="toggleCustomPassword()">
-                    <option value="default">Default Password (12345678)</option>
-                    <option value="custom">Custom Password</option>
-                </select>
-            </div>
-
-            <form action="{{ route('admin.users.reset-password', $user->id) }}" method="POST">
-                @csrf
-
-                {{-- Field Custom Password --}}
-                <div id="customPasswordFields" class="hidden space-y-4 mb-6">
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Password Baru</label>
-                        <input type="password" name="password" class="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-slate-500 focus:border-slate-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Konfirmasi Password</label>
-                        <input type="password" name="password_confirmation" class="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-slate-500 focus:border-slate-500">
-                    </div>
-                </div>
-
-                {{-- Hidden input untuk kirim tipe reset --}}
-                <input type="hidden" name="reset_type" id="reset_type_input" value="default">
-
-                <div class="flex justify-end gap-3">
-                    <button type="button" onclick="document.getElementById('resetPasswordModal').classList.add('hidden')" class="px-6 py-3 text-slate-600 hover:text-slate-800 font-medium transition-colors">
-                        Batal
-                    </button>
-                    <button type="submit" class="px-6 py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg">
-                        Simpan
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
 @endsection
 
 @push('scripts')
