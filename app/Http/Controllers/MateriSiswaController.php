@@ -30,7 +30,11 @@ class MateriSiswaController extends Controller
     public function show($id)
     {
         $materi = Materi::with('topikMateri')->findOrFail($id);
-        return view('siswa.materi.show', compact('materi'));
+
+        $files = json_decode($materi->file_materi, true) ?? [];
+        $filePath = count($files) > 0 ? asset('storage/' . $files[0]) : null;
+
+        return view('siswa.materi.show', compact('materi', 'filePath'));
     }
 
 }

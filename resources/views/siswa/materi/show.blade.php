@@ -8,7 +8,7 @@
     {{-- Breadcrumb & Back --}}
     <div class="mb-6 pt-14">
         <div class="flex items-center space-x-3 mb-2">
-            <a href="{{ route('siswa.materi') }}" class="text-slate-600 hover:underline text-lg">&lt;</a>
+            <a href="{{ route('siswa.materi.index') }}" class="text-slate-600 hover:underline text-lg">&lt;</a>
             <h1 class="text-2xl font-bold text-slate-800">Detail Materi</h1>
         </div>
         <p class="text-slate-600">
@@ -34,16 +34,18 @@
 
     {{-- Info Topik & Materi --}}
     <div class="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
-        {{-- Topik --}}
-        <div class="flex flex-col items-center bg-off-white border border-border-gray rounded-lg p-4 shadow-sm">
-            <i class="fas fa-book-open text-2xl text-slate-navy mb-1"></i>
-            <span class="text-slate-navy font-semibold">{{ $materi->topikMateri->judul_topik ?? '-' }}</span>
+        <div class="flex flex-col items-center justify-center bg-off-white border border-border-gray rounded-lg px-4 py-4 md:py-6 shadow-sm">
+            <div class="flex justify-center gap-3">
+                <i class="fas fa-book-open text-2xl text-slate-navy mb-1"></i>
+                <p class="text-slate-navy font-semibold">Topik Materi : <span class="text-slate-navy font-semibold">{{ $materi->topikMateri->judul_topik ?? '-' }}</span></p>
+            </div>
         </div>
 
-        {{-- Materi --}}
-        <div class="flex flex-col items-center bg-off-white border border-border-gray rounded-lg p-4 shadow-sm">
-            <i class="fas fa-file-alt text-2xl text-slate-navy mb-1"></i>
-            <span class="text-slate-navy font-semibold">{{ $materi->nama_materi ?? '-' }}</span>
+        <div class="flex flex-col items-center justify-center bg-off-white border border-border-gray rounded-lg px-4 py-4 md:py-6 shadow-sm">
+            <div class="flex justify-center gap-3">
+                <i class="fas fa-file-alt text-2xl text-slate-navy mb-1"></i>
+                <p class="text-slate-navy font-semibold">Materi : <span class="text-slate-navy font-semibold">{{ $materi->nama_materi ?? '-' }}</span></p>
+            </div>
         </div>
     </div>
 
@@ -52,32 +54,46 @@
         <h2 class="text-lg font-semibold text-slate-navy mb-4">Preview Materi</h2>
 
         @php
-            $filePath = $materi->file_materi ? asset('storage/' . $materi->file_materi) : null;
+            $files = $materi->file_materi ? json_decode($materi->file_materi, true) : [];
         @endphp
 
-        @if($filePath)
-            <div class="mb-4">
-                @if($materi->tipe_file === 'pdf')
-                    <embed src="{{ $filePath }}" type="application/pdf" class="w-full h-96 rounded-lg border border-border-gray shadow-inner">
-                @elseif($materi->tipe_file === 'img')
-                    <img src="{{ $filePath }}" class="w-full rounded-lg border border-border-gray shadow-inner">
-                @elseif($materi->tipe_file === 'video')
-                    <video controls class="w-full rounded-lg border border-border-gray shadow-inner">
-                        <source src="{{ $filePath }}" type="video/mp4">
-                    </video>
-                @endif
-            </div>
+        @if(count($files) > 0)
+            @foreach($files as $file)
+                @php $filePath = asset('storage/' . $file); @endphp
 
-            <div class="flex gap-3">
-                <a href="{{ $filePath }}" download
-                   class="px-4 py-2 bg-slate-navy text-off-white rounded-lg shadow hover:bg-cool-gray transition">
-                    Unduh
-                </a>
-                <a href="{{ $filePath }}" target="_blank"
-                   class="px-4 py-2 bg-off-white border border-slate-navy text-slate-navy rounded-lg shadow hover:bg-slate-navy hover:text-off-white transition">
-                    Lihat File
-                </a>
-            </div>
+                <div class="mb-6 text-center">
+                    @if($materi->tipe_file === 'pdf')
+                        <div class="mx-auto max-w-2xl h-[400px] rounded-xl border border-slate-300 bg-white shadow-md overflow-hidden">
+                            <embed src="{{ $filePath }}" type="application/pdf" class="w-full h-full">
+                        </div>
+                    @elseif($materi->tipe_file === 'img')
+                        <div class="mx-auto max-w-2xl rounded-xl border border-slate-300 bg-white shadow-md overflow-hidden">
+                            <img src="{{ $filePath }}"
+                                class="w-full object-contain max-h-[400px] mx-auto">
+                        </div>
+                    @elseif($materi->tipe_file === 'video')
+                        <div class="mx-auto max-w-2xl rounded-xl border border-slate-300 bg-black shadow-md overflow-hidden">
+                            <video controls class="w-full max-h-[400px] mx-auto">
+                                <source src="{{ $filePath }}" type="video/mp4">
+                            </video>
+                        </div>
+                    @endif
+
+                    {{-- Tombol Aksi --}}
+                    <div class="flex gap-4 mt-5 justify-center">
+                        <a href="{{ $filePath }}" download
+                        class="px-6 py-2 bg-slate-navy text-white rounded-lg shadow hover:bg-cool-gray transition">
+                            Unduh
+                        </a>
+                        <a href="{{ $filePath }}" target="_blank"
+                        class="px-6 py-2 bg-white border border-slate-navy text-slate-navy rounded-lg shadow hover:bg-slate-navy hover:text-white transition">
+                            Lihat File
+                        </a>
+                    </div>
+                </div>
+
+
+            @endforeach
         @else
             <p class="text-red-500">File materi tidak tersedia.</p>
         @endif
