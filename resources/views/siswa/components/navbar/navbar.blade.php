@@ -11,8 +11,8 @@
 
             <!-- Navigation Links (desktop) -->
             <div id="navLinksDashboard" class="hidden md:flex space-x-6 font-medium">
-                <a href="{{ route('siswa.materi') }}" class="text-cool-gray hover:text-slate-navy transition">Materi</a>
-                <a href="#eksplorasi" class="text-cool-gray hover:text-slate-navy transition">Eksplorasi</a>
+                <a href="{{ route('siswa.materi.index') }}" class="text-cool-gray hover:text-slate-navy transition">Materi</a>
+                <a href="{{ route('siswa.eksplorasi-kerja.index') }}" class="text-cool-gray hover:text-slate-navy transition">Eksplorasi</a>
                 <a href="#kenali-karier" class="text-cool-gray hover:text-slate-navy transition">Kenali Karir</a>
                 <a href="#bincang-karier" class="text-cool-gray hover:text-slate-navy transition">Bincang Karir</a>
             </div>
@@ -57,8 +57,8 @@
 
     <!-- Mobile Menu Dropdown -->
     <div id="mobileMenuDashboard" class="md:hidden hidden px-6 pb-4">
-        <a href="{{ route('siswa.materi') }}" class="block py-2 text-cool-gray hover:text-slate-navy">Materi</a>
-        <a href="#eksplorasi" class="block py-2 text-cool-gray hover:text-slate-navy">Eksplorasi</a>
+        <a href="{{ route('siswa.materi.index') }}" class="block py-2 text-cool-gray hover:text-slate-navy">Materi</a>
+        <a href="{{ route('siswa.eksplorasi-kerja.index') }}" class="block py-2 text-cool-gray hover:text-slate-navy">Eksplorasi</a>
         <a href="#kenali-karier" class="block py-2 text-cool-gray hover:text-slate-navy">Kenali Karir</a>
         <a href="#bincang-karier" class="block py-2 text-cool-gray hover:text-slate-navy">Bincang Karir</a>
     </div>

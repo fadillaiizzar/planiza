@@ -1,8 +1,5 @@
 <?php
 
-use App\Models\Materi;
-use App\Models\ProfesiKerja;
-use App\Models\KontribusiSdgs;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\AuthController;
@@ -16,6 +13,8 @@ use App\Http\Controllers\TopikMateriController;
 use App\Http\Controllers\ProfesiKerjaController;
 use App\Http\Controllers\KontribusiSdgsController;
 use App\Http\Controllers\IndustriProfesiController;
+
+use App\Http\Controllers\Siswa\EksplorasiKerjaSiswaController;
 
 Route::get('/', function () {
     return view('beranda');
@@ -53,6 +52,10 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->gr
     Route::get('/dashboard/', [SiswaController::class, 'index'])->name('siswa.dashboard');
     Route::post('/simpan-rencana', [SiswaController::class, 'simpanRencana'])->name('siswa.simpan.rencana');
 
-    Route::get('/materi', [MateriSiswaController::class, 'index'])->name('siswa.materi');
-    Route::get('/materi/{id}', [MateriSiswaController::class, 'show'])->name('siswa.materi.show');
+    Route::resource('materi', MateriSiswaController::class)->names('siswa.materi');
+
+    // Route::get('/materi', [MateriSiswaController::class, 'index'])->name('siswa.materi');
+    // Route::get('/materi/{id}', [MateriSiswaController::class, 'show'])->name('siswa.materi.show');
+
+    Route::resource('eksplorasi-kerja', EksplorasiKerjaSiswaController::class)->names('siswa.eksplorasi-kerja');
 });
