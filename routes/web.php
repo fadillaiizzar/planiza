@@ -54,8 +54,5 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->gr
 
     Route::resource('materi', MateriSiswaController::class)->names('siswa.materi');
 
-    // Route::get('/materi', [MateriSiswaController::class, 'index'])->name('siswa.materi');
-    // Route::get('/materi/{id}', [MateriSiswaController::class, 'show'])->name('siswa.materi.show');
-
     Route::resource('eksplorasi-kerja', EksplorasiKerjaSiswaController::class)->names('siswa.eksplorasi-kerja');
 });
