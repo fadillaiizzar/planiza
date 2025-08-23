@@ -4,17 +4,11 @@
 
 @section('content')
 <div class="px-4 py-8 sm:px-8">
-
-    {{-- Breadcrumb & Back --}}
-    <div class="mb-6 pt-14">
-        <div class="flex items-center space-x-3 mb-2">
-            <a href="{{ route('siswa.materi.index') }}" class="text-slate-600 hover:underline text-lg">&lt;</a>
-            <h1 class="text-2xl font-bold text-slate-800">Detail Materi</h1>
-        </div>
-        <p class="text-slate-600">
-            Semua materi belajar yang kamu butuhkan, tersusun rapi berdasarkan kelas, jurusan, dan rencana
-        </p>
-    </div>
+    <x-siswa.section-header
+        title="Detail Materi"
+        subtitle="Semua materi belajar yang kamu butuhkan, tersusun rapi berdasarkan kelas, jurusan, dan rencana"
+        back-route="siswa.materi.index"
+    />
 
     {{-- Info Siswa --}}
     <div class="flex flex-wrap items-center gap-4 text-sm text-slate-700 mb-6">

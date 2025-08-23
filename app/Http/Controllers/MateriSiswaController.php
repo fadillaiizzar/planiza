@@ -34,7 +34,9 @@ class MateriSiswaController extends Controller
         $files = json_decode($materi->file_materi, true) ?? [];
         $filePath = count($files) > 0 ? asset('storage/' . $files[0]) : null;
 
-        return view('siswa.materi.show', compact('materi', 'filePath'));
+        $siswa = $user->siswa ?? null;
+
+        return view('siswa.materi.show', compact('materi', 'filePath', 'siswa'));
     }
 
 }
