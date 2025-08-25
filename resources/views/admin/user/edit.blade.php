@@ -91,9 +91,11 @@
                     class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm text-slate-900 bg-white" required>
                     <option value="">Pilih Role</option>
                     @foreach($roles as $role)
-                        <option value="{{ $role->id }}" {{ old('role_id', $detailUser->role_id) == $role->id ? 'selected' : '' }}>
-                            {{ $role->nama_role }}
-                        </option>
+                        @if ($role->nama_role !== 'Administrator')
+                            <option value="{{ $role->id }}" {{ old('role_id', $detailUser->role_id) == $role->id ? 'selected' : '' }}>
+                                {{ $role->nama_role }}
+                            </option>
+                        @endif
                     @endforeach
                 </select>
             </div>
