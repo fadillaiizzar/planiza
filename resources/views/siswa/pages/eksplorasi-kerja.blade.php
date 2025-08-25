@@ -41,7 +41,7 @@
                         {{-- Gaji dan Button --}}
                         <div class="flex gap-3 justify-start w-full">
                             <p class="flex-1 text-sm text-center border border-border-gray px-4 py-2 rounded-lg transition">
-                                Rp{{ number_format($profesi->gaji, 0, ',', '.') }}
+                                <i class="fas fa-money-bill-wave"></i> : Rp{{ number_format($profesi->gaji, 0, ',', '.') }}
                             </p>
 
                             <a href="{{ route('siswa.eksplorasi-kerja.show', $profesi->id) }}"
@@ -52,7 +52,10 @@
                     </div>
                 </div>
             @empty
-                <p class="col-span-full text-center text-gray-500">Belum ada profesi kerja tersedia.</p>
+                <x-siswa.empty-state
+                    title="Belum Ada Profesi Kerja Tersedia"
+                    message="Tenang aja, profesi kerja akan segera ditambahkan. Sementara itu, kamu bisa eksplorasi bagian lain dulu"
+                />
             @endforelse
         </div>
     </div>

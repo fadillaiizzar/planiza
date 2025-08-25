@@ -35,7 +35,7 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
     Route::resource('users', UserController::class)->names('admin.user');
-    Route::post('/users/{user}/reset-password', [UserController::class, 'resetPassword'])->name('admin.user.reset-password');
+    // Route::post('/users/{user}/reset-password', [UserController::class, 'resetPassword'])->name('admin.user.reset-password');
 
     Route::resource('topik-materi', TopikMateriController::class)->names('admin.topik.materi');
 

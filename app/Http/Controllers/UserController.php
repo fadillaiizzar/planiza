@@ -159,6 +159,10 @@ class UserController extends Controller
             'role_id' => 'required|exists:roles,id',
         ];
 
+        if ($request->filled('password')) {
+            $rules['password'] = 'confirmed|min:6';
+        }
+
         if ($role->nama_role === 'Siswa') {
             $rules['kelas_id'] = 'required|exists:kelas,id';
             $rules['jurusan_id'] = 'required|exists:jurusans,id';
@@ -173,6 +177,12 @@ class UserController extends Controller
             'username' => $validated['username'],
             'role_id' => $validated['role_id'],
         ]);
+
+        if ($request->filled('password')) {
+            $detailUser->update([
+                'password' => Hash::make($request->password),
+            ]);
+        }
 
         if ($role->nama_role === 'Siswa') {
             if ($detailUser->siswa) {
@@ -210,25 +220,5 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('admin.user.index')->with('success', 'User berhasil dihapus');
-    }
-
-    public function resetPassword(Request $request, $id)
-    {
-        $detailUser = User::findOrFail($id);
-
-        if ($request->reset_type === 'default') {
-            $newPassword = '12345678';
-        } else {
-            $validated = $request->validate([
-                'password' => 'required|confirmed|min:6',
-            ]);
-            $newPassword = $validated['password'];
-        }
-
-        $detailUser->update([
-            'password' => Hash::make($newPassword),
-        ]);
-
-        return redirect()->route('admin.user.index')->with('success', 'password berhasil direset');
     }
 }

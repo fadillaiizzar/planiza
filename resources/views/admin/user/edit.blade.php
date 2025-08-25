@@ -68,11 +68,21 @@
             </div>
 
             <!-- Reset Password Section (hidden default) -->
-            <div id="resetPasswordBox" class="hidden">
-                @include('admin.user.reset-password')
-            </div>
+            <div id="resetPasswordBox" class="hidden space-y-3 mt-3">
+                <div class="space-y-1">
+                    <label for="password" class="block text-sm font-semibold text-slate-700">Password Baru</label>
+                    <input type="password" name="password" id="password"
+                        placeholder="Masukkan password baru"
+                        class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm text-slate-900 bg-white">
+                </div>
 
-            <div class="h-3"></div>
+                <div class="space-y-1">
+                    <label for="password_confirmation" class="block text-sm font-semibold text-slate-700">Konfirmasi Password</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation"
+                        placeholder="Konfirmasi password baru"
+                        class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm text-slate-900 bg-white">
+                </div>
+            </div>
 
             <!-- Role -->
             <div class="space-y-1">
@@ -136,9 +146,6 @@
                         class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm text-slate-900 bg-white">
                 </div>
             </div>
-
-            <!-- Reset Password Section -->
-            {{-- @include('admin.user.reset-password') --}}
 
             <!-- Action Buttons -->
             <div class="flex items-center justify-center pt-4 gap-5">
