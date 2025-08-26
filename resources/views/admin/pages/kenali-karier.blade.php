@@ -7,108 +7,58 @@
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-30 z-30 hidden md:hidden" onclick="toggleSidebar()"></div>
 
     <!-- Main -->
-    <main class="flex-1 p-6">
-        <div class="md:hidden flex justify-between items-center mb-4">
-            <button onclick="toggleSidebar()" class="text-2xl">
-                <i class="fas fa-bars"></i>
-            </button>
-            <a href="{{ route('register') }}" class="text-xl text-slate-navy hover:text-blue-600">
-                <i class="fas fa-user-plus"></i>
-            </a>
-        </div>
-
-        <div class="hidden md:flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-semibold">materi</h2>
-            <a href="{{ route('register') }}" class="px-4 py-2 bg-white text-slate-navy hover:bg-slate-navy hover:text-white border border-slate-navy rounded transition">
-                Tambah Akun
-            </a>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div class="bg-white shadow rounded-lg p-4">
-                <p class="text-cool-gray">Total User</p>
-                <h3 class="text-2xl font-bold">{{ $userCount }}</h3>
+    <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
+        <div class="mx-auto max-w-7xl space-y-6">
+            <!-- Mobile header -->
+            <div class="md:hidden flex justify-between items-center mb-4">
+                <div class="flex items-center gap-2">
+                    <button onclick="toggleSidebar()" class="text-2xl text-slate-navy hover:text-cool-gray transition-colors">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="text-lg ml-3 md:ml-0 font-semibold bg-gradient-to-r from-slate-navy to-cool-gray bg-clip-text text-transparent">
+                        Kenali Profesi Management
+                    </h1>
+                </div>  
             </div>
-            <div class="bg-white shadow rounded-lg p-4">
-                <p class="text-cool-gray">Jumlah Materi</p>
-                <h3 class="text-2xl font-bold">{{ $materiCount }}</h3>
-            </div>
-            <div class="bg-white shadow rounded-lg p-4">
-                <p class="text-cool-gray">Jumlah Eksplorasi</p>
-                <h3 class="text-2xl font-bold">{{ $eksplorasiCount }}</h3>
-            </div>
-        </div>
 
-        <div class="bg-white shadow rounded-lg p-4">
-            <h3 class="text-xl font-semibold mb-4">Aktivitas Terbaru</h3>
-            <table class="w-full table-auto text-left">
-                <thead>
-                    <tr class="border-b border-border-gray text-cool-gray">
-                        <th class="p-2">Waktu</th>
-                        <th class="p-2">Nama</th>
-                        <th class="p-2">Aktivitas</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($aktivitas as $log)
-                    <tr class="border-b hover:bg-off-white">
-                        <td class="p-2 text-sm">{{ $log->created_at->format('d M Y H:i') }}</td>
-                        <td class="p-2 text-sm">{{ $log->user?->name ?? '-' }}</td>
-                        <td class="p-2 text-sm">{{ $log->aktivitas }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <!-- Desktop Header -->
+            <div class="hidden md:flex justify-between items-center">
+                <h1 class="text-3xl font-bold bg-gradient-to-r from-slate-navy to-cool-gray bg-clip-text text-transparent">
+                    Kenali Profesi Management
+                </h1>
+            </div>
+
+             <!-- Aksi Cepat -->
+            <section class="mb-8">
+                <h2 class="text-xl font-semibold mb-4 text-slate-700">Aksi Cepat</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                    <!-- Profesi -->
+                    <a href="{{ url('/admin/profesi') }}" class="p-4 bg-white rounded-2xl shadow hover:shadow-lg border border-slate-200 flex flex-col items-center transition">
+                        <i class="fas fa-briefcase text-2xl text-slate-navy mb-2"></i>
+                        <span class="text-slate-700 font-medium">Profesi</span>
+                    </a>
+                    <!-- Kategori -->
+                    <a href="{{ url('/admin/kategori') }}" class="p-4 bg-white rounded-2xl shadow hover:shadow-lg border border-slate-200 flex flex-col items-center transition">
+                        <i class="fas fa-layer-group text-2xl text-slate-navy mb-2"></i>
+                        <span class="text-slate-700 font-medium">Kategori</span>
+                    </a>
+                    <!-- Tes -->
+                    <a href="{{ url('/admin/tes') }}" class="p-4 bg-white rounded-2xl shadow hover:shadow-lg border border-slate-200 flex flex-col items-center transition">
+                        <i class="fas fa-clipboard-check text-2xl text-slate-navy mb-2"></i>
+                        <span class="text-slate-700 font-medium">Tes</span>
+                    </a>
+                    <!-- Soal -->
+                    <a href="{{ url('/admin/soal') }}" class="p-4 bg-white rounded-2xl shadow hover:shadow-lg border border-slate-200 flex flex-col items-center transition">
+                        <i class="fas fa-file-alt text-2xl text-slate-navy mb-2"></i>
+                        <span class="text-slate-700 font-medium">Soal</span>
+                    </a>
+                    <!-- Jawaban -->
+                    <a href="{{ url('/admin/jawaban') }}" class="p-4 bg-white rounded-2xl shadow hover:shadow-lg border border-slate-200 flex flex-col items-center transition">
+                        <i class="fas fa-comments text-2xl text-slate-navy mb-2"></i>
+                        <span class="text-slate-700 font-medium">Jawaban</span>
+                    </a>
+                </div>
+            </section>
         </div>
     </main>
 @endsection
-
-@push('scripts')
-    <script>
-        function toggleSidebarSize() {
-            const sidebar = document.getElementById('sidebar');
-            const isCollapsed = sidebar.classList.toggle('w-20');
-            sidebar.classList.toggle('w-64', !isCollapsed);
-
-            const profileSection = document.getElementById('profileSection');
-            const userName = document.getElementById('userName');
-
-            if (isCollapsed) {
-                profileSection.classList.replace('gap-3', 'gap-2');
-                userName.classList.add('opacity-0', 'w-0', 'overflow-hidden');
-            } else {
-                profileSection.classList.replace('gap-2', 'gap-3');
-                userName.classList.remove('opacity-0', 'w-0', 'overflow-hidden');
-            }
-
-            document.querySelectorAll('.sidebar-label').forEach(label => {
-                label.classList.toggle('opacity-0', isCollapsed);
-                label.classList.toggle('w-0', isCollapsed);
-                label.classList.toggle('overflow-hidden', isCollapsed);
-            });
-
-            document.querySelectorAll('.icon-wrapper').forEach(wrapper => {
-                wrapper.classList.toggle('justify-center', isCollapsed);
-                wrapper.classList.toggle('justify-start', !isCollapsed);
-            });
-
-            const icon = document.getElementById('sidebarToggleIcon');
-            icon.classList.toggle('fa-angle-left', !isCollapsed);
-            icon.classList.toggle('fa-angle-right', isCollapsed);
-        }
-
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-
-            const isOpen = sidebar.classList.contains('-translate-x-full');
-            if (isOpen) {
-                sidebar.classList.remove('-translate-x-full');
-                overlay.classList.remove('hidden');
-            } else {
-                sidebar.classList.add('-translate-x-full');
-                overlay.classList.add('hidden');
-            }
-        }
-    </script>
-@endpush
