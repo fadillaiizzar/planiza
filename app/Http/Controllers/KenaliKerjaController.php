@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class KenaliKerjaController extends Controller
 {
-    //
+    public function index()
+    {
+        return view('admin.pages.kenali-karier');
+    }
 }
