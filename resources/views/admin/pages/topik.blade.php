@@ -9,17 +9,17 @@
     <!-- Main -->
     <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
         <div class="flex justify-center mb-8 gap-4 flex-wrap">
-            <a href="{{ route('admin.topik.materi.index') }}"
-            class="px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300 bg-gradient-to-r from-slate-navy to-cool-gray text-off-white hover:scale-105 hover:from-cool-gray hover:to-slate-navy focus:ring-4 focus:ring-cool-gray">
-                <i class="fas fa-book-open w-5 h-5 mr-2"></i>
-                Topik Materi
-            </a>
+            <x-admin.navbar.button-link-aktif
+                href="{{ route('admin.topik.materi.index') }}"
+                icon="fas fa-book-open"
+                title="Topik Materi"
+            />
 
-            <a href="{{ route('admin.materi.index') }}"
-            class="px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300 bg-off-white text-slate-navy border border-border-gray hover:bg-cool-gray hover:text-off-white hover:scale-105 focus:ring-4 focus:ring-border-gray">
-                <i class="fas fa-file-lines w-5 h-5 mr-2"></i>
-                Materi
-            </a>
+            <x-admin.navbar.button-link
+                href="{{ route('admin.materi.index') }}"
+                icon="fas fa-file-lines"
+                title="Materi"
+            />
         </div>
 
         @component('admin.materi.topik.section', [
