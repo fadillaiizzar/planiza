@@ -8,12 +8,13 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\IndustriController;
+use App\Http\Controllers\KenaliKerjaController;
 use App\Http\Controllers\MateriSiswaController;
 use App\Http\Controllers\TopikMateriController;
 use App\Http\Controllers\ProfesiKerjaController;
 use App\Http\Controllers\KontribusiSdgsController;
-use App\Http\Controllers\IndustriProfesiController;
 
+use App\Http\Controllers\IndustriProfesiController;
 use App\Http\Controllers\Siswa\EksplorasiKerjaSiswaController;
 
 Route::get('/', function () {
@@ -43,6 +44,8 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
     Route::resource('profesi-kerja', ProfesiKerjaController::class)->names('admin.profesi-kerja');
     Route::resource('industri', IndustriController::class)->names('admin.industri');
     Route::resource('industri-profesi', IndustriProfesiController::class)->names('admin.industri-profesi');
+
+    Route::resource('kenali-profesi', KenaliKerjaController::class)->names('admin.kenali-profesi');
 
     Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('admin.kontribusi-sdgs');
 });
