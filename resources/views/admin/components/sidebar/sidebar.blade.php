@@ -27,7 +27,7 @@
                     ['icon' => 'fa-users', 'label' => 'User', 'route' => 'admin.user.index'],
                     ['icon' => 'fa-book', 'label' => 'Materi', 'route' => 'admin.topik.materi.index'],
                     ['icon' => 'fa-globe', 'label' => 'Eksplorasi Kerja', 'route' => 'admin.profesi-kerja.index'],
-                    ['icon' => 'fa-briefcase', 'label' => 'Kenali Karier', 'route' => 'admin.dashboard'],
+                    ['icon' => 'fa-briefcase', 'label' => 'Kenali Karier', 'route' => 'admin.kenali-profesi.index'],
                     ['icon' => 'fa-leaf', 'label' => 'Kontribusi SDGs', 'route' => 'admin.kontribusi-sdgs'],
                     ['icon' => 'fa-comments', 'label' => 'Bincang Karier', 'route' => 'admin.dashboard'],
                 ];
