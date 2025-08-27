@@ -23,4 +23,9 @@ class ProfesiKerja extends Model
     {
         return $this->belongsToMany(Industri::class, 'industri_profesis', 'profesi_kerja_id', 'industri_id');
     }
+
+    public function kategoriMinats(): BelongsToMany
+    {
+        return $this->belongsToMany(KategoriMinat::class, 'profesi_kategoris', 'profesi_kerja_id', 'kategori_minat_id');
+    }
 }
