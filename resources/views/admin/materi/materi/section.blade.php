@@ -50,7 +50,8 @@
                     @forelse ($items as $item)
                         <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors materi-row"
                             data-nama="{{ strtolower($item->nama_materi) }}"
-                            data-topik="{{ strtolower($item->topikMateri->judul_topik ?? '') }}">
+                            data-topik="{{ strtolower($item->topikMateri->judul_topik ?? '') }}"
+                        >
                             <td class="p-4">{{ $item->id }}</td>
                             <td class="p-4">
                                 <span title="{{ $item->nama_materi }}">

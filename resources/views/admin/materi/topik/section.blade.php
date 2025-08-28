@@ -50,10 +50,10 @@
                 <tbody>
                     @forelse ($items as $item)
                         <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors topik-row"
-                        data-judul="{{ strtolower($item->judul_topik) }}"
-                        data-kelas="{{ strtolower($item->kelas->nama_kelas ?? '') }}"
-                        data-jurusan="{{ strtolower($item->jurusan->nama_jurusan ?? '') }}"
-                        data-rencana="{{ strtolower($item->rencana->nama_rencana ?? '') }}"
+                            data-judul="{{ strtolower($item->judul_topik) }}"
+                            data-kelas="{{ strtolower($item->kelas->nama_kelas ?? '') }}"
+                            data-jurusan="{{ strtolower($item->jurusan->nama_jurusan ?? '') }}"
+                            data-rencana="{{ strtolower($item->rencana->nama_rencana ?? '') }}"
                         >
                             <td class="p-4">{{ $item->id }}</td>
                             <td class="p-4">{{ Str::limit($item->judul_topik, 15) }}</td>

@@ -120,88 +120,89 @@
         const filterSelect = document.getElementById('filterSelect');
         const resultCount = document.getElementById('resultCount');
 
-        // Cari baris data: user-row, topik-row, atau materi-row
-        let rows = [];
-        if (document.querySelectorAll('.user-row').length > 0) {
-            rows = document.querySelectorAll('.user-row');
-        } else if (document.querySelectorAll('.topik-row').length > 0) {
-            rows = document.querySelectorAll('.topik-row');
-        } else if (document.querySelectorAll('.materi-row').length > 0) {
-            rows = document.querySelectorAll('.materi-row');
-        } else if (document.querySelectorAll('.profesi-row').length > 0) {
-            rows = document.querySelectorAll('.profesi-row');
-        } else if (document.querySelectorAll('.industri-row').length > 0) {
-            rows = document.querySelectorAll('.industri-row');
-        } else if (document.querySelectorAll('.industri-profesi-row').length > 0) {
-            rows = document.querySelectorAll('.industri-profesi-row');
-        } else if (document.querySelectorAll('.kategori-minat-row').length > 0) {
-            rows = document.querySelectorAll('.kategori-minat-row');
-        } else {
-            return;
-        }
+        const rowClasses = [
+            'user-row', 'topik-row', 'materi-row', 'profesi-row', 'industri-row', 'industri-profesi-row', 'kategori-minat-row', 'profesi-kategori-row'
+        ];
+
+        let rows = rowClasses.map(cls=> document.querySelectorAll(`.${cls}`))
+                             .find(list => list.length > 0);
+        if (!rows) return;
+
+        const strategies = {
+            'user-row': row => {
+                const { name='', username='', role='' } = row.dataset;
+                return {
+                    search: [name, username, role],
+                    filter: role
+                };
+            },
+            'topik-row': row => {
+            const { judul='', kelas='', jurusan='', rencana='' } = row.dataset;
+            return {
+                search: [judul, kelas, jurusan, rencana],
+                filter: kelas
+            };
+            },
+            'materi-row': row => {
+                const { nama='', topik='', deskripsi='', tipe='', file='' } = row.dataset;
+                return {
+                    search: [nama, topik, deskripsi, tipe, file],
+                    filter: topik
+                };
+            },
+            'profesi-row': row => {
+                const { nama='', gaji='', deskripsi='', skill='', jurusan='' } = row.dataset;
+                return {
+                    search: [nama, gaji, deskripsi, skill, jurusan],
+                    filter: gaji
+                };
+            },
+            'industri-row': row => {
+                const { nama='', website='', alamat='' } = row.dataset;
+                return {
+                    search: [nama, website, alamat],
+                    filter: alamat
+                };
+            },
+            'industri-profesi-row': row => {
+                const { profesi='', industri='' } = row.dataset;
+                return {
+                    search: [profesi, industri],
+                    filter: profesi
+                };
+            },
+            'kategori-minat-row': row => {
+                const { nama='', deskripsi='' } = row.dataset;
+                return {
+                    search: [nama, deskripsi],
+                    filter: nama
+                };
+            },
+            'profesi-kategori-row': row => {
+                const { profesi='', kategori='' } = row.dataset;
+                return {
+                    search: [profesi, kategori],
+                    filter: kategori
+                };
+            },
+        };
 
         function filterItems() {
             const searchTerm = searchInput.value.toLowerCase().trim();
             const selectedFilter = filterSelect.value.toLowerCase();
-
             let visibleCount = 0;
 
             rows.forEach(row => {
-                let matchesSearch = false;
-                let matchesFilter = false;
+                const cls = rowClasses.find(c => row.classList.contains(c));
+                if (!cls) return;
 
-                if (row.classList.contains('user-row')) {
-                    const name = row.dataset.name || '';
-                    const username = row.dataset.username || '';
-                    const role = row.dataset.role || '';
+                const { search, filter } = strategies[cls](row);
 
-                    matchesSearch = name.includes(searchTerm) || username.includes(searchTerm);
-                    matchesFilter = !selectedFilter || role === selectedFilter;
-                }
-                else if (row.classList.contains('topik-row')) {
-                    const judul = row.dataset.judul || '';
-                    const kelas = row.dataset.kelas || '';
-                    const jurusan = row.dataset.jurusan || '';
-                    const rencana = row.dataset.rencana || '';
-
-                    matchesSearch = judul.includes(searchTerm);
-                    matchesFilter = !selectedFilter || kelas === selectedFilter || jurusan === selectedFilter || rencana === selectedFilter;
-                }
-                else if (row.classList.contains('materi-row')) {
-                    const nama = row.dataset.nama || '';
-                    const topik = row.dataset.topik || '';
-
-                    matchesSearch = nama.includes(searchTerm) || topik.includes(searchTerm);
-                    matchesFilter = !selectedFilter || topik === selectedFilter;
-                }
-                else if (row.classList.contains('profesi-row')) {
-                    const nama = row.dataset.nama || '';
-                    const gaji = row.dataset.gaji || '';
-
-                    matchesSearch = nama.includes(searchTerm) || gaji.includes(searchTerm);
-                    matchesFilter = !selectedFilter || gaji === selectedFilter;
-                }
-                else if (row.classList.contains('industri-row')) {
-                    const nama = row.dataset.nama || '';
-                    const alamat = row.dataset.alamat || '';
-
-                    matchesSearch = nama.includes(searchTerm);
-                    matchesFilter = !selectedFilter || alamat === selectedFilter;
-                }
-                else if (row.classList.contains('industri-profesi-row')) {
-                    const profesi = row.dataset.profesi || '';
-                    const industri = row.dataset.industri || '';
-
-                    matchesSearch = profesi.includes(searchTerm) || industri.includes(searchTerm);
-                    matchesFilter = !selectedFilter || profesi === selectedFilter;
-                }
-                else if (row.classList.contains('kategori-minat-row')) {
-                    const nama = row.dataset.nama || '';
-                    const deskripsi = row.dataset.deskripsi || '';
-
-                    matchesSearch = nama.includes(searchTerm) || deskripsi.includes(searchTerm);
-                    matchesFilter = !selectedFilter || nama === selectedFilter;
-                }
+                const matchesSearch = search.some(val => val.toLowerCase().includes(searchTerm));
+                const matchesFilter = !selectedFilter ||
+                                    (Array.isArray(filter)
+                                        ? filter.includes(selectedFilter)
+                                        : filter === selectedFilter);
 
                 if (matchesSearch && matchesFilter) {
                     row.style.display = '';
@@ -215,11 +216,7 @@
 
             const noDataRow = document.getElementById('noDataRow');
             if (noDataRow) {
-                if (visibleCount === 0) {
-                    noDataRow.classList.remove('hidden');
-                } else {
-                    noDataRow.classList.add('hidden');
-                }
+                noDataRow.classList.toggle('hidden', visibleCount !== 0);
             }
         }
 

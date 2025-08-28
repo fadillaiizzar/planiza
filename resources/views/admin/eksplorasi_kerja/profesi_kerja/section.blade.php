@@ -26,7 +26,11 @@
                     @forelse ($items as $item)
                         <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors profesi-row"
                             data-nama="{{ strtolower($item->nama_profesi_kerja) }}"
-                            data-gaji="{{ strtolower($item->gaji) }}">
+                            data-gaji="{{ strtolower($item->gaji) }}"
+                            data-deskripsi="{{ strtolower($item->deskripsi) }}"
+                            data-skill="{{ strtolower($item->info_skill) }}"
+                            data-jurusan="{{ strtolower($item->info_jurusan) }}"
+                        >
                             <td class="p-4">{{ $item->id }}</td>
                             <td class="p-4">{{ Str::limit($item->nama_profesi_kerja, 15) }}</td>
                             <td class="p-4">

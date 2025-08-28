@@ -26,7 +26,9 @@
                     @forelse ($items as $item)
                         <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors industri-row"
                             data-nama="{{ strtolower($item->nama_industri) }}"
-                            data-alamat="{{ strtolower($item->alamat) }}">
+                            data-website="{{ strtolower($item->website) }}"
+                            data-alamat="{{ strtolower($item->alamat) }}"
+                        >
                             <td class="p-4 w-[5%]">{{ $item->id }}</td>
                             <td class="p-4 w-[20%]">{{ Str::limit($item->nama_industri, 20) }}</td>
                             <td class="p-4 w-[30%]">
