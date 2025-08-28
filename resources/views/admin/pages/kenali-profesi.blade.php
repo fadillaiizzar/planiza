@@ -26,11 +26,11 @@
                     {{-- Card Aksi Cepat --}}
                     @php
                         $actions = [
-                            ['route' => route('admin.profesi-kerja.index'), 'icon' => 'fas fa-briefcase', 'label' => 'Profesi'],
-                            ['route' => route('admin.kenali-profesi-kerja.kategori-minat.index'), 'icon' => 'fas fa-layer-group', 'label' => 'Kategori Minat'],
+                            ['route' => route('admin.eksplorasi-profesi.profesi-kerja.index'), 'icon' => 'fas fa-briefcase', 'label' => 'Profesi'],
+                            ['route' => route('admin.kenali-profesi.kategori-minat.index'), 'icon' => 'fas fa-layer-group', 'label' => 'Kategori Minat'],
                             ['route' => url('/admin/tes'), 'icon' => 'fas fa-clipboard-check', 'label' => 'Profesi Kategori'],
                             ['route' => url('/admin/soal'), 'icon' => 'fas fa-file-alt', 'label' => 'Tes'],
-                            ['route' => url('/admin/jawaban'), 'icon' => 'fas fa-comments', 'label' => 'Jawaban'],
+                            ['route' => url('/admin/hasil'), 'icon' => 'fas fa-comments', 'label' => 'Hasil'],
                         ];
                     @endphp
 
@@ -58,10 +58,10 @@
 
                                 switch ($activity['type']) {
                                     case 'Profesi Kerja':
-                                        $detailUrl = route('admin.profesi-kerja.show', $activity['id']);
+                                        $detailUrl = route('admin.eksplorasi-profesi.profesi-kerja.show', $activity['id']);
                                         break;
                                     case 'Kategori Minat':
-                                        $detailUrl = route('admin.kenali-profesi-kerja.kategori-minat.show', $activity['id']);
+                                        $detailUrl = route('admin.kenali-profesi.kategori-minat.show', $activity['id']);
                                         break;
                                     case 'tes':
                                         $detailUrl = route('admin.tes.show', $activity['id']);
