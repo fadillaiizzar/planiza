@@ -33,7 +33,7 @@
 
     <!-- Form Content -->
     <div class="px-6 pt-2 pb-6">
-        <form action="{{ route('admin.topik.materi.store') }}" method="POST" class="space-y-4">
+        <form action="{{ route('admin.pembelajaran.topik-materi.store') }}" method="POST" class="space-y-4">
             @csrf
 
             <!-- Judul Topik -->

@@ -73,7 +73,7 @@ class TopikMateriController extends Controller
 
         TopikMateri::create($request->all());
 
-        return redirect()->route('admin.topik.materi.index')->with('success', 'topik materi berhasil ditambahkan');
+        return redirect()->route('admin.pembelajaran.topik-materi.index')->with('success', 'topik materi berhasil ditambahkan');
     }
 
     public function show($id)
@@ -103,7 +103,7 @@ class TopikMateriController extends Controller
         $topik = TopikMateri::findOrFail($id);
         $topik->update($request->all());
 
-        return redirect()->route('admin.topik.materi.index')->with('success', 'topik materi berhasil diupdate');
+        return redirect()->route('admin.pembelajaran.topik-materi.index')->with('success', 'topik materi berhasil diupdate');
     }
 
     public function destroy($id)
@@ -111,6 +111,6 @@ class TopikMateriController extends Controller
         $topik = TopikMateri::findOrFail($id);
         $topik->delete();
 
-        return redirect()->route('admin.topik.materi.index')->with('success', 'topik materi berhasil dihapus');
+        return redirect()->route('admin.pembelajaran.topik-materi.index')->with('success', 'topik materi berhasil dihapus');
     }
 }

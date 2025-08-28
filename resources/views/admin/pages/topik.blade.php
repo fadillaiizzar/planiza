@@ -3,24 +3,13 @@
 @section('title', 'Manajemen Topik Materi - Planiza')
 
 @section('content')
-    <!-- Overlay (mobile) -->
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-30 z-30 hidden md:hidden" onclick="toggleSidebar()"></div>
 
-    <!-- Main -->
     <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
-        <div class="flex justify-center mb-8 gap-4 flex-wrap">
-            <x-admin.navbar.button-link-aktif
-                href="{{ route('admin.topik.materi.index') }}"
-                icon="fas fa-book-open"
-                title="Topik Materi"
-            />
-
-            <x-admin.navbar.button-link
-                href="{{ route('admin.materi.index') }}"
-                icon="fas fa-file-lines"
-                title="Materi"
-            />
-        </div>
+        <x-admin.breadcrumb :links="[
+            ['href' => route('admin.pembelajaran.index'), 'icon' => 'fas fa-book', 'title' => 'Pembelajaran'],
+            ['href' => '#', 'icon' => 'fas fa-layer-group', 'title' => 'Topik Materi'],
+        ]" />
 
         @component('admin.materi.topik.section', [
             'id' => 'sectionTopik',
@@ -28,7 +17,7 @@
             'addButtonText' => 'Tambah Topik',
             'userCount' => $userCount,
             'stats' => [
-                ['label' => 'Total Topik', 'count' => $topikMaterisCount, 'icon' => 'fas fa-book', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
+                ['label' => 'Total Topik', 'count' => $topikMaterisCount, 'icon' => 'fas fa-layer-group', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
                 ['label' => 'Topik per Kelas', 'count' => $materiPerKelas->sum(), 'icon' => 'fas fa-layer-group', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
                 ['label' => 'Topik per Jurusan', 'count' => $materiPerJurusan->sum(), 'icon' => 'fas fa-university', 'bg' => 'from-purple-500 to-purple-600', 'textColor' => 'text-purple-100'],
                 ['label' => 'Topik per Rencana', 'count' => $materiPerRencana->sum(), 'icon' => 'fas fa-tasks', 'bg' => 'from-yellow-500 to-yellow-600', 'textColor' => 'text-yellow-100'],
