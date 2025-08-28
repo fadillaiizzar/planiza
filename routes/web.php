@@ -12,8 +12,10 @@ use App\Http\Controllers\KenaliKerjaController;
 use App\Http\Controllers\MateriSiswaController;
 use App\Http\Controllers\TopikMateriController;
 use App\Http\Controllers\ProfesiKerjaController;
-use App\Http\Controllers\KontribusiSdgsController;
+use App\Http\Controllers\KategoriMinatController;
 
+use App\Http\Controllers\KontribusiSdgsController;
+use App\Http\Controllers\EksplorasiKerjaController;
 use App\Http\Controllers\IndustriProfesiController;
 use App\Http\Controllers\Siswa\EksplorasiKerjaSiswaController;
 
@@ -41,11 +43,16 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
 
     Route::resource('materi', MateriController::class)->names('admin.materi');
 
+    Route::get('/eksplorasi-profesi', [EksplorasiKerjaController::class, 'index'])->name('admin.eksplorasi-profesi');
     Route::resource('profesi-kerja', ProfesiKerjaController::class)->names('admin.profesi-kerja');
     Route::resource('industri', IndustriController::class)->names('admin.industri');
     Route::resource('industri-profesi', IndustriProfesiController::class)->names('admin.industri-profesi');
 
-    Route::resource('kenali-profesi', KenaliKerjaController::class)->names('admin.kenali-profesi');
+    Route::get('/kenali-profesi', [KenaliKerjaController::class, 'index'])->name('admin.kenali-profesi');
+    Route::prefix('kenali-profesi')->name('admin.kenali-profesi-kerja.')->group(function () {
+        Route::resource('kategori-minat', KategoriMinatController::class);
+        Route::resource('profesi-kategori', KategoriMinatController::class);
+    });
 
     Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('admin.kontribusi-sdgs');
 });
