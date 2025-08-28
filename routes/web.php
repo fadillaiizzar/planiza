@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ProfesiKategori;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\AuthController;
@@ -11,13 +12,14 @@ use App\Http\Controllers\IndustriController;
 use App\Http\Controllers\KenaliKerjaController;
 use App\Http\Controllers\MateriSiswaController;
 use App\Http\Controllers\TopikMateriController;
+use App\Http\Controllers\PembelajaranController;
+
 use App\Http\Controllers\ProfesiKerjaController;
 use App\Http\Controllers\KategoriMinatController;
-
 use App\Http\Controllers\KontribusiSdgsController;
 use App\Http\Controllers\EksplorasiKerjaController;
 use App\Http\Controllers\IndustriProfesiController;
-use App\Http\Controllers\PembelajaranController;
+use App\Http\Controllers\ProfesiKategoriController;
 use App\Http\Controllers\Siswa\EksplorasiKerjaSiswaController;
 
 Route::get('/', function () {
@@ -56,7 +58,7 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
     Route::get('/kenali-profesi', [KenaliKerjaController::class, 'index'])->name('admin.kenali-profesi.index');
     Route::prefix('kenali-profesi')->name('admin.kenali-profesi.')->group(function () {
         Route::resource('kategori-minat', KategoriMinatController::class);
-        Route::resource('profesi-kategori', KategoriMinatController::class);
+        Route::resource('profesi-kategori', ProfesiKategoriController::class);
     });
 
     Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('admin.kontribusi-sdgs');
