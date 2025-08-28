@@ -3,10 +3,8 @@
 @section('title', 'Manajemen Kategori Minat - Planiza')
 
 @section('content')
-    <!-- Overlay (mobile) -->
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-30 z-30 hidden md:hidden" onclick="toggleSidebar()"></div>
 
-    <!-- Main -->
     <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
         <x-admin.breadcrumb :links="[
             ['href' => route('admin.kenali-profesi.index'), 'icon' => 'fas fa-user-tie', 'title' => 'Kenali Profesi'],

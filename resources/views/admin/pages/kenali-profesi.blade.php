@@ -3,10 +3,8 @@
 @section('title', 'Kenali Profesi Admin - Planiza')
 
 @section('content')
-    <!-- Overlay (mobile) -->
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-30 z-30 hidden md:hidden" onclick="toggleSidebar()"></div>
 
-    <!-- Main -->
     <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
         <div class="mx-auto max-w-7xl space-y-6">
             @include('admin.components.header.header', [
@@ -23,7 +21,6 @@
                 <h2 class="text-xl font-semibold text-slate-navy mb-4">🚀 Aksi Cepat</h2>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-5">
 
-                    {{-- Card Aksi Cepat --}}
                     @php
                         $actions = [
                             ['route' => route('admin.eksplorasi-profesi.profesi-kerja.index'), 'icon' => 'fas fa-briefcase', 'label' => 'Profesi'],
@@ -54,7 +51,7 @@
                     <ul class="space-y-3">
                         @forelse($activities as $activity)
                             @php
-                                $detailUrl = '#'; // default
+                                $detailUrl = '#';
 
                                 switch ($activity['type']) {
                                     case 'Profesi Kerja':
@@ -85,10 +82,6 @@
                                         <span class="p-2 rounded-full bg-blue-100 text-blue-600">
                                             <i class="fas fa-pen"></i>
                                         </span>
-                                    @elseif($activity['action'] === 'delete')
-                                        <span class="p-2 rounded-full bg-red-100 text-red-600">
-                                            <i class="fas fa-trash"></i>
-                                        </span>
                                     @else
                                         <span class="p-2 rounded-full bg-slate-100 text-slate-500">
                                             <i class="fas fa-clock"></i>
@@ -102,8 +95,6 @@
                                                 berhasil dibuat ✨
                                             @elseif($activity['action'] === 'update')
                                                 diperbarui 🔄
-                                            @elseif($activity['action'] === 'delete')
-                                                dihapus ❌
                                             @else
                                                 dicatat ⏳
                                             @endif
