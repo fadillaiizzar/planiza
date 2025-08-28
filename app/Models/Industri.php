@@ -18,6 +18,6 @@ class Industri extends Model
 
     public function profesiKerjas(): BelongsToMany
     {
-        return $this->belongsToMany(ProfesiKerja::class, 'industri_profesis', 'industri_id', 'profesi_kerja_id');
+        return $this->belongsToMany(ProfesiKerja::class, 'industri_profesis', 'industri_id', 'profesi_kerja_id')->withTimestamps();
     }
 }

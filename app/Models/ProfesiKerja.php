@@ -21,11 +21,11 @@ class ProfesiKerja extends Model
 
     public function industris(): BelongsToMany
     {
-        return $this->belongsToMany(Industri::class, 'industri_profesis', 'profesi_kerja_id', 'industri_id');
+        return $this->belongsToMany(Industri::class, 'industri_profesis', 'profesi_kerja_id', 'industri_id')->withTimestamps();
     }
 
     public function kategoriMinats(): BelongsToMany
     {
-        return $this->belongsToMany(KategoriMinat::class, 'profesi_kategoris', 'profesi_kerja_id', 'kategori_minat_id');
+        return $this->belongsToMany(KategoriMinat::class, 'profesi_kategoris', 'profesi_kerja_id', 'kategori_minat_id')->withTimestamps();
     }
 }

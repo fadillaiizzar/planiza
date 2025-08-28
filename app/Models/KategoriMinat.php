@@ -17,6 +17,6 @@ class KategoriMinat extends Model
 
     public function profesiKerjas(): BelongsToMany
     {
-        return $this->belongsToMany(ProfesiKerja::class, 'profesi_kategoris', 'kategori_minat_id', 'profesi_kerja_id');
+        return $this->belongsToMany(ProfesiKerja::class, 'profesi_kategoris', 'kategori_minat_id', 'profesi_kerja_id')->withTimestamps();
     }
 }
