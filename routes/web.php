@@ -50,8 +50,8 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
         Route::resource('industri-profesi', IndustriProfesiController::class);
     });
 
-    Route::get('/kenali-profesi', [KenaliKerjaController::class, 'index'])->name('admin.kenali-profesi');
-    Route::prefix('kenali-profesi')->name('admin.kenali-profesi-kerja.')->group(function () {
+    Route::get('/kenali-profesi', [KenaliKerjaController::class, 'index'])->name('admin.kenali-profesi.index');
+    Route::prefix('kenali-profesi')->name('admin.kenali-profesi.')->group(function () {
         Route::resource('kategori-minat', KategoriMinatController::class);
         Route::resource('profesi-kategori', KategoriMinatController::class);
     });
