@@ -41,7 +41,7 @@
 
                                 <div id="dropdown-{{ $item->id }}"
                                     class="hidden absolute right-16 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[160px]">
-                                    <a href="{{ route('admin.kenali-profesi-kerja.kategori-minat.show', $item->id) }}"
+                                    <a href="{{ route('admin.kenali-profesi.kategori-minat.show', $item->id) }}"
                                         class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
                                         <i class="fas fa-eye w-5 h-5"></i>
                                         <span>Detail</span>
@@ -54,7 +54,7 @@
                                     </button>
                                     <div class="border-t border-border-gray"></div>
                                     <button type="button"
-                                        onclick="showDeleteModal({{ $item->id }}, '{{ addslashes($item->nama_kategori) }}', '{{ route('admin.kenali-profesi-kerja.kategori-minat.destroy', $item->id) }}')"
+                                        onclick="showDeleteModal({{ $item->id }}, '{{ addslashes($item->nama_kategori) }}', '{{ route('admin.kenali-profesi.kategori-minat.destroy', $item->id) }}')"
                                         class="px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base w-full text-left">
                                         <i class="fas fa-trash-alt w-5 h-5"></i>
                                         <span>Hapus</span>

@@ -8,7 +8,7 @@
 
         <!-- Breadcrumb Guide -->
         <nav class="flex items-center space-x-2 text-sm">
-            <a href="{{ route('admin.kenali-profesi-kerja.kategori-minat.index') }}"
+            <a href="{{ route('admin.kenali-profesi.kategori-minat.index') }}"
                class="group flex items-center px-4 py-2 rounded-full text-slate-400 hover:text-slate-600 hover:bg-white/70 transition-all duration-200">
                 <i class="fas fa-layer-group w-4 h-4 mr-2 text-slate-300 group-hover:text-slate-500"></i>
                 <span class="font-medium">Kategori Minat</span>

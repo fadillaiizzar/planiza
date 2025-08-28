@@ -61,7 +61,7 @@ class KategoriMinatController extends Controller
 
         KategoriMinat::create($request->all());
 
-        return redirect()->route('admin.kenali-profesi-kerja.kategori-minat.index')->with('success', 'kategori minat berhasil ditambahkan');
+        return redirect()->route('admin.kenali-profesi.kategori-minat.index')->with('success', 'kategori minat berhasil ditambahkan');
     }
 
     /**
@@ -95,7 +95,7 @@ class KategoriMinatController extends Controller
         $kategoriMinat = KategoriMinat::findOrFail($id);
         $kategoriMinat->update($request->all());
 
-        return redirect()->route('admin.kenali-profesi-kerja.kategori-minat.index')->with('success', 'kategori minat berhasil diupdate');
+        return redirect()->route('admin.kenali-profesi.kategori-minat.index')->with('success', 'kategori minat berhasil diupdate');
     }
 
     /**
@@ -106,6 +106,6 @@ class KategoriMinatController extends Controller
         $kategoriMinat = KategoriMinat::findOrFail($id);
         $kategoriMinat->delete();
 
-        return redirect()->route('admin.kenali-profesi-kerja.kategori-minat.index')->with('success', 'kategori minat berhasil dihapus');
+        return redirect()->route('admin.kenali-profesi.kategori-minat.index')->with('success', 'kategori minat berhasil dihapus');
     }
 }

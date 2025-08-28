@@ -34,7 +34,7 @@
 
     <!-- Form Content -->
     <div class="px-6 pt-2 pb-6">
-        <form action="{{ route('admin.kenali-profesi-kerja.kategori-minat.update', $kategoriMinat->id) }}" method="POST" class="space-y-4">
+        <form action="{{ route('admin.kenali-profesi.kategori-minat.update', $kategoriMinat->id) }}" method="POST" class="space-y-4">
             @csrf
             @method('PATCH')
 
