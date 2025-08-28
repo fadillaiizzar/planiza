@@ -1,12 +1,12 @@
 @extends('layouts.siswa')
 
-@section('title', $profesi->nama_profesi_kerja)
+@section('title', 'Detail ' . $profesi->nama_profesi_kerja)
 
 @section('content')
 <div class="px-4 py-8 sm:px-8">
 
     <x-siswa.section-header
-        title="{{ $profesi->nama_profesi_kerja }}"
+        title="Detail {{ $profesi->nama_profesi_kerja }}"
         subtitle="Detail profesi kerja, skill dibutuhkan, jurusan, dan industri terkait"
         back-route="siswa.eksplorasi-kerja.index"
     />

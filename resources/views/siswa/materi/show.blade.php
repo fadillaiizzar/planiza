@@ -1,11 +1,11 @@
 @extends('layouts.siswa')
 
-@section('title', $materi->nama_materi)
+@section('title', 'Detail ' . $materi->nama_materi)
 
 @section('content')
 <div class="px-4 py-8 sm:px-8">
     <x-siswa.section-header
-        title="Detail Materi"
+        title="Detail {{ $materi->nama_materi }}"
         subtitle="Semua materi belajar yang kamu butuhkan, tersusun rapi berdasarkan kelas, jurusan, dan rencana"
         back-route="siswa.materi.index"
     />
