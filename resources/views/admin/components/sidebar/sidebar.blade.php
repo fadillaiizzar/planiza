@@ -25,7 +25,7 @@
                 $sidebarItems = [
                     ['icon' => 'fa-home', 'label' => 'Dashboard', 'route' => 'admin.dashboard'],
                     ['icon' => 'fa-users', 'label' => 'User', 'route' => 'admin.user.index'],
-                    ['icon' => 'fa-book', 'label' => 'Materi', 'route' => 'admin.topik.materi.index'],
+                    ['icon' => 'fa-book', 'label' => 'Pembelajaran', 'route' => 'admin.pembelajaran.index'],
                     ['icon' => 'fa-globe', 'label' => 'Eksplorasi Profesi', 'route' => 'admin.eksplorasi-profesi.index'],
                     ['icon' => 'fa-user-tie', 'label' => 'Kenali Profesi', 'route' => 'admin.kenali-profesi.index'],
                     ['icon' => 'fa-leaf', 'label' => 'Kontribusi SDGs', 'route' => 'admin.kontribusi-sdgs'],
