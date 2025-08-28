@@ -18,14 +18,16 @@
         </h1>
     </div>
 
-    <div class="flex gap-2">
-        <button class="px-3 py-2 bg-off-white/80 backdrop-blur-sm text-slate-navy hover:bg-off-white border border-border-gray rounded-lg transition-all shadow-sm hover:shadow-md">
-            <i class="fas fa-download"></i>
-        </button>
-        <button onclick="openModal()" class="bg-gradient-to-r from-slate-navy to-cool-gray text-off-white px-4 py-2 rounded-lg hover:from-cool-gray hover:to-slate-navy transition-all shadow-lg hover:shadow-xl">
-            <i class="fas fa-user-plus mr-0 sm:mr-2"></i>
-        </button>
-    </div>
+    @if(!empty($addButtonText))
+        <div class="flex gap-2">
+            <button class="px-3 py-2 bg-off-white/80 backdrop-blur-sm text-slate-navy hover:bg-off-white border border-border-gray rounded-lg transition-all shadow-sm hover:shadow-md">
+                <i class="fas fa-download"></i>
+            </button>
+            <button onclick="openModal()" class="bg-gradient-to-r from-slate-navy to-cool-gray text-off-white px-4 py-2 rounded-lg hover:from-cool-gray hover:to-slate-navy transition-all shadow-lg hover:shadow-xl">
+                <i class="fas fa-user-plus mr-0 sm:mr-2"></i>
+            </button>
+        </div>
+    @endif
 </div>
 
 <!-- Desktop Header -->
@@ -35,17 +37,17 @@
     </h1>
 
     @if(!empty($addButtonText))
-    <div class="flex gap-2">
-        <button class="px-4 py-2 bg-off-white/80 backdrop-blur-sm text-slate-navy hover:bg-off-white border border-border-gray rounded-lg transition-all shadow-sm hover:shadow-md">
-            <i class="fas fa-download mr-2"></i>
-            Export
-        </button>
+        <div class="flex gap-2">
+            <button class="px-4 py-2 bg-off-white/80 backdrop-blur-sm text-slate-navy hover:bg-off-white border border-border-gray rounded-lg transition-all shadow-sm hover:shadow-md">
+                <i class="fas fa-download mr-2"></i>
+                Export
+            </button>
 
-        <button onclick="openModal()" class="px-6 py-2 bg-gradient-to-r from-slate-navy to-cool-gray text-off-white hover:from-cool-gray hover:to-slate-navy rounded-lg transition-all shadow-lg hover:shadow-xl">
-            <i class="fas fa-plus mr-2"></i>
-            {{ $addButtonText }}
-        </button>
-    </div>
+            <button onclick="openModal()" class="px-6 py-2 bg-gradient-to-r from-slate-navy to-cool-gray text-off-white hover:from-cool-gray hover:to-slate-navy rounded-lg transition-all shadow-lg hover:shadow-xl">
+                <i class="fas fa-plus mr-2"></i>
+                {{ $addButtonText }}
+            </button>
+        </div>
     @endif
 </div>
 
@@ -132,6 +134,8 @@
             rows = document.querySelectorAll('.industri-row');
         } else if (document.querySelectorAll('.industri-profesi-row').length > 0) {
             rows = document.querySelectorAll('.industri-profesi-row');
+        } else if (document.querySelectorAll('.kategori-minat-row').length > 0) {
+            rows = document.querySelectorAll('.kategori-minat-row');
         } else {
             return;
         }
@@ -190,6 +194,13 @@
 
                     matchesSearch = profesi.includes(searchTerm) || industri.includes(searchTerm);
                     matchesFilter = !selectedFilter || profesi === selectedFilter;
+                }
+                else if (row.classList.contains('kategori-minat-row')) {
+                    const nama = row.dataset.nama || '';
+                    const deskripsi = row.dataset.deskripsi || '';
+
+                    matchesSearch = nama.includes(searchTerm) || deskripsi.includes(searchTerm);
+                    matchesFilter = !selectedFilter || nama === selectedFilter;
                 }
 
                 if (matchesSearch && matchesFilter) {
