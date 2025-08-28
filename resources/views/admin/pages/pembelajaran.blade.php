@@ -97,7 +97,7 @@
                                 </a>
                             </li>
                         @empty
-                            <li class="text-slate-500 text-center py-4">Belum ada aktivitas terbaru</li>
+                            <x-admin.empty-state/>
                         @endforelse
                     </ul>
                 </div>

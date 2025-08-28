@@ -9,7 +9,7 @@
     <!-- Main -->
     <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
         <x-admin.breadcrumb :links="[
-            ['href' => route('admin.eksplorasi-profesi.index'), 'icon' => 'fas fa-globe', 'title' => 'Eksplorasi Profesi'],
+            ['href' => route('admin.eksplorasi-profesi.index'), 'icon' => 'fas fa-tools', 'title' => 'Eksplorasi Profesi'],
             ['href' => '#', 'icon' => 'fas fa-industry', 'title' => 'Industri'],
         ]" />
 

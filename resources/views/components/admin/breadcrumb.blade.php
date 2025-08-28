@@ -6,9 +6,9 @@
     @foreach ($links as $key => $link)
         @if ($key !== count($links) - 1)
             <a href="{{ $link['href'] ?? '#' }}"
-               class="flex items-center gap-2 text-gray-500 hover:underline">
+               class="flex items-center gap-2 text-gray-500">
                 <i class="{{ $link['icon'] }} text-base"></i>
-                <span>{{ $link['title'] }}</span>
+                <span class="hover:underline">{{ $link['title'] }}</span>
             </a>
             <span class="text-gray-400">›</span>
         @else

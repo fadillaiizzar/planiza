@@ -60,7 +60,7 @@
                 <!-- Kontribusi SDGs -->
                 <div class="bg-white p-6 rounded-lg shadow-sm border border-border-gray text-center">
                     <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-globe text-2xl text-green-600"></i>
+                        <i class="fas fa-tools text-2xl text-green-600"></i>
                     </div>
                     <div class="text-3xl font-bold text-gray-900 mb-2">0</div>
                     <div class="text-slate-navy mb-2">Kontribusi SDGs</div>

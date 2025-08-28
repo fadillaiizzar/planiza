@@ -86,7 +86,7 @@
                     @empty
                         <x-empty-state
                             colspan="4"
-                            icon="fas fa-link"
+                            icon="fas fa-project-diagram"
                             message="Belum ada relasi industri ↔ profesi. Tambahkan data"
                             button="true"
                             buttonAction="openModal()"
