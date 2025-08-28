@@ -100,7 +100,7 @@ class ProfesiKategoriController extends Controller
         $pivot = ProfesiKategori::findOrFail($id);
         $pivot->update([
             'profesi_kerja_id' => $request->profesi_kerja_id,
-            'kategori_minat_id' => $request->pkategori_minat_id,
+            'kategori_minat_id' => $request->kategori_minat_id,
         ]);
 
         return redirect()->route('admin.kenali-profesi.profesi-kategori.index')->with('success', 'Relasi profesi - kategori minat berhasil diperbarui');
