@@ -36,7 +36,7 @@
 
     <!-- Form Content -->
     <div class="px-6 pt-2 pb-6">
-        <form action="{{ route('admin.profesi-kerja.store') }}" method="POST" enctype="multipart/form-data"
+        <form action="{{ route('admin.eksplorasi-profesi.profesi-kerja.store') }}" method="POST" enctype="multipart/form-data"
             class="space-y-4">
             @csrf
 

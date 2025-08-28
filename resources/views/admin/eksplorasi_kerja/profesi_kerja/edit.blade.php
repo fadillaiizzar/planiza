@@ -33,7 +33,7 @@
 
     <!-- Form Content -->
     <div class="px-6 pt-2 pb-6">
-        <form action="{{ route('admin.profesi-kerja.update', $profesi->id) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+        <form action="{{ route('admin.eksplorasi-profesi.profesi-kerja.update', $profesi->id) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
             @csrf
             @method('PATCH')
 

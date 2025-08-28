@@ -47,7 +47,7 @@
                                 </button>
 
                                 <div id="dropdown-{{ $item->id }}" class="hidden absolute right-12 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
-                                    <a href="{{ route('admin.profesi-kerja.show', $item->id) }}"
+                                    <a href="{{ route('admin.eksplorasi-profesi.profesi-kerja.show', $item->id) }}"
                                         class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
                                         <i class="fas fa-eye w-5 h-5"></i>
                                         <span>Detail</span>
@@ -59,11 +59,11 @@
                                         <span>Edit</span>
                                     </button>
                                     <div class="border-t border-border-gray"></div>
-                                    <form action="{{ route('admin.profesi-kerja.destroy', $item->id) }}" method="POST" class="w-full">
+                                    <form action="{{ route('admin.eksplorasi-profesi.profesi-kerja.destroy', $item->id) }}" method="POST" class="w-full">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button"
-                                            onclick="showDeleteModal({{ $item->id }}, '{{ addslashes($item->nama_profesi_kerja) }}', '{{ route('admin.profesi-kerja.destroy', $item->id) }}')"
+                                            onclick="showDeleteModal({{ $item->id }}, '{{ addslashes($item->nama_profesi_kerja) }}', '{{ route('admin.eksplorasi-profesi.profesi-kerja.destroy', $item->id) }}')"
                                             class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base">
                                             <i class="fas fa-trash-alt w-5 h-5"></i>
                                             <span>Hapus</span>
@@ -132,7 +132,7 @@
 <script>
     // Modal Edit
     function showEdit(id) {
-        fetch(`/admin/profesi-kerja/${id}/edit`)
+        fetch(`/admin/eksplorasi-profesi/profesi-kerja/${id}/edit`)
             .then(res => res.text())
             .then(html => {
                 document.getElementById('modalContentEdit').innerHTML = html;

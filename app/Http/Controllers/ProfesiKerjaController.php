@@ -72,7 +72,7 @@ class ProfesiKerjaController extends Controller
 
         ProfesiKerja::create($data);
 
-        return redirect()->route('admin.profesi-kerja.index')->with('success', 'profesi kerja berhasil ditambahkan');
+        return redirect()->route('admin.eksplorasi-profesi.profesi-kerja.index')->with('success', 'profesi kerja berhasil ditambahkan');
     }
 
     /**
@@ -120,7 +120,7 @@ class ProfesiKerjaController extends Controller
 
         $profesi->update($data);
 
-        return redirect()->route('admin.profesi-kerja.index')->with('success', 'profesi kerja berhasil diupdate');
+        return redirect()->route('admin.eksplorasi-profesi.profesi-kerja.index')->with('success', 'profesi kerja berhasil diupdate');
     }
 
     /**
@@ -134,6 +134,6 @@ class ProfesiKerjaController extends Controller
         }
         $profesi->delete();
 
-        return redirect()->route('admin.profesi-kerja.index')->with('success', 'profesi kerja berhasil dihapus');
+        return redirect()->route('admin.eksplorasi-profesi.profesi-kerja.index')->with('success', 'profesi kerja berhasil dihapus');
     }
 }
