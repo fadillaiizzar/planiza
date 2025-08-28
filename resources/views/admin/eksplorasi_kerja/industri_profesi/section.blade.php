@@ -53,7 +53,7 @@
                                 </button>
 
                                 <div id="dropdown-{{ $relasi->id }}" class="hidden absolute right-32 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
-                                    <a href="{{ route('admin.industri-profesi.show', $relasi->id) }}"
+                                    <a href="{{ route('admin.eksplorasi-profesi.industri-profesi.show', $relasi->id) }}"
                                         class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
                                         <i class="fas fa-eye w-5 h-5"></i>
                                         <span>Detail</span>
@@ -65,7 +65,7 @@
                                         <span>Edit</span>
                                     </button>
                                     <div class="border-t border-border-gray"></div>
-                                    <form action="{{ route('admin.industri-profesi.destroy', $relasi->id) }}" method="POST" class="w-full">
+                                    <form action="{{ route('admin.eksplorasi-profesi.industri-profesi.destroy', $relasi->id) }}" method="POST" class="w-full">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button"
@@ -73,7 +73,7 @@
                                                 {{ $relasi->id }},
                                                 '{{ addslashes($relasi->industri->nama_industri) }}',
                                                 '{{ addslashes($relasi->profesiKerja->nama_profesi_kerja) }}',
-                                                '{{ route('admin.industri-profesi.destroy', $relasi->id) }}'
+                                                '{{ route('admin.eksplorasi-profesi.industri-profesi.destroy', $relasi->id) }}'
                                             )"
                                             class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base">
                                             <i class="fas fa-trash-alt w-5 h-5"></i>
@@ -156,7 +156,7 @@
     }
 
     function showEdit(id) {
-        fetch(`/admin/industri-profesi/${id}/edit`)
+        fetch(`/admin/eksplorasi-profesi/industri-profesi/${id}/edit`)
             .then(res => res.text())
             .then(html => {
                 document.getElementById('modalContentEdit').innerHTML = html;

@@ -81,7 +81,7 @@ class IndustriProfesiController extends Controller
         // tambahkan relasi tanpa menghapus yang lama
         $industri->profesiKerjas()->syncWithoutDetaching([$request->profesi_kerja_id]);
 
-        return redirect()->route('admin.industri-profesi.index')
+        return redirect()->route('admin.eksplorasi-profesi.industri-profesi.index')
             ->with('success', 'Relasi industri - profesi berhasil ditambahkan');
     }
 
@@ -123,7 +123,7 @@ class IndustriProfesiController extends Controller
             'profesi_kerja_id' => $request->profesi_kerja_id,
         ]);
 
-        return redirect()->route('admin.industri-profesi.index')->with('success', 'Relasi industri - profesi berhasil diperbarui');
+        return redirect()->route('admin.eksplorasi-profesi.industri-profesi.index')->with('success', 'Relasi industri - profesi berhasil diperbarui');
     }
 
     /**
@@ -135,6 +135,6 @@ class IndustriProfesiController extends Controller
         $industriProfesi = IndustriProfesi::findOrFail($id);
         $industriProfesi->delete();
 
-        return redirect()->route('admin.industri-profesi.index')->with('success', 'Relasi industri - profesi berhasil dihapus');
+        return redirect()->route('admin.eksplorasi-profesi.industri-profesi.index')->with('success', 'Relasi industri - profesi berhasil dihapus');
     }
 }
