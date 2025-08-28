@@ -1,11 +1,11 @@
 @extends('layouts.siswa')
 
-@section('title', 'Eksplorasi Kerja')
+@section('title', 'Eksplorasi Profesi - Siswa')
 
 @section('content')
     <div class="px-4 py-8 sm:px-8">
         <x-siswa.section-header
-            title="Temukan Eksplorasi Kerja"
+            title="Temukan Eksplorasi Profesi"
             subtitle="Jelajahi berbagai profesi dan jurusan kuliah masa depan sesuai minat dan potensi kamu. Dapatkan informasi singkat tentang setiap jurusan, prospek karier, serta kampus yang menyediakannya"
             back-route="siswa.dashboard"
         />
@@ -44,7 +44,7 @@
                                 <i class="fas fa-money-bill-wave"></i> : Rp{{ number_format($profesi->gaji, 0, ',', '.') }}
                             </p>
 
-                            <a href="{{ route('siswa.eksplorasi-kerja.show', $profesi->id) }}"
+                            <a href="{{ route('siswa.eksplorasi-profesi.show', $profesi->id) }}"
                             class="flex-1 text-sm text-center bg-slate-navy text-white px-4 py-2 rounded-lg transition">
                                 Lihat Detail
                             </a>

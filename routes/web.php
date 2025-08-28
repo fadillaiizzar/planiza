@@ -70,5 +70,5 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->na
 
     Route::resource('materi', MateriSiswaController::class)->names('materi');
 
-    Route::resource('eksplorasi-kerja', EksplorasiKerjaSiswaController::class)->names('eksplorasi-kerja');
+    Route::resource('eksplorasi-profesi', EksplorasiKerjaSiswaController::class)->names('eksplorasi-profesi');
 });

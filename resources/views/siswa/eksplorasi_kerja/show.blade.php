@@ -8,7 +8,7 @@
     <x-siswa.section-header
         title="Detail {{ $profesi->nama_profesi_kerja }}"
         subtitle="Detail profesi kerja, skill dibutuhkan, jurusan, dan industri terkait"
-        back-route="siswa.eksplorasi-kerja.index"
+        back-route="siswa.eksplorasi-profesi.index"
     />
 
     <x-siswa.info-siswa

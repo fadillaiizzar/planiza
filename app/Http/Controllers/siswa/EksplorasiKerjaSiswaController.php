@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Siswa;
 
-use App\Models\Materi;
-use App\Models\TopikMateri;
 use App\Models\ProfesiKerja;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
