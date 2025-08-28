@@ -28,7 +28,7 @@
             ])
 
             @include('components.admin.materi.materi-card', [
-                'icon' => 'fas fa-folder-open',
+                'icon' => 'fas fa-tasks',
                 'label' => $labelRencana,
                 'items' => $materiPerRencana ?? []
             ])
@@ -90,7 +90,7 @@
                     @empty
                         <x-empty-state
                             colspan="6"
-                            icon="fa-folder-open"
+                            icon="fas fa-layer-group"
                             message="Belum ada topik. Tambahkan data"
                             button="true"
                             buttonAction="openModal()"

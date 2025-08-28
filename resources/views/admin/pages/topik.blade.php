@@ -18,8 +18,8 @@
             'userCount' => $userCount,
             'stats' => [
                 ['label' => 'Total Topik', 'count' => $topikMaterisCount, 'icon' => 'fas fa-layer-group', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
-                ['label' => 'Topik per Kelas', 'count' => $materiPerKelas->sum(), 'icon' => 'fas fa-layer-group', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
-                ['label' => 'Topik per Jurusan', 'count' => $materiPerJurusan->sum(), 'icon' => 'fas fa-university', 'bg' => 'from-purple-500 to-purple-600', 'textColor' => 'text-purple-100'],
+                ['label' => 'Topik per Kelas', 'count' => $materiPerKelas->sum(), 'icon' => 'fas fa-user-graduate', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
+                ['label' => 'Topik per Jurusan', 'count' => $materiPerJurusan->sum(), 'icon' => 'fas fa-school', 'bg' => 'from-purple-500 to-purple-600', 'textColor' => 'text-purple-100'],
                 ['label' => 'Topik per Rencana', 'count' => $materiPerRencana->sum(), 'icon' => 'fas fa-tasks', 'bg' => 'from-yellow-500 to-yellow-600', 'textColor' => 'text-yellow-100'],
             ],
            'filterOptions' => [

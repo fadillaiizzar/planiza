@@ -27,7 +27,7 @@
             ])
 
             @include('components.admin.materi.materi-card', [
-                'icon' => 'fas fa-folder-open',
+                'icon' => 'fas fa-tasks',
                 'label' => $labelRencana,
                 'items' => $materiPerRencana ?? []
             ])
