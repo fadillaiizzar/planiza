@@ -13,7 +13,6 @@
             ['href' => '#', 'icon' => 'fas fa-tags', 'title' => 'Kategori Minat'],
         ]" />
 
-
         @component('admin.kenali_profesi.kategori_minat.section', [
             'id' => 'sectionKategoriMinat',
             'pageTitle' => 'Kategori Minat Management',
@@ -24,7 +23,7 @@
             ],
             'filterOptions' => $filterOptions,
             'searchPlaceholder' => 'Cari berdasarkan nama kategori',
-            'itemCount' =>  $kategoriMinatCount,    
+            'itemCount' =>  $kategoriMinatCount,
             'tableTitle' => 'Daftar Kategori Minat',
             'tableHeaders' => ['ID', 'Nama Kategori', 'Deskripsi', 'Aksi'],
             'items' => $kategoriMinats,
