@@ -34,41 +34,41 @@ Route::middleware('auth')->group(function () {
     Route::get('/redirect', [AuthController::class, 'redirectByRole'])->name('redirect');
 });
 
-Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrator,admin'])->group(function () {
+Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrator,admin'])->name('admin.')->group(function () {
     Route::get('/register', [UserController::class, 'create'])->name('register');
     Route::post('/register', [UserController::class, 'store']);
 
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
-    Route::resource('users', UserController::class)->names('admin.user');
+    Route::resource('users', UserController::class)->names('user');
 
-    Route::get('/pembelajaran', [PembelajaranController::class, 'index'])->name('admin.pembelajaran.index');
-    Route::prefix('pembelajaran')->name('admin.pembelajaran.')->group(function () {
+    Route::prefix('pembelajaran')->name('pembelajaran.')->group(function () {
+        Route::get('/', [PembelajaranController::class, 'index'])->name('index');
         Route::resource('topik-materi', TopikMateriController::class);
         Route::resource('materi', MateriController::class);
     });
 
-    Route::get('/eksplorasi-profesi', [EksplorasiKerjaController::class, 'index'])->name('admin.eksplorasi-profesi.index');
-    Route::prefix('eksplorasi-profesi')->name('admin.eksplorasi-profesi.')->group(function () {
+    Route::prefix('eksplorasi-profesi')->name('eksplorasi-profesi.')->group(function () {
+        Route::get('/', [EksplorasiKerjaController::class, 'index'])->name('index');
         Route::resource('profesi-kerja', ProfesiKerjaController::class);
         Route::resource('industri', IndustriController::class);
         Route::resource('industri-profesi', IndustriProfesiController::class);
     });
 
-    Route::get('/kenali-profesi', [KenaliKerjaController::class, 'index'])->name('admin.kenali-profesi.index');
-    Route::prefix('kenali-profesi')->name('admin.kenali-profesi.')->group(function () {
+    Route::prefix('kenali-profesi')->name('kenali-profesi.')->group(function () {
+        Route::get('/', [KenaliKerjaController::class, 'index'])->name('index');
         Route::resource('kategori-minat', KategoriMinatController::class);
         Route::resource('profesi-kategori', ProfesiKategoriController::class);
     });
 
-    Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('admin.kontribusi-sdgs');
+    Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('kontribusi-sdgs');
 });
 
-Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->group(function () {
-    Route::get('/dashboard/', [SiswaController::class, 'index'])->name('siswa.dashboard');
-    Route::post('/simpan-rencana', [SiswaController::class, 'simpanRencana'])->name('siswa.simpan.rencana');
+Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->name('siswa.')->group(function () {
+    Route::get('/dashboard/', [SiswaController::class, 'index'])->name('dashboard');
+    Route::post('/simpan-rencana', [SiswaController::class, 'simpanRencana'])->name('simpan.rencana');
 
-    Route::resource('materi', MateriSiswaController::class)->names('siswa.materi');
+    Route::resource('materi', MateriSiswaController::class)->names('materi');
 
-    Route::resource('eksplorasi-kerja', EksplorasiKerjaSiswaController::class)->names('siswa.eksplorasi-kerja');
+    Route::resource('eksplorasi-kerja', EksplorasiKerjaSiswaController::class)->names('eksplorasi-kerja');
 });
