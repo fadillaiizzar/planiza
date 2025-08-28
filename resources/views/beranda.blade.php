@@ -49,7 +49,7 @@
     <section id="beranda" class="h-screen flex flex-col justify-center items-center text-center px-4 bg-off-white">
         <h1 class="text-5xl font-extrabold text-slate-navy mb-4 drop-shadow-lg">Planiza</h1>
         <p class="text-cool-gray mb-6 max-w-xl">Brand Promosie – Solusi Digital Edukasi & Karier yang Membuka Peluang Masa Depanmu.</p>
-        <a href="#fitur" class="bg-slate-navy text-off-white px-6 py-3 rounded-md text-base font-semibold hover:scale-105 transition duration-300">Jelajahi Fitur</a>
+        <a href="#layanan" class="bg-slate-navy text-off-white px-6 py-3 rounded-md text-base font-semibold hover:scale-105 transition duration-300">Jelajahi Fitur</a>
     </section>
 
     <!-- Info Section -->
@@ -123,7 +123,7 @@
     <section id="layanan" class="py-20 bg-off-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-2xl md:text-3xl font-bold text-slate-navy mb-12 text-center">Layanan Kami</h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="bg-off-white border border-border p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
                     <div class="bg-blue-500 text-off-white p-2 rounded-lg shadow-sm mb-4 w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -137,7 +137,7 @@
                         Pelajari <i class="fas fa-arrow-right ml-1 text-xs"></i>
                     </a>
                 </div>
-                
+
                 <div class="bg-off-white border border-border p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
                     <div class="bg-green-500 text-off-white p-2 rounded-lg shadow-sm mb-4 w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -150,7 +150,7 @@
                         Pelajari <i class="fas fa-arrow-right ml-1 text-xs"></i>
                     </a>
                 </div>
-                
+
                 <div class="bg-off-white border border-border p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
                     <div class="bg-purple-500 text-off-white p-2 rounded-lg shadow-sm mb-4 w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -163,7 +163,7 @@
                         Pelajari <i class="fas fa-arrow-right ml-1 text-xs"></i>
                     </a>
                 </div>
-                
+
                 <div class="bg-off-white border border-border p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
                     <div class="bg-orange-500 text-off-white p-2 rounded-lg shadow-sm mb-4 w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -176,7 +176,7 @@
                         Pelajari <i class="fas fa-arrow-right ml-1 text-xs"></i>
                     </a>
                 </div>
-                
+
                 <div class="bg-off-white border border-border p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
                     <div class="bg-teal-500 text-off-white p-2 rounded-lg shadow-sm mb-4 w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
