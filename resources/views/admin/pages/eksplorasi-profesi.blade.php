@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Kenali Profesi Admin - Planiza')
+@section('title', 'Eksplorasi Profesi Admin - Planiza')
 
 @section('content')
     <!-- Overlay (mobile) -->
@@ -25,9 +25,9 @@
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-5">
                     @php
                         $actions = [
-                            ['route' => route('admin.profesi-kerja.index'), 'icon' => 'fas fa-briefcase', 'label' => 'Profesi'],
-                            ['route' => route('admin.industri.index'), 'icon' => 'fas fa-industry', 'label' => 'Industri'],
-                            ['route' => route('admin.industri-profesi.index'), 'icon' => 'fas fa-project-diagram', 'label' => 'Industri Profesi'],
+                            ['route' => route('admin.eksplorasi-profesi.profesi-kerja.index'), 'icon' => 'fas fa-briefcase', 'label' => 'Profesi'],
+                            ['route' => route('admin.eksplorasi-profesi.industri.index'), 'icon' => 'fas fa-industry', 'label' => 'Industri'],
+                            ['route' => route('admin.eksplorasi-profesi.industri-profesi.index'), 'icon' => 'fas fa-project-diagram', 'label' => 'Industri Profesi'],
                         ];
                     @endphp
 
@@ -55,13 +55,13 @@
 
                                 switch ($activity['type']) {
                                     case 'profesi':
-                                        $detailUrl = route('admin.profesi-kerja.show', $activity['id']);
+                                        $detailUrl = route('admin.eksplorasi-profesi.profesi-kerja.show', $activity['id']);
                                         break;
                                     case 'industri':
-                                        $detailUrl = route('admin.industri.show', $activity['id']);
+                                        $detailUrl = route('admin.eksplorasi-profesi.industri.show', $activity['id']);
                                         break;
                                     case 'industri-profesi':
-                                        $detailUrl = route('admin.industri-profesi.show', $activity['id']);
+                                        $detailUrl = route('admin.eksplorasi-profesi.industri-profesi.show', $activity['id']);
                                         break;
                                 }
                             @endphp
