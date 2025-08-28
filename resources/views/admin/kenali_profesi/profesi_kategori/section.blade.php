@@ -19,7 +19,7 @@
             />
 
             <x-admin.eksplorasi_kerja.industri-profesi-card
-                icon="fas fa-layer-group"
+                icon="fas fa-folder-open"
                 :label="$labelKategori"
                 :items="$kategoriProfesi"
             />
@@ -86,7 +86,7 @@
                     @empty
                         <x-empty-state
                             colspan="4"
-                            icon="fas fa-link"
+                            icon="fas fa-clipboard-check"
                             message="Belum ada relasi profesi ↔ kategori minat. Tambahkan data"
                             button="true"
                             buttonAction="openModal()"

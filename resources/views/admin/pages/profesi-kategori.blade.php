@@ -20,7 +20,7 @@
             'stats' => [
                 ['label' => 'Total Relasi', 'count' => $relasiCount, 'icon' => 'fas fa-clipboard-check', 'bg' => 'from-purple-500 to-purple-600', 'textColor' => 'text-purple-100'],
                 ['label' => 'Total Profesi', 'count' => $profesiCount, 'icon' => 'fas fa-briefcase', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
-                ['label' => 'Total Kategori Minat', 'count' => $kategoriMinatCount, 'icon' => 'fas fa-layer-group', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
+                ['label' => 'Total Kategori Minat', 'count' => $kategoriMinatCount, 'icon' => 'fas fa-folder-open', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
             ],
             'filterOptions' => $filterOptions,
             'searchPlaceholder' => 'Cari berdasarkan profesi atau kategori minat',
