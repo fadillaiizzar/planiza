@@ -17,6 +17,7 @@ use App\Http\Controllers\KategoriMinatController;
 use App\Http\Controllers\KontribusiSdgsController;
 use App\Http\Controllers\EksplorasiKerjaController;
 use App\Http\Controllers\IndustriProfesiController;
+use App\Http\Controllers\PembelajaranController;
 use App\Http\Controllers\Siswa\EksplorasiKerjaSiswaController;
 
 Route::get('/', function () {
@@ -39,9 +40,11 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
 
     Route::resource('users', UserController::class)->names('admin.user');
 
-    Route::resource('topik-materi', TopikMateriController::class)->names('admin.topik.materi');
-
-    Route::resource('materi', MateriController::class)->names('admin.materi');
+    Route::get('/pembelajaran', [PembelajaranController::class, 'index'])->name('admin.pembelajaran.index');
+    Route::prefix('pembelajaran')->name('admin.pembelajaran.')->group(function () {
+        Route::resource('topik-materi', TopikMateriController::class);
+        Route::resource('materi', MateriController::class);
+    });
 
     Route::get('/eksplorasi-profesi', [EksplorasiKerjaController::class, 'index'])->name('admin.eksplorasi-profesi.index');
     Route::prefix('eksplorasi-profesi')->name('admin.eksplorasi-profesi.')->group(function () {
