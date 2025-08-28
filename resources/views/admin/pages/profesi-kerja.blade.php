@@ -8,25 +8,10 @@
 
     <!-- Main -->
     <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
-        <div class="flex justify-center mb-8 gap-4 flex-wrap">
-            <x-admin.navbar.button-link-aktif
-                href="{{ route('admin.profesi-kerja.index') }}"
-                icon="fas fa-briefcase"
-                title="Profesi Kerja"
-            />
-
-            <x-admin.navbar.button-link
-                href="{{ route('admin.industri.index') }}"
-                icon="fas fa-industry"
-                title="Industri"
-            />
-
-            <x-admin.navbar.button-link
-                href="{{ route('admin.industri-profesi.index') }}"
-                icon="fas fa-project-diagram"
-                title="Industri Profesi"
-            />
-        </div>
+        <x-admin.breadcrumb :links="[
+            ['href' => route('admin.eksplorasi-profesi.index'), 'icon' => 'fas fa-globe', 'title' => 'Eksplorasi Profesi'],
+            ['href' => '#', 'icon' => 'fas fa-briefcase', 'title' => 'Profesi Kerja'],
+        ]" />
 
         @component('admin.eksplorasi_kerja.profesi_kerja.section', [
             'id' => 'sectionProfesi',
