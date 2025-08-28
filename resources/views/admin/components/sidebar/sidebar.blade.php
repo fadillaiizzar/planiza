@@ -26,8 +26,8 @@
                     ['icon' => 'fa-home', 'label' => 'Dashboard', 'route' => 'admin.dashboard'],
                     ['icon' => 'fa-users', 'label' => 'User', 'route' => 'admin.user.index'],
                     ['icon' => 'fa-book', 'label' => 'Materi', 'route' => 'admin.topik.materi.index'],
-                    ['icon' => 'fa-globe', 'label' => 'Eksplorasi Kerja', 'route' => 'admin.eksplorasi-profesi'],
-                    ['icon' => 'fa-briefcase', 'label' => 'Kenali Karier', 'route' => 'admin.kenali-profesi'],
+                    ['icon' => 'fa-globe', 'label' => 'Eksplorasi Profesi', 'route' => 'admin.eksplorasi-profesi.index'],
+                    ['icon' => 'fa-user-tie', 'label' => 'Kenali Profesi', 'route' => 'admin.kenali-profesi.index'],
                     ['icon' => 'fa-leaf', 'label' => 'Kontribusi SDGs', 'route' => 'admin.kontribusi-sdgs'],
                     ['icon' => 'fa-comments', 'label' => 'Bincang Karier', 'route' => 'admin.dashboard'],
                 ];
