@@ -84,7 +84,7 @@
 
                                 <div id="dropdown-{{ $item->id }}"
                                     class="hidden absolute right-10 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
-                                    <a href="{{ route('admin.materi.show', $item->id) }}"
+                                    <a href="{{ route('admin.pembelajaran.materi.show', $item->id) }}"
                                         class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
                                         <i class="fas fa-eye w-5 h-5"></i>
                                         <span>Detail</span>
@@ -97,7 +97,7 @@
                                     </button>
                                     <div class="border-t border-border-gray"></div>
                                     <button type="button"
-                                        onclick="showDeleteModal({{ $item->id }}, '{{ addslashes($item->nama_materi) }}', '{{ route('admin.materi.destroy', $item->id) }}')"
+                                        onclick="showDeleteModal({{ $item->id }}, '{{ addslashes($item->nama_materi) }}', '{{ route('admin.pembelajaran.materi.destroy', $item->id) }}')"
                                         class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base border-none bg-transparent cursor-pointer">
                                         <i class="fas fa-trash-alt w-5 h-5"></i>
                                         <span>Hapus</span>
@@ -198,7 +198,7 @@
     });
 
     function showEditMateri(id) {
-        fetch(`/admin/materi/${id}/edit`)
+        fetch(`/admin/pembelajaran/materi/${id}/edit`)
             .then(res => res.text())
             .then(html => {
                 document.getElementById('modalContentEditMateri').innerHTML = html;

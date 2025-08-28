@@ -8,19 +8,10 @@
 
     <!-- Main -->
     <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
-        <div class="flex justify-center mb-8 gap-4 flex-wrap">
-            <x-admin.navbar.button-link
-                href="{{ route('admin.topik.materi.index') }}"
-                icon="fas fa-book-open"
-                title="Topik Materi"
-            />
-
-            <x-admin.navbar.button-link-aktif
-                href="{{ route('admin.materi.index') }}"
-                icon="fas fa-file-lines"
-                title="Materi"
-            />
-        </div>
+        <x-admin.breadcrumb :links="[
+            ['href' => route('admin.pembelajaran.index'), 'icon' => 'fas fa-book', 'title' => 'Pembelajaran'],
+            ['href' => '#', 'icon' => 'fas fa-book-open', 'title' => 'Materi'],
+        ]" />
 
         @component('admin.materi.materi.section', [
             'id' => 'sectionMateri',
@@ -28,7 +19,7 @@
             'addButtonText' => 'Tambah Materi',
             'userCount' => $userCount,
             'stats' => [
-                ['label' => 'Total Materi', 'count' => $materisCount, 'icon' => 'fas fa-book', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
+                ['label' => 'Total Materi', 'count' => $materisCount, 'icon' => 'fas fa-book-open', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
                 ['label' => 'Materi per Kelas', 'count' => $materiPerKelas->sum(), 'icon' => 'fas fa-layer-group', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
                 ['label' => 'Materi per Jurusan', 'count' => $materiPerJurusan->sum(), 'icon' => 'fas fa-university', 'bg' => 'from-purple-500 to-purple-600', 'textColor' => 'text-purple-100'],
                 ['label' => 'Materi per Rencana', 'count' => $materiPerRencana->sum(), 'icon' => 'fas fa-tasks', 'bg' => 'from-yellow-500 to-yellow-600', 'textColor' => 'text-yellow-100'],
