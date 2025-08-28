@@ -43,10 +43,12 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
 
     Route::resource('materi', MateriController::class)->names('admin.materi');
 
-    Route::get('/eksplorasi-profesi', [EksplorasiKerjaController::class, 'index'])->name('admin.eksplorasi-profesi');
-    Route::resource('profesi-kerja', ProfesiKerjaController::class)->names('admin.profesi-kerja');
-    Route::resource('industri', IndustriController::class)->names('admin.industri');
-    Route::resource('industri-profesi', IndustriProfesiController::class)->names('admin.industri-profesi');
+    Route::get('/eksplorasi-profesi', [EksplorasiKerjaController::class, 'index'])->name('admin.eksplorasi-profesi.index');
+    Route::prefix('eksplorasi-profesi')->name('admin.eksplorasi-profesi.')->group(function () {
+        Route::resource('profesi-kerja', ProfesiKerjaController::class);
+        Route::resource('industri', IndustriController::class);
+        Route::resource('industri-profesi', IndustriProfesiController::class);
+    });
 
     Route::get('/kenali-profesi', [KenaliKerjaController::class, 'index'])->name('admin.kenali-profesi');
     Route::prefix('kenali-profesi')->name('admin.kenali-profesi-kerja.')->group(function () {
