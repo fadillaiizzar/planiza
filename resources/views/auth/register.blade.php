@@ -38,7 +38,7 @@
 
     <!-- Form Content -->
     <div class="px-6 pt-2 pb-6">
-        <form method="POST" action="{{ route('register') }}" class="space-y-4">
+        <form method="POST" action="{{ route('admin.register') }}" class="space-y-4">
             @csrf
 
             <!-- Nama -->

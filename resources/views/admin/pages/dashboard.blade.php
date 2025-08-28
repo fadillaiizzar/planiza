@@ -12,7 +12,7 @@
             <button onclick="toggleSidebar()" class="text-2xl">
                 <i class="fas fa-bars"></i>
             </button>
-            <a href="{{ route('register') }}" class="text-xl text-slate-navy hover:text-blue-600">
+            <a href="{{ route('admin.register') }}" class="text-xl text-slate-navy hover:text-blue-600">
                 <i class="fas fa-user-plus"></i>
             </a>
         </div>

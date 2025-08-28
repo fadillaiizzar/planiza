@@ -12,14 +12,14 @@
             <button onclick="toggleSidebar()" class="text-2xl">
                 <i class="fas fa-bars"></i>
             </button>
-            <a href="{{ route('register') }}" class="text-xl text-slate-navy hover:text-blue-600">
+            <a href="{{ route('admin.register') }}" class="text-xl text-slate-navy hover:text-blue-600">
                 <i class="fas fa-user-plus"></i>
             </a>
         </div>
 
         <div class="hidden md:flex justify-between items-center mb-6">
             <h2 class="text-2xl font-semibold">Kontribusi SDGs</h2>
-            <a href="{{ route('register') }}" class="px-4 py-2 bg-white text-slate-navy hover:bg-slate-navy hover:text-white border border-slate-navy rounded transition">
+            <a href="{{ route('admin.register') }}" class="px-4 py-2 bg-white text-slate-navy hover:bg-slate-navy hover:text-white border border-slate-navy rounded transition">
                 Tambah Akun
             </a>
         </div>
