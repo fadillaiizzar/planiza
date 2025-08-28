@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Industri;
 use App\Models\ProfesiKerja;
-use Illuminate\Http\Request;
 use App\Models\IndustriProfesi;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,7 +36,7 @@ class EksplorasiKerjaController extends Controller
             return [
                 'id' => $item->id,
                 'type' => 'industri-profesi',
-                'name' => $item->nama_industri_profesi,
+                'name' => ($item->industri->nama_industri ?? '-') . ' - ' . ($item->profesiKerja->nama_profesi_kerja ?? '-'),
                 'created_at' => $item->updated_at,
                 'action' => optional($item->created_at)->eq($item->updated_at) ? 'create' : 'update',
             ];
