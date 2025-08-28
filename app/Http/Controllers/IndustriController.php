@@ -62,7 +62,7 @@ class IndustriController extends Controller
 
         Industri::create($request->all());
 
-        return redirect()->route('admin.industri.index')->with('success', 'industri berhasil ditambahkan');
+        return redirect()->route('admin.eksplorasi-profesi.industri.index')->with('success', 'industri berhasil ditambahkan');
     }
 
     /**
@@ -97,7 +97,7 @@ class IndustriController extends Controller
         $industri = Industri::findOrFail($id);
         $industri->update($request->all());
 
-        return redirect()->route('admin.industri.index')->with('success', 'Industri berhasil diupdate');
+        return redirect()->route('admin.eksplorasi-profesi.industri.index')->with('success', 'Industri berhasil diupdate');
     }
 
     /**
@@ -108,6 +108,6 @@ class IndustriController extends Controller
         $industri = Industri::findOrFail($id);
         $industri->delete();
 
-        return redirect()->route('admin.industri.index')->with('success', 'Industri berhasil dihapus');
+        return redirect()->route('admin.eksplorasi-profesi.industri.index')->with('success', 'Industri berhasil dihapus');
     }
 }

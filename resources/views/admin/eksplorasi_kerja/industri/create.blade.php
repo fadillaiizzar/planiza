@@ -36,7 +36,7 @@
 
     <!-- Form Content -->
     <div class="px-6 pt-2 pb-6">
-        <form action="{{ route('admin.industri.store') }}" method="POST" class="space-y-4">
+        <form action="{{ route('admin.eksplorasi-profesi.industri.store') }}" method="POST" class="space-y-4">
             @csrf
 
             <!-- Nama Industri -->
