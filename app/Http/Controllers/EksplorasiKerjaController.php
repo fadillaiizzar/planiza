@@ -2,36 +2,67 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Industri;
+use App\Models\ProfesiKerja;
+use Illuminate\Http\Request;
+use App\Models\IndustriProfesi;
+use Illuminate\Support\Facades\Auth;
 
 class EksplorasiKerjaController extends Controller
 {
     public function index()
     {
-        return view('admin.pages.materi', [
-            'user' => Auth::user(),
-            'userCount' => User::count(),
-            'materiCount' => 23,
-            'eksplorasiCount' => 12,
-            'aktivitas' => [
-                (object)[
-                    'created_at' => now()->subMinutes(5),
-                    'user' => (object)['name' => 'Dilla'],
-                    'aktivitas' => 'Menambahkan materi baru',
-                ],
-                (object)[
-                    'created_at' => now()->subHours(1),
-                    'user' => (object)['name' => 'Rina'],
-                    'aktivitas' => 'Mengedit eksplorasi',
-                ],
-                (object)[
-                    'created_at' => now()->subDays(1),
-                    'user' => (object)['name' => 'Budi'],
-                    'aktivitas' => 'Menghapus akun user',
-                ],
-            ],
+        $profesi = ProfesiKerja::latest()->get()->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'type' => 'profesi',
+                'name' => $item->nama_profesi_kerja,
+                'created_at' => $item->updated_at,
+                'action' => optional($item->created_at)->eq($item->updated_at) ? 'create' : 'update',
+            ];
+        });
+
+        $industri = Industri::latest()->get()->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'type' => 'industri',
+                'name' => $item->nama_industri,
+                'created_at' => $item->updated_at,
+                'action' => optional($item->created_at)->eq($item->updated_at) ? 'create' : 'update',
+            ];
+        });
+
+        $industriProfesi = IndustriProfesi::latest()->get()->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'type' => 'industri-profesi',
+                'name' => $item->nama_industri_profesi,
+                'created_at' => $item->updated_at,
+                'action' => optional($item->created_at)->eq($item->updated_at) ? 'create' : 'update',
+            ];
+        });
+
+        $activities = $profesi
+            ->merge($industri)
+            ->merge($industriProfesi)
+            ->sortByDesc('created_at')
+            ->take(10);
+
+        $profesiCount = ProfesiKerja::count();
+        $industriCount = Industri::count();
+        $industriProfesiCount = IndustriProfesi::count();
+
+        $user = Auth::user();
+        $userCount = User::count();
+
+        return view('admin.pages.eksplorasi-profesi', [
+            'activities' => $activities,
+            'profesiCount' => $profesiCount,
+            'industriCount' => $industriCount,
+            'industriProfesiCount' => $industriProfesiCount,
+            'user' => $user,
+            'userCount' => $userCount,
         ]);
     }
 }
