@@ -62,7 +62,7 @@ class IndustriController extends Controller
 
         Industri::create($request->all());
 
-        return redirect()->route('admin.industri.index')->with('success', 'Industri berhasil ditambahkan');
+        return redirect()->route('admin.industri.index')->with('success', 'industri berhasil ditambahkan');
     }
 
     /**
