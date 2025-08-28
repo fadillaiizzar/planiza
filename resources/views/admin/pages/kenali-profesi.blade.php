@@ -11,8 +11,8 @@
                 'pageTitle' => 'Kenali Profesi Management',
                 'userCount' => $userCount,
                 'stats' => [
-                    ['label' => 'Total Profesi Kerja', 'count' => $profesiCount, 'icon' => 'fas fa-book', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
-                    ['label' => 'Topik Kategori Minat', 'count' => $kategoriMinatCount, 'icon' => 'fas fa-layer-group', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
+                    ['label' => 'Total Profesi Kerja', 'count' => $profesiCount, 'icon' => 'fas fa-briefcase', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
+                    ['label' => 'Topik Kategori Minat', 'count' => $kategoriMinatCount, 'icon' => 'fas fa-folder-open', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
                 ],
             ])
 
@@ -24,7 +24,7 @@
                     @php
                         $actions = [
                             ['route' => route('admin.eksplorasi-profesi.profesi-kerja.index'), 'icon' => 'fas fa-briefcase', 'label' => 'Profesi'],
-                            ['route' => route('admin.kenali-profesi.kategori-minat.index'), 'icon' => 'fas fa-layer-group', 'label' => 'Kategori Minat'],
+                            ['route' => route('admin.kenali-profesi.kategori-minat.index'), 'icon' => 'fas fa-folder-open', 'label' => 'Kategori Minat'],
                             ['route' => route('admin.kenali-profesi.profesi-kategori.index'), 'icon' => 'fas fa-clipboard-check', 'label' => 'Profesi Kategori'],
                             ['route' => url('/admin/soal'), 'icon' => 'fas fa-file-alt', 'label' => 'Tes'],
                             ['route' => url('/admin/hasil'), 'icon' => 'fas fa-comments', 'label' => 'Hasil'],

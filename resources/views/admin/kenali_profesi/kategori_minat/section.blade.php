@@ -63,15 +63,13 @@
                             </td>
                         </tr>
                     @empty
-                        <tr>
-                            <td colspan="4" class="text-center py-6 text-slate-500">
-                                <i class="fas fa-folder-open text-gray-400 text-lg"></i>
-                                <p class="mt-2">Belum ada kategori minat. Tambahkan data</p>
-                                <button onclick="openModal()" class="mt-3 px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700">
-                                    + Tambah Kategori
-                                </button>
-                            </td>
-                        </tr>
+                        <x-empty-state
+                            icon="fas fa-folder-open"
+                            message="Belum ada kategori minat. Tambahkan data"
+                            button="true"
+                            buttonAction="openModal()"
+                            buttonText="+ Tambah Kategori"
+                        />
                     @endforelse
                 </tbody>
             </table>

@@ -8,7 +8,7 @@
     <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
         <x-admin.breadcrumb :links="[
             ['href' => route('admin.kenali-profesi.index'), 'icon' => 'fas fa-user-tie', 'title' => 'Kenali Profesi'],
-            ['href' => '#', 'icon' => 'fas fa-tags', 'title' => 'Kategori Minat'],
+            ['href' => '#', 'icon' => 'fas fa-folder-open', 'title' => 'Kategori Minat'],
         ]" />
 
         @component('admin.kenali_profesi.kategori_minat.section', [
@@ -17,7 +17,7 @@
             'addButtonText' => 'Tambah Kategori',
             'userCount' => $userCount,
             'stats' => [
-                ['label' => 'Total Kategori Minat', 'count' => $kategoriMinatCount, 'icon' => 'fas fa-book', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
+                ['label' => 'Total Kategori Minat', 'count' => $kategoriMinatCount, 'icon' => 'fas fa-folder-open', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
             ],
             'filterOptions' => $filterOptions,
             'searchPlaceholder' => 'Cari berdasarkan nama kategori',
