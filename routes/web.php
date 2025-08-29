@@ -19,6 +19,7 @@ use App\Http\Controllers\EksplorasiKerjaController;
 use App\Http\Controllers\IndustriProfesiController;
 use App\Http\Controllers\ProfesiKategoriController;
 use App\Http\Controllers\Siswa\EksplorasiKerjaSiswaController;
+use App\Http\Controllers\TesController;
 
 Route::get('/', function () {
     return view('beranda');
@@ -57,6 +58,7 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
         Route::get('/', [KenaliKerjaController::class, 'index'])->name('index');
         Route::resource('kategori-minat', KategoriMinatController::class);
         Route::resource('profesi-kategori', ProfesiKategoriController::class);
+        Route::resource('tes', TesController::class);
     });
 
     Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('kontribusi-sdgs');
