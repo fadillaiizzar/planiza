@@ -1,3 +1,5 @@
+<x-admin.toast />
+
 <div class="mx-auto max-w-7xl space-y-6">
     @include('admin.components.header.header', [
         'pageTitle' => $pageTitle,

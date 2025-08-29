@@ -3,13 +3,12 @@
 @section('title', 'User Admin - Planiza')
 
 @section('content')
-    <!-- Overlay (mobile) -->
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-30 z-30 hidden md:hidden" onclick="toggleSidebar()"></div>
 
-    <!-- Main -->
     <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
-        <div class="mx-auto max-w-7xl space-y-6">
+        <x-admin.toast />
 
+        <div class="mx-auto max-w-7xl space-y-6">
            @include('admin.components.header.header', [
                 'pageTitle' => 'User Management',
                 'addButtonText' => 'Tambah User',

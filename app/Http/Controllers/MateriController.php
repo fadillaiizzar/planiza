@@ -156,7 +156,7 @@ class MateriController extends Controller
             'file_materi'=>json_encode($uploadedFiles),
         ]);
 
-        return redirect()->route('admin.pembelajaran.materi.index')->with('success', 'materi berhasil diupdate');
+        return redirect()->route('admin.pembelajaran.materi.index')->with('success', 'Materi berhasil diperbarui');
     }
 
     public function destroy($id)
@@ -164,6 +164,6 @@ class MateriController extends Controller
         $materi = Materi::findOrFail($id);
         $materi->delete();
 
-        return redirect()->route('admin.pembelajaran.materi.index')->with('success', 'materi berhasil dihapus');
+        return redirect()->route('admin.pembelajaran.materi.index')->with('success', 'Materi berhasil dihapus');
     }
 }

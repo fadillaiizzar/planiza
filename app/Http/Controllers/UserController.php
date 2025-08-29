@@ -113,12 +113,12 @@ class UserController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.user.index')->with('success', 'Registrasi berhasil');
+        return redirect()->route('admin.user.index')->with('success', 'User berhasil ditambahkan');
     }
 
     public function show($id)
     {
-       $detailUser = User::with('role')->findOrFail($id);
+        $detailUser = User::with('role')->findOrFail($id);
 
         $siswa = null;
         if (strtolower($detailUser->role->nama_role) === 'siswa') {
@@ -205,7 +205,7 @@ class UserController extends Controller
             if ($detailUser->siswa) $detailUser->siswa->delete();
         }
 
-        return redirect()->route('admin.user.index')->with('success', 'user berhasil diperbarui');
+        return redirect()->route('admin.user.index')->with('success', 'User berhasil diperbarui');
     }
 
     public function destroy(User $user)

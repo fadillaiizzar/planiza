@@ -72,7 +72,7 @@ class ProfesiKategoriController extends Controller
         // tambahkan relasi tanpa menghapus yang lama
         $profesi->kategoriMinats()->syncWithoutDetaching([$request->kategori_minat_id]);
 
-        return redirect()->route('admin.kenali-profesi.profesi-kategori.index')->with('success', 'Relasi profesi - kategori minat berhasil ditambahkan');
+        return redirect()->route('admin.kenali-profesi.profesi-kategori.index')->with('success', 'Relasi Profesi - Kategori Minat berhasil ditambahkan');
     }
 
     public function show($id)
@@ -103,7 +103,7 @@ class ProfesiKategoriController extends Controller
             'kategori_minat_id' => $request->kategori_minat_id,
         ]);
 
-        return redirect()->route('admin.kenali-profesi.profesi-kategori.index')->with('success', 'Relasi profesi - kategori minat berhasil diperbarui');
+        return redirect()->route('admin.kenali-profesi.profesi-kategori.index')->with('success', 'Relasi Profesi - Kategori Minat berhasil diperbarui');
     }
 
     public function destroy($id)
@@ -111,6 +111,6 @@ class ProfesiKategoriController extends Controller
         $profesiKategori = ProfesiKategori::findOrFail($id);
         $profesiKategori->delete();
 
-        return redirect()->route('admin.kenali-profesi.profesi-kategori.index')->with('success', 'Relasi profesi - kategori minat berhasil dihapus');
+        return redirect()->route('admin.kenali-profesi.profesi-kategori.index')->with('success', 'Relasi Profesi - Kategori Minat berhasil dihapus');
     }
 }
