@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\ProfesiKategori;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\AuthController;
@@ -13,7 +12,6 @@ use App\Http\Controllers\KenaliKerjaController;
 use App\Http\Controllers\MateriSiswaController;
 use App\Http\Controllers\TopikMateriController;
 use App\Http\Controllers\PembelajaranController;
-
 use App\Http\Controllers\ProfesiKerjaController;
 use App\Http\Controllers\KategoriMinatController;
 use App\Http\Controllers\KontribusiSdgsController;
