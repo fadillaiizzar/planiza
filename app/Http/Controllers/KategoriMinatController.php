@@ -85,7 +85,7 @@ class KategoriMinatController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'nama_kategori' => 'required|string|max:255',
@@ -101,7 +101,7 @@ class KategoriMinatController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         $kategoriMinat = KategoriMinat::findOrFail($id);
         $kategoriMinat->delete();
