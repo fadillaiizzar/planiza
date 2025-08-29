@@ -12,7 +12,8 @@
                 'userCount' => $userCount,
                 'stats' => [
                     ['label' => 'Total Profesi Kerja', 'count' => $profesiCount, 'icon' => 'fas fa-briefcase', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
-                    ['label' => 'Topik Kategori Minat', 'count' => $kategoriMinatCount, 'icon' => 'fas fa-folder-open', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
+                    ['label' => 'Kategori Minat', 'count' => $kategoriMinatCount, 'icon' => 'fas fa-folder-open', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
+                    ['label' => 'Profesi Kategori', 'count' => $kategoriMinatCount, 'icon' => 'fas fa-clipboard-check', 'bg' => 'from-red-500 to-red-600', 'textColor' => 'text-red-100'],
                 ],
             ])
 
