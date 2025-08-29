@@ -27,7 +27,7 @@
                             ['route' => route('admin.eksplorasi-profesi.profesi-kerja.index'), 'icon' => 'fas fa-briefcase', 'label' => 'Profesi'],
                             ['route' => route('admin.kenali-profesi.kategori-minat.index'), 'icon' => 'fas fa-folder-open', 'label' => 'Kategori Minat'],
                             ['route' => route('admin.kenali-profesi.profesi-kategori.index'), 'icon' => 'fas fa-clipboard-check', 'label' => 'Profesi Kategori'],
-                            ['route' => url('/admin/soal'), 'icon' => 'fas fa-file-alt', 'label' => 'Tes'],
+                            ['route' => route('admin.kenali-profesi.tes.index'), 'icon' => 'fas fa-file-alt', 'label' => 'Tes'],
                             ['route' => url('/admin/hasil'), 'icon' => 'fas fa-comments', 'label' => 'Hasil'],
                         ];
                     @endphp
