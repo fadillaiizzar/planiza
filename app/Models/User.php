@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable
 {
@@ -38,7 +39,7 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    public function siswa()
+    public function siswa(): HasOne
     {
         return $this->hasOne(Siswa::class);
     }

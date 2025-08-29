@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -14,6 +15,11 @@ class KategoriMinat extends Model
         'nama_kategori',
         'deskripsi',
     ];
+
+    public function opsiJawabans(): HasMany
+    {
+        return $this->hasMany(OpsiJawaban::class);
+    }
 
     public function profesiKerjas(): BelongsToMany
     {
