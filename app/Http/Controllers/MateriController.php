@@ -127,43 +127,43 @@ class MateriController extends Controller
         ));
     }
 
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'topik_materi_id' => 'required|exists:topik_materis,id',
-            'nama_materi' => 'required|string|max:255',
-            'deskripsi_materi' => 'required|string',
-            'tipe_file' => 'required|in:pdf,img,video',
-            'file_materi' => 'required',
-        ]);
+        public function update(Request $request, $id)
+        {
+            $request->validate([
+                'topik_materi_id' => 'required|exists:topik_materis,id',
+                'nama_materi' => 'required|string|max:255',
+                'deskripsi_materi' => 'required|string',
+                'tipe_file' => 'required|in:pdf,img,video',
+                'file_materi' => 'required',
+            ]);
 
-        $materi = Materi::findOrFail($id);
+            $materi = Materi::findOrFail($id);
 
-        $uploadedFiles = json_decode($materi->file_materi,true) ?: [];
-        if ($request->hasFile('file_materi')) {
-            foreach ($request->file('file_materi') as $file) {
-                // Nama asli + timestamp
-                $filename = time().'_'.$file->getClientOriginalName();
-                $uploadedFiles[] = $file->storeAs('materi_files', $filename, 'public');
+            $uploadedFiles = json_decode($materi->file_materi,true) ?: [];
+            if ($request->hasFile('file_materi')) {
+                foreach ($request->file('file_materi') as $file) {
+                    // Nama asli + timestamp
+                    $filename = time().'_'.$file->getClientOriginalName();
+                    $uploadedFiles[] = $file->storeAs('materi_files', $filename, 'public');
+                }
             }
+
+            $materi->update([
+                'topik_materi_id'=>$request->topik_materi_id,
+                'nama_materi'=>$request->nama_materi,
+                'deskripsi_materi'=>$request->deskripsi_materi,
+                'tipe_file'=>$request->tipe_file,
+                'file_materi'=>json_encode($uploadedFiles),
+            ]);
+
+            return redirect()->route('admin.pembelajaran.materi.index')->with('success', 'Materi berhasil diperbarui');
         }
 
-        $materi->update([
-            'topik_materi_id'=>$request->topik_materi_id,
-            'nama_materi'=>$request->nama_materi,
-            'deskripsi_materi'=>$request->deskripsi_materi,
-            'tipe_file'=>$request->tipe_file,
-            'file_materi'=>json_encode($uploadedFiles),
-        ]);
+        public function destroy($id)
+        {
+            $materi = Materi::findOrFail($id);
+            $materi->delete();
 
-        return redirect()->route('admin.pembelajaran.materi.index')->with('success', 'Materi berhasil diperbarui');
-    }
-
-    public function destroy($id)
-    {
-        $materi = Materi::findOrFail($id);
-        $materi->delete();
-
-        return redirect()->route('admin.pembelajaran.materi.index')->with('success', 'Materi berhasil dihapus');
-    }
+            return redirect()->route('admin.pembelajaran.materi.index')->with('success', 'Materi berhasil dihapus');
+        }
 }
