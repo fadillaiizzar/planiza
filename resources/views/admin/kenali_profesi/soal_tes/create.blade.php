@@ -68,7 +68,8 @@
                     <i class="fas fa-vial mr-2 text-indigo-500"></i> Tes
                 </label>
                 <select name="tes_id" id="tes_id"
-                    class="w-full px-5 py-3 border border-slate-200 rounded-2xl shadow-sm focus:ring-2 focus:ring-indigo-400 @error('tes_id') border-red-500 @enderror" required>
+                    class="w-full px-5 py-3 border border-slate-200 rounded-2xl shadow-sm focus:ring-2 focus:ring-indigo-400"
+                    required>
                     <option value="">-- Pilih Tes --</option>
                     @foreach ($tesList as $tes)
                         <option value="{{ $tes->id }}" {{ old('tes_id', $selectedTesId ?? '') == $tes->id ? 'selected' : '' }}>
@@ -76,61 +77,73 @@
                         </option>
                     @endforeach
                 </select>
+
                 @error('tes_id') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
 
-            {{-- Isi Pertanyaan --}}
-            <div class="group space-y-1">
-                <label for="isi_pertanyaan" class="block text-sm font-semibold text-slate-700 mb-2">
-                    <i class="fas fa-question-circle mr-2 text-green-500"></i> Isi Pertanyaan
-                </label>
-                <textarea name="isi_pertanyaan" id="isi_pertanyaan" rows="3"
-                    class="w-full px-5 py-3 border border-slate-200 rounded-2xl shadow-sm focus:ring-2 focus:ring-indigo-400 @error('isi_pertanyaan') border-red-500 @enderror"
-                    required>{{ old('isi_pertanyaan') }}</textarea>
-                @error('isi_pertanyaan') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+            {{-- Container Soal --}}
+            <div id="soal-container" class="space-y-6">
+                <div class="soal-item p-5 rounded-2xl border border-slate-200 shadow-sm bg-slate-50">
+
+                    {{-- Isi Pertanyaan --}}
+                    <div class="group space-y-1 mb-4">
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">
+                            <i class="fas fa-question-circle mr-2 text-green-500"></i> Isi Pertanyaan
+                        </label>
+                        <textarea name="isi_pertanyaan[]" rows="3" class="w-full px-5 py-3 border border-slate-200 rounded-2xl shadow-sm focus:ring-2 focus:ring-indigo-400" required></textarea>
+
+                        @error('isi_pertanyaan') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                    </div>
+
+                    {{-- Jenis Soal --}}
+                    @php
+                        $jenisSoal = ['single' => 'Single', 'multi' => 'Multi'];
+                    @endphp
+                    <div class="group space-y-1 mb-4">
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">
+                            <i class="fas fa-check-double mr-2 text-purple-500"></i> Jenis Soal
+                        </label>
+                        <select name="jenis_soal[]" class="jenis-soal w-full px-5 py-3 border border-slate-200 rounded-2xl shadow-sm focus:ring-2 focus:ring-indigo-400" required>
+                            <option value="">-- Pilih Jenis Soal --</option>
+                            @foreach ($jenisSoal as $key => $value)
+                                <option value="{{ $key }}" {{ old('jenis_soal') == $key ? 'selected' : '' }}>
+                                    {{ $value }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        @error('jenis_soal') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                    </div>
+
+                    {{-- Max Select --}}
+                    <div class="group space-y-1">
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">
+                            <i class="fas fa-sort-numeric-up-alt mr-2 text-orange-500"></i> Maksimal Pilihan
+                        </label>
+                        <input type="number" name="max_select[]" placeholder="Isi jika Multi" class="w-full px-5 py-3 border border-slate-200 rounded-2xl shadow-sm focus:ring-2 focus:ring-indigo-400">
+
+                        @error('max_select') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                    </div>
+                </div>
             </div>
 
-            {{-- Jenis Soal --}}
-            @php
-                $jenisSoal = ['single' => 'Single', 'multi' => 'Multi'];
-            @endphp
-            <div class="group space-y-1">
-                <label for="jenis_soal" class="block text-sm font-semibold text-slate-700 mb-2">
-                    <i class="fas fa-check-double mr-2 text-purple-500"></i> Jenis Soal
-                </label>
-                <select name="jenis_soal" id="jenis_soal"
-                    class="w-full px-5 py-3 border border-slate-200 rounded-2xl shadow-sm focus:ring-2 focus:ring-indigo-400 @error('jenis_soal') border-red-500 @enderror" required>
-                    <option value="">-- Pilih Jenis Soal --</option>
-                    @foreach ($jenisSoal as $key => $value)
-                        <option value="{{ $key }}" {{ old('jenis_soal') == $key ? 'selected' : '' }}>
-                            {{ $value }}
-                        </option>
-                    @endforeach
-                </select>
-                @error('jenis_soal') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
-            </div>
-
-            {{-- Max Select --}}
-            <div class="group space-y-1">
-                <label for="max_select" class="block text-sm font-semibold text-slate-700 mb-2">
-                    <i class="fas fa-sort-numeric-up-alt mr-2 text-orange-500"></i> Maksimal Pilihan
-                </label>
-                <input type="number" name="max_select" id="max_select"
-                    value="{{ old('max_select') }}"
-                    class="w-full px-5 py-3 border border-slate-200 rounded-2xl shadow-sm focus:ring-2 focus:ring-indigo-400 @error('max_select') border-red-500 @enderror"
-                    placeholder="Isi jika Multi">
-                @error('max_select') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+            {{-- Button Tambah Soal --}}
+            <div class="flex justify-start">
+                <button type="button" id="add-soal"
+                    class="mt-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold px-4 py-2 rounded-xl shadow-md transition-all duration-200">
+                    <i class="fas fa-plus mr-2"></i> Tambah Soal
+                </button>
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex items-center justify-center pt-4 gap-5">
-                <button onclick="closeModal()" type="button"
+            <div class="flex items-center justify-center pt-6 gap-5">
+                <a href="{{ route('admin.kenali-profesi.soal-tes.index') }}"
                     class="text-slate-600 hover:text-slate-800 font-medium transition-all duration-200 hover:underline">
                     Batal
-                </button>
+                </a>
                 <button type="submit"
                     class="bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-semibold px-6 py-2 rounded-xl transition-all duration-200">
-                    Simpan
+                    Simpan Semua
                 </button>
             </div>
         </form>
@@ -139,9 +152,10 @@
 
 {{-- Script Dinamis --}}
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const jenisSelect = document.getElementById('jenis_soal');
-        const maxSelectInput = document.getElementById('max_select');
+document.addEventListener('DOMContentLoaded', function () {
+    function initSoalItem(soalItem) {
+        const jenisSelect = soalItem.querySelector('.jenis-soal');
+        const maxSelectInput = soalItem.querySelector('input[name="max_select[]"]');
 
         function toggleMaxSelect() {
             if (jenisSelect.value === 'single') {
@@ -157,7 +171,28 @@
         }
 
         jenisSelect.addEventListener('change', toggleMaxSelect);
-        toggleMaxSelect(); // jalankan saat load
+        toggleMaxSelect(); // jalanin saat pertama kali load
+    }
+
+    // inisialisasi semua soal yang ada di halaman
+    document.querySelectorAll('.soal-item').forEach(initSoalItem);
+
+    // kalau klik tombol tambah soal
+    document.getElementById('add-soal').addEventListener('click', function () {
+        const container = document.getElementById('soal-container');
+        const newSoal = container.firstElementChild.cloneNode(true);
+
+        // reset value inputnya
+        newSoal.querySelectorAll('textarea, select, input').forEach(el => {
+            el.value = '';
+            el.readOnly = false;
+        });
+
+        container.appendChild(newSoal);
+
+        // re-inisialisasi event listener untuk soal baru
+        initSoalItem(newSoal);
     });
+});
 </script>
 @endsection
