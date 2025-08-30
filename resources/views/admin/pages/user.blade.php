@@ -12,6 +12,8 @@
            @include('admin.components.header.header', [
                 'pageTitle' => 'User Management',
                 'addButtonText' => 'Tambah User',
+                'showExport' => true,
+                'exportRoute' => 'admin.user.index',
                 'stats' => [
                     ['label' => 'Total User', 'count' => $userCount, 'icon' => 'fas fa-users', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
                     ['label' => 'Administrator', 'count' => $administratorCount, 'icon' => 'fas fa-crown', 'bg' => 'from-red-500 to-red-600', 'textColor' => 'text-red-100'],
