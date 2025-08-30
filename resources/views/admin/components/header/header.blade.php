@@ -1,6 +1,9 @@
 @php
     $pageTitle = $pageTitle ?? 'Dashboard';
     $addButtonText = $addButtonText ?? '';
+    $addRoute = $addRoute ?? null;
+    $showExport = $showExport ?? false;
+    $exportRoute = $exportRoute ?? null;
     $stats = $stats ?? [];
     $filterOptions = $filterOptions ?? [];
     $searchPlaceholder = $searchPlaceholder ?? '';
@@ -18,37 +21,63 @@
         </h1>
     </div>
 
-    @if(!empty($addButtonText))
-        <div class="flex gap-2">
-            <button class="px-3 py-2 bg-off-white/80 backdrop-blur-sm text-slate-navy hover:bg-off-white border border-border-gray rounded-lg transition-all shadow-sm hover:shadow-md">
+    <div class="flex gap-2">
+        @if(!empty($showExport))
+            <a href="{{ route($exportRoute ?? '#') }}"
+               class="px-3 py-2 bg-off-white/80 backdrop-blur-sm text-slate-navy hover:bg-off-white border border-border-gray rounded-lg transition-all shadow-sm hover:shadow-md">
                 <i class="fas fa-download"></i>
-            </button>
-            <button onclick="openModal()" class="bg-gradient-to-r from-slate-navy to-cool-gray text-off-white px-4 py-2 rounded-lg hover:from-cool-gray hover:to-slate-navy transition-all shadow-lg hover:shadow-xl">
-                <i class="fas fa-user-plus mr-0 sm:mr-2"></i>
-            </button>
-        </div>
-    @endif
+            </a>
+        @endif
+
+        @if(!empty($addButtonText))
+            @if(!empty($addRoute))
+                <a href="{{ route($addRoute) }}"
+                   class="bg-gradient-to-r from-slate-navy to-cool-gray text-off-white px-4 py-2 rounded-lg hover:from-cool-gray hover:to-slate-navy transition-all shadow-lg hover:shadow-xl">
+                    <i class="fas fa-user-plus mr-0 sm:mr-2"></i>
+                    {{ $addButtonText }}
+                </a>
+            @else
+                <button onclick="openModal()"
+                        class="bg-gradient-to-r from-slate-navy to-cool-gray text-off-white px-4 py-2 rounded-lg hover:from-cool-gray hover:to-slate-navy transition-all shadow-lg hover:shadow-xl">
+                    <i class="fas fa-user-plus mr-0 sm:mr-2"></i>
+                    {{ $addButtonText }}
+                </button>
+            @endif
+        @endif
+    </div>
 </div>
 
-<!-- Desktop Header -->
+<!-- Desktop header -->
 <div class="hidden md:flex justify-between items-center">
     <h1 class="text-3xl font-bold bg-gradient-to-r from-slate-navy to-cool-gray bg-clip-text text-transparent">
         {{ $pageTitle }}
     </h1>
 
-    @if(!empty($addButtonText))
-        <div class="flex gap-2">
-            <button class="px-4 py-2 bg-off-white/80 backdrop-blur-sm text-slate-navy hover:bg-off-white border border-border-gray rounded-lg transition-all shadow-sm hover:shadow-md">
+    <div class="flex gap-2">
+        @if(!empty($showExport))
+            <a href="{{ route($exportRoute ?? '#') }}"
+               class="px-4 py-2 bg-off-white/80 backdrop-blur-sm text-slate-navy hover:bg-off-white border border-border-gray rounded-lg transition-all shadow-sm hover:shadow-md">
                 <i class="fas fa-download mr-2"></i>
                 Export
-            </button>
+            </a>
+        @endif
 
-            <button onclick="openModal()" class="px-6 py-2 bg-gradient-to-r from-slate-navy to-cool-gray text-off-white hover:from-cool-gray hover:to-slate-navy rounded-lg transition-all shadow-lg hover:shadow-xl">
-                <i class="fas fa-plus mr-2"></i>
-                {{ $addButtonText }}
-            </button>
-        </div>
-    @endif
+        @if(!empty($addButtonText))
+            @if(!empty($addRoute))
+                <a href="{{ route($addRoute) }}"
+                   class="px-6 py-2 bg-gradient-to-r from-slate-navy to-cool-gray text-off-white hover:from-cool-gray hover:to-slate-navy rounded-lg transition-all shadow-lg hover:shadow-xl">
+                    <i class="fas fa-plus mr-2"></i>
+                    {{ $addButtonText }}
+                </a>
+            @else
+                <button onclick="openModal()"
+                        class="px-6 py-2 bg-gradient-to-r from-slate-navy to-cool-gray text-off-white hover:from-cool-gray hover:to-slate-navy rounded-lg transition-all shadow-lg hover:shadow-xl">
+                    <i class="fas fa-plus mr-2"></i>
+                    {{ $addButtonText }}
+                </button>
+            @endif
+        @endif
+    </div>
 </div>
 
 <!-- Stats Cards -->
