@@ -37,10 +37,15 @@
                                     <i class="fas fa-cog text-cool-gray"></i>
                                 </button>
 
-                                <div id="dropdown-{{ $item->id }}"
-                                    class="hidden absolute right-16 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[160px]">
+                                <div id="dropdown-{{ $item->id }}" class="hidden absolute right-16 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[160px]">
+                                    <a href="#"
+                                        class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-yellow-600 transition-colors text-base w-full text-left">
+                                        <i class="fas fa-list-ul w-5 h-5"></i>
+                                        <span>Soal</span>
+                                    </a>
+                                    <div class="border-t border-border-gray"></div>
                                     <a href="{{ route('admin.kenali-profesi.tes.show', $item->id) }}"
-                                        class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
+                                        class="px-5 py-3 hover:bg-blue-50 flex items-center gap-3 text-blue-600 transition-colors text-base w-full text-left">
                                         <i class="fas fa-eye w-5 h-5"></i>
                                         <span>Detail</span>
                                     </a>
