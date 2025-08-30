@@ -54,51 +54,86 @@ class SoalTesController extends Controller
     {
         $request->validate([
             'tes_id' => 'required|exists:tes,id',
-            'isi_pertanyaan' => 'required|string',
-            'jenis_soal' => 'required|in:single,multi',
-            'max_select' => 'nullable|integer|min:1',
+            'isi_pertanyaan.*' => 'required|string',
+            'jenis_soal.*' => 'required|in:single,multi',
+            'max_select.*' => 'nullable|integer|min:1',
         ]);
 
-        $data = $request->all();
-
-        if($data['jenis_soal'] === 'single') {
-            $data['max_Select'] = 1;
+        foreach ($request->isi_pertanyaan as $i => $pertanyaan) {
+            SoalTes::create([
+                'tes_id' => $request->tes_id,
+                'isi_pertanyaan' => $pertanyaan,
+                'jenis_soal' => $request->jenis_soal[$i],
+                'max_select' => $request->jenis_soal[$i] === 'single'
+                    ? 1
+                    : ($request->max_select[$i] ?? null),
+            ]);
         }
 
-        SoalTes::create($data);
+        return redirect()->route('admin.kenali-profesi.soal-tes.index')->with('success', 'Soal Tes berhasil ditambahkan');
+    }
 
-         return redirect()->route('admin.kenali-profesi.soal-tes.index')->with('success', 'Soal Tes berhasil ditambahkan!');
+    private function findSoalTes($id)
+    {
+        return SoalTes::findOrFail($id);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $soalTes = $this->findSoalTes($id);
+        return view('admin.kenali_profesi.soal_tes.show', compact('soalTes'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $soalTes = $this->findSoalTes($id);
+
+        return view('admin.kenali_profesi.soal_tes.edit', array_merge(
+            compact('soalTes'),
+            $this->getDropdownData()
+    ));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'tes_id' => 'required|exists:tes,id',
+            'isi_pertanyaan.*' => 'required|string',
+            'jenis_soal.*' => 'required|in:single,multi',
+            'max_select.*' => 'nullable|integer|min:1',
+        ]);
+
+        $soalTes = $this->findSoalTes($id);
+
+        $soalTes->update([
+            'tes_id' => $request->tes_id,
+            'isi_pertanyaan.*' => $request->isi_pertanyaan,
+            'jenis_soal.*' => $request->jenis_soal,
+            'max_select.*' => $request->jenis_soal === 'single'
+                ? 1
+                : ($request->max_select ?? null),
+        ]);
+
+        return redirect()->route('admin.kenali-profesi.soal-tes.index')->with('success', 'Soal Tes berhasil diperbarui');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $soalTes = $this->findSoalTes($id);
+        $soalTes->delete();
+
+        return redirect()->route('admin.kenali-profesi.soal-tes.index')->with('success', 'Soal Tes berhasil dihapus');
     }
 }
