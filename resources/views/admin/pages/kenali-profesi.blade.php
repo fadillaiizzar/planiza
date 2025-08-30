@@ -28,7 +28,7 @@
                             ['route' => route('admin.kenali-profesi.kategori-minat.index'), 'icon' => 'fas fa-folder-open', 'label' => 'Kategori Minat'],
                             ['route' => route('admin.kenali-profesi.profesi-kategori.index'), 'icon' => 'fas fa-clipboard-check', 'label' => 'Profesi Kategori'],
                             ['route' => route('admin.kenali-profesi.tes.index'), 'icon' => 'fas fa-file-alt', 'label' => 'Tes'],
-                            ['route' => url('/admin/hasil'), 'icon' => 'fas fa-comments', 'label' => 'Hasil'],
+                            ['route' => route('admin.kenali-profesi.soal-tes.index'), 'icon' => 'fas fa-comments', 'label' => 'Soal Tes'],
                         ];
                     @endphp
 
