@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tes extends Model
 {
+    protected $table = 'tes';
     protected $fillable = ['nama_tes'];
 
     public function soalTes(): HasMany
