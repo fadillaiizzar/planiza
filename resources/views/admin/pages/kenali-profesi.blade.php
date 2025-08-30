@@ -41,7 +41,6 @@
                             <span class="text-slate-700 font-medium">{{ $item['label'] }}</span>
                         </a>
                     @endforeach
-
                 </div>
             </section>
 
