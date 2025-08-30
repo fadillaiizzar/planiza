@@ -1,12 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TesController;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\MateriController;
+use App\Http\Controllers\SoalTesController;
 use App\Http\Controllers\IndustriController;
 use App\Http\Controllers\KenaliKerjaController;
 use App\Http\Controllers\MateriSiswaController;
@@ -19,7 +21,6 @@ use App\Http\Controllers\EksplorasiKerjaController;
 use App\Http\Controllers\IndustriProfesiController;
 use App\Http\Controllers\ProfesiKategoriController;
 use App\Http\Controllers\Siswa\EksplorasiKerjaSiswaController;
-use App\Http\Controllers\TesController;
 
 Route::get('/', function () {
     return view('beranda');
@@ -59,6 +60,7 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
         Route::resource('kategori-minat', KategoriMinatController::class);
         Route::resource('profesi-kategori', ProfesiKategoriController::class);
         Route::resource('tes', TesController::class);
+        Route::resource('soal-tes', SoalTesController::class);
     });
 
     Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('kontribusi-sdgs');
