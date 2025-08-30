@@ -134,8 +134,44 @@
             .then(res => res.text())
             .then(html => {
                 document.getElementById('modalContentEdit').innerHTML = html;
+                initEditSoalTesForm();
                 openModalEdit();
         });
+    }
+
+    function initEditSoalTesForm() {
+        const jenisSelect = document.querySelector('#modalEdit #jenis_soal');
+        const maxSelectInput = document.querySelector('#modalEdit    #max_select');
+
+        if (jenisSelect && maxSelectInput) {
+            const originalMaxSelect = maxSelectInput.value;
+
+            function toggleMaxSelect() {
+                if (jenisSelect.value === 'single') {
+
+                    maxSelectInput.dataset.oldValue = maxSelectInput.value;
+                    maxSelectInput.value = 1;
+                    maxSelectInput.readOnly = true;
+                } else if (jenisSelect.value === 'multi') {
+
+                    if (maxSelectInput.dataset.oldValue && maxSelectInput.dataset.oldValue != 1) {
+                        maxSelectInput.value = maxSelectInput.dataset.oldValue;
+                    } else if (originalMaxSelect && originalMaxSelect != 1) {
+                        maxSelectInput.value = originalMaxSelect;
+                    } else {
+                        maxSelectInput.value = '';
+                    }
+                    maxSelectInput.readOnly = false;
+                } else {
+                    maxSelectInput.value = '';
+                    maxSelectInput.readOnly = true;
+                }
+            }
+
+            toggleMaxSelect();
+
+            jenisSelect.addEventListener('change', toggleMaxSelect);
+        }
     }
 
     function openModalEdit() {
