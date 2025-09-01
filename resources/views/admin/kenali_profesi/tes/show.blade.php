@@ -62,6 +62,39 @@
                     {{ $tes->nama_tes }}
                 </div>
             </div>
+
+            <!-- Daftar Soal -->
+            <div class="group mt-6">
+                <label class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
+                    <i class="fas fa-question-circle mr-2 text-indigo-500"></i> Daftar Soal
+                </label>
+
+                @forelse($tes->soalTes as $index => $soal)
+                    <div class="mb-4 p-4 border border-slate-200 rounded-2xl bg-slate-50">
+                        <p class="font-medium text-slate-800">
+                            Soal {{ $index+1 }} : {{ $soal->isi_pertanyaan }}
+                            <span class="ml-2 text-xs px-2 py-1 rounded-full
+                                {{ $soal->jenis_soal === 'single' ? 'bg-blue-100 text-blue-600' : 'bg-green-100 text-green-600' }}">
+                                {{ strtoupper($soal->jenis_soal) }}
+                            </span>
+                        </p>
+
+                        <!-- Opsi Jawaban -->
+                        <ul class="mt-2 space-y-2">
+                            @forelse($soal->opsiJawabans as $opsi)
+                                <li class="px-3 py-2 bg-white rounded-xl border text-sm flex justify-between items-center">
+                                    <span>{{ $opsi->isi_opsi }}</span>
+                                    <span class="text-slate-500 text-xs">Poin: {{ $opsi->poin }}</span>
+                                </li>
+                            @empty
+                                <li class="text-sm text-slate-500">Belum ada opsi jawaban</li>
+                            @endforelse
+                        </ul>
+                    </div>
+                @empty
+                    <p class="text-sm text-slate-500">Belum ada soal untuk tes ini.</p>
+                @endforelse
+            </div>
         </div>
 
         <!-- Footer Actions -->

@@ -29,6 +29,7 @@
                             ['route' => route('admin.kenali-profesi.profesi-kategori.index'), 'icon' => 'fas fa-clipboard-check', 'label' => 'Profesi Kategori'],
                             ['route' => route('admin.kenali-profesi.tes.index'), 'icon' => 'fas fa-file-alt', 'label' => 'Tes'],
                             ['route' => route('admin.kenali-profesi.soal-tes.index'), 'icon' => 'fas fa-comments', 'label' => 'Soal Tes'],
+                            ['route' => route('admin.kenali-profesi.opsi-jawaban.index'), 'icon' => 'fas fa-comments', 'label' => 'Opsi Jawaban'],
                         ];
                     @endphp
 

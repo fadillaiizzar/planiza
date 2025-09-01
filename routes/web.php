@@ -12,6 +12,7 @@ use App\Http\Controllers\SoalTesController;
 use App\Http\Controllers\IndustriController;
 use App\Http\Controllers\KenaliKerjaController;
 use App\Http\Controllers\MateriSiswaController;
+use App\Http\Controllers\OpsiJawabanController;
 use App\Http\Controllers\TopikMateriController;
 use App\Http\Controllers\PembelajaranController;
 use App\Http\Controllers\ProfesiKerjaController;
@@ -61,6 +62,7 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
         Route::resource('profesi-kategori', ProfesiKategoriController::class);
         Route::resource('tes', TesController::class);
         Route::resource('soal-tes', SoalTesController::class);
+        Route::resource('opsi-jawaban', OpsiJawabanController::class);
     });
 
     Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('kontribusi-sdgs');

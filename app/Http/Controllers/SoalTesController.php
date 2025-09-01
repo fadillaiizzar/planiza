@@ -19,14 +19,14 @@ class SoalTesController extends Controller
         $tesList = Tes::all();
 
         $filterOptions = Tes::select('nama_tes')
-        ->distinct()
-        ->orderBy('nama_tes', 'asc')
-        ->get()
-        ->map(fn($tes) => [
-            'label' => $tes->nama_tes,
-            'value' => $tes->nama_tes
-        ])
-        ->toArray();
+            ->distinct()
+            ->orderBy('nama_tes', 'asc')
+            ->get()
+            ->map(fn($tes) => [
+                'label' => $tes->nama_tes,
+                'value' => $tes->nama_tes
+            ])
+            ->toArray();
 
         return view('admin.pages.soal-tes', [
             'soalTes' => $soalTes,
@@ -118,9 +118,9 @@ class SoalTesController extends Controller
     {
         $request->validate([
             'tes_id' => 'required|exists:tes,id',
-            'isi_pertanyaan.*' => 'required|string',
-            'jenis_soal.*' => 'required|in:single,multi',
-            'max_select.*' => 'nullable|integer|min:1',
+            'isi_pertanyaan' => 'required|string',
+            'jenis_soal' => 'required|in:single,multi',
+            'max_select' => 'nullable|integer|min:1',
         ]);
 
         $soalTes = $this->findSoalTes($id);
