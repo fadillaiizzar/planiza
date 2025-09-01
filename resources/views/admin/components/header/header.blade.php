@@ -100,7 +100,7 @@
 @endif
 
 <!-- Search & Filter -->
-
+@if(!empty($searchPlaceholder))
 <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border-0 p-6 mb-6">
     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div class="flex flex-col gap-4 md:flex-row md:items-center">
@@ -142,6 +142,7 @@
         </div>
     </div>
 </div>
+@endif
 
 @push('scripts')
 <script>
