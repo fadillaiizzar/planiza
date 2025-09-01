@@ -81,7 +81,7 @@
                     @empty
                         <x-empty-state
                             colspan="8"
-                            icon="fas fa-user-tie"
+                            icon="fas fa-briefcase"
                             message="Belum ada profesi kerja. Tambahkan data"
                             button="true"
                             buttonAction="openModal()"

@@ -36,7 +36,7 @@
 
         <!-- Pagination -->
         <div class="px-6 py-4 border-t border-slate-200 bg-slate-50/30">
-            {{ $soalTes->links() }}
+            {{ $soalTes->links() }} 
         </div>
     </main>
 @endsection
