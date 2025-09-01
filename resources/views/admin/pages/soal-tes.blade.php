@@ -20,7 +20,7 @@
             'stats' => [
                 ['label' => 'Total Soal Tes', 'count' => $soalTesCount, 'icon' => 'fas fa-list-ul', 'bg' => 'from-indigo-500 to-indigo-600', 'textColor' => 'text-indigo-100'],
             ],
-            'filterOptions' => [],
+            'filterOptions' => $filterOptions,
             'searchPlaceholder' => 'Cari berdasarkan pertanyaan',
             'itemCount' => $soalTesCount,
             'tableTitle' => 'Daftar Soal Tes',
@@ -36,7 +36,7 @@
 
         <!-- Pagination -->
         <div class="px-6 py-4 border-t border-slate-200 bg-slate-50/30">
-            {{ $soalTes->links() }} 
+            {{ $soalTes->links() }}
         </div>
     </main>
 @endsection

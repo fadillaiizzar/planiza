@@ -100,7 +100,7 @@
 @endif
 
 <!-- Search & Filter -->
-@if(count($filterOptions) > 0)
+
 <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border-0 p-6 mb-6">
     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div class="flex flex-col gap-4 md:flex-row md:items-center">
@@ -116,6 +116,7 @@
             </div>
 
             <!-- Dynamic Filter Select -->
+            @if(count($filterOptions) > 0)
             <div class="flex gap-2">
                 <div class="relative inline-block w-48">
                     <select id="filterSelect" class="appearance-none w-full px-4 py-2 pr-10 bg-white border border-gray-300 rounded-lg shadow-sm
@@ -133,6 +134,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
 
         <div class="text-sm text-slate-600">
@@ -140,7 +142,6 @@
         </div>
     </div>
 </div>
-@endif
 
 @push('scripts')
 <script>
@@ -150,7 +151,7 @@
         const resultCount = document.getElementById('resultCount');
 
         const rowClasses = [
-            'user-row', 'topik-row', 'materi-row', 'profesi-row', 'industri-row', 'industri-profesi-row', 'kategori-minat-row', 'profesi-kategori-row'
+            'user-row', 'topik-row', 'materi-row', 'profesi-row', 'industri-row', 'industri-profesi-row', 'kategori-minat-row', 'profesi-kategori-row', 'tes-row', 'soal-tes-row'
         ];
 
         let rows = rowClasses.map(cls=> document.querySelectorAll(`.${cls}`))
@@ -214,6 +215,20 @@
                     filter: kategori
                 };
             },
+            'tes-row': row => {
+                const { nama='' } = row.dataset;
+                return {
+                    search: [nama],
+                    filter: nama
+                };
+            },
+            'soal-tes-row': row => {
+                const { tes='', pertanyaan='', jenis='', max='' } = row.dataset;
+                return {
+                    search: [tes, pertanyaan, jenis, max],
+                    filter: tes
+                };
+            }
         };
 
         function filterItems() {

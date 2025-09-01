@@ -28,7 +28,8 @@
                 <tbody>
                     @forelse ($items as $item)
                         <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors tes-row"
-                        data-nama="{{ strtolower($item->nama_tes) }}">
+                            data-nama="{{ strtolower($item->nama_tes) }}"
+                        >
                             <td class="p-4">{{ $item->id }}</td>
                             <td class="p-4 font-medium text-slate-700">{{ Str::limit($item->nama_tes, 65) }}</td>
                             <td class="p-4 relative overflow-visible">

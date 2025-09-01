@@ -9,7 +9,7 @@
         'stats' => $stats,
         'filterOptions' => $filterOptions ?? [],
         'searchPlaceholder' => $searchPlaceholder ?? 'Cari...',
-        'defaultFilterText' => 'Semua Soal',
+        'defaultFilterText' => 'Semua Tes',
         'itemCount' => $itemCount ?? 0,
     ])
 
@@ -28,12 +28,15 @@
                 </thead>
                 <tbody>
                     @forelse ($items as $item)
-                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors soal-row"
-                            data-nama="{{ strtolower($item->isi_pertanyaan) }}"
+                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors soal-tes-row"
+                            data-tes="{{ strtolower($item->tes->nama_tes ?? '') }}"
+                            data-pertanyaan="{{ strtolower($item->isi_pertanyaan) }}"
+                            data-jenis="{{ strtolower($item->jenis_soal) }}"
+                            data-max="{{ strtolower($item->max_select) }}"
                         >
                             <td class="p-4">{{ $item->id }}</td>
-                            <td class="p-4">{{ $item->tes->nama_tes ?? '-' }}</td>
-                            <td class="p-4 font-medium text-slate-700">{{ Str::limit($item->isi_pertanyaan, 60) }}</td>
+                            <td class="p-4">{{ Str::limit($item->tes->nama_tes ?? '-', 12) }}</td>
+                            <td class="p-4 font-medium text-slate-700">{{ Str::limit($item->isi_pertanyaan, 40) }}</td>
                             <td class="p-4">{{ ucfirst($item->jenis_soal) }}</td>
                             <td class="p-4">{{ $item->max_select ?? '-' }}</td>
                             <td class="p-4 relative overflow-visible">

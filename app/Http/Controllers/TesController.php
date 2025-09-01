@@ -17,10 +17,21 @@ class TesController extends Controller
         $tesCount = Tes::count();
         $allTes = Tes::all();
 
+        $filterOptions = Tes::select('nama_tes')
+            ->distinct()
+            ->orderBy('nama_tes', 'asc')
+            ->get()
+            ->map(fn($tes) => [
+                'label' => $tes->nama_tes,
+                'value' => $tes->nama_tes
+            ])
+            ->toArray();
+
         return view('admin.pages.tes', [
             'tes' => $tes,
             'tesCount' => $tesCount,
             'allTes' => $allTes,
+            'filterOptions' => $filterOptions,
         ]);
     }
 

@@ -18,11 +18,22 @@ class SoalTesController extends Controller
         $allSoalTes = SoalTes::all();
         $tesList = Tes::all();
 
+        $filterOptions = Tes::select('nama_tes')
+        ->distinct()
+        ->orderBy('nama_tes', 'asc')
+        ->get()
+        ->map(fn($tes) => [
+            'label' => $tes->nama_tes,
+            'value' => $tes->nama_tes
+        ])
+        ->toArray();
+
         return view('admin.pages.soal-tes', [
             'soalTes' => $soalTes,
             'soalTesCount' => $soalTesCount,
             'allSoalTes' => $allSoalTes,
             'tesList' => $tesList,
+            'filterOptions' => $filterOptions,
         ]);
     }
 
@@ -116,9 +127,9 @@ class SoalTesController extends Controller
 
         $soalTes->update([
             'tes_id' => $request->tes_id,
-            'isi_pertanyaan.*' => $request->isi_pertanyaan,
-            'jenis_soal.*' => $request->jenis_soal,
-            'max_select.*' => $request->jenis_soal === 'single'
+            'isi_pertanyaan' => $request->isi_pertanyaan,
+            'jenis_soal' => $request->jenis_soal,
+            'max_select' => $request->jenis_soal === 'single'
                 ? 1
                 : ($request->max_select ?? null),
         ]);
