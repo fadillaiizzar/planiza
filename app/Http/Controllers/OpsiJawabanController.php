@@ -76,30 +76,29 @@ class OpsiJawabanController extends Controller
         $kategoriIds = is_array($request->kategori_minat_id) ? $request->kategori_minat_id : [$request->kategori_minat_id];
         $profesiIds  = is_array($request->profesi_kerja_id) ? $request->profesi_kerja_id : [$request->profesi_kerja_id];
 
-        foreach ($request->isi_opsi as $i => $opsi) {
-            if ($soalTes->jenis_soal === 'single') {
-                // Validasi kategori
-                $request->validate([
-                    'kategori_minat_id' => 'required|exists:kategori_minats,id',
-                ]);
+        if ($soalTes->jenis_soal === 'single') {
+            $request->validate([
+                'kategori_minat_id.*' => 'required|exists:kategori_minats,id',
+            ]);
 
-                $kategoriList = KategoriMinat::whereIn('id', $kategoriIds)->get();
-                    foreach ($kategoriList as $kategori) {
-                        foreach ($kategori->profesiKerjas as $profesi) {
-                            OpsiJawaban::create([
-                                'soal_tes_id'       => $soalTes->id,
-                                'kategori_minat_id' => $kategori->id,
-                                'profesi_kerja_id'  => $profesi->id,
-                                'isi_opsi'          => $opsi,
-                                'poin'              => $request->poin[$i],
-                            ]);
-                        }
-                    }
-            } else {
-                $request->validate([
-                    'profesi_kerja_id' => 'required|exists:profesi_kerjas,id',
-                ]);
+            foreach ($request->isi_opsi as $i => $opsi) {
+                $kategoriId = $request->kategori_minat_id[$i] ?? null;
+                if ($kategoriId) {
+                    OpsiJawaban::create([
+                        'soal_tes_id'       => $soalTes->id,
+                        'kategori_minat_id' => $kategoriId,
+                        'profesi_kerja_id'  => null,
+                        'isi_opsi'          => $opsi,
+                        'poin'              => $request->poin[$i],
+                    ]);
+                }
+            }
+        } else {
+            $request->validate([
+                'profesi_kerja_id' => 'required|exists:profesi_kerjas,id',
+            ]);
 
+            foreach ($request->isi_opsi as $i => $opsi) {
                 $profesiId = $profesiIds[$i] ?? null;
 
                 if ($profesiId) {
@@ -127,7 +126,7 @@ class OpsiJawabanController extends Controller
      */
     public function show($id)
     {
-        $opsiJawaban = $this->findOpsiJawaban($id);
+        $opsiJawaban = OpsiJawaban::with(['soalTes.tes', 'kategoriMinat.profesiKerjas', 'profesiKerja'])->findOrFail($id);
         return view('admin.kenali_profesi.opsi_jawaban.show', compact('opsiJawaban'));
     }
 
@@ -158,50 +157,33 @@ class OpsiJawabanController extends Controller
         $opsiJawaban = $this->findOpsiJawaban($id);
         $soalTes = SoalTes::findOrFail($request->soal_tes_id);
 
-        $kategoriIds = is_array($request->kategori_minat_id) ? $request->kategori_minat_id : [$request->kategori_minat_id];
-        $profesiIds  = is_array($request->profesi_kerja_id) ? $request->profesi_kerja_id : [$request->profesi_kerja_id];
-
         if ($soalTes->jenis_soal === 'single') {
             $request->validate([
                 'kategori_minat_id' => 'required|exists:kategori_minats,id',
             ]);
 
-            $kategoriList = KategoriMinat::whereIn('id', $kategoriIds)->get();
-
-            foreach ($kategoriList as $kategori) {
-                OpsiJawaban::where('soal_tes_id', $soalTes->id)
-                    ->where('kategori_minat_id', $kategori->id)
-                    ->delete();
-
-                foreach ($kategori->profesiKerjas as $profesi) {
-                    OpsiJawaban::create([
-                        'soal_tes_id'       => $soalTes->id,
-                        'kategori_minat_id' => $kategori->id,
-                        'profesi_kerja_id'  => $profesi->id,
-                        'isi_opsi'          => $request->isi_opsi,
-                        'poin'              => $request->poin,
-                    ]);
-                }
-            }
+            $opsiJawaban->update([
+                'soal_tes_id'       => $soalTes->id,
+                'kategori_minat_id' => $request->kategori_minat_id,
+                'profesi_kerja_id'  => null,
+                'isi_opsi'          => $request->isi_opsi,
+                'poin'              => $request->poin,
+            ]);
         } else {
             $request->validate([
                 'profesi_kerja_id' => 'required|exists:profesi_kerjas,id',
             ]);
 
-            $profesiId = $profesiIds[0] ?? null;
-
-            if ($profesiId) {
-                $opsiJawaban->update([
-                    'soal_tes_id'       => $soalTes->id,
-                    'profesi_kerja_id'  => $profesiId,
-                    'kategori_minat_id' => null,
-                    'isi_opsi'          => $request->isi_opsi,
-                    'poin'              => $request->poin,
-                ]);
-            }
+            $opsiJawaban->update([
+                'soal_tes_id'       => $soalTes->id,
+                'profesi_kerja_id'  => $request->profesi_kerja_id,
+                'kategori_minat_id' => null,
+                'isi_opsi'          => $request->isi_opsi,
+                'poin'              => $request->poin,
+            ]);
         }
 
-        return redirect()->route('admin.kenali-profesi.opsi_jawaban.index')->with('success', 'Opsi Jawaban berhasil diperbarui');
+        return redirect()->route('admin.kenali-profesi.opsi-jawaban.index')->with('success', 'Opsi Jawaban berhasil diperbarui');
     }
 
     /**
@@ -212,6 +194,6 @@ class OpsiJawabanController extends Controller
         $opsiJawaban = $this->findOpsiJawaban($id);
         $opsiJawaban->delete();
 
-        return redirect()->route('admin.kenali-profesi.opsi_jawaban.index')->with('success', 'Opsi Jawaban berhasil dihapus');
+        return redirect()->route('admin.kenali-profesi.opsi-jawaban.index')->with('success', 'Opsi Jawaban berhasil dihapus');
     }
 }

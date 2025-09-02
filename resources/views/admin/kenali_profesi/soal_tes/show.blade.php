@@ -43,59 +43,57 @@
 
         <!-- Content -->
         <div class="px-8 pt-8 pb-0 space-y-5">
+            @php
+                $fields = [
+                    [
+                        'icon' => 'fas fa-hashtag',
+                        'color' => 'text-red-500',
+                        'label' => 'ID Soal Tes',
+                        'value' => $soalTes->id,
+                    ],
+                    [
+                        'icon' => 'fas fa-vial',
+                        'color' => 'text-purple-500',
+                        'label' => 'Nama Tes',
+                        'value' => $soalTes->tes->nama_tes ?? '-',
+                    ],
+                    [
+                        'icon' => 'fas fa-question',
+                        'color' => 'text-yellow-500',
+                        'label' => 'Isi Pertanyaan',
+                        'value' => $soalTes->isi_pertanyaan,
+                    ],
+                    [
+                        'icon' => 'fas fa-list',
+                        'color' => 'text-green-500',
+                        'label' => 'Jenis Soal',
+                        'value' => $soalTes->jenis_soal,
+                    ],
+                ];
+            @endphp
 
-            <!-- ID -->
-            <div class="group">
-                <label class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
-                    <i class="fas fa-hashtag mr-2 text-slate-500"></i> ID Soal Tes
-                </label>
-                <div class="w-full px-5 py-4 border border-slate-200 rounded-2xl text-sm text-slate-900 bg-white shadow-sm">
-                    {{ $soalTes->id }}
-                </div>
-            </div>
-
-            <!-- Tes -->
-            <div class="group">
-                <label class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
-                    <i class="fas fa-vial mr-2 text-blue-500"></i> Nama Tes
-                </label>
-                <div class="w-full px-5 py-4 border border-slate-200 rounded-2xl text-sm text-slate-900 bg-white shadow-sm">
-                    {{ $soalTes->tes->nama_tes ?? '-' }}
-                </div>
-            </div>
-
-            <!-- Isi Pertanyaan -->
-            <div class="group">
-                <label class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
-                    <i class="fas fa-question mr-2 text-indigo-500"></i> Isi Pertanyaan
-                </label>
-                <div class="w-full px-5 py-4 border border-slate-200 rounded-2xl text-sm text-slate-900 bg-white shadow-sm">
-                    {{ $soalTes->isi_pertanyaan }}
-                </div>
-            </div>
-
-            <!-- Jenis Soal -->
-            <div class="group">
-                <label class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
-                    <i class="fas fa-list mr-2 text-green-500"></i> Jenis Soal
-                </label>
-                <div class="w-full px-5 py-4 border border-slate-200 rounded-2xl text-sm text-slate-900 bg-white shadow-sm capitalize">
-                    {{ $soalTes->jenis_soal }}
-                </div>
-            </div>
-
+            @foreach ($fields as $field)
+                <x-admin.detail-field
+                    :icon="$field['icon']"
+                    :colorIcon="$field['color']"
+                    :label="$field['label']"
+                    :value="$field['value']"
+                />
+            @endforeach
+            
             <!-- Max Select -->
-            @if($soalTes->jenis_soal === 'multi')
             <div class="group">
                 <label class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
                     <i class="fas fa-check-double mr-2 text-purple-500"></i> Maksimal Pilihan
                 </label>
                 <div class="w-full px-5 py-4 border border-slate-200 rounded-2xl text-sm text-slate-900 bg-white shadow-sm">
-                    {{ $soalTes->max_select ?? '-' }}
+                    @if($soalTes->jenis_soal === 'single')
+                        1
+                    @else
+                        {{ $soalTes->max_select ?? '-' }}
+                    @endif
                 </div>
             </div>
-            @endif
-
         </div>
 
         <!-- Footer -->

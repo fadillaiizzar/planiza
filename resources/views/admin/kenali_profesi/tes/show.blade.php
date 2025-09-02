@@ -84,7 +84,7 @@
                             @forelse($soal->opsiJawabans as $opsi)
                                 <li class="px-3 py-2 bg-white rounded-xl border text-sm flex justify-between items-center">
                                     <span>{{ $opsi->isi_opsi }}</span>
-                                    <span class="text-slate-500 text-xs">Poin: {{ $opsi->poin }}</span>
+                                    <span class="text-slate-500 text-xs">Poin : {{ $opsi->poin }}</span>
                                 </li>
                             @empty
                                 <li class="text-sm text-slate-500">Belum ada opsi jawaban</li>

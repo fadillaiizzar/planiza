@@ -15,18 +15,15 @@
 
     <!-- Daftar Opsi Jawaban -->
     <section class="bg-white rounded-xl shadow p-6 mt-6">
-        <h3 class="text-lg font-semibold text-slate-navy mb-4">Daftar Opsi Jawaban</h3>
+        <x-h3>{{ $tableTitle }}</x-h3>
 
         <div class="overflow-x-auto scrollbar-none">
             <table class="w-full text-left text-sm table-auto">
                 <thead class="bg-off-white border-b border-border-gray">
                     <tr>
-                        <th class="p-4 font-semibold text-slate-navy">ID</th>
-                        <th class="p-4 font-semibold text-slate-navy">Soal Tes</th>
-                        <th class="p-4 font-semibold text-slate-navy">Isi Opsi</th>
-                        <th class="p-4 font-semibold text-slate-navy">Poin</th>
-                        <th class="p-4 font-semibold text-slate-navy">Kategori / Profesi</th>
-                        <th class="p-4 font-semibold text-slate-navy">Aksi</th>
+                        @foreach($tableHeaders as $header)
+                            <th class="p-4 font-semibold text-slate-navy">{{ $header }}</th>
+                        @endforeach
                     </tr>
                 </thead>
                 <tbody>
@@ -38,9 +35,9 @@
                         >
                             <td class="p-4">{{ $item->id }}</td>
                             <td class="p-4 font-medium text-slate-700">
-                                {{ Str::limit($item->soalTes->isi_pertanyaan ?? '-', 30) }}
+                                {{ Str::limit($item->soalTes->isi_pertanyaan ?? '-', 25) }}
                             </td>
-                            <td class="p-4">{{ Str::limit($item->isi_opsi, 40) }}</td>
+                            <td class="p-4">{{ Str::limit($item->isi_opsi, 30) }}</td>
                             <td class="p-4">{{ $item->poin }}</td>
                             <td class="p-4">
                                 @if($item->kategoriMinat)
@@ -49,6 +46,15 @@
                                     <span class="text-green-600">{{ $item->profesiKerja->nama_profesi_kerja }}</span>
                                 @else
                                     -
+                                @endif
+                            </td>
+                            <td class="p-4">
+                                @if($item->soalTes->jenis_soal === 'single' && $item->kategoriMinat)
+                                    {{ $item->kategoriMinat->profesiKerjas->count() }}
+                                @elseif($item->soalTes->jenis_soal === 'multi' && $item->profesiKerja)
+                                    1
+                                @else
+                                    0
                                 @endif
                             </td>
                             <td class="p-4 relative overflow-visible">
@@ -64,11 +70,11 @@
                                         <span>Detail</span>
                                     </a>
                                     <div class="border-t border-border-gray"></div>
-                                    <a href="{{ route('admin.kenali-profesi.opsi-jawaban.edit', $item->id) }}"
+                                    <button onclick="showEdit({{ $item->id }})"
                                         class="px-5 py-3 hover:bg-green-50 flex items-center gap-3 text-green-600 transition-colors text-base w-full text-left">
                                         <i class="fas fa-edit w-5 h-5"></i>
                                         <span>Edit</span>
-                                    </a>
+                                    </button>
                                     <div class="border-t border-border-gray"></div>
                                     <button type="button"
                                         onclick="showDeleteModal({{ $item->id }}, '{{ addslashes($item->isi_opsi) }}', '{{ route('admin.kenali-profesi.opsi-jawaban.destroy', $item->id) }}')"
@@ -121,3 +127,68 @@
         </div>
     </div>
 </div>
+
+<script>
+    function toggleDropdown(id) {
+        document.querySelectorAll('[id^="dropdown-"]').forEach(drop => {
+            if (drop.id === `dropdown-${id}`) {
+                drop.classList.toggle('hidden');
+            } else {
+                drop.classList.add('hidden');
+            }
+        });
+    }
+
+    function showDeleteModal(id, name, action) {
+        document.getElementById('deleteModal').classList.remove('hidden');
+        document.getElementById('deleteSoalNama').textContent = name;
+        const form = document.getElementById('deleteForm');
+        form.action = action;
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.add('hidden');
+    }
+
+    function showEdit(id) {
+        const modal = document.getElementById('modalEdit');
+        const modalContent = document.getElementById('modalContentEdit');
+
+        // buka modal dulu
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+
+        // kasih loading state sementara
+        modalContent.innerHTML = `
+            <div class="flex justify-center items-center w-full h-40">
+                <div class="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-slate-600"></div>
+            </div>
+        `;
+
+        // ambil konten dari server
+        fetch(`/admin/kenali-profesi/opsi-jawaban/${id}/edit`)
+            .then(res => res.text())
+            .then(html => {
+                modalContent.innerHTML = html;
+            })
+            .catch(() => {
+                modalContent.innerHTML = `
+                    <div class="p-6 text-center text-red-600">
+                        Gagal memuat data. Coba lagi.
+                    </div>
+                `;
+            });
+    }
+
+    function openModalEdit() {
+        const modal = document.getElementById('modalEdit');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+
+    function closeModalEdit() {
+        const modal = document.getElementById('modalEdit');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+</script>
