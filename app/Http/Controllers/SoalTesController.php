@@ -13,10 +13,9 @@ class SoalTesController extends Controller
      */
     public function index()
     {
-        $soalTes = SoalTes::oldest()->paginate(10);
-        $soalTesCount = SoalTes::count();
-        $allSoalTes = SoalTes::all();
-        $tesList = Tes::all();
+        $tesList = Tes::withCount('soalTes')->paginate(10);
+
+        $tesCount = Tes::count();
 
         $filterOptions = Tes::select('nama_tes')
             ->distinct()
@@ -29,10 +28,8 @@ class SoalTesController extends Controller
             ->toArray();
 
         return view('admin.pages.soal-tes', [
-            'soalTes' => $soalTes,
-            'soalTesCount' => $soalTesCount,
-            'allSoalTes' => $allSoalTes,
             'tesList' => $tesList,
+            'tesCount' => $tesCount,
             'filterOptions' => $filterOptions,
         ]);
     }
@@ -94,8 +91,8 @@ class SoalTesController extends Controller
      */
     public function show($id)
     {
-        $soalTes = $this->findSoalTes($id);
-        return view('admin.kenali_profesi.soal_tes.show', compact('soalTes'));
+        $tes = Tes::with('soalTes')->findOrFail($id);
+        return view('admin.kenali_profesi.soal_tes.show', compact('tes'));
     }
 
     /**
@@ -145,6 +142,6 @@ class SoalTesController extends Controller
         $soalTes = $this->findSoalTes($id);
         $soalTes->delete();
 
-        return redirect()->route('admin.kenali-profesi.soal-tes.index')->with('success', 'Soal Tes berhasil dihapus');
+        return redirect()->route('admin.kenali-profesi.soal-tes.show')->with('success', 'Soal Tes berhasil dihapus');
     }
 }

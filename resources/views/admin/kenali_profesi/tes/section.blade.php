@@ -119,36 +119,4 @@
             }
         });
     }
-
-    function showDeleteModal(id, name, action) {
-        document.getElementById('deleteModal').classList.remove('hidden');
-        document.getElementById('deleteTesNama').textContent = name;
-        const form = document.getElementById('deleteForm');
-        form.action = action;
-    }
-
-    function closeDeleteModal() {
-        document.getElementById('deleteModal').classList.add('hidden');
-    }
-
-    function showEdit(id) {
-        fetch(`/admin/kenali-profesi/tes/${id}/edit`)
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById('modalContentEdit').innerHTML = html;
-                openModalEdit();
-        });
-    }
-
-    function openModalEdit() {
-        const modal = document.getElementById('modalEdit');
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-    }
-
-    function closeModalEdit() {
-        const modal = document.getElementById('modalEdit');
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-    }
 </script>

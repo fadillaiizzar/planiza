@@ -16,27 +16,22 @@
             'pageTitle' => 'Soal Tes Management',
             'addButtonText' => 'Tambah Soal Tes',
             'addRoute' => 'admin.kenali-profesi.soal-tes.create',
-            'userCount' => $soalTesCount,
+            'userCount' => $tesCount,
             'stats' => [
-                ['label' => 'Total Soal Tes', 'count' => $soalTesCount, 'icon' => 'fas fa-list-ul', 'bg' => 'from-indigo-500 to-indigo-600', 'textColor' => 'text-indigo-100'],
+                ['label' => 'Total Tes', 'count' => $tesCount, 'icon' => 'fas fa-list-ul', 'bg' => 'from-indigo-500 to-indigo-600', 'textColor' => 'text-indigo-100'],
             ],
             'filterOptions' => $filterOptions,
             'searchPlaceholder' => 'Cari berdasarkan pertanyaan',
-            'itemCount' => $soalTesCount,
+            'itemCount' => $tesCount,
             'tableTitle' => 'Daftar Soal Tes',
-            'tableHeaders' => ['ID', 'Tes', 'Pertanyaan', 'Jenis', 'Max Select', 'Aksi'],
-            'items' => $soalTes,
+            'tableHeaders' => ['No', 'Nama Tes', 'Jumlah Soal', 'Aksi'],
+            'tesList' => $tesList,
         ])
         @endcomponent
 
-        <!-- Modal Edit -->
-        <div id="modalEdit" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
-            <div id="modalContentEdit" class="w-full mx-auto flex items-center justify-center"></div>
-        </div>
-
         <!-- Pagination -->
         <div class="px-6 py-4 border-t border-slate-200 bg-slate-50/30">
-            {{ $soalTes->links() }}
+            {{ $tesList->links() }}
         </div>
     </main>
 @endsection
