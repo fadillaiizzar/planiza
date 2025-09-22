@@ -222,4 +222,14 @@
         modal.classList.remove('flex');
         document.body.classList.remove('overflow-hidden');
     }
+
+    @if(($openCreate ?? false) && ($topikId ?? null))
+        document.addEventListener("DOMContentLoaded", function() {
+            openModal();
+            const topikSelect = document.getElementById('topik_materi_id');
+            if (topikSelect) {
+                topikSelect.value = "{{ $topikId ?? '' }}";
+            }
+        });
+    @endif
 </script>

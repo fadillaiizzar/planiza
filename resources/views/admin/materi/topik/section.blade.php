@@ -75,6 +75,12 @@
                                         <span>Detail</span>
                                     </a>
                                     <div class="border-t border-border-gray"></div>
+                                    <a href="{{ route('admin.pembelajaran.materi.index', ['topik_id' => $item->id, 'open_create' => 1]) }}"
+                                        class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-yellow-600 transition-colors text-base w-full text-left">
+                                        <i class="fas fa-list-ul w-5 h-5"></i>
+                                        <span>Materi</span>
+                                    </a>
+                                    <div class="border-t border-border-gray"></div>
                                     <button onclick="showEdit({{ $item->id }})"
                                         class="px-5 py-3 hover:bg-green-50 flex items-center gap-3 text-green-600 transition-colors text-base">
                                         <i class="fas fa-edit w-5 h-5"></i>

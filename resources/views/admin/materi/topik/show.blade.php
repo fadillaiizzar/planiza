@@ -112,6 +112,64 @@
                         {{ $topik->rencana->nama_rencana ?? '-' }}
                     </div>
                 </div>
+
+                <!-- Daftar Materi -->
+                <div class="group mt-8">
+                    <label class="block text-sm font-semibold text-slate-700 mb-3 flex items-center text-left justify-start">
+                        <i class="fas fa-book-open mr-2 text-indigo-500"></i>
+                        Daftar Materi
+                    </label>
+
+                    @forelse($topik->materis as $index => $materi)
+                        <div class="mb-5 p-5 border border-slate-200 rounded-2xl bg-gradient-to-r from-slate-50 to-indigo-50 hover:shadow-lg transition">
+                            <!-- Header Materi -->
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-slate-800">
+                                    Materi {{ $index+1 }} : {{ $materi->nama_materi }}
+                                </h3>
+                                <a href="{{ route('admin.pembelajaran.materi.show', $materi->id) }}"
+                                class="text-xs px-3 py-1 rounded-full bg-indigo-600 text-white hover:bg-indigo-700 transition">
+                                Lihat Detail
+                                </a>
+                            </div>
+
+                            <!-- Detail Materi -->
+                            <div class="text-sm text-slate-700 space-y-2">
+                                <p>
+                                    <span class="font-semibold">Deskripsi :</span>
+                                    {{ $materi->deskripsi_materi ?? '-' }}
+                                </p>
+                                <p>
+                                    <span class="font-semibold">Tipe File :</span>
+                                    {{ strtoupper($materi->tipe_file) ?? '-' }}
+                                </p>
+
+                                <!-- File Materi -->
+                                @if($materi->file_materi)
+                                    <div>
+                                        <span class="font-semibold">File :</span>
+                                        <div class="mt-1 space-y-1">
+                                            @foreach(json_decode($materi->file_materi, true) ?? [] as $file)
+                                                <a href="{{ asset('storage/' . $file) }}"
+                                                target="_blank"
+                                                class="flex items-center text-blue-600 hover:text-blue-800 hover:underline text-sm transition">
+                                                    <i class="fas fa-file-alt mr-2 text-blue-400"></i>
+                                                    {{ basename($file) }}
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    @empty
+                        <div class="text-center py-10 border border-dashed border-slate-300 rounded-2xl bg-white">
+                            <i class="fas fa-folder-open text-4xl text-slate-400 mb-3"></i>
+                            <p class="text-slate-500 font-medium">Belum ada materi untuk topik ini.</p>
+                        </div>
+                    @endforelse
+                </div>
+
             </div>
 
             <!-- Footer Actions -->
