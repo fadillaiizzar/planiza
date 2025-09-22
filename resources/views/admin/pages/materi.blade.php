@@ -40,6 +40,8 @@
             'tableTitle' => 'Daftar Materi',
             'tableHeaders' => ['ID', 'Nama Materi', 'Topik', 'Deskripsi Materi', 'Tipe File', 'File Materi', 'Aksi'],
             'items' => $materis,
+            'openCreate' => $openCreate ?? false,
+            'topikId' => $topikId ?? null,
         ])
         @endcomponent
 
