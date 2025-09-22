@@ -91,7 +91,7 @@ class SoalTesController extends Controller
      */
     public function show($id)
     {
-        $tes = Tes::with('soalTes')->findOrFail($id);
+        $tes = Tes::with('soalTes.opsiJawabans')->findOrFail($id);
         return view('admin.kenali_profesi.soal_tes.show', compact('tes'));
     }
 

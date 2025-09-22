@@ -23,6 +23,16 @@
         </nav>
     </div>
 
+    <div class="max-w-4xl mx-auto mb-10">
+        <div class="bg-white rounded-3xl shadow-lg border border-slate-200 p-6">
+            <h2 class="text-xl font-bold text-slate-800 flex items-center">
+                <i class="fas fa-clipboard-list text-indigo-500 mr-3"></i>
+                Tes : {{ $tes->nama_tes }}
+            </h2>
+            <p class="text-slate-500 mt-2">Jumlah Soal > {{ $tes->soalTes->count() }}</p>
+        </div>
+    </div>
+
     <!-- Card Detail -->
     <div class="max-w-4xl mx-auto space-y-10 overflow-hidden">
         @forelse($tes->soalTes as $soal)
@@ -69,6 +79,28 @@
                         </div>
                     </div>
 
+                    <!-- Opsi Jawaban -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">
+                            <i class="fas fa-list-ul mr-2 text-blue-500"></i> Opsi Jawaban
+                        </label>
+
+                        @if($soal->opsiJawabans->count())
+                            <ul class="space-y-2">
+                                @foreach($soal->opsiJawabans as $opsi)
+                                    <li class="px-4 py-3 border border-slate-200 rounded-xl bg-slate-50 flex justify-between items-center">
+                                        <span>{{ $opsi->isi_opsi }}</span>
+                                        <span class="text-sm text-slate-500">Poin: {{ $opsi->poin }}</span>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <div class="px-4 py-3 border border-dashed border-slate-300 rounded-xl bg-slate-50 text-slate-500">
+                                Belum ada opsi tersedia
+                            </div>
+                        @endif
+                    </div>
+
                     <!-- Aksi Soal -->
                     <div class="mt-4 relative">
                         <button onclick="toggleDropdown({{ $soal->id }})"
@@ -80,7 +112,7 @@
                             class="hidden mt-3 flex items-center space-x-4 p-3 bg-white border border-slate-200 rounded-2xl shadow-lg">
 
                             <!-- Opsi Soal -->
-                            <a href="{{ route('admin.kenali-profesi.soal-tes.show', $soal->id) }}"
+                            <a href="{{ route('admin.kenali-profesi.opsi-jawaban.create') }}?soal_tes_id={{ $soal->id }}"
                             class="flex items-center px-6 py-2 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100">
                                 <i class="fas fa-question-circle mr-2"></i> Opsi
                             </a>
