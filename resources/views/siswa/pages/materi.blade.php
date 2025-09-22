@@ -15,7 +15,7 @@
         />
 
         <x-siswa.search-bar
-            id="search" placeholder="Cari materi favoritmu..."
+            id="search" placeholder="Cari topik favoritmu..."
         />
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
@@ -45,21 +45,26 @@
 
                     {{-- Daftar Materi --}}
                     <div id="{{ $slug }}" class="hidden mt-4 w-full text-left bg-white text-slate-800 rounded-lg p-3 shadow-inner max-h-48 overflow-y-auto scrollbar-thin scrollbar-thumb-indigo-300 scrollbar-track-gray-100">
-                       <ul class="space-y-2">
-                            @foreach($item->materis ?? [] as $sub)
-                                @php
-                                    $icon = $icons[array_rand($icons)];
-                                @endphp
-                                <li class="flex items-center gap-2">
-                                    <i class="fas {{ $icon }} text-indigo-400"></i>
-                                    <a href="{{ route('siswa.materi.show', $sub->id) }}" class="hover:text-indigo-600 font-medium transition">
-                                        {{ $sub->nama_materi }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
+                        @if($item->materis->count() > 0)
+                            <ul class="space-y-2">
+                                @foreach($item->materis ?? [] as $sub)
+                                    @php
+                                        $icon = $icons[array_rand($icons)];
+                                    @endphp
+                                    <li class="flex items-center gap-2">
+                                        <i class="fas {{ $icon }} text-indigo-400"></i>
+                                        <a href="{{ route('siswa.materi.show', $sub->id) }}" class="hover:text-indigo-600 font-medium transition">
+                                            {{ $sub->nama_materi }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <div class="text-center text-sm text-gray-500 italic">
+                                Belum ada materi tersedia
+                            </div>
+                        @endif
                     </div>
-
                 </div>
             @empty
                 <x-siswa.empty-state
