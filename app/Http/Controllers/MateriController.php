@@ -10,12 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class MateriController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $materis = Materi::with(['topikMateri'])->oldest()->paginate(10);
-
         $materisCount = Materi::count();
-
         $allMateris = Materi::with(['topikMateri.kelas', 'topikMateri.jurusan', 'topikMateri.rencana'])->get();
 
         $materiPerKelas = $allMateris
@@ -45,6 +43,10 @@ class MateriController extends Controller
 
         $topikMateriList = TopikMateri::all();
 
+        $items = Materi::all();
+        $openCreate = $request->get('open_create', 0);
+        $topikId = $request->get('topik_id');
+
         return view('admin.pages.materi', [
             'materis' => $materis,
             'materisCount' => $materisCount,
@@ -57,6 +59,9 @@ class MateriController extends Controller
             'filterOptions' => $filterOptions,
             'aktivitas' => Materi::latest()->get(),
             'topikMateriList' => $topikMateriList,
+            'items' => $items,
+            'openCreate' => $openCreate,
+            'topikId' => $topikId,
         ]);
     }
 
