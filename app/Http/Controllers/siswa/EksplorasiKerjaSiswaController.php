@@ -16,11 +16,11 @@ class EksplorasiKerjaSiswaController extends Controller
         $jurusanSiswa = $siswa?->jurusan->nama_jurusan ?? null;
 
         $jurusans = ProfesiKerja::select('info_jurusan')
-            ->distinct()
+            ->groupBy('info_jurusan')
             ->orderBy('info_jurusan')
             ->paginate(3);
 
-        $profesiKerjas = ProfesiKerja::orderBy('info_jurusan', $jurusans->pluck('info_jurusan'))
+        $profesiKerjas = ProfesiKerja::whereIn('info_jurusan', $jurusans->pluck('info_jurusan'))
             ->orderBy('nama_profesi_kerja')
             ->get()
             ->groupBy('info_jurusan');
