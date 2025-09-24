@@ -21,12 +21,12 @@
         @foreach($jurusans as $jurusan)
             <div class="mb-10">
                 <h2 class="text-xl font-bold text-slate-700 mb-4">
-                    {{ $jurusanNames[$jurusan->info_jurusan] ?? $jurusan->info_jurusan }}
+                    {{ $jurusanNames[$jurusan] ?? $jurusan }}
                 </h2>
 
                 {{-- Grid Profesi per Jurusan --}}
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    @forelse($profesiKerjas[$jurusan->info_jurusan] ?? [] as $profesi)
+                    @forelse($profesiKerjas[$jurusan] ?? [] as $profesi)
                         <div class="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden">
                             <div class="w-full h-40 bg-gray-200 overflow-hidden">
                                 @if($profesi->gambar)
@@ -67,7 +67,10 @@
             </div>
         @endforeach
 
-        <x-paginate :jurusans="$jurusans" />
+        {{-- Pagination --}}
+        <div class="mt-8">
+            {{ $jurusans->links() }}
+        </div>
     </div>
 @endsection
 

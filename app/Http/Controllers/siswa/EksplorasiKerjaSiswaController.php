@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Siswa;
 use App\Models\ProfesiKerja;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Arr;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class EksplorasiKerjaSiswaController extends Controller
 {
@@ -18,12 +19,26 @@ class EksplorasiKerjaSiswaController extends Controller
         $jurusans = ProfesiKerja::select('info_jurusan')
             ->groupBy('info_jurusan')
             ->orderBy('info_jurusan')
-            ->paginate(3);
-
-        $profesiKerjas = ProfesiKerja::whereIn('info_jurusan', $jurusans->pluck('info_jurusan'))
-            ->orderBy('nama_profesi_kerja')
             ->get()
-            ->groupBy('info_jurusan');
+            ->pluck('info_jurusan');
+
+        $profesiKerjas = ProfesiKerja::orderBy('nama_profesi_kerja')->get()->groupBy('info_jurusan');
+
+        if ($jurusanSiswa) {
+            $jurusans = $jurusans->reject(fn($j) => $j === $jurusanSiswa);
+            $jurusans = $jurusans->prepend($jurusanSiswa);
+        }
+
+        $perPage = 3;
+        $currentPage = request()->get('page', 1);
+        $items = $jurusans->forPage($currentPage, $perPage);
+        $paginatedJurusans = new LengthAwarePaginator(
+            $items,
+            $jurusans->count(),
+            $perPage,
+            $currentPage,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
 
         $jurusanNames = [
             'DKV'  => 'Desain Komunikasi Visual',
@@ -37,17 +52,12 @@ class EksplorasiKerjaSiswaController extends Controller
             'GEO'  => 'Geomatika',
         ];
 
-        if ($jurusanSiswa) {
-            $jurusanCollection = collect([
-                $jurusanSiswa => $profesiKerjas->get($jurusanSiswa, collect())
-            ]);
-
-            $profesiKerjas = $jurusanCollection->merge(
-                Arr::except($profesiKerjas, $jurusanSiswa)
-            );
-        }
-
-        return view('siswa.pages.eksplorasi-kerja', compact('siswa', 'jurusans', 'profesiKerjas', 'jurusanNames'));
+        return view('siswa.pages.eksplorasi-kerja', [
+            'siswa' => $siswa,
+            'jurusans' => $paginatedJurusans,
+            'profesiKerjas' => $profesiKerjas,
+            'jurusanNames' => $jurusanNames,
+        ]);
     }
 
     public function show($id)
