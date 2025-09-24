@@ -6,7 +6,6 @@ use App\Models\ProfesiKerja;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
 
 class EksplorasiKerjaSiswaController extends Controller
 {
