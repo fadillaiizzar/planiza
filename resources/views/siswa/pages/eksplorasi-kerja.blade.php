@@ -70,6 +70,8 @@
         {{-- Pagination --}}
         <div class="mt-8">
             {{ $jurusans->links() }}
+
+            <x-paginate :jurusans="$jurusans" />
         </div>
     </div>
 @endsection
