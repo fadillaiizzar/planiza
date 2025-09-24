@@ -22,6 +22,7 @@ use App\Http\Controllers\EksplorasiKerjaController;
 use App\Http\Controllers\IndustriProfesiController;
 use App\Http\Controllers\ProfesiKategoriController;
 use App\Http\Controllers\Siswa\EksplorasiKerjaSiswaController;
+use App\Http\Controllers\Siswa\KenaliProfesiSiswaController;
 
 Route::get('/', function () {
     return view('beranda');
@@ -75,4 +76,8 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->na
     Route::resource('materi', MateriSiswaController::class)->names('materi');
 
     Route::resource('eksplorasi-profesi', EksplorasiKerjaSiswaController::class)->names('eksplorasi-profesi');
+
+    Route::prefix('kenali-profesi')->name('kenali-profesi.')->group(function () {
+        Route::get('/', [KenaliProfesiSiswaController::class, 'index'])->name('index');
+    });
 });
