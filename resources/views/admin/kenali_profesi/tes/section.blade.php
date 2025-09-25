@@ -22,6 +22,7 @@
                     <tr>
                         <th class="p-4 font-semibold text-slate-navy w-[60px]">ID</th>
                         <th class="p-4 font-semibold text-slate-navy">Nama Tes</th>
+                        <th class="p-4 font-semibold text-slate-navy ">Active</th>
                         <th class="p-4 font-semibold text-slate-navy w-[120px]">Aksi</th>
                     </tr>
                 </thead>
@@ -32,6 +33,16 @@
                         >
                             <td class="p-4">{{ $item->id }}</td>
                             <td class="p-4 font-medium text-slate-700">{{ Str::limit($item->nama_tes, 65) }}</td>
+                            <td class="p-4">
+                                <form action="{{ route('admin.kenali-profesi.tes.setActive', $item->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit"
+                                        class="px-4 py-1 rounded-full border transition
+                                        {{ $item->is_active ? 'bg-green-500 text-white border-green-500' : 'bg-white text-slate-600 border-slate-300 hover:bg-slate-100' }}">
+                                        {{ $item->is_active ? 'Aktif' : 'Tidak Aktif' }}
+                                    </button>
+                                </form>
+                            </td>
                             <td class="p-4 relative overflow-visible">
                                 <button onclick="toggleDropdown({{ $item->id }})"
                                     class="p-2 rounded-lg hover:bg-off-white focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all">
