@@ -92,7 +92,7 @@
                     </div>
                 </button>
 
-                <a href="{{ route('siswa.dashboard') }}"
+                <a href="{{ route('siswa.kenali-profesi.tes.index') }}"
                     class="group px-6 py-3 rounded-xl w-full flex justify-center bg-gradient-to-r from-slate-navy via-cool-gray to-slate-navy text-white font-semibold hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-cool-gray/30 overflow-hidden relative">
 
                     <div class="absolute inset-0 bg-gradient-to-r from-cool-gray via-slate-navy to-cool-gray opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
