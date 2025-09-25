@@ -17,16 +17,16 @@ class SoalTes extends Model
 
     public function opsiJawabans(): HasMany
     {
-        return $this->hasMany(OpsiJawaban::class);
+        return $this->hasMany(OpsiJawaban::class, 'soal_tes_id');
     }
 
     public function jawabanSiswas(): HasMany
     {
-        return $this->hasMany(JawabanSiswa::class);
+        return $this->hasMany(JawabanSiswa::class, 'soal_tes_id');
     }
 
     public function tes(): BelongsTo
     {
-        return $this->belongsTo(Tes::class);
+        return $this->belongsTo(Tes::class, 'tes_id');
     }
 }

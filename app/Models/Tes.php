@@ -12,7 +12,7 @@ class Tes extends Model
 
     public function soalTes(): HasMany
     {
-        return $this->hasMany(SoalTes::class);
+        return $this->hasMany(SoalTes::class, 'tes_id');
     }
 
     public function jawabanSiswas(): HasMany
