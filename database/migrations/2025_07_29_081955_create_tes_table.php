@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tes', function (Blueprint $table) {
             $table->id();
             $table->string('nama_tes');
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

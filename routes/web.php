@@ -21,8 +21,11 @@ use App\Http\Controllers\KontribusiSdgsController;
 use App\Http\Controllers\EksplorasiKerjaController;
 use App\Http\Controllers\IndustriProfesiController;
 use App\Http\Controllers\ProfesiKategoriController;
-use App\Http\Controllers\Siswa\EksplorasiKerjaSiswaController;
+use App\Http\Controllers\Siswa\KerjakanTesController;
+use App\Http\Controllers\Siswa\JawabanSiswaController;
 use App\Http\Controllers\Siswa\KenaliProfesiSiswaController;
+use App\Http\Controllers\Siswa\RekomendasiProfesiController;
+use App\Http\Controllers\Siswa\EksplorasiKerjaSiswaController;
 
 Route::get('/', function () {
     return view('beranda');
@@ -64,6 +67,8 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
         Route::resource('tes', TesController::class);
         Route::resource('soal-tes', SoalTesController::class);
         Route::resource('opsi-jawaban', OpsiJawabanController::class);
+
+        Route::post('tes/{id}/set-active', [TesController::class, 'setActive'])->name('tes.setActive');
     });
 
     Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('kontribusi-sdgs');
@@ -79,5 +84,11 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->na
 
     Route::prefix('kenali-profesi')->name('kenali-profesi.')->group(function () {
         Route::get('/', [KenaliProfesiSiswaController::class, 'index'])->name('index');
+
+        Route::get('/tes', [KerjakanTesController::class, 'index'])->name('tes.index');
+        Route::post('/tes/{soal}/jawab', [JawabanSiswaController::class, 'store'])->name('tes.jawab');
+
+        Route::post('/tes/{tes}/submit', [KerjakanTesController::class, 'submit'])->name('tes.submit');
+        Route::get('/rekomendasi/{tes}', [RekomendasiProfesiController::class, 'index'])->name('tes.rekomendasi');
     });
 });

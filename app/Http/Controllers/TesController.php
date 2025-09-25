@@ -105,4 +105,14 @@ class TesController extends Controller
 
         return redirect()->route('admin.kenali-profesi.tes.index')->with('success', 'Tes berhasil dihapus');
     }
+
+    public function setActive($id)
+    {
+        Tes::query()->update(['is_active' => false]);
+
+        $tes = Tes::findOrFail($id);
+        $tes->update(['is_active' => true]);
+
+        return back()->with('success', 'Tes '.$tes->nama_tes.' berhasil ditampilkan');
+    }
 }
