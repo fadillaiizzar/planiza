@@ -28,7 +28,7 @@
             <div class="bg-white/70 backdrop-blur-xl rounded-3xl shadow-xl border border-white/20 p-6 sm:p-8 lg:p-12">
                 <div id="soal-container" class="min-h-[400px]">
                     @foreach ($soals as $index => $soal)
-                        <div class="soal-item {{ $index === 0 ? '' : 'hidden' }}" data-index="{{ $index }}">
+                        <div class="soal-item {{ $index === 0 ? '' : 'hidden' }}" data-index="{{ $index }}" data-id="{{ $soal->id }}">
                             @include('siswa.kenali_profesi.tes.question-header',
                                 [
                                     'index' => $index,
@@ -52,10 +52,13 @@
 
     @include('siswa.kenali_profesi.tes.loading')
 
+    @include('siswa.kenali_profesi.tes.popup-custom')
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         const soalItems = document.querySelectorAll('.soal-item');
         let currentIndex = 0;
+        let answeredSoal = {};
 
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
@@ -83,7 +86,17 @@
 
         // 🔹 Navigasi soal
         prevBtn.onclick = () => { if (currentIndex > 0) showSoal(--currentIndex); };
-        nextBtn.onclick = () => { if (currentIndex < totalSoal - 1) showSoal(++currentIndex); };
+
+        // 🔹 Tambahan validasi di tombol next
+        nextBtn.onclick = () => {
+            const soalId = soalItems[currentIndex].dataset.id;
+            if (!answeredSoal[soalId]) {
+                showCustomAlert('Harap pilih jawaban terlebih dahulu sebelum lanjut.');
+                return;
+            }
+            if (currentIndex < totalSoal - 1) showSoal(++currentIndex);
+        };
+
         document.addEventListener('keydown', e => {
             if (e.code === 'ArrowLeft') prevBtn.click();
             if (e.code === 'ArrowRight' || e.code === 'Space') nextBtn.click();
@@ -101,6 +114,16 @@
                 nextBtn.click();
             }
         });
+
+        // 🔹 Tambahan Popup
+        function showCustomAlert(message) {
+            document.getElementById('custom-alert-message').textContent = message;
+            document.getElementById('custom-alert').classList.remove('hidden');
+        }
+
+        function hideCustomAlert() {
+            document.getElementById('custom-alert').classList.add('hidden');
+        }
 
         // 🔹 Reset semua opsi ke default
         function resetOptionStyles($btn) {
@@ -163,6 +186,9 @@
                         // lalu set opsi yang dipilih
                         setSelectedOptionStyles(btn);
 
+                        // 🔹 Tambahan validasi : tandai soal sudah dijawab
+                        answeredSoal[soalId] = opsiId;
+
                         // auto next
                         setTimeout(() => {
                             if (currentIndex < soalItems.length - 1) {
@@ -173,7 +199,7 @@
                 },
                 error: function () {
                     loadingOverlay.classList.add('hidden');
-                    alert('Gagal menyimpan jawaban. Silakan coba lagi.');
+                    showCustomAlert('Gagal menyimpan jawaban. Silakan coba lagi.');
                 }
             });
         });
