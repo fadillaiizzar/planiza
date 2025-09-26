@@ -55,10 +55,18 @@
     @include('siswa.kenali_profesi.tes.popup-custom')
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
+        const answeredSoal = {
+            @foreach($soals as $soal)
+                @if($soal->jawabanSiswa)
+                    '{{ $soal->id }}': '{{ $soal->jawabanSiswa->opsi_jawaban_id }}',
+                @endif
+            @endforeach
+        };
+
         const soalItems = document.querySelectorAll('.soal-item');
         let currentIndex = 0;
-        let answeredSoal = {};
 
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
@@ -82,6 +90,17 @@
             nextBtn.classList.toggle('hidden', index === totalSoal - 1);
             submitForm.classList.toggle('hidden', index !== totalSoal - 1);
             updateProgress();
+
+            const soalId = soalItems[index].dataset.id;
+            const selectedOpsi = answeredSoal[soalId];
+            if (selectedOpsi) {
+                const btn = $(soalItems[index]).find(`.opsi-btn[data-opsi="${selectedOpsi}"]`);
+                btn.parent().find('.opsi-btn').each(function() { resetOptionStyles($(this)); });
+                setSelectedOptionStyles(btn);
+            } else {
+                // reset semua opsi ke default jika belum dijawab
+                $(soalItems[index]).find('.opsi-btn').each(function() { resetOptionStyles($(this)); });
+            }
         }
 
         // 🔹 Navigasi soal

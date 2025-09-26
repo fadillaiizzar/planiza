@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,6 +24,11 @@ class SoalTes extends Model
     public function jawabanSiswas(): HasMany
     {
         return $this->hasMany(JawabanSiswa::class, 'soal_tes_id');
+    }
+
+    public function jawabanSiswa()
+    {
+        return $this->hasOne(JawabanSiswa::class, 'soal_tes_id')->where('user_id', Auth::id());
     }
 
     public function tes(): BelongsTo

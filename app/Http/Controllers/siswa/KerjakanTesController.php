@@ -17,7 +17,12 @@ class KerjakanTesController extends Controller
             return view('siswa.tes.empty');
         }
 
-        $soals = SoalTes::where('tes_id', $tes->id)->with('opsiJawabans')->get();
+        $soals = SoalTes::with([
+            'opsiJawabans',
+            'jawabanSiswa' => function($q) {
+                $q->where('user_id', Auth::id());
+            }
+        ])->where('tes_id', $tes->id)->get();
 
         return view('siswa.kenali_profesi.tes.index', compact('tes', 'soals'));
     }
