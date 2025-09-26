@@ -55,7 +55,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         const soalItems = document.querySelectorAll('.soal-item');
-        const totalSoal = soalItems.length;
         let currentIndex = 0;
 
         const prevBtn = document.getElementById('prev-btn');
@@ -64,54 +63,30 @@
         const progressBar = document.getElementById('progress-bar');
         const questionCounter = document.getElementById('question-counter');
         const loadingOverlay = document.getElementById('loading-overlay');
+        const totalSoal = soalItems.length;
 
+        // 🔹 Update progress bar + counter
         function updateProgress() {
             const progress = ((currentIndex + 1) / totalSoal) * 100;
             progressBar.style.width = `${progress}%`;
             questionCounter.textContent = `${currentIndex + 1} / ${totalSoal}`;
         }
 
+        // 🔹 Tampilkan soal ke-n
         function showSoal(index) {
-            soalItems.forEach((item, i) => {
-                if (i === index) {
-                    item.classList.remove('hidden');
-                    item.style.opacity = '0';
-                    item.style.transform = 'translateY(20px)';
-                    setTimeout(() => {
-                        item.style.transition = 'all 0.5s ease-out';
-                        item.style.opacity = '1';
-                        item.style.transform = 'translateY(0)';
-                    }, 50);
-                } else {
-                    item.classList.add('hidden');
-                }
-            });
-
+            soalItems.forEach((item, i) => item.classList.toggle('hidden', i !== index));
             prevBtn.disabled = index === 0;
-
-            if (index === soalItems.length - 1) {
-                nextBtn.classList.add('hidden');
-                submitForm.classList.remove('hidden');
-            } else {
-                nextBtn.classList.remove('hidden');
-                submitForm.classList.add('hidden');
-            }
-
+            nextBtn.classList.toggle('hidden', index === totalSoal - 1);
+            submitForm.classList.toggle('hidden', index !== totalSoal - 1);
             updateProgress();
         }
 
-        prevBtn.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                showSoal(currentIndex);
-            }
-        });
-
-        nextBtn.addEventListener('click', () => {
-            if (currentIndex < soalItems.length - 1) {
-                currentIndex++;
-                showSoal(currentIndex);
-            }
+        // 🔹 Navigasi soal
+        prevBtn.onclick = () => { if (currentIndex > 0) showSoal(--currentIndex); };
+        nextBtn.onclick = () => { if (currentIndex < totalSoal - 1) showSoal(++currentIndex); };
+        document.addEventListener('keydown', e => {
+            if (e.code === 'ArrowLeft') prevBtn.click();
+            if (e.code === 'ArrowRight' || e.code === 'Space') nextBtn.click();
         });
 
         document.addEventListener('keydown', (e) => {
@@ -127,6 +102,41 @@
             }
         });
 
+        // 🔹 Reset semua opsi ke default
+        function resetOptionStyles($btn) {
+            const badge = $btn.find('.w-12.h-12');
+            const text = $btn.find('p');
+
+            $btn.removeClass('bg-slate-navy border-slate-navy shadow-xl scale-[1.02]')
+                .addClass('bg-white hover:bg-blue-50 border-border-gray/30 hover:border-blue-300/50');
+
+            badge.removeClass('bg-white/20 border-white/40 text-white')
+                .addClass('border-border-gray/50 text-cool-gray group-hover:border-blue-400 group-hover:text-slate-navy group-hover:bg-blue-50');
+
+            text.removeClass('text-white')
+                .addClass('text-slate-navy');
+
+            $btn.find('.absolute').removeClass('hidden');
+        }
+
+        // 🔹 Set opsi terpilih
+        function setSelectedOptionStyles($btn) {
+            const badge = $btn.find('.w-12.h-12');
+            const text = $btn.find('p');
+
+            $btn.removeClass('bg-white hover:bg-blue-50 border-border-gray/30 hover:border-blue-300/50')
+                .addClass('bg-slate-navy border-slate-navy shadow-xl scale-[1.02]');
+
+            badge.removeClass('border-border-gray/50 text-cool-gray group-hover:border-blue-400 group-hover:text-slate-navy group-hover:bg-blue-50')
+                .addClass('bg-white/20 border-white/40 text-white');
+
+            text.removeClass('text-slate-navy')
+                .addClass('text-white');
+
+            $btn.find('.absolute').addClass('hidden');
+        }
+
+        // 🔹 Event Pilih opsi jawaban
         $(document).on('click', '.opsi-btn', function () {
             const soalId = $(this).data('soal');
             const opsiId = $(this).data('opsi');
@@ -145,37 +155,15 @@
                     loadingOverlay.classList.add('hidden');
 
                     if (res.success) {
-                        btn.parent().find('.opsi-btn').each(function() {
-                            const $this = $(this);
-                            const letterBadge = $this.find('.w-12.h-12');
-                            const optionText = $this.find('p');
-
-                            $this.removeClass('bg-blue-600 border-blue-600 shadow-xl scale-[1.02]')
-                                .addClass('bg-white hover:bg-blue-50 border-border-gray/30 hover:border-blue-300/50');
-
-                            letterBadge.removeClass('bg-white/20 border-white/40 text-white')
-                                    .addClass('border-border-gray/50 text-cool-gray group-hover:border-blue-400 group-hover:text-blue-600 group-hover:bg-blue-50');
-
-                            optionText.removeClass('text-white')
-                                    .addClass('text-slate-navy');
-
-                            $this.find('.absolute').removeClass('hidden');
+                        // reset semua opsi dulu
+                        btn.parent().find('.opsi-btn').each(function () {
+                            resetOptionStyles($(this));
                         });
 
-                        const selectedLetterBadge = btn.find('.w-12.h-12');
-                        const selectedText = btn.find('p');
+                        // lalu set opsi yang dipilih
+                        setSelectedOptionStyles(btn);
 
-                        btn.removeClass('bg-white hover:bg-blue-50 border-border-gray/30 hover:border-blue-300/50')
-                        .addClass('bg-blue-600 border-blue-600 shadow-xl scale-[1.02]');
-
-                        selectedLetterBadge.removeClass('border-border-gray/50 text-cool-gray group-hover:border-blue-400 group-hover:text-blue-600 group-hover:bg-blue-50')
-                                        .addClass('bg-white/20 border-white/40 text-white');
-
-                        selectedText.removeClass('text-slate-navy')
-                                    .addClass('text-white');
-
-                        btn.find('.absolute').addClass('hidden');
-
+                        // auto next
                         setTimeout(() => {
                             if (currentIndex < soalItems.length - 1) {
                                 nextBtn.click();
