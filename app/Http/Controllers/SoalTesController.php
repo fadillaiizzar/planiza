@@ -142,6 +142,6 @@ class SoalTesController extends Controller
         $soalTes = $this->findSoalTes($id);
         $soalTes->delete();
 
-        return redirect()->route('admin.kenali-profesi.soal-tes.show')->with('success', 'Soal Tes berhasil dihapus');
+        return redirect()->route('admin.kenali-profesi.soal-tes.show', $soalTes->tes_id)->with('success', 'Soal Tes berhasil dihapus');
     }
 }
