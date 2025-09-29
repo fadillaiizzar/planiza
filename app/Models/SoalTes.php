@@ -21,14 +21,9 @@ class SoalTes extends Model
         return $this->hasMany(OpsiJawaban::class, 'soal_tes_id');
     }
 
-    public function jawabanSiswas(): HasMany
+    public function jawabanSiswa(): HasMany
     {
-        return $this->hasMany(JawabanSiswa::class, 'soal_tes_id');
-    }
-
-    public function jawabanSiswa()
-    {
-        return $this->hasOne(JawabanSiswa::class, 'soal_tes_id')->where('user_id', Auth::id());
+        return $this->hasMany(JawabanSiswa::class, 'soal_tes_id')->where('user_id', Auth::id());
     }
 
     public function tes(): BelongsTo

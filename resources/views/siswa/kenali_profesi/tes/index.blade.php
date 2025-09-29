@@ -28,7 +28,7 @@
             <div class="bg-white/70 backdrop-blur-xl rounded-3xl shadow-xl border border-white/20 p-6 sm:p-8 lg:p-12">
                 <div id="soal-container" class="min-h-[400px]">
                     @foreach ($soals as $index => $soal)
-                        <div class="soal-item {{ $index === 0 ? '' : 'hidden' }}" data-index="{{ $index }}" data-id="{{ $soal->id }}">
+                        <div class="soal-item {{ $index === 0 ? '' : 'hidden' }}" data-index="{{ $index }}" data-id="{{ $soal->id }}" data-max="{{ $soal->max_select }}">
                             @include('siswa.kenali_profesi.tes.question-header',
                                 [
                                     'index' => $index,
@@ -59,9 +59,7 @@
     <script>
         const answeredSoal = {
             @foreach($soals as $soal)
-                @if($soal->jawabanSiswa)
-                    '{{ $soal->id }}': '{{ $soal->jawabanSiswa->opsi_jawaban_id }}',
-                @endif
+                '{{ $soal->id }}': @json($soal->jawabanSiswa ? $soal->jawabanSiswa->pluck('opsi_jawaban_id') : []),
             @endforeach
         };
 
@@ -92,15 +90,16 @@
             updateProgress();
 
             const soalId = soalItems[index].dataset.id;
-            const selectedOpsi = answeredSoal[soalId];
-            if (selectedOpsi) {
-                const btn = $(soalItems[index]).find(`.opsi-btn[data-opsi="${selectedOpsi}"]`);
-                btn.parent().find('.opsi-btn').each(function() { resetOptionStyles($(this)); });
-                setSelectedOptionStyles(btn);
-            } else {
-                // reset semua opsi ke default jika belum dijawab
-                $(soalItems[index]).find('.opsi-btn').each(function() { resetOptionStyles($(this)); });
-            }
+            const selectedOpsi = answeredSoal[soalId] || [];
+
+            $(soalItems[index]).find('.opsi-btn').each(function () {
+                const opsiId = $(this).data('opsi');
+                if (selectedOpsi.includes(opsiId)) {
+                    setSelectedOptionStyles($(this));
+                } else {
+                    resetOptionStyles($(this));
+                }
+            });
         }
 
         // 🔹 Navigasi soal
@@ -109,13 +108,14 @@
         // 🔹 Tambahan validasi di tombol next
         nextBtn.onclick = () => {
             const soalId = soalItems[currentIndex].dataset.id;
-            if (!answeredSoal[soalId]) {
+            if (!answeredSoal[soalId] || answeredSoal[soalId].length === 0) {
                 showCustomAlert('Harap pilih jawaban terlebih dahulu sebelum lanjut.');
                 return;
             }
             if (currentIndex < totalSoal - 1) showSoal(++currentIndex);
         };
 
+        // 🔹 Tambahan keyboard
         document.addEventListener('keydown', e => {
             if (e.code === 'ArrowLeft') prevBtn.click();
             if (e.code === 'ArrowRight' || e.code === 'Space') nextBtn.click();
@@ -183,37 +183,60 @@
             const soalId = $(this).data('soal');
             const opsiId = $(this).data('opsi');
             const btn = $(this);
+            const soalItem = $(this).closest('.soal-item');
+            const maxSelect = parseInt(soalItem.data('max'));
 
             loadingOverlay.classList.remove('hidden');
+
+            // toggle multi select
+            if (!answeredSoal[soalId]) {
+                answeredSoal[soalId] = [];
+            }
+
+            if (maxSelect === 1) {
+                answeredSoal[soalId] = [opsiId];
+            } else {
+                const idx = answeredSoal[soalId].indexOf(opsiId);
+
+                if (idx === -1) {
+                    if (answeredSoal[soalId].length < maxSelect) {
+                        answeredSoal[soalId].push(opsiId);
+                    } else {
+                        answeredSoal[soalId].shift();
+                        answeredSoal[soalId].push(opsiId);
+                    }
+                } else {
+                    answeredSoal[soalId].splice(idx, 1);
+                }
+            }
 
             $.ajax({
                 url: `/siswa/kenali-profesi/tes/${soalId}/jawab`,
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
-                    opsi_jawaban_id: opsiId
+                    opsi_jawaban_id: answeredSoal[soalId]
                 },
                 success: function (res) {
                     loadingOverlay.classList.add('hidden');
 
                     if (res.success) {
-                        // reset semua opsi dulu
                         btn.parent().find('.opsi-btn').each(function () {
-                            resetOptionStyles($(this));
+                            const opsi = $(this).data('opsi');
+                            if (answeredSoal[soalId].includes(opsi)) {
+                                setSelectedOptionStyles($(this));
+                            } else {
+                                resetOptionStyles($(this));
+                            }
                         });
 
-                        // lalu set opsi yang dipilih
-                        setSelectedOptionStyles(btn);
-
-                        // 🔹 Tambahan validasi : tandai soal sudah dijawab
-                        answeredSoal[soalId] = opsiId;
-
-                        // auto next
-                        setTimeout(() => {
-                            if (currentIndex < soalItems.length - 1) {
-                                nextBtn.click();
-                            }
-                        }, 800);
+                        if (res.jenis_soal === "single") {
+                            setTimeout(() => {
+                                if (currentIndex < soalItems.length - 1) {
+                                    nextBtn.click();
+                                }
+                            }, 800);
+                        }
                     }
                 },
                 error: function () {
