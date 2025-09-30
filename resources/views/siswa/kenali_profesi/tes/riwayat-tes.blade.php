@@ -40,16 +40,9 @@
                 <h3 class="text-2xl font-bold text-slate-navy mb-3">
                     Belum Ada Riwayat Tes
                 </h3>
-                <p class="text-cool-gray mb-8 max-w-md mx-auto">
+                <p class="text-cool-gray max-w-md mx-auto">
                     Mulai perjalanan kariermu dengan mengikuti tes minat dan bakat pertamamu!
                 </p>
-
-                <a href="#mulai-tes"
-                   class="inline-flex items-center gap-2 px-8 py-4 bg-slate-navy text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300">
-                    <i class="fas fa-rocket"></i>
-                    <span>Mulai Tes Sekarang</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
             </div>
         </div>
     @else
