@@ -17,7 +17,7 @@
                 <div class="inline-flex items-center gap-2 px-5 py-2.5 bg-white rounded-full shadow-sm border border-border-gray/20">
                     <i class="fas fa-check-double text-slate-navy text-sm"></i>
                     <span class="text-sm font-medium text-cool-gray">
-                        Total: <span class="font-bold text-slate-navy">{{ $riwayatTes->count() }}</span> tes
+                        Total : <span>{{ $riwayatTes->count() }}</span> Tes
                     </span>
                 </div>
             @endif
@@ -72,7 +72,7 @@
                                     </span>
                                     <span class="flex items-center gap-1.5">
                                         <i class="fas fa-calendar-alt"></i>
-                                        {{ $tes->created_at->format('d M Y, H:i') }}
+                                        {{ $tes->kenaliProfesis->first()?->created_at->format('d M Y, H:i') }}
                                     </span>
                                 </div>
                             </div>
