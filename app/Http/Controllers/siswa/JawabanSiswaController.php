@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Siswa;
 
 use App\Models\SoalTes;
-use App\Models\OpsiJawaban;
 use App\Models\JawabanSiswa;
 use Illuminate\Http\Request;
-use App\Models\KenaliProfesi;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
