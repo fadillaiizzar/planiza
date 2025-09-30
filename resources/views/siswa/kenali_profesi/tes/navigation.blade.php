@@ -25,7 +25,7 @@
             <button type="submit"
                 class="w-full sm:w-auto px-8 py-4 bg-slate-navy hover:bg-slate-navy/90 text-off-white rounded-2xl font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-xl hover:shadow-2xl transform hover:scale-105 relative overflow-hidden">
                 <i class="fas fa-check-circle text-sm"></i>
-                <span>Selesai & Lihat Rekomendasi</span>
+                <span>Kirim</span>
                 <div class="absolute inset-0 bg-gradient-to-r from-transparent via-off-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
             </button>
         </form>

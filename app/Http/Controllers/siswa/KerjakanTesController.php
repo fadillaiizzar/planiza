@@ -35,6 +35,6 @@ class KerjakanTesController extends Controller
             'tes_selesai' => true,
         ]);
 
-        return redirect()->route('siswa.tes.rekomendasi', $tes->id);
+        return redirect()->route('siswa.kenali-profesi.tes.rekomendasi', $tes->id);
     }
 }
