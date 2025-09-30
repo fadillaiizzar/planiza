@@ -13,7 +13,10 @@
         <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
             @include('siswa.kenali_profesi.tes.rekomendasi_profesi.hero')
 
-            @include('siswa.kenali_profesi.tes.rekomendasi_profesi.top-profesi-card')
+            @include('siswa.kenali_profesi.tes.rekomendasi_profesi.top-profesi-card', [
+                'topProfesi' => $topProfesi,
+                'alasanFormatted' => $alasanFormatted
+            ])
 
             @include('siswa.kenali_profesi.tes.rekomendasi_profesi.bottom-info')
         </div>
