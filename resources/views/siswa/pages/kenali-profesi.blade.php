@@ -26,6 +26,8 @@
             </div>
         </div>
 
+        @include('siswa.kenali_profesi.tes.riwayat-tes')
+
         @include('siswa.kenali_profesi.additional-link')
     </div>
 @endsection
