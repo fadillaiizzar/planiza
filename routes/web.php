@@ -89,6 +89,6 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->na
         Route::post('/tes/{soal}/jawab', [JawabanSiswaController::class, 'store'])->name('tes.jawab');
 
         Route::post('/tes/{tes}/submit', [KerjakanTesController::class, 'submit'])->name('tes.submit');
-        Route::get('/rekomendasi/{tes}', [RekomendasiProfesiController::class, 'index'])->name('tes.rekomendasi');
+        Route::get('/rekomendasi/{tes}/{attempt?}', [RekomendasiProfesiController::class, 'index'])->name('tes.rekomendasi');
     });
 });
