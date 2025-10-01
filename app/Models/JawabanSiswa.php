@@ -12,6 +12,7 @@ class JawabanSiswa extends Model
         'tes_id',
         'soal_tes_id',
         'opsi_jawaban_id',
+        'attempt',
     ];
 
     public function user(): BelongsTo

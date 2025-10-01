@@ -14,6 +14,7 @@ class KenaliProfesi extends Model
         'sumber_rekomendasi',
         'total_poin',
         'ranking',
+        'attempt',
     ];
 
     public function user(): BelongsTo
