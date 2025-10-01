@@ -29,22 +29,61 @@ class JawabanSiswaController extends Controller
             ], 422);
         }
 
-        JawabanSiswa::where('user_id', $user->id)
-            ->where('soal_tes_id', $soalId)
-            ->whereNotIn('opsi_jawaban_id', $request->opsi_jawaban_id)
-            ->delete();
+        $activeAttempt = $request->input('attempt', 1);
 
-        foreach ($request->opsi_jawaban_id as $opsiId) {
+        if ($max == 1) {
+            // 🔹 Pilgan (single choice)
             JawabanSiswa::updateOrCreate(
                 [
                     'user_id' => $user->id,
                     'soal_tes_id' => $soalId,
-                    'opsi_jawaban_id' => $opsiId,
+                    'tes_id' => $soal->tes_id,
+                    'attempt' => $activeAttempt,
                 ],
                 [
-                    'tes_id' => $soal->tes_id,
+                    'opsi_jawaban_id' => $request->opsi_jawaban_id[0],
                 ]
             );
+        } else {
+            // 🔹 Multi choice
+            $currentAnswers = JawabanSiswa::where('user_id', $user->id)
+                ->where('soal_tes_id', $soalId)
+                ->where('tes_id', $soal->tes_id)
+                ->where('attempt', $activeAttempt)
+                ->pluck('opsi_jawaban_id')
+                ->toArray();
+
+            foreach ($request->opsi_jawaban_id as $opsiId) {
+                if (in_array($opsiId, $currentAnswers)) {
+                    continue; // sudah ada, skip
+                }
+
+                if (count($currentAnswers) >= $max) {
+                    // kalau sudah penuh max → hapus jawaban lama paling awal
+                    $jawabanLama = JawabanSiswa::where('user_id', $user->id)
+                        ->where('soal_tes_id', $soalId)
+                        ->where('tes_id', $soal->tes_id)
+                        ->where('attempt', $activeAttempt)
+                        ->oldest()
+                        ->first();
+
+                    if ($jawabanLama) {
+                        $jawabanLama->delete();
+                        array_shift($currentAnswers);
+                    }
+                }
+
+                // tambahkan jawaban baru
+                JawabanSiswa::create([
+                    'user_id' => $user->id,
+                    'soal_tes_id' => $soalId,
+                    'opsi_jawaban_id' => $opsiId,
+                    'tes_id' => $soal->tes_id,
+                    'attempt' => $activeAttempt,
+                ]);
+
+                $currentAnswers[] = $opsiId;
+            }
         }
 
         return response()->json([

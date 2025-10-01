@@ -3,22 +3,27 @@
 namespace App\Http\Controllers\Siswa;
 
 use App\Models\Tes;
+use App\Models\JawabanSiswa;
 use App\Models\KenaliProfesi;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class RekomendasiProfesiController extends Controller
 {
-    public function index($tesId)
+    public function index($tesId, $attempt = null)
     {
         $tes = Tes::findOrFail($tesId);
         $user = Auth::user();
         $siswa = $user->siswa;
 
-        // 🔹 Ambil semua jawaban siswa di tes ini
+        $activeAttempt = $attempt ?? JawabanSiswa::where('user_id', $user->id)
+        ->where('tes_id', $tesId)
+        ->max('attempt');
+
         $jawaban = $siswa->jawabanSiswa()
             ->with(['opsiJawaban.kategoriMinat.profesiKerjas', 'opsiJawaban.profesiKerja'])
-            ->whereHas('soalTes', fn($q) => $q->where('tes_id', $tesId))
+            ->where('tes_id', $tesId)
+            ->where('attempt', $activeAttempt)
             ->get();
 
         $poinProfesi = [];
@@ -33,7 +38,6 @@ class RekomendasiProfesiController extends Controller
                 foreach ($opsi->kategoriMinat->profesiKerjas as $profesi) {
                     $poinProfesi[$profesi->id] = ($poinProfesi[$profesi->id] ?? 0) + $opsi->poin;
 
-                    // alasan spesifik profesi
                     $alasanPerProfesi[$profesi->id][] = $opsi->isi_opsi;
                 }
             }
@@ -42,7 +46,6 @@ class RekomendasiProfesiController extends Controller
             if ($opsi->profesi_kerja_id) {
                 $poinProfesi[$opsi->profesi_kerja_id] = ($poinProfesi[$opsi->profesi_kerja_id] ?? 0) + $opsi->poin;
 
-                // alasan spesifik profesi
                 $alasanPerProfesi[$opsi->profesi_kerja_id][] = $opsi->isi_opsi;
             }
         }
@@ -53,6 +56,7 @@ class RekomendasiProfesiController extends Controller
                 [
                     'user_id' => $user->id,
                     'tes_id' => $tesId,
+                    'attempt' => $activeAttempt,
                     'profesi_kerja_id' => $profesiId,
                     'sumber_rekomendasi' => 'tes'
                 ],
@@ -66,6 +70,7 @@ class RekomendasiProfesiController extends Controller
         $allProfesi = KenaliProfesi::with('profesiKerja')
             ->where('user_id', $user->id)
             ->where('tes_id', $tesId)
+            ->where('attempt', $activeAttempt)
             ->orderByDesc('total_poin')
             ->get();
 
@@ -76,11 +81,11 @@ class RekomendasiProfesiController extends Controller
         $alasanFormatted = [];
         foreach ($alasanPerProfesi as $profesiId => $listAlasan) {
             $skills = implode(', ', array_unique($listAlasan));
-            $alasanFormatted[$profesiId] = "Karena kemampuanmu di bidang $skills, profesi ini sangat sesuai untukmu.";
+            $alasanFormatted[$profesiId] = "Karena kemampuanmu di bidang $skills, profesi ini sangat sesuai untukmu";
         }
 
         return view('siswa.pages.rekomendasi-profesi', compact(
-            'tes', 'siswa', 'topProfesi', 'allProfesi', 'alasanFormatted'
+            'tes', 'siswa', 'topProfesi', 'allProfesi', 'alasanFormatted', 'activeAttempt'
         ));
     }
 }
