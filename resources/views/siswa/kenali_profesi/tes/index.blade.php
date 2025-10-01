@@ -215,7 +215,8 @@
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
-                    opsi_jawaban_id: answeredSoal[soalId]
+                    opsi_jawaban_id: answeredSoal[soalId],
+                    attempt: {{ $activeAttempt }} 
                 },
                 success: function (res) {
                     loadingOverlay.classList.add('hidden');

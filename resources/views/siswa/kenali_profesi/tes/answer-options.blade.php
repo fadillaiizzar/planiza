@@ -1,5 +1,7 @@
 @php
-    $selectedIds = $soal->jawabanSiswa ? $soal->jawabanSiswa->pluck('opsi_jawaban_id')->toArray() : [];
+    $selectedIds = $soal->jawabanSiswa
+        ? $soal->jawabanSiswa->pluck('opsi_jawaban_id')->toArray()
+        : [];
 @endphp
 
 <div class="grid gap-4 sm:gap-5 max-w-3xl mx-auto">
