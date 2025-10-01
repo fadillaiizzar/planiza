@@ -4,9 +4,9 @@
 <div class="min-h-screen bg-gradient-to-br from-off-white via-white to-off-white">
     <div class="px-4 py-8 sm:px-8">
         <x-siswa.section-header
-            title="Kenali Profesi Kerja"
-            subtitle="Temukan profesi kerja yang sesuai dengan dirimu melalui tes minat dan bakat. Jawab soal sederhana dan dapatkan rekomendasi karier yang cocok untukmu!"
-            back-route="siswa.dashboard"
+            title="Rekomendasi Profesi"
+            subtitle="Temukan tiga profesi teratas yang cocok dengan potensi dan minatmu"
+            back-route="siswa.kenali-profesi.index"
         />
         <x-siswa.info-siswa :siswa="$siswa" />
 
