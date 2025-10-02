@@ -22,17 +22,13 @@ class KerjakanTesController extends Controller
 
         $lastAttempt = JawabanSiswa::where('user_id', $userId)
             ->where('tes_id', $tes->id)
+            ->where('is_finished', true)
             ->max('attempt');
 
-        if (!$lastAttempt) {
-            $activeAttempt = 1;
+        if ($lastAttempt) {
+            $activeAttempt = $lastAttempt + 1;
         } else {
-            $siswa = Auth::user()->siswa;
-            if ($siswa->tes_selesai) {
-                $activeAttempt = $lastAttempt + 1;
-            } else {
-                $activeAttempt = $lastAttempt;
-            }
+            $activeAttempt = 1;
         }
 
         $soals = SoalTes::with(['opsiJawabans', 'jawabanSiswa' => function($q) use($userId, $activeAttempt) {
@@ -46,12 +42,17 @@ class KerjakanTesController extends Controller
 
     public function submit(Tes $tes)
     {
-        $siswa = Auth::user()->siswa;
+        $userId = Auth::id();
 
-        $siswa->update([
-            'tes_selesai' => true,
-        ]);
+        $lastAttempt = JawabanSiswa::where('user_id', $userId)
+            ->where('tes_id', $tes->id)
+            ->max('attempt');
 
-        return redirect()->route('siswa.kenali-profesi.tes.rekomendasi', $tes->id);
+        JawabanSiswa::where('user_id', $userId)
+            ->where('tes_id', $tes->id)
+            ->where('attempt', $lastAttempt)
+            ->update(['is_finished' => true]);
+
+        return redirect()->route('siswa.kenali-profesi.tes.rekomendasi', [$tes->id, $lastAttempt]);
     }
 }

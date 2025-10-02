@@ -42,6 +42,7 @@ class JawabanSiswaController extends Controller
                 ],
                 [
                     'opsi_jawaban_id' => $request->opsi_jawaban_id[0],
+                    'is_finished' => false,
                 ]
             );
         } else {
@@ -80,6 +81,7 @@ class JawabanSiswaController extends Controller
                     'opsi_jawaban_id' => $opsiId,
                     'tes_id' => $soal->tes_id,
                     'attempt' => $activeAttempt,
+                    'is_finished' => false,
                 ]);
 
                 $currentAnswers[] = $opsiId;
