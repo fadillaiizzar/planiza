@@ -54,6 +54,8 @@
 
     @include('siswa.kenali_profesi.tes.popup-custom')
 
+    <input type="hidden" id="activeAttempt" value="{{ $activeAttempt }}">
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
@@ -216,7 +218,7 @@
                 data: {
                     _token: '{{ csrf_token() }}',
                     opsi_jawaban_id: answeredSoal[soalId],
-                    attempt: {{ $activeAttempt }} 
+                    attempt: $('#activeAttempt').val()
                 },
                 success: function (res) {
                     loadingOverlay.classList.add('hidden');
