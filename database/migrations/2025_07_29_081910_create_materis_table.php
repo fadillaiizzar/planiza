@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('topik_materi_id')->constrained('topik_materis')->onDelete('cascade');
             $table->string('nama_materi');
             $table->text('deskripsi_materi');
-            $table->string('tipe_file', 20);
-            $table->string('file_materi', 255);
+            $table->string('tipe_file', 20)->nullable();
+            $table->string('file_materi', 255)->nullable();
             $table->timestamps();
         });
     }
