@@ -587,14 +587,17 @@ class DatabaseSeeder extends Seeder
             'max_select' => 1,
         ]);
 
-        OpsiJawaban::insert([
+        $opsi1 = [
             ['soal_tes_id' => $soal1->id, 'kategori_minat_id' => 4, 'profesi_kerja_id' => null, 'isi_opsi' => 'Membantu orang lain atau mengajar', 'poin' => 5],
             ['soal_tes_id' => $soal1->id, 'kategori_minat_id' => 3, 'profesi_kerja_id' => null, 'isi_opsi' => 'Menggambar, melukis, atau desain', 'poin' => 5],
             ['soal_tes_id' => $soal1->id, 'kategori_minat_id' => 6, 'profesi_kerja_id' => null, 'isi_opsi' => 'Mengatur data atau dokumen', 'poin' => 5],
             ['soal_tes_id' => $soal1->id, 'kategori_minat_id' => 2, 'profesi_kerja_id' => null, 'isi_opsi' => 'Melakukan eksperimen atau penelitian', 'poin' => 5],
             ['soal_tes_id' => $soal1->id, 'kategori_minat_id' => 1, 'profesi_kerja_id' => null, 'isi_opsi' => 'Memperbaiki atau merakit mesin', 'poin' => 5],
             ['soal_tes_id' => $soal1->id, 'kategori_minat_id' => 5, 'profesi_kerja_id' => null, 'isi_opsi' => 'Mengelola tim atau berbisnis', 'poin' => 5],
-        ]);
+        ];
+        foreach ($opsi1 as $data) {
+            OpsiJawaban::create($data);
+        }
 
         // Soal 2
         $soal2 = SoalTes::create([
@@ -604,14 +607,17 @@ class DatabaseSeeder extends Seeder
             'max_select' => 1,
         ]);
 
-        OpsiJawaban::insert([
+        $opsi2 = [
             ['soal_tes_id' => $soal2->id, 'kategori_minat_id' => 2, 'profesi_kerja_id' => null, 'isi_opsi' => 'Menganalisis masalah dan mencari solusi', 'poin' => 5],
             ['soal_tes_id' => $soal2->id, 'kategori_minat_id' => 1, 'profesi_kerja_id' => null, 'isi_opsi' => 'Bertugas memegang alat dan praktek langsung', 'poin' => 5],
             ['soal_tes_id' => $soal2->id, 'kategori_minat_id' => 3, 'profesi_kerja_id' => null, 'isi_opsi' => 'Membuat presentasi atau desain tampilan', 'poin' => 5],
             ['soal_tes_id' => $soal2->id, 'kategori_minat_id' => 6, 'profesi_kerja_id' => null, 'isi_opsi' => 'Mendata hasil kerja dan membuat laporan', 'poin' => 5],
             ['soal_tes_id' => $soal2->id, 'kategori_minat_id' => 5, 'profesi_kerja_id' => null, 'isi_opsi' => 'Mengatur strategi kelompok agar lebih terarah', 'poin' => 5],
             ['soal_tes_id' => $soal2->id, 'kategori_minat_id' => 4, 'profesi_kerja_id' => null, 'isi_opsi' => 'Menjadi penengah dan membantu teman yang kesulitan', 'poin' => 5],
-        ]);
+        ];
+        foreach ($opsi2 as $data) {
+            OpsiJawaban::create($data);
+        }
 
         // Soal 3
         $soal3 = SoalTes::create([
@@ -621,14 +627,17 @@ class DatabaseSeeder extends Seeder
             'max_select' => 1,
         ]);
 
-        OpsiJawaban::insert([
+        $opsi3 = [
             ['soal_tes_id' => $soal3->id, 'kategori_minat_id' => 4, 'profesi_kerja_id' => null, 'isi_opsi' => 'Mengajar adik/teman, ikut kegiatan sosial', 'poin' => 5],
             ['soal_tes_id' => $soal3->id, 'kategori_minat_id' => 1, 'profesi_kerja_id' => null, 'isi_opsi' => 'Merakit atau memperbaiki barang', 'poin' => 5],
             ['soal_tes_id' => $soal3->id, 'kategori_minat_id' => 5, 'profesi_kerja_id' => null, 'isi_opsi' => 'Berjualan online atau ikut organisasi', 'poin' => 5],
             ['soal_tes_id' => $soal3->id, 'kategori_minat_id' => 2, 'profesi_kerja_id' => null, 'isi_opsi' => 'Membaca buku atau artikel sains/teknologi', 'poin' => 5],
             ['soal_tes_id' => $soal3->id, 'kategori_minat_id' => 6, 'profesi_kerja_id' => null, 'isi_opsi' => 'Merapikan data, dokumen, atau koleksi pribadi', 'poin' => 5],
             ['soal_tes_id' => $soal3->id, 'kategori_minat_id' => 3, 'profesi_kerja_id' => null, 'isi_opsi' => 'Menggambar, membuat video, atau desain digital', 'poin' => 5],
-        ]);
+        ];
+        foreach ($opsi3 as $data) {
+            OpsiJawaban::create($data);
+        }
 
         // Soal 4
         $soal4 = SoalTes::create([
@@ -638,7 +647,7 @@ class DatabaseSeeder extends Seeder
             'max_select' => 3,
         ]);
 
-        OpsiJawaban::insert([
+        $opsi4 = [
             ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 1, 'isi_opsi' => 'Servis kendaraan ringan', 'poin' => 15],
             ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 3, 'isi_opsi' => 'Perbaikan kelistrikan mobil', 'poin' => 15],
             ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 5, 'isi_opsi' => 'Perawatan mesin berat', 'poin' => 14],
@@ -654,7 +663,10 @@ class DatabaseSeeder extends Seeder
             ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 41, 'isi_opsi' => 'Pemasangan instalasi gedung', 'poin' => 15],
             ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 44, 'isi_opsi' => 'Pembuatan animasi 2D/3D', 'poin' => 15],
             ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 47, 'isi_opsi' => 'Pengukuran dan pemetaan', 'poin' => 15],
-        ]);
+        ];
+        foreach ($opsi4 as $data) {
+            OpsiJawaban::create($data);
+        }
 
         // Soal 5
         $soal5 = SoalTes::create([
@@ -664,7 +676,7 @@ class DatabaseSeeder extends Seeder
             'max_select' => 3,
         ]);
 
-        OpsiJawaban::insert([
+        $opsi5 = [
             ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 4, 'isi_opsi' => 'Kerja teknis lapangan', 'poin' => 15],
             ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 8, 'isi_opsi' => 'Kerja kreatif digital', 'poin' => 15],
             ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 9, 'isi_opsi' => 'Analisis dan konfigurasi', 'poin' => 15],
@@ -681,7 +693,10 @@ class DatabaseSeeder extends Seeder
             ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 42, 'isi_opsi' => 'Desain grafis kreatif', 'poin' => 15],
             ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 45, 'isi_opsi' => 'Desain motion animasi', 'poin' => 15],
             ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 50, 'isi_opsi' => 'Pemetaan data geografis', 'poin' => 15],
-        ]);
+        ];
+        foreach ($opsi5 as $data) {
+            OpsiJawaban::create($data);
+        }
 
         // Soal 6
         $soal6 = SoalTes::create([
@@ -691,7 +706,7 @@ class DatabaseSeeder extends Seeder
             'max_select' => 3,
         ]);
 
-        OpsiJawaban::insert([
+        $opsi6 = [
             ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 2, 'isi_opsi' => 'Operator Industri', 'poin' => 15],
             ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 7, 'isi_opsi' => 'Programmer', 'poin' => 15],
             ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 11, 'isi_opsi' => 'Database Admin', 'poin' => 15],
@@ -707,7 +722,10 @@ class DatabaseSeeder extends Seeder
             ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 36, 'isi_opsi' => 'Desainer Retail', 'poin' => 15],
             ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 39, 'isi_opsi' => 'Supervisor Gedung', 'poin' => 15],
             ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 51, 'isi_opsi' => 'Analisis Remote Sensing', 'poin' => 15],
-        ]);
+        ];
+        foreach ($opsi6 as $data) {
+            OpsiJawaban::create($data);
+        }
 
         // Soal 7
         $soal7 = SoalTes::create([
@@ -717,7 +735,7 @@ class DatabaseSeeder extends Seeder
             'max_select' => 3,
         ]);
 
-        OpsiJawaban::insert([
+        $opsi7 = [
             ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 3, 'isi_opsi' => 'Memasang sistem kelistrikan', 'poin' => 15],
             ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 6, 'isi_opsi' => 'Menganalisis performa mesin', 'poin' => 15],
             ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 10, 'isi_opsi' => 'Menganalisis kebutuhan sistem', 'poin' => 15],
@@ -733,7 +751,11 @@ class DatabaseSeeder extends Seeder
             ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 44, 'isi_opsi' => 'Menggambar karakter animasi', 'poin' => 15],
             ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 47, 'isi_opsi' => 'Mengukur data lapangan', 'poin' => 15],
             ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 21, 'isi_opsi' => 'Mengoperasikan perangkat BTS', 'poin' => 15],
-        ]);
+        ];
+        foreach ($opsi7 as $data) {
+            OpsiJawaban::create($data);
+        }
+
         // Soal 8
         $soal8 = SoalTes::create([
             'tes_id' => $tes->id,
@@ -742,7 +764,7 @@ class DatabaseSeeder extends Seeder
             'max_select' => 3,
         ]);
 
-        OpsiJawaban::insert([
+        $opsi8 = [
             ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 1, 'isi_opsi' => 'Memperbaiki kendaraan bermotor', 'poin' => 15],
             ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 8, 'isi_opsi' => 'Membuat tampilan web', 'poin' => 15],
             ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 13, 'isi_opsi' => 'Mengatur sistem audio', 'poin' => 15],
@@ -758,7 +780,10 @@ class DatabaseSeeder extends Seeder
             ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 16, 'isi_opsi' => 'Mencipta efek suara', 'poin' => 15],
             ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 31, 'isi_opsi' => 'Mendesain ruang interior', 'poin' => 15],
             ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 43, 'isi_opsi' => 'Menggambar ilustrasi kreatif', 'poin' => 15],
-        ]);
+        ];
+        foreach ($opsi8 as $data) {
+            OpsiJawaban::create($data);
+        }
 
         // Soal 9
         $soal9 = SoalTes::create([
@@ -768,7 +793,7 @@ class DatabaseSeeder extends Seeder
             'max_select' => 3,
         ]);
 
-        OpsiJawaban::insert([
+        $opsi9 = [
             ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 2, 'isi_opsi' => 'Mengoperasikan Mesin Industri', 'poin' => 15],
             ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 4, 'isi_opsi' => 'Servis dan Perbaikan Motor', 'poin' => 15],
             ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 7, 'isi_opsi' => 'Menulis Kode Program', 'poin' => 15],
@@ -784,7 +809,10 @@ class DatabaseSeeder extends Seeder
             ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 46, 'isi_opsi' => 'Menceritakan Visual Kreatif', 'poin' => 15],
             ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 48, 'isi_opsi' => 'Menganalisis Data Geospasial', 'poin' => 15],
             ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 49, 'isi_opsi' => 'Mengukur dan Memetakan Lahan', 'poin' => 15],
-        ]);
+        ];
+        foreach ($opsi9 as $data) {
+            OpsiJawaban::create($data);
+        }
 
         // Soal 10
         $soal10 = SoalTes::create([
@@ -794,7 +822,7 @@ class DatabaseSeeder extends Seeder
             'max_select' => 3,
         ]);
 
-        OpsiJawaban::insert([
+        $opsi10 = [
             ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 5, 'isi_opsi' => 'Perawatan Kendaraan Berat', 'poin' => 15],
             ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 11, 'isi_opsi' => 'Manajemen Basis Data', 'poin' => 15],
             ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 17, 'isi_opsi' => 'Desain Motion Graphic', 'poin' => 15],
@@ -810,6 +838,9 @@ class DatabaseSeeder extends Seeder
             ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 49, 'isi_opsi' => 'Pemetaan dan Survey Lahan', 'poin' => 15],
             ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 50, 'isi_opsi' => 'Pemetaan Kartografi Digital', 'poin' => 15],
             ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 51, 'isi_opsi' => 'Analisis Citra Satelit', 'poin' => 15],
-        ]);
+        ];
+        foreach ($opsi10 as $data) {
+            OpsiJawaban::create($data);
+        }
     }
 }
