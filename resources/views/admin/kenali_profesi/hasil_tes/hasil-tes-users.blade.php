@@ -89,7 +89,7 @@ document.querySelectorAll('.btn-detail').forEach(btn => {
                                 <td>${r.ke}</td>
                                 <td>${r.tanggal}</td>
                                 <td>
-                                    <a href="/admin/hasil-tes/detail/${r.id_hasil}" class="btn btn-sm btn-outline-primary">
+                                    <a href="/admin/kenali-profesi/hasil-tes/${tesId}/user/${userId}/attempt/${r.ke}" class="btn btn-sm btn-outline-primary">
                                         🔍 Lihat Attempt
                                     </a>
                                 </td>
