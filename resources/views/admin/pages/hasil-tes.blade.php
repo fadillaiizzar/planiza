@@ -1,46 +1,35 @@
 @extends('layouts.admin')
 
-@section('content')
-<div class="container mt-4">
-    <h4 class="mb-4">📊 Manajemen Hasil Tes</h4>
+@section('title', 'Manajemen Hasil Tes - Planiza')
 
-    <table class="table table-bordered align-middle table-striped">
-        <thead class="table-dark">
-            <tr>
-                <th>No</th>
-                <th>Nama Tes</th>
-                <th>Jumlah User</th>
-                <th>Jumlah Pengerjaan</th>
-                <th>Update Terakhir</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($data as $i => $tes)
-            <tr id="row-{{ $tes->id }}">
-                <td>{{ $i + 1 }}</td>
-                <td>{{ $tes->nama_tes }}</td>
-                <td>{{ $tes->jumlah_user }}</td>
-                <td>{{ $tes->jumlah_pengerjaan }}</td>
-                <td>{{ optional($tes->kenaliProfesis->first()?->updated_at)->format('d M H:i') ?? '-' }}</td>
-                <td>
-                    <a href="{{ route('admin.kenali-profesi.hasil-tes.users', $tes->id) }}" class="btn btn-sm btn-primary">
-                        Detail
-                    </a>
-                </td>
-            </tr>
-            <!-- Baris collapse detail -->
-            <tr id="collapse-{{ $tes->id }}" class="collapse-row" style="display:none;">
-                <td colspan="6" class="bg-light p-3">
-                    <div id="detail-{{ $tes->id }}">Loading...</div>
-                </td>
-            </tr>
-            @empty
-            <tr>
-                <td colspan="6" class="text-center text-muted">Belum ada data tes</td>
-            </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
+@section('content')
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-30 z-30 hidden md:hidden" onclick="toggleSidebar()"></div>
+
+    <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
+        <x-admin.breadcrumb :links="[
+            ['href' => route('admin.kenali-profesi.index'), 'icon' => 'fas fa-user-tie', 'title' => 'Kenali Profesi'],
+            ['href' => '#', 'icon' => 'fas fa-list-ul', 'title' => 'Hasil Tes'],
+        ]" />
+
+        @component('admin.kenali_profesi.hasil_tes.section', [
+            'pageTitle' => 'Manajemen Hasil Tes',
+            'userCount' => $tesCount,
+            'stats' => [
+                ['label' => 'Total Tes', 'count' => $tesCount, 'icon' => 'fas fa-vial', 'bg' => 'from-purple-500 to-purple-600', 'textColor' => 'text-purple-100'],
+                ['label' => 'Total User', 'count' => $totalUser, 'icon' => 'fas fa-users', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
+                ['label' => 'Total Pengerjaan', 'count' => $totalPengerjaan, 'icon' => 'fas fa-sync-alt', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
+            ],
+            'filterOptions' => $filterOptions,
+            'searchPlaceholder' => 'Cari berdasarkan nama tes',
+            'itemCount' =>  $tesCount,
+            'tableTitle' => 'Daftar Hasil Tes',
+            'tableHeaders' => ['No', 'Nama Tes', 'Jumlah User', 'Jumlah Pengerjaan', 'Update Terakhir', 'Aksi'],
+            'items' => $data,
+        ])
+        @endcomponent
+    </main>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/app.js') }}"></script>
+@endpush

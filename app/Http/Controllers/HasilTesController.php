@@ -25,7 +25,28 @@ class HasilTesController extends Controller
         }])
         ->get();
 
-        return view('admin.pages.hasil-tes', compact('data'));
+        $tesCount = $data->count();
+        $totalUser = $data->sum('jumlah_user');
+        $totalPengerjaan = $data->sum('jumlah_pengerjaan');
+
+        // Data filter untuk dropdown
+        $filterOptions = Tes::select('nama_tes')
+            ->distinct()
+            ->orderBy('nama_tes', 'asc')
+            ->get()
+            ->map(fn($tes) => [
+                'label' => $tes->nama_tes,
+                'value' => $tes->nama_tes
+            ])
+            ->toArray();
+
+        return view('admin.pages.hasil-tes', [
+            'data' => $data,
+            'tesCount' => $tesCount,
+            'totalUser' => $totalUser,
+            'totalPengerjaan' => $totalPengerjaan,
+            'filterOptions' => $filterOptions,
+        ]);
     }
 
     public function show($tes_id)
