@@ -10,6 +10,8 @@ class Tes extends Model
     protected $table = 'tes';
     protected $fillable = ['nama_tes', 'is_active'];
 
+    public $timestamps = true;
+
     public function soalTes(): HasMany
     {
         return $this->hasMany(SoalTes::class, 'tes_id');

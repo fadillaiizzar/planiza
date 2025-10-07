@@ -43,4 +43,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Siswa::class);
     }
+
+    public function hasilTes()
+    {
+        return $this->hasMany(KenaliProfesi::class);
+    }
 }
