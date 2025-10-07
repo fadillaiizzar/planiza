@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\SoalTesController;
+use App\Http\Controllers\HasilTesController;
 use App\Http\Controllers\IndustriController;
 use App\Http\Controllers\KenaliKerjaController;
 use App\Http\Controllers\MateriSiswaController;
@@ -68,7 +69,17 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
         Route::resource('soal-tes', SoalTesController::class);
         Route::resource('opsi-jawaban', OpsiJawabanController::class);
 
-        Route::post('tes/{id}/set-active', [TesController::class, 'setActive'])->name('tes.setActive');
+        Route::post('/tes/{id}/set-active', [TesController::class, 'setActive'])->name('tes.setActive');
+
+        Route::prefix('hasil-tes')->group(function () {
+            Route::get('/', [HasilTesController::class, 'index'])->name('hasil-tes.index');
+            Route::get('/{tes_id}', [HasilTesController::class, 'show'])->name('hasil-tes.show');
+
+            Route::get('/{tes_id}/users', [HasilTesController::class, 'showUsers'])->name('hasil-tes.users');
+            Route::get('/{tes_id}/user/{user_id}', [HasilTesController::class, 'showUserHistory'])->name('hasil-tes.user-history');
+
+            Route::get('/{tes_id}/user/{user_id}/attempt/{attempt}', [HasilTesController::class, 'showAttempt'])->name('hasil-tes.attempt');
+        });
     });
 
     Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('kontribusi-sdgs');
