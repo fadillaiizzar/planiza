@@ -33,10 +33,7 @@
                             <td class="p-4 font-medium text-slate-700">{{ $tes->nama_tes }}</td>
                             <td class="p-4">{{ $tes->soal_tes_count }}</td>
                             <td class="p-4">
-                                <a href="{{ route('admin.kenali-profesi.soal-tes.show', $tes->id) }}"
-                                class="inline-flex items-center px-4 py-2 rounded-lg border border-blue-600
-                                        bg-white text-blue-600 hover:bg-blue-600 hover:text-white
-                                        transition-colors duration-200 shadow-sm">
+                                <a href="{{ route('admin.kenali-profesi.soal-tes.show', $tes->id) }}" class="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm shadow hover:shadow-md transition">
                                     <i class="fas fa-eye w-4 h-4 mr-2"></i>
                                     Detail
                                 </a>
