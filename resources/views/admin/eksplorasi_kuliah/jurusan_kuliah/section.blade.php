@@ -26,6 +26,13 @@
                         <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors">
                             <td class="p-4">{{ $item->id }}</td>
                             <td class="p-4">{{ Str::limit($item->nama_jurusan_kuliah, 20) }}</td>
+                            <td class="p-4">
+                                @if($item->gambar)
+                                    <img src="{{ asset('storage/'.$item->gambar) }}" alt="{{ $item->nama_jurusan_kuliah }}" class="w-12 h-12 object-cover rounded-lg">
+                                @else
+                                    <span class="text-gray-400">-</span>
+                                @endif
+                            </td>
                             <td class="p-4">{{ Str::limit($item->deskripsi, 20) }}</td>
                             <td class="p-4">{{ Str::limit($item->info_matkul, 20) }}</td>
                             <td class="p-4">{{ Str::limit($item->info_prospek, 20) }}</td>
@@ -76,6 +83,8 @@
         </div>
     </section>
 </div>
+
+@include('admin.eksplorasi_kuliah.jurusan_kuliah.delete')
 
 <script>
     // Modal Edit

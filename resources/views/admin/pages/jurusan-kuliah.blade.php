@@ -23,7 +23,7 @@
             ],
             'itemCount' => $jurusanKuliahCount,
             'tableTitle' => 'Daftar Jurusan Kuliah',
-            'tableHeaders' => ['ID', 'Nama Jurusan', 'Deskripsi', 'Mata Kuliah', 'Prospek', 'Aksi'],
+            'tableHeaders' => ['ID', 'Nama Jurusan', 'Gambar', 'Deskripsi', 'Mata Kuliah', 'Prospek', 'Aksi'],
             'items' => $jurusanKuliahs,
         ])
         @endcomponent
