@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('jurusan_kuliahs', function (Blueprint $table) {
             $table->id();
             $table->string('nama_jurusan_kuliah');
+            $table->string('gambar')->nullable();
             $table->text('deskripsi');
             $table->text('info_matkul');
             $table->text('info_prospek');

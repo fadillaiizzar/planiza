@@ -13,6 +13,7 @@ class JurusanKuliah extends Model
 
     protected $fillable = [
         'nama_jurusan_kuliah',
+        'gambar',
         'deskripsi',
         'info_matkul',
         'info_prospek',

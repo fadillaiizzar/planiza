@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\JurusanKuliah;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class JurusanKuliahController extends Controller
 {
@@ -45,12 +46,19 @@ class JurusanKuliahController extends Controller
     {
         $request->validate([
             'nama_jurusan_kuliah' => 'required|string|max:255',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'deskripsi' => 'required|string',
             'info_matkul' => 'required|string',
             'info_prospek' => 'required|string',
         ]);
 
-        JurusanKuliah::create($request->all());
+        $data = $request->all();
+
+        if ($request->hasFile('gambar')) {
+            $data['gambar'] = $request->file('gambar')->store('jurusanKuliah', 'public');
+        }
+
+        JurusanKuliah::create($data);
 
         return redirect()->route('admin.eksplorasi-kuliah.jurusan-kuliah.index')->with('success', 'Jurusan Kuliah berhasil ditambahkan');
     }
@@ -80,13 +88,24 @@ class JurusanKuliahController extends Controller
     {
         $request->validate([
             'nama_jurusan_kuliah' => 'required|string|max:255',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'deskripsi' => 'required|string',
             'info_matkul' => 'required|string',
             'info_prospek' => 'required|string',
         ]);
 
         $jurusanKuliah = JurusanKuliah::findOrFail($id);
-        $jurusanKuliah->update($request->all());
+
+        $data = $request->all();
+
+        if ($request->hasFile('gambar')) {
+            if ($jurusanKuliah->gambar) {
+                Storage::disk('public')->delete($jurusanKuliah->gambar);
+            }
+            $data['gambar'] = $request->file('gambar')->store('jurusanKuliah', 'public');
+        }
+
+        $jurusanKuliah->update($data);
 
         return redirect()->route('admin.eksplorasi-kuliah.jurusan-kuliah.index')->with('success', 'Jurusan Kuliah berhasil diperbarui');
     }
@@ -97,6 +116,9 @@ class JurusanKuliahController extends Controller
     public function destroy($id)
     {
         $jurusanKuliah = JurusanKuliah::findOrFail($id);
+        if ($jurusanKuliah->gambar) {
+            Storage::disk('public')->delete($jurusanKuliah->gambar);
+        }
         $jurusanKuliah->delete();
 
         return redirect()->route('admin.eksplorasi-kuliah.jurusan-kuliah.index')->with('success', 'Jurusan Kuliah berhasil dihapus');
