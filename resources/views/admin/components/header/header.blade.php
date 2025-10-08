@@ -82,7 +82,7 @@
 
 <!-- Stats Cards -->
 @if(count($stats) > 0)
-<div class="grid grid-cols-2 gap-4 md:grid-cols-4 mb-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-4 mb-6">
     @foreach ($stats as $stat)
         <div class="bg-gradient-to-br {{ $stat['bg'] }} text-white rounded-xl p-4 shadow-lg">
             <div class="flex items-center justify-between">
