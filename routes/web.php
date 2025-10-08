@@ -22,6 +22,8 @@ use App\Http\Controllers\KontribusiSdgsController;
 use App\Http\Controllers\EksplorasiKerjaController;
 use App\Http\Controllers\IndustriProfesiController;
 use App\Http\Controllers\ProfesiKategoriController;
+use App\Http\Controllers\EksplorasiKuliahController;
+use App\Http\Controllers\JurusanKuliahController;
 use App\Http\Controllers\Siswa\KerjakanTesController;
 use App\Http\Controllers\Siswa\JawabanSiswaController;
 use App\Http\Controllers\Siswa\KenaliProfesiSiswaController;
@@ -80,6 +82,11 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
 
             Route::get('/{tes_id}/user/{user_id}/attempt/{attempt}', [HasilTesController::class, 'showAttempt'])->name('hasil-tes.attempt');
         });
+    });
+
+    Route::prefix('eksplorasi-kuliah')->name('eksplorasi-kuliah.')->group(function () {
+        Route::get('/', [EksplorasiKuliahController::class, 'index'])->name('index');
+        Route::resource('jurusan-kuliah', JurusanKuliahController::class);
     });
 
     Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('kontribusi-sdgs');
