@@ -34,6 +34,13 @@ class User extends Authenticatable
         ];
     }
 
+    public function scopeHasTes($query, $tesId)
+    {
+        return $query->whereHas('hasilTes', function ($q) use ($tesId) {
+            $q->where('tes_id', $tesId);
+        });
+    }
+
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);

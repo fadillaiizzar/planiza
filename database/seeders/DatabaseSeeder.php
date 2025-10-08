@@ -575,7 +575,7 @@ class DatabaseSeeder extends Seeder
 
         // Tes utama
         $tes = Tes::create([
-            'nama_tes' => 'Tes Minat Bakat Siswa',
+            'nama_tes' => 'Minat Bakat',
             'is_active' => true,
         ]);
 
@@ -650,11 +650,11 @@ class DatabaseSeeder extends Seeder
         $opsi4 = [
             ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 1, 'isi_opsi' => 'Servis kendaraan ringan', 'poin' => 15],
             ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 3, 'isi_opsi' => 'Perbaikan kelistrikan mobil', 'poin' => 15],
-            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 5, 'isi_opsi' => 'Perawatan mesin berat', 'poin' => 14],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 5, 'isi_opsi' => 'Perawatan mesin berat', 'poin' => 15],
             ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 6, 'isi_opsi' => 'Diagnosa kerusakan mesin', 'poin' => 15],
-            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 14, 'isi_opsi' => 'Editing video profesional', 'poin' => 13],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 14, 'isi_opsi' => 'Editing video profesional', 'poin' => 15],
             ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 15, 'isi_opsi' => 'Desain motion graphic', 'poin' => 15],
-            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 21, 'isi_opsi' => 'Pemantauan jaringan BTS', 'poin' => 14],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 21, 'isi_opsi' => 'Pemantauan jaringan BTS', 'poin' => 15],
             ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 22, 'isi_opsi' => 'Instalasi jaringan internet', 'poin' => 15],
             ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 23, 'isi_opsi' => 'Perbaikan alat komunikasi', 'poin' => 15],
             ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 37, 'isi_opsi' => 'Pengelolaan operasional gedung', 'poin' => 15],
