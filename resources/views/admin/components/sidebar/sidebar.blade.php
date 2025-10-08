@@ -1,4 +1,4 @@
-<aside id="sidebar" class="fixed inset-y-0 left-0 w-64 bg-slate-navy text-white p-4 flex flex-col justify-between transition-all duration-300 ease-in-out z-40 transform md:translate-x-0 -translate-x-full md:translate-none h-screen">
+<aside id="sidebar" class="fixed md:static inset-y-0 left-0 w-64 bg-slate-navy text-white p-4 flex flex-col justify-between transition-all duration-300 ease-in-out z-40 transform md:translate-x-0 -translate-x-full md:translate-none">
 
     <!-- Atas: Profil + Toggle -->
     <div>
