@@ -12,7 +12,9 @@
         <div class="flex min-h-screen">
             @include('admin.components.sidebar.sidebar')
 
-            @yield('content')
+            <div class="flex-1 md:pl-64 flex flex-col">
+                @yield('content')
+            </div>
 
             @stack('scripts')
         </div>
