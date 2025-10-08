@@ -135,6 +135,7 @@ class DatabaseSeeder extends Seeder
                 ['nama_profesi_kerja' => 'Supervisor Konstruksi Gedung', 'gaji' => 4200000, 'deskripsi' => 'Mengawasi pelaksanaan proyek pembangunan dan memastikan kualitas serta keselamatan kerja di lapangan.', 'info_skill' => 'Construction Supervision, Quality Control, Manajemen Proyek', 'info_jurusan' => 'KGSP'],
                 ['nama_profesi_kerja' => 'Ahli Sanitasi Bangunan', 'gaji' => 4000000, 'deskripsi' => 'Menangani sistem sanitasi, drainase, dan pengelolaan limbah bangunan agar sesuai standar kebersihan.', 'info_skill' => 'Sistem Sanitasi, Plumbing, Drainase Bangunan', 'info_jurusan' => 'KGSP'],
                 ['nama_profesi_kerja' => 'Teknisi Instalasi Gedung', 'gaji' => 3900000, 'deskripsi' => 'Melakukan instalasi dan perawatan sistem listrik, air, dan ventilasi di dalam bangunan.', 'info_skill' => 'Electrical Wiring, HVAC System, Instalasi Gedung', 'info_jurusan' => 'KGSP'],
+                ['nama_profesi_kerja' => 'Estimator Konstruksi', 'gaji' => 4300000, 'deskripsi' => 'Menghitung kebutuhan material, biaya, dan tenaga kerja pada proyek pembangunan gedung.', 'info_skill' => 'Estimasi Biaya, Analisis Struktur, Manajemen Proyek', 'info_jurusan' => 'KGSP'],
             ],
             'DKV' => [
                 ['nama_profesi_kerja' => 'Desainer Grafis', 'gaji' => 4000000, 'deskripsi' => 'Membuat desain visual', 'info_skill' => 'Adobe Illustrator', 'info_jurusan' => 'DKV'],
@@ -142,6 +143,8 @@ class DatabaseSeeder extends Seeder
                 ['nama_profesi_kerja' => 'Animator', 'gaji' => 4500000, 'deskripsi' => 'Membuat animasi kreatif', 'info_skill' => '2D Animation', 'info_jurusan' => 'DKV'],
                 ['nama_profesi_kerja' => 'Motion Designer', 'gaji' => 4400000, 'deskripsi' => 'Membuat animasi grafis', 'info_skill' => 'After Effects', 'info_jurusan' => 'DKV'],
                 ['nama_profesi_kerja' => 'Visual Storyteller', 'gaji' => 4300000, 'deskripsi' => 'Menyampaikan cerita lewat visual', 'info_skill' => 'Storyboarding', 'info_jurusan' => 'DKV'],
+                ['nama_profesi_kerja' => 'Art Director', 'gaji' => 4800000, 'deskripsi' => 'Mengonsep dan mengarahkan tampilan visual dalam proyek kreatif seperti iklan, kampanye, dan branding.', 'info_skill' => 'Creative Direction, Branding, Visual Concept', 'info_jurusan' => 'DKV'],
+
             ],
             'GEO' => [
                 ['nama_profesi_kerja' => 'Surveyor', 'gaji' => 3800000, 'deskripsi' => 'Pengukuran tanah dan pemetaan', 'info_skill' => 'Total Station', 'info_jurusan' => 'GEO'],
@@ -149,6 +152,7 @@ class DatabaseSeeder extends Seeder
                 ['nama_profesi_kerja' => 'Teknisi Pemetaan', 'gaji' => 3900000, 'deskripsi' => 'Membuat peta dan survei lapangan', 'info_skill' => 'GPS Mapping', 'info_jurusan' => 'GEO'],
                 ['nama_profesi_kerja' => 'Cartographer', 'gaji' => 4100000, 'deskripsi' => 'Membuat peta tematik dan digital', 'info_skill' => 'Mapping Software', 'info_jurusan' => 'GEO'],
                 ['nama_profesi_kerja' => 'Remote Sensing Analyst', 'gaji' => 4200000, 'deskripsi' => 'Analisis citra satelit', 'info_skill' => 'Satellite Imagery', 'info_jurusan' => 'GEO'],
+                ['nama_profesi_kerja' => 'Ahli Sistem Informasi Geografis', 'gaji' => 4500000, 'deskripsi' => 'Mengelola, menganalisis, dan memvisualisasikan data spasial menggunakan sistem GIS.', 'info_skill' => 'ArcGIS, Spatial Database, Data Visualization', 'info_jurusan' => 'GEO'],
             ],
         ];
         foreach ($profesiPerJurusan as $jurusanName => $profesis) {
@@ -648,21 +652,22 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $opsi4 = [
-            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 1, 'isi_opsi' => 'Servis kendaraan ringan', 'poin' => 15],
-            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 3, 'isi_opsi' => 'Perbaikan kelistrikan mobil', 'poin' => 15],
-            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 5, 'isi_opsi' => 'Perawatan mesin berat', 'poin' => 15],
-            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 6, 'isi_opsi' => 'Diagnosa kerusakan mesin', 'poin' => 15],
-            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 14, 'isi_opsi' => 'Editing video profesional', 'poin' => 15],
-            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 15, 'isi_opsi' => 'Desain motion graphic', 'poin' => 15],
-            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 21, 'isi_opsi' => 'Pemantauan jaringan BTS', 'poin' => 15],
-            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 22, 'isi_opsi' => 'Instalasi jaringan internet', 'poin' => 15],
-            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 23, 'isi_opsi' => 'Perbaikan alat komunikasi', 'poin' => 15],
-            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 37, 'isi_opsi' => 'Pengelolaan operasional gedung', 'poin' => 15],
-            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 38, 'isi_opsi' => 'Perawatan fasilitas gedung', 'poin' => 15],
-            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 40, 'isi_opsi' => 'Pengelolaan sistem sanitasi', 'poin' => 15],
-            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 41, 'isi_opsi' => 'Pemasangan instalasi gedung', 'poin' => 15],
-            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 44, 'isi_opsi' => 'Pembuatan animasi 2D/3D', 'poin' => 15],
-            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 47, 'isi_opsi' => 'Pengukuran dan pemetaan', 'poin' => 15],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 1,  'isi_opsi' => 'Servis kendaraan', 'poin' => 15],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 7,  'isi_opsi' => 'Buat aplikasi', 'poin' => 15],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 13, 'isi_opsi' => 'Instal audio', 'poin' => 15],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 14, 'isi_opsi' => 'Edit video', 'poin' => 15],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 19, 'isi_opsi' => 'Pasang jaringan', 'poin' => 15],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 20, 'isi_opsi' => 'Sambung fiber', 'poin' => 15],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 25, 'isi_opsi' => 'Operasi bubut', 'poin' => 15],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 26, 'isi_opsi' => 'Operasi CNC', 'poin' => 15],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 31, 'isi_opsi' => 'Desain interior', 'poin' => 15],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 32, 'isi_opsi' => 'Gambar bangunan', 'poin' => 15],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 37, 'isi_opsi' => 'Kelola gedung', 'poin' => 15],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 38, 'isi_opsi' => 'Rawat bangunan', 'poin' => 15],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 43, 'isi_opsi' => 'Desain grafis', 'poin' => 15],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 44, 'isi_opsi' => 'Ilustrasi digital', 'poin' => 15],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 49, 'isi_opsi' => 'Ukur lahan', 'poin' => 15],
+            ['soal_tes_id' => $soal4->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 50, 'isi_opsi' => 'Analisis peta', 'poin' => 15],
         ];
         foreach ($opsi4 as $data) {
             OpsiJawaban::create($data);
@@ -677,22 +682,22 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $opsi5 = [
-            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 4, 'isi_opsi' => 'Kerja teknis lapangan', 'poin' => 15],
-            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 8, 'isi_opsi' => 'Kerja kreatif digital', 'poin' => 15],
-            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 9, 'isi_opsi' => 'Analisis dan konfigurasi', 'poin' => 15],
-            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 10, 'isi_opsi' => 'Analisis kebutuhan sistem', 'poin' => 15],
-            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 12, 'isi_opsi' => 'Pemantauan keamanan data', 'poin' => 15],
-            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 18, 'isi_opsi' => 'Kerja teknis studio', 'poin' => 15],
-            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 24, 'isi_opsi' => 'Instalasi perangkat satelit', 'poin' => 15],
-            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 25, 'isi_opsi' => 'Pengoperasian mesin bubut', 'poin' => 15],
-            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 27, 'isi_opsi' => 'Kerja produksi pabrik', 'poin' => 15],
-            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 31, 'isi_opsi' => 'Desain ruang interior', 'poin' => 15],
-            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 32, 'isi_opsi' => 'Perancangan bangunan estetis', 'poin' => 15],
-            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 33, 'isi_opsi' => 'Desain furnitur fungsional', 'poin' => 15],
-            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 35, 'isi_opsi' => 'Visualisasi desain 3D', 'poin' => 15],
-            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 42, 'isi_opsi' => 'Desain grafis kreatif', 'poin' => 15],
-            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 45, 'isi_opsi' => 'Desain motion animasi', 'poin' => 15],
-            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 50, 'isi_opsi' => 'Pemetaan data geografis', 'poin' => 15],
+            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 2, 'isi_opsi' => 'Kerja pabrik teratur', 'poin' => 15],
+            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 3, 'isi_opsi' => 'Teknis lapangan', 'poin' => 15],
+            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 8, 'isi_opsi' => 'Kreatif digital', 'poin' => 15],
+            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 9, 'isi_opsi' => 'Analitis sistem', 'poin' => 15],
+            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 15, 'isi_opsi' => 'Visual dinamis', 'poin' => 15],
+            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 21, 'isi_opsi' => 'Kerja lapangan', 'poin' => 15],
+            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 27, 'isi_opsi' => 'Kerja tim produksi', 'poin' => 15],
+            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 28, 'isi_opsi' => 'Fokus presisi', 'poin' => 15],
+            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 33, 'isi_opsi' => 'Desain detail', 'poin' => 15],
+            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 34, 'isi_opsi' => 'Koordinasi proyek', 'poin' => 15],
+            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 39, 'isi_opsi' => 'Pengawasan lapangan', 'poin' => 15],
+            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 40, 'isi_opsi' => 'Standar kebersihan', 'poin' => 15],
+            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 45, 'isi_opsi' => 'Kreatif fleksibel', 'poin' => 15],
+            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 46, 'isi_opsi' => 'Kolaborasi ide', 'poin' => 15],
+            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 51, 'isi_opsi' => 'Survey lapangan', 'poin' => 15],
+            ['soal_tes_id' => $soal5->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 52, 'isi_opsi' => 'Analisis peta', 'poin' => 15],
         ];
         foreach ($opsi5 as $data) {
             OpsiJawaban::create($data);
@@ -707,21 +712,22 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $opsi6 = [
-            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 2, 'isi_opsi' => 'Operator Industri', 'poin' => 15],
-            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 7, 'isi_opsi' => 'Programmer', 'poin' => 15],
-            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 11, 'isi_opsi' => 'Database Admin', 'poin' => 15],
-            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 13, 'isi_opsi' => 'Teknisi Audio Visual', 'poin' => 15],
-            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 16, 'isi_opsi' => 'Sound Designer', 'poin' => 15],
-            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 17, 'isi_opsi' => 'Motion Designer', 'poin' => 15],
-            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 19, 'isi_opsi' => 'Teknisi Telekomunikasi', 'poin' => 15],
-            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 26, 'isi_opsi' => 'Operator CNC', 'poin' => 15],
-            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 28, 'isi_opsi' => 'Teknisi Mesin Industri', 'poin' => 15],
+            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 4,  'isi_opsi' => 'Mekanik Motor', 'poin' => 15],
+            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 5,  'isi_opsi' => 'Teknisi Alat Berat', 'poin' => 15],
+            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 10, 'isi_opsi' => 'Analis Sistem', 'poin' => 15],
+            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 11, 'isi_opsi' => 'Admin Database', 'poin' => 15],
+            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 16, 'isi_opsi' => 'Desainer Suara', 'poin' => 15],
+            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 17, 'isi_opsi' => 'Desainer Motion', 'poin' => 15],
+            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 22, 'isi_opsi' => 'Pemasang Jaringan', 'poin' => 15],
+            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 23, 'isi_opsi' => 'Teknisi Telekom', 'poin' => 15],
             ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 29, 'isi_opsi' => 'Quality Control', 'poin' => 15],
-            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 30, 'isi_opsi' => 'Drafter Mesin', 'poin' => 15],
-            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 34, 'isi_opsi' => 'Project Architect', 'poin' => 15],
-            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 36, 'isi_opsi' => 'Desainer Retail', 'poin' => 15],
-            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 39, 'isi_opsi' => 'Supervisor Gedung', 'poin' => 15],
-            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 51, 'isi_opsi' => 'Analisis Remote Sensing', 'poin' => 15],
+            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 35, 'isi_opsi' => 'Desainer 3D', 'poin' => 15],
+            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 41, 'isi_opsi' => 'Teknisi Gedung', 'poin' => 15],
+            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 42, 'isi_opsi' => 'Estimator Konstruksi', 'poin' => 15],
+            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 47, 'isi_opsi' => 'Visual Storyteller', 'poin' => 15],
+            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 48, 'isi_opsi' => 'Art Director', 'poin' => 15],
+            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 53, 'isi_opsi' => 'Analis Citra Satelit', 'poin' => 15],
+            ['soal_tes_id' => $soal6->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 54, 'isi_opsi' => 'Ahli GIS', 'poin' => 15],
         ];
         foreach ($opsi6 as $data) {
             OpsiJawaban::create($data);
@@ -736,21 +742,21 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $opsi7 = [
-            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 3, 'isi_opsi' => 'Memasang sistem kelistrikan', 'poin' => 15],
-            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 6, 'isi_opsi' => 'Menganalisis performa mesin', 'poin' => 15],
-            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 10, 'isi_opsi' => 'Menganalisis kebutuhan sistem', 'poin' => 15],
-            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 24, 'isi_opsi' => 'Memasang perangkat satelit', 'poin' => 15],
-            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 37, 'isi_opsi' => 'Mengatur operasional gedung', 'poin' => 15],
-            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 42, 'isi_opsi' => 'Membuat desain visual', 'poin' => 15],
-            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 5, 'isi_opsi' => 'Memperbaiki kendaraan berat', 'poin' => 15],
-            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 14, 'isi_opsi' => 'Menyunting video kreatif', 'poin' => 15],
-            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 15, 'isi_opsi' => 'Membuat animasi gerak', 'poin' => 15],
-            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 41, 'isi_opsi' => 'Menginstal sistem bangunan', 'poin' => 15],
-            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 23, 'isi_opsi' => 'Memelihara jaringan telekom', 'poin' => 15],
-            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 38, 'isi_opsi' => 'Memelihara fasilitas gedung', 'poin' => 15],
-            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 44, 'isi_opsi' => 'Menggambar karakter animasi', 'poin' => 15],
-            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 47, 'isi_opsi' => 'Mengukur data lapangan', 'poin' => 15],
-            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 21, 'isi_opsi' => 'Mengoperasikan perangkat BTS', 'poin' => 15],
+            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 6,  'isi_opsi' => 'Diagnosa Mesin', 'poin' => 15],
+            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 7,  'isi_opsi' => 'Menulis Kode', 'poin' => 15],
+            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 12, 'isi_opsi' => 'Analisis Keamanan', 'poin' => 15],
+            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 18, 'isi_opsi' => 'Teknisi Studio', 'poin' => 15],
+            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 23, 'isi_opsi' => 'Perawatan Telekom', 'poin' => 15],
+            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 24, 'isi_opsi' => 'Instalasi Satelit', 'poin' => 15],
+            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 30, 'isi_opsi' => 'Gambar Teknik', 'poin' => 15],
+            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 31, 'isi_opsi' => 'Desain Interior', 'poin' => 15],
+            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 32, 'isi_opsi' => 'Rancang Bangunan', 'poin' => 15],
+            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 41, 'isi_opsi' => 'Instalasi Gedung', 'poin' => 15],
+            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 42, 'isi_opsi' => 'Hitung Konstruksi', 'poin' => 15],
+            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 47, 'isi_opsi' => 'Desain Cerita Visual', 'poin' => 15],
+            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 48, 'isi_opsi' => 'Arahkan Desain', 'poin' => 15],
+            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 53, 'isi_opsi' => 'Analisis Citra', 'poin' => 15],
+            ['soal_tes_id' => $soal7->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 54, 'isi_opsi' => 'Peta Digital', 'poin' => 15],
         ];
         foreach ($opsi7 as $data) {
             OpsiJawaban::create($data);
@@ -765,21 +771,21 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $opsi8 = [
-            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 1, 'isi_opsi' => 'Memperbaiki kendaraan bermotor', 'poin' => 15],
-            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 8, 'isi_opsi' => 'Membuat tampilan web', 'poin' => 15],
-            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 13, 'isi_opsi' => 'Mengatur sistem audio', 'poin' => 15],
-            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 27, 'isi_opsi' => 'Mengoperasikan mesin produksi', 'poin' => 15],
-            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 32, 'isi_opsi' => 'Merancang bangunan estetik', 'poin' => 15],
-            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 35, 'isi_opsi' => 'Membuat visual 3D', 'poin' => 15],
-            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 36, 'isi_opsi' => 'Mendesain tata retail', 'poin' => 15],
-            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 39, 'isi_opsi' => 'Mengawasi proyek konstruksi', 'poin' => 15],
-            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 40, 'isi_opsi' => 'Menjaga kebersihan bangunan', 'poin' => 15],
-            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 28, 'isi_opsi' => 'Merawat mesin industri', 'poin' => 15],
-            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 19, 'isi_opsi' => 'Mengelola sistem telekom', 'poin' => 15],
-            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 11, 'isi_opsi' => 'Mengelola basis data', 'poin' => 15],
-            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 16, 'isi_opsi' => 'Mencipta efek suara', 'poin' => 15],
-            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 31, 'isi_opsi' => 'Mendesain ruang interior', 'poin' => 15],
-            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 43, 'isi_opsi' => 'Menggambar ilustrasi kreatif', 'poin' => 15],
+            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 1,  'isi_opsi' => 'Servis Motor Cepat', 'poin' => 15],
+            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 2,  'isi_opsi' => 'Mekanik Mesin', 'poin' => 15],
+            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 8,  'isi_opsi' => 'Buat Website', 'poin' => 15],
+            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 11, 'isi_opsi' => 'Kelola Database', 'poin' => 15],
+            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 13, 'isi_opsi' => 'Set Audio', 'poin' => 15],
+            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 14, 'isi_opsi' => 'Edit Video Kreatif', 'poin' => 15],
+            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 24, 'isi_opsi' => 'Pasang Satelit', 'poin' => 15],
+            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 25, 'isi_opsi' => 'Jalankan Mesin Bubut', 'poin' => 15],
+            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 26, 'isi_opsi' => 'Kontrol Mesin CNC', 'poin' => 15],
+            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 32, 'isi_opsi' => 'Rancang Bangunan', 'poin' => 15],
+            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 36, 'isi_opsi' => 'Tata Retail', 'poin' => 15],
+            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 37, 'isi_opsi' => 'Atur Gedung', 'poin' => 15],
+            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 38, 'isi_opsi' => 'Rawat Gedung', 'poin' => 15],
+            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 43, 'isi_opsi' => 'Desain Grafis Kreatif', 'poin' => 15],
+            ['soal_tes_id' => $soal8->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 44, 'isi_opsi' => 'Bikin Ilustrasi', 'poin' => 15],
         ];
         foreach ($opsi8 as $data) {
             OpsiJawaban::create($data);
@@ -794,21 +800,21 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $opsi9 = [
-            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 2, 'isi_opsi' => 'Mengoperasikan Mesin Industri', 'poin' => 15],
-            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 4, 'isi_opsi' => 'Servis dan Perbaikan Motor', 'poin' => 15],
-            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 7, 'isi_opsi' => 'Menulis Kode Program', 'poin' => 15],
-            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 9, 'isi_opsi' => 'Membangun Jaringan Komputer', 'poin' => 15],
-            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 12, 'isi_opsi' => 'Melindungi Sistem Data', 'poin' => 15],
-            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 18, 'isi_opsi' => 'Menyiarkan Acara TV/Radio', 'poin' => 15],
-            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 20, 'isi_opsi' => 'Memasang Kabel Fiber Optik', 'poin' => 15],
-            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 25, 'isi_opsi' => 'Mengoperasikan Mesin Bubut', 'poin' => 15],
-            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 29, 'isi_opsi' => 'Memeriksa Kualitas Produk', 'poin' => 15],
-            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 33, 'isi_opsi' => 'Merancang Furniture Interior', 'poin' => 15],
-            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 30, 'isi_opsi' => 'Membuat Gambar Teknik Mesin', 'poin' => 15],
-            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 45, 'isi_opsi' => 'Membuat Motion Graphic', 'poin' => 15],
-            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 46, 'isi_opsi' => 'Menceritakan Visual Kreatif', 'poin' => 15],
-            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 48, 'isi_opsi' => 'Menganalisis Data Geospasial', 'poin' => 15],
-            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 49, 'isi_opsi' => 'Mengukur dan Memetakan Lahan', 'poin' => 15],
+            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 2,  'isi_opsi' => 'Mesin Industri', 'poin' => 15],
+            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 4,  'isi_opsi' => 'Servis Motor', 'poin' => 15],
+            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 7,  'isi_opsi' => 'Coding Program', 'poin' => 15],
+            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 9,  'isi_opsi' => 'Bangun Jaringan', 'poin' => 15],
+            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 12, 'isi_opsi' => 'Amankan Data', 'poin' => 15],
+            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 15, 'isi_opsi' => 'Animasi Gerak', 'poin' => 15],
+            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 16, 'isi_opsi' => 'Bikin Efek Suara', 'poin' => 15],
+            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 20, 'isi_opsi' => 'Pasang Fiber', 'poin' => 15],
+            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 25, 'isi_opsi' => 'Mesin Bubut', 'poin' => 15],
+            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 29, 'isi_opsi' => 'Cek Kualitas Produk', 'poin' => 15],
+            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 30, 'isi_opsi' => 'Gambar Teknik', 'poin' => 15],
+            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 33, 'isi_opsi' => 'Furniture Interior', 'poin' => 15],
+            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 45, 'isi_opsi' => 'Bikin Motion Graphic', 'poin' => 15],
+            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 46, 'isi_opsi' => 'Visual Kreatif', 'poin' => 15],
+            ['soal_tes_id' => $soal9->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 51, 'isi_opsi' => 'Pemetaan Lahan', 'poin' => 15],
         ];
         foreach ($opsi9 as $data) {
             OpsiJawaban::create($data);
@@ -823,21 +829,21 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $opsi10 = [
-            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 5, 'isi_opsi' => 'Perawatan Kendaraan Berat', 'poin' => 15],
-            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 11, 'isi_opsi' => 'Manajemen Basis Data', 'poin' => 15],
-            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 17, 'isi_opsi' => 'Desain Motion Graphic', 'poin' => 15],
-            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 19, 'isi_opsi' => 'Teknologi Telekomunikasi', 'poin' => 15],
-            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 20, 'isi_opsi' => 'Instalasi Fiber Optik', 'poin' => 15],
-            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 22, 'isi_opsi' => 'Instalasi Jaringan Kabel', 'poin' => 15],
-            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 23, 'isi_opsi' => 'Sistem Komunikasi Data', 'poin' => 15],
-            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 26, 'isi_opsi' => 'Pengoperasian Mesin CNC', 'poin' => 15],
-            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 30, 'isi_opsi' => 'Gambar Teknik Mesin', 'poin' => 15],
-            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 34, 'isi_opsi' => 'Perencanaan Proyek Arsitektur', 'poin' => 15],
-            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 46, 'isi_opsi' => 'Penceritaan Visual Kreatif', 'poin' => 15],
-            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 48, 'isi_opsi' => 'Analisis Data Geospasial', 'poin' => 15],
-            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 49, 'isi_opsi' => 'Pemetaan dan Survey Lahan', 'poin' => 15],
-            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 50, 'isi_opsi' => 'Pemetaan Kartografi Digital', 'poin' => 15],
-            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 51, 'isi_opsi' => 'Analisis Citra Satelit', 'poin' => 15],
+            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 5,  'isi_opsi' => 'Kendaraan Berat', 'poin' => 15],
+            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 6,  'isi_opsi' => 'Diagnosa Mesin', 'poin' => 15],
+            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 11, 'isi_opsi' => 'Database Admin', 'poin' => 15],
+            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 12, 'isi_opsi' => 'Keamanan Sistem', 'poin' => 15],
+            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 17, 'isi_opsi' => 'Motion Graphic', 'poin' => 15],
+            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 18, 'isi_opsi' => 'Broadcast TV', 'poin' => 15],
+            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 21, 'isi_opsi' => 'Operator BTS', 'poin' => 15],
+            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 22, 'isi_opsi' => 'Jaringan Kabel', 'poin' => 15],
+            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 23, 'isi_opsi' => 'Data Komunikasi', 'poin' => 15],
+            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 26, 'isi_opsi' => 'Mesin CNC', 'poin' => 15],
+            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 30, 'isi_opsi' => 'Gambar Mesin', 'poin' => 15],
+            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 34, 'isi_opsi' => 'Proyek Arsitektur', 'poin' => 15],
+            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 46, 'isi_opsi' => 'Desain Motion', 'poin' => 15],
+            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 48, 'isi_opsi' => 'Data Geospasial', 'poin' => 15],
+            ['soal_tes_id' => $soal10->id, 'kategori_minat_id' => null, 'profesi_kerja_id' => 52, 'isi_opsi' => 'Kartografi Digital', 'poin' => 15],
         ];
         foreach ($opsi10 as $data) {
             OpsiJawaban::create($data);
