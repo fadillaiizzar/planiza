@@ -24,11 +24,13 @@ use App\Http\Controllers\IndustriProfesiController;
 use App\Http\Controllers\ProfesiKategoriController;
 use App\Http\Controllers\EksplorasiKuliahController;
 use App\Http\Controllers\JurusanKuliahController;
+use App\Http\Controllers\KampusController;
 use App\Http\Controllers\Siswa\KerjakanTesController;
 use App\Http\Controllers\Siswa\JawabanSiswaController;
 use App\Http\Controllers\Siswa\KenaliProfesiSiswaController;
 use App\Http\Controllers\Siswa\RekomendasiProfesiController;
 use App\Http\Controllers\Siswa\EksplorasiKerjaSiswaController;
+use App\Models\Kampus;
 
 Route::get('/', function () {
     return view('beranda');
@@ -87,6 +89,7 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
     Route::prefix('eksplorasi-jurusan')->name('eksplorasi-jurusan.')->group(function () {
         Route::get('/', [EksplorasiKuliahController::class, 'index'])->name('index');
         Route::resource('jurusan-kuliah', JurusanKuliahController::class);
+        Route::resource('kampus', KampusController::class);
     });
 
     Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('kontribusi-sdgs');
