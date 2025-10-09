@@ -60,7 +60,7 @@ class JurusanKuliahController extends Controller
 
         JurusanKuliah::create($data);
 
-        return redirect()->route('admin.eksplorasi-kuliah.jurusan-kuliah.index')->with('success', 'Jurusan Kuliah berhasil ditambahkan');
+        return redirect()->route('admin.eksplorasi-jurusan.jurusan-kuliah.index')->with('success', 'Jurusan Kuliah berhasil ditambahkan');
     }
 
     /**
@@ -107,7 +107,7 @@ class JurusanKuliahController extends Controller
 
         $jurusanKuliah->update($data);
 
-        return redirect()->route('admin.eksplorasi-kuliah.jurusan-kuliah.index')->with('success', 'Jurusan Kuliah berhasil diperbarui');
+        return redirect()->route('admin.eksplorasi-jurusan.jurusan-kuliah.index')->with('success', 'Jurusan Kuliah berhasil diperbarui');
     }
 
     /**
@@ -121,6 +121,6 @@ class JurusanKuliahController extends Controller
         }
         $jurusanKuliah->delete();
 
-        return redirect()->route('admin.eksplorasi-kuliah.jurusan-kuliah.index')->with('success', 'Jurusan Kuliah berhasil dihapus');
+        return redirect()->route('admin.eksplorasi-jurusan.jurusan-kuliah.index')->with('success', 'Jurusan Kuliah berhasil dihapus');
     }
 }

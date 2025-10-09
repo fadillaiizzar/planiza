@@ -28,7 +28,7 @@
                     ['icon' => 'fa-book', 'label' => 'Pembelajaran', 'route' => 'admin.pembelajaran.index'],
                     ['icon' => 'fa-tools', 'label' => 'Eksplorasi Profesi', 'route' => 'admin.eksplorasi-profesi.index'],
                     ['icon' => 'fa-user-tie', 'label' => 'Kenali Profesi', 'route' => 'admin.kenali-profesi.index'],
-                    ['icon' => 'fa-tools', 'label' => 'Eksplorasi Kuliah', 'route' => 'admin.eksplorasi-kuliah.index'],
+                    ['icon' => 'fa-tools', 'label' => 'Eksplorasi Jurusan', 'route' => 'admin.eksplorasi-jurusan.index'],
                     ['icon' => 'fa-leaf', 'label' => 'Kontribusi SDGs', 'route' => 'admin.kontribusi-sdgs'],
                     ['icon' => 'fa-comments', 'label' => 'Bincang Karier', 'route' => 'admin.dashboard'],
                 ];

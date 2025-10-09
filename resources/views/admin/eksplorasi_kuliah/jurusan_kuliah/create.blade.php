@@ -36,7 +36,7 @@
 
     <!-- Form Content -->
     <div class="px-6 pt-2 pb-6">
-        <form action="{{ route('admin.eksplorasi-kuliah.jurusan-kuliah.store') }}" method="POST" class="space-y-4" enctype="multipart/form-data">
+        <form action="{{ route('admin.eksplorasi-jurusan.jurusan-kuliah.store') }}" method="POST" class="space-y-4" enctype="multipart/form-data">
             @csrf
 
             <!-- Nama Jurusan -->

@@ -84,7 +84,7 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
         });
     });
 
-    Route::prefix('eksplorasi-kuliah')->name('eksplorasi-kuliah.')->group(function () {
+    Route::prefix('eksplorasi-jurusan')->name('eksplorasi-jurusan.')->group(function () {
         Route::get('/', [EksplorasiKuliahController::class, 'index'])->name('index');
         Route::resource('jurusan-kuliah', JurusanKuliahController::class);
     });

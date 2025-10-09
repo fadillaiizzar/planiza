@@ -25,9 +25,9 @@
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-5">
                     @php
                         $actions = [
-                            ['route' => route('admin.eksplorasi-kuliah.jurusan-kuliah.index'), 'icon' => 'fas fa-graduation-cap', 'label' => 'Jurusan Kuliah'],
-                            // ['route' => route('admin.eksplorasi-kuliah.kampus.index'), 'icon' => 'fas fa-university', 'label' => 'Kampus'],
-                            // ['route' => route('admin.eksplorasi-kuliah.kampus-jurusan.index'), 'icon' => 'fas fa-project-diagram', 'label' => 'Kampus-Jurusan'],
+                            ['route' => route('admin.eksplorasi-jurusan.jurusan-kuliah.index'), 'icon' => 'fas fa-graduation-cap', 'label' => 'Jurusan Kuliah'],
+                            // ['route' => route('admin.eksplorasi-jurusan.kampus.index'), 'icon' => 'fas fa-university', 'label' => 'Kampus'],
+                            // ['route' => route('admin.eksplorasi-jurusan.kampus-jurusan.index'), 'icon' => 'fas fa-project-diagram', 'label' => 'Kampus-Jurusan'],
                         ];
                     @endphp
 
@@ -54,13 +54,13 @@
 
                                 switch ($activity['type']) {
                                     case 'kuliah':
-                                        $detailUrl = route('admin.eksplorasi-kuliah.jurusan-kuliah.show', $activity['id']);
+                                        $detailUrl = route('admin.eksplorasi-jurusan.jurusan-kuliah.show', $activity['id']);
                                         break;
                                     case 'kampus':
-                                        $detailUrl = route('admin.eksplorasi-kuliah.kampus.show', $activity['id']);
+                                        $detailUrl = route('admin.eksplorasi-jurusan.kampus.show', $activity['id']);
                                         break;
                                     case 'kampus-jurusan':
-                                        $detailUrl = route('admin.eksplorasi-kuliah.kampus-jurusan.show', $activity['id']);
+                                        $detailUrl = route('admin.eksplorasi-jurusan.kampus-jurusan.show', $activity['id']);
                                         break;
                                 }
                             @endphp
