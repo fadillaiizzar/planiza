@@ -49,7 +49,7 @@ class EksplorasiKuliahController extends Controller
         //     ->take(10);
 
         $jurusanKuliahCount = JurusanKuliah::count();
-        // $kampusCount = Kampus::count();
+        $kampusCount = Kampus::count();
         // $kampusJurusanCount = KampusJurusan::count();
 
         $user = Auth::user();
@@ -58,7 +58,7 @@ class EksplorasiKuliahController extends Controller
         return view('admin.pages.eksplorasi-kuliah', [
             // 'activities' => $activities,
             'jurusanKuliahCount' => $jurusanKuliahCount,
-            // 'kampusCount' => $kampusCount,
+            'kampusCount' => $kampusCount,
             // 'kampusJurusanCount' => $kampusJurusanCount,
             'user' => $user,
             'userCount' => $userCount,

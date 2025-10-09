@@ -31,7 +31,7 @@ class KampusController extends Controller
         //     ])
         //     ->toArray();
 
-        return view('admin.pages.kampus', [
+        return view('admin.eksplorasi_kuliah.kampus.kampus', [
             'kampus' => $kampus,
             'kampusCount' => $kampusCount,
             'allKampus' => $allKampus,
