@@ -10,6 +10,8 @@ class Kampus extends Model
 {
     use HasFactory;
 
+    protected $table = 'kampus';
+
     protected $fillable = [
         'nama_kampus',
         'website',
