@@ -22,31 +22,31 @@ class EksplorasiKuliahController extends Controller
             ];
         });
 
-        // $kampus = Kampus::latest()->get()->map(function ($item) {
-        //     return [
-        //         'id' => $item->id,
-        //         'type' => 'kampus',
-        //         'name' => $item->nama_kampus,
-        //         'created_at' => $item->updated_at,
-        //         'action' => optional($item->created_at)->eq($item->updated_at) ? 'create' : 'update',
-        //     ];
-        // });
+        $kampus = Kampus::latest()->get()->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'type' => 'kampus',
+                'name' => $item->nama_kampus,
+                'created_at' => $item->updated_at,
+                'action' => optional($item->created_at)->eq($item->updated_at) ? 'create' : 'update',
+            ];
+        });
 
-        // $kampusJurusan = KampusJurusan::latest()->get()->map(function ($item) {
-        //     return [
-        //         'id' => $item->id,
-        //         'type' => 'kampus-jurusan',
-        //         'name' => ($item->kampus->nama_kampus ?? '-') . ' - ' . ($item->jurusanKuliah->nama_jurusan_kuliah ?? '-'),
-        //         'created_at' => $item->updated_at,
-        //         'action' => optional($item->created_at)->eq($item->updated_at) ? 'create' : 'update',
-        //     ];
-        // });
+        $kampusJurusan = KampusJurusan::latest()->get()->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'type' => 'kampus-jurusan',
+                'name' => ($item->kampus->nama_kampus ?? '-') . ' - ' . ($item->jurusanKuliah->nama_jurusan_kuliah ?? '-'),
+                'created_at' => $item->updated_at,
+                'action' => optional($item->created_at)->eq($item->updated_at) ? 'create' : 'update',
+            ];
+        });
 
-        // $activities = $jurusanKuliah
-        //     ->merge($kampus)
-        //     ->merge($kampusJurusan)
-        //     ->sortByDesc('created_at')
-        //     ->take(10);
+        $activities = $jurusanKuliah
+            ->merge($kampus)
+            ->merge($kampusJurusan)
+            ->sortByDesc('created_at')
+            ->take(10);
 
         $jurusanKuliahCount = JurusanKuliah::count();
         $kampusCount = Kampus::count();
@@ -56,7 +56,7 @@ class EksplorasiKuliahController extends Controller
         $userCount = User::count();
 
         return view('admin.pages.eksplorasi-kuliah', [
-            // 'activities' => $activities,
+            'activities' => $activities,
             'jurusanKuliahCount' => $jurusanKuliahCount,
             'kampusCount' => $kampusCount,
             'kampusJurusanCount' => $kampusJurusanCount,
