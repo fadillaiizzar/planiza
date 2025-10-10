@@ -9,7 +9,7 @@
     <!-- Main -->
     <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
         <x-admin.breadcrumb :links="[
-            ['href' => route('admin.eksplorasi-jurusan.kampus-jurusan.index'), 'icon' => 'fas fa-university', 'title' => 'Eksplorasi Kuliah'],
+            ['href' => route('admin.eksplorasi-jurusan.index'), 'icon' => 'fas fa-university', 'title' => 'Eksplorasi Kuliah'],
             ['href' => '#', 'icon' => 'fas fa-graduation-cap', 'title' => 'Kampus Jurusan'],
         ]" />
 
