@@ -82,7 +82,7 @@
                     class="text-slate-600 hover:text-slate-800 font-medium transition-all duration-200 hover:underline">
                     Batal
                 </button>
-                <button type="submit"
+                <button id="btnSubmit" type="submit"
                     class="bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-semibold px-6 py-2 rounded-xl transition-all duration-200">
                     Simpan
                 </button>
@@ -97,17 +97,30 @@
     document.getElementById('formKampusJurusan').addEventListener('submit', async function (e) {
         e.preventDefault();
 
+        const btn = document.getElementById('btnSubmit');
+        btn.disabled = true;
+        btn.innerText = 'Memeriksa...'; // tampilkan status loading
+
         const kampusId = document.getElementById('kampus_id').value;
         const jurusanId = document.getElementById('jurusan_kuliah_id').value;
 
-        const sudahAda = true;
+        try {
+            const response = await fetch(`{{ route('admin.eksplorasi-jurusan.kampus-jurusan.check') }}?kampus_id=${kampusId}&jurusan_kuliah_id=${jurusanId}`);
+            const data = await response.json();
 
-        if (sudahAda) {
-            showConfirmModal(() => {
+            if (data.exists) {
+                showConfirmModal(() => {
+                    e.target.submit();
+                });
+            } else {
                 e.target.submit();
-            });
-        } else {
-            e.target.submit();
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Terjadi kesalahan saat memeriksa data.');
+        } finally {
+            btn.disabled = false;
+            btn.innerText = 'Simpan';
         }
     });
 </script>
