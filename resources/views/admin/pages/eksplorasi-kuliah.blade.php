@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Eksplorasi Kuliah Admin - Planiza')
+@section('title', 'Eksplorasi Jurusan Admin - Planiza')
 
 @section('content')
     <!-- Overlay (mobile) -->
@@ -10,7 +10,7 @@
     <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
         <div class="mx-auto max-w-7xl space-y-6">
             @include('admin.components.header.header', [
-                'pageTitle' => 'Eksplorasi Kuliah Management',
+                'pageTitle' => 'Eksplorasi Jurusan Management',
                 'userCount' => $userCount,
                 'stats' => [
                     ['label' => 'Total Jurusan Kuliah', 'count' => $jurusanKuliahCount, 'icon' => 'fas fa-graduation-cap', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
