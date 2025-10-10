@@ -36,7 +36,7 @@
 
     <!-- Form Content -->
     <div class="px-6 pt-2 pb-6">
-        <form action="{{ route('admin.eksplorasi-jurusan.kampus-jurusan.store') }}" method="POST" class="space-y-4">
+        <form id="formKampusJurusan" action="{{ route('admin.eksplorasi-jurusan.kampus-jurusan.store') }}" method="POST" class="space-y-4">
             @csrf
 
             <!-- Pilih Kampus -->
@@ -90,3 +90,24 @@
         </form>
     </div>
 </div>
+
+@include('admin.eksplorasi_kuliah.kampus_jurusan.popup-confirm-replace')
+
+<script>
+    document.getElementById('formKampusJurusan').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const kampusId = document.getElementById('kampus_id').value;
+        const jurusanId = document.getElementById('jurusan_kuliah_id').value;
+
+        const sudahAda = true;
+
+        if (sudahAda) {
+            showConfirmModal(() => {
+                e.target.submit();
+            });
+        } else {
+            e.target.submit();
+        }
+    });
+</script>

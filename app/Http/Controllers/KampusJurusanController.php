@@ -142,4 +142,13 @@ class KampusJurusanController extends Controller
 
         return redirect()->route('admin.eksplorasi-jurusan.kampus-jurusan.index')->with('success', 'Relasi Kampus - Jurusan berhasil dihapus');
     }
+
+    public function checkExists(Request $request)
+    {
+        $exists = KampusJurusan::where('kampus_id', $request->kampus_id)
+            ->where('jurusan_kuliah_id', $request->jurusan_kuliah_id)
+            ->exists();
+
+        return response()->json(['exists' => $exists]);
+    }
 }

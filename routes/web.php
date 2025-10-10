@@ -92,6 +92,8 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
         Route::get('/', [EksplorasiKuliahController::class, 'index'])->name('index');
         Route::resource('jurusan-kuliah', JurusanKuliahController::class);
         Route::resource('kampus', KampusController::class);
+
+        Route::get('/kampus-jurusan/check', [KampusJurusanController::class, 'checkExists'])->name('kampus-jurusan.check');
         Route::resource('kampus-jurusan' , KampusJurusanController::class);
     });
 
