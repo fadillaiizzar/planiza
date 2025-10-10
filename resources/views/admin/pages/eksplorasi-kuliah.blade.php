@@ -15,7 +15,7 @@
                 'stats' => [
                     ['label' => 'Total Jurusan Kuliah', 'count' => $jurusanKuliahCount, 'icon' => 'fas fa-graduation-cap', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
                     ['label' => 'Total Kampus', 'count' => $kampusCount, 'icon' => 'fas fa-university', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
-                    // ['label' => 'Total Kampus-Jurusan', 'count' => $kampusJurusanCount, 'icon' => 'fas fa-project-diagram', 'bg' => 'from-purple-500 to-purple-600', 'textColor' => 'text-purple-100'],
+                    ['label' => 'Total Kampus Jurusan', 'count' => $kampusJurusanCount, 'icon' => 'fas fa-project-diagram', 'bg' => 'from-purple-500 to-purple-600', 'textColor' => 'text-purple-100'],
                 ],
             ])
 
@@ -27,7 +27,7 @@
                         $actions = [
                             ['route' => route('admin.eksplorasi-jurusan.jurusan-kuliah.index'), 'icon' => 'fas fa-graduation-cap', 'label' => 'Jurusan Kuliah'],
                             ['route' => route('admin.eksplorasi-jurusan.kampus.index'), 'icon' => 'fas fa-university', 'label' => 'Kampus'],
-                            // ['route' => route('admin.eksplorasi-jurusan.kampus-jurusan.index'), 'icon' => 'fas fa-project-diagram', 'label' => 'Kampus-Jurusan'],
+                            ['route' => route('admin.eksplorasi-jurusan.kampus-jurusan.index'), 'icon' => 'fas fa-project-diagram', 'label' => 'Kampus-Jurusan'],
                         ];
                     @endphp
 
