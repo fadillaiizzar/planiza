@@ -50,7 +50,7 @@ class EksplorasiKuliahController extends Controller
 
         $jurusanKuliahCount = JurusanKuliah::count();
         $kampusCount = Kampus::count();
-        // $kampusJurusanCount = KampusJurusan::count();
+        $kampusJurusanCount = KampusJurusan::count();
 
         $user = Auth::user();
         $userCount = User::count();
@@ -59,7 +59,7 @@ class EksplorasiKuliahController extends Controller
             // 'activities' => $activities,
             'jurusanKuliahCount' => $jurusanKuliahCount,
             'kampusCount' => $kampusCount,
-            // 'kampusJurusanCount' => $kampusJurusanCount,
+            'kampusJurusanCount' => $kampusJurusanCount,
             'user' => $user,
             'userCount' => $userCount,
         ]);
