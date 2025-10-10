@@ -13,7 +13,7 @@
     <!-- Statistik Kampus - Jurusan -->
     <section class="bg-off-white rounded-2xl shadow-lg p-6">
         <x-h3>{{ $statistikTitle }}</x-h3>
-        {{-- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <x-admin.eksplorasi_kuliah.kampus-jurusan-card
                 icon="fas fa-book"
                 :label="$labelJurusan"
@@ -25,7 +25,7 @@
                 :label="$labelKampus"
                 :items="$jurusanPerKampus"
             />
-        </div> --}}
+        </div>
     </section>
 
     <!-- Daftar Relasi -->
