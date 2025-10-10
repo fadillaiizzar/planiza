@@ -6,7 +6,7 @@
         @forelse(($items ?? []) as $name => $group)
             <li class="flex justify-between items-center border-b border-border-gray pb-1 last:border-none last:pb-0">
                 <span>{{ $name ?: 'Tidak ada data' }}</span>
-                <strong class="text-slate-navy">{{ $group->count() }}</strong>
+                <strong class="text-slate-navy">{{ $group }}</strong>
             </li>
         @empty
             <li class="text-gray-500 text-sm italic">Belum ada data</li>
