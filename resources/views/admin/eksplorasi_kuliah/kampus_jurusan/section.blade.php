@@ -48,14 +48,14 @@
                             <td class="p-4 w-[5%]">{{ $relasi->id }}</td>
                             <td class="p-4 w-[30%]">{{ Str::limit($relasi->kampus->nama_kampus, 50) }}</td>
                             <td class="p-4 w-[30%]">{{ Str::limit($relasi->jurusanKuliah->nama_jurusan_kuliah, 50) }}</td>
-                            <td class="p-4 w-[15%]">{{ $relasi->passing_grade }}</td>
-                            <td class="p-4 relative overflow-visible w-[20%]">
+                            <td class="p-4 w-[20%]">{{ $relasi->passing_grade }}</td>
+                            <td class="p-4 relative overflow-visible w-[10%]">
                                 <button onclick="toggleDropdown({{ $relasi->id }})"
                                     class="p-2 rounded-lg hover:bg-off-white focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all">
                                     <i class="fas fa-cog text-cool-gray"></i>
                                 </button>
 
-                                <div id="dropdown-{{ $relasi->id }}" class="hidden absolute right-32 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
+                                <div id="dropdown-{{ $relasi->id }}" class="hidden absolute right-14 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
                                     <a href="{{ route('admin.eksplorasi-jurusan.kampus-jurusan.show', $relasi->id) }}"
                                         class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
                                         <i class="fas fa-eye w-5 h-5"></i>
