@@ -104,6 +104,8 @@
     </section>
 </div>
 
+@include('admin.eksplorasi_kuliah.kampus_jurusan.delete')
+
 <script>
     function showEdit(id) {
         fetch(`/admin/eksplorasi-jurusan/kampus-jurusan/${id}/edit`)
