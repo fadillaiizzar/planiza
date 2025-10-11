@@ -18,8 +18,6 @@ class KampusJurusan extends Model
         'passing_grade',
     ];
 
-    protected $with = ['jurusanKuliah', 'kampus'];
-
     public function jurusanKuliah(): BelongsTo
     {
         return $this->belongsTo(JurusanKuliah::class, 'jurusan_kuliah_id');

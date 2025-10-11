@@ -2,48 +2,83 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\JurusanKuliah;
 use App\Models\Kampus;
 use Illuminate\Http\Request;
+use App\Models\JurusanKuliah;
 use App\Models\KampusJurusan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 
 class KampusJurusanController extends Controller
 {
+    private function clearKampusJurusanCache()
+    {
+        Cache::forget('kampus_jurusan_stats');
+        Cache::forget('jurusan_per_kampus');
+        Cache::forget('kampus_per_jurusan');
+        Cache::forget('filterOptions');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $relations = Kampus::with('jurusanKuliahs')->whereHas('jurusanKuliahs')->get();
+        $relations = Kampus::with('jurusanKuliahs')->whereHas('jurusanKuliahs')->paginate(50);
 
-        $relasiCount = KampusJurusan::count();
-        $jurusanKuliahCount = KampusJurusan::distinct('jurusan_kuliah_id')->count('jurusan_kuliah_id');
-        $kampusCount = KampusJurusan::distinct('kampus_id')->count('kampus_id');
+        $stats = Cache::remember('kampus_jurusan_stats', 3600, function () {
+            return KampusJurusan::selectRaw('
+                COUNT(*) as total_relasi,
+                COUNT(DISTINCT kampus_id) as total_kampus,
+                COUNT(DISTINCT jurusan_kuliah_id) as total_jurusan
+            ')->first();
+        });
 
-        $allRelations = KampusJurusan::with(['kampus', 'jurusanKuliah'])->get();
+        $allRelations = KampusJurusan::with([
+            'kampus:id,nama_kampus',
+            'jurusanKuliah:id,nama_jurusan_kuliah'
+        ])->paginate(50);
 
-        $jurusanPerKampus = $allRelations->groupBy(fn($relasi) => $relasi->kampus->nama_kampus ?? '-')->map->count();
-        $kampusPerJurusan = $allRelations->groupBy(fn($relasi) => $relasi->jurusanKuliah->nama_jurusan_kuliah ?? '-')->map->count();
+        $jurusanPerKampus = Cache::remember('jurusan_per_kampus', 3600, function () {
+            return KampusJurusan::join('kampus', 'kampus.id', '=', 'kampus_jurusans.kampus_id')
+                ->select('kampus.nama_kampus', DB::raw('COUNT(*) as total'))
+                ->groupBy('kampus.nama_kampus')
+                ->pluck('total', 'nama_kampus');
+        });
 
-        $kampus = Kampus::all();
-        $jurusanKuliahs = JurusanKuliah::all();
+        $kampusPerJurusan = Cache::remember('kampus_per_jurusan', 3600, function () {
+            return KampusJurusan::join('jurusan_kuliahs', 'jurusan_kuliahs.id', '=', 'kampus_jurusans.jurusan_kuliah_id')
+                ->select('jurusan_kuliahs.nama_jurusan_kuliah', DB::raw('COUNT(*) as total'))
+                ->groupBy('jurusan_kuliahs.nama_jurusan_kuliah')
+                ->pluck('total', 'nama_jurusan_kuliah');
+        });
 
-        $filterOptions = KampusJurusan::with('jurusanKuliah')
-            ->get()
-            ->map(fn($relasi) => [
-                'label' => $relasi->jurusanKuliah->nama_jurusan_kuliah,
-                'value' => strtolower($relasi->jurusanKuliah->nama_jurusan_kuliah)
-            ])
-            ->unique('value')
-            ->sortBy('label')
-            ->values()
-            ->toArray();
+        $kampus = Cache::remember('kampus_list', 3600, fn() =>
+            Kampus::select('id', 'nama_kampus')->orderBy('nama_kampus')->get()
+        );
+        
+        $jurusanKuliahs = Cache::remember('jurusan_list', 3600, fn() =>
+            JurusanKuliah::select('id', 'nama_jurusan_kuliah')->orderBy('nama_jurusan_kuliah')->get()
+        );
+
+        $filterOptions = Cache::remember('filterOptions', 3600, function() {
+            return KampusJurusan::join('jurusan_kuliahs', 'kampus_jurusans.jurusan_kuliah_id', '=', 'jurusan_kuliahs.id')
+                ->select('jurusan_kuliahs.nama_jurusan_kuliah')
+                ->distinct()
+                ->orderBy('nama_jurusan_kuliah')
+                ->get()
+                ->map(fn($item) => [
+                    'label' => $item->nama_jurusan_kuliah,
+                    'value' => strtolower($item->nama_jurusan_kuliah)
+                ])
+                ->toArray();
+            });
 
         return view('admin.eksplorasi_kuliah.kampus_jurusan.kampus-jurusan', [
             'relations' => $relations,
-            'relasiCount' => $relasiCount,
-            'jurusanKuliahCount' => $jurusanKuliahCount,
-            'kampusCount' => $kampusCount,
+            'relasiCount' => $stats->total_relasi,
+            'jurusanKuliahCount' => $stats->total_jurusan,
+            'kampusCount' => $stats->total_kampus,
             'allRelations' => $allRelations,
             'jurusanPerKampus' => $jurusanPerKampus,
             'kampusPerJurusan' => $kampusPerJurusan,
@@ -58,8 +93,8 @@ class KampusJurusanController extends Controller
      */
     public function create()
     {
-        $kampus = Kampus::all();
-        $jurusanKuliahs = JurusanKuliah::all();
+        $kampus = Kampus::select('id', 'nama_kampus')->orderBy('nama_kampus')->get();
+        $jurusanKuliahs = JurusanKuliah::select('id', 'nama_jurusan_kuliah')->orderBy('nama_jurusan_kuliah')->get();
 
         return view('admin.eksplorasi_kuliah.kampus_jurusan.create', compact('kampus', 'jurusanKuliahs'));
     }
@@ -84,6 +119,8 @@ class KampusJurusanController extends Controller
                 'passing_grade' => $request->passing_grade,
             ]
         );
+
+        $this->clearKampusJurusanCache();
 
         return redirect()->route('admin.eksplorasi-jurusan.kampus-jurusan.index')
             ->with('success', 'Relasi Kampus - Jurusan berhasil ditambahkan');
@@ -129,6 +166,8 @@ class KampusJurusanController extends Controller
             'passing_grade' => $request->passing_grade,
         ]);
 
+        $this->clearKampusJurusanCache();
+
         return redirect()->route('admin.eksplorasi-jurusan.kampus-jurusan.index')->with('success', 'Relasi Kampus - Jurusan berhasil diperbarui');
     }
 
@@ -139,6 +178,8 @@ class KampusJurusanController extends Controller
     {
         $kampusJurusan = KampusJurusan::findOrFail($id);
         $kampusJurusan->delete();
+
+        $this->clearKampusJurusanCache();
 
         return redirect()->route('admin.eksplorasi-jurusan.kampus-jurusan.index')->with('success', 'Relasi Kampus - Jurusan berhasil dihapus');
     }
