@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Kampus;
+use App\Models\KampusJurusan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TesController;
 use App\Http\Middleware\RoleMiddleware;
@@ -7,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\KampusController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\SoalTesController;
 use App\Http\Controllers\HasilTesController;
@@ -17,22 +20,20 @@ use App\Http\Controllers\OpsiJawabanController;
 use App\Http\Controllers\TopikMateriController;
 use App\Http\Controllers\PembelajaranController;
 use App\Http\Controllers\ProfesiKerjaController;
+use App\Http\Controllers\JurusanKuliahController;
+use App\Http\Controllers\KampusJurusanController;
 use App\Http\Controllers\KategoriMinatController;
 use App\Http\Controllers\KontribusiSdgsController;
 use App\Http\Controllers\EksplorasiKerjaController;
 use App\Http\Controllers\IndustriProfesiController;
 use App\Http\Controllers\ProfesiKategoriController;
 use App\Http\Controllers\EksplorasiKuliahController;
-use App\Http\Controllers\JurusanKuliahController;
-use App\Http\Controllers\KampusController;
-use App\Http\Controllers\KampusJurusanController;
 use App\Http\Controllers\Siswa\KerjakanTesController;
 use App\Http\Controllers\Siswa\JawabanSiswaController;
 use App\Http\Controllers\Siswa\KenaliProfesiSiswaController;
 use App\Http\Controllers\Siswa\RekomendasiProfesiController;
 use App\Http\Controllers\Siswa\EksplorasiKerjaSiswaController;
-use App\Models\Kampus;
-use App\Models\KampusJurusan;
+use App\Http\Controllers\Siswa\EksplorasiKuliah\EksplorasiKuliahSiswaController;
 
 Route::get('/', function () {
     return view('beranda');
@@ -117,4 +118,6 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->na
         Route::post('/tes/{tes}/submit', [KerjakanTesController::class, 'submit'])->name('tes.submit');
         Route::get('/tes/{tes}/rekomendasi/{attempt?}', [RekomendasiProfesiController::class, 'index'])->name('tes.rekomendasi');
     });
+
+    Route::resource('eksplorasi-jurusan', EksplorasiKuliahSiswaController::class)->names('eksplorasi-jurusan');
 });

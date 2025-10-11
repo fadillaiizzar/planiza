@@ -30,6 +30,12 @@
                             'desc' => 'Profesi impian',
                         ],
                         [
+                            'href' => route('siswa.eksplorasi-jurusan.index'),
+                            'icon' => 'fas fa-search',
+                            'title' => 'Eksplorasi',
+                            'desc' => 'Jelajahi jurusan',
+                        ],
+                        [
                             'href' => '#',
                             'icon' => 'fas fa-globe',
                             'title' => 'Kontribusi SDGs',
