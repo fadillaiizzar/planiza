@@ -10,6 +10,8 @@
             <!-- Quick Access Buttons -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 sm:gap-6 max-w-5xl mx-auto">
                 @php
+                    $rencanaSiswa = $user->siswa->rencana?->nama_rencana ?? null;
+
                     $menus = [
                         [
                             'href' => route('siswa.materi.index'),
@@ -18,22 +20,21 @@
                             'desc' => 'Pembelajaran',
                         ],
                         [
-                            'href' => route('siswa.eksplorasi-profesi.index'),
+                            'href' => $rencanaSiswa === 'Kerja'
+                                        ? route('siswa.eksplorasi-profesi.index')
+                                        : ($rencanaSiswa === 'Kuliah'
+                                            ? route('siswa.eksplorasi-jurusan.index')
+                                            : route('siswa.eksplorasi-profesi.index')),
                             'icon' => 'fas fa-search',
-                            'title' => 'Eksplorasi',
-                            'desc' => 'Jelajahi minat',
+                            'title' => 'Eksplorasi Karier',
+                            'desc' => $rencanaSiswa === 'Kerja' ? 'Jelajahi profesi'
+                                    : ($rencanaSiswa === 'Kuliah' ? 'Jelajahi jurusan' : 'Jelajahi jurusan'),
                         ],
                         [
                             'href' => route('siswa.kenali-profesi.index'),
                             'icon' => 'fas fa-briefcase',
                             'title' => 'Kenali Karier',
                             'desc' => 'Profesi impian',
-                        ],
-                        [
-                            'href' => route('siswa.eksplorasi-jurusan.index'),
-                            'icon' => 'fas fa-search',
-                            'title' => 'Eksplorasi',
-                            'desc' => 'Jelajahi jurusan',
                         ],
                         [
                             'href' => '#',
