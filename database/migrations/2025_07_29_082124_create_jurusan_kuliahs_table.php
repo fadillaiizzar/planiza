@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->text('info_matkul');
             $table->text('info_prospek');
+            $table->text('info_jurusan');
             $table->timestamps();
         });
     }

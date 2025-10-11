@@ -20,6 +20,6 @@ class Kampus extends Model
 
     public function jurusanKuliahs(): BelongsToMany
     {
-        return $this->belongsToMany(JurusanKuliah::class, 'kampus_jurusans', 'kampus_id', 'jurusan_kuliah_id')->withTimestamps();
+        return $this->belongsToMany(JurusanKuliah::class, 'kampus_jurusans', 'kampus_id', 'jurusan_kuliah_id')->withTimestamps()->withPivot('passing_grade');
     }
 }
