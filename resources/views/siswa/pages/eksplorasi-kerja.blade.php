@@ -3,9 +3,9 @@
 @section('title', 'Eksplorasi Profesi - Siswa')
 
 @section('content')
-    <div class="px-4 py-8 sm:px-8">
+    <div id="main-content" class="px-4 py-8 sm:px-8">
         <x-siswa.section-header
-            title="Temukan Eksplorasi Profesi"
+            title="Eksplorasi Profesi Kerja"
             subtitle="Jelajahi berbagai profesi dan jurusan kuliah masa depan sesuai minat dan potensi kamu. Dapatkan informasi singkat tentang setiap jurusan, prospek karier, serta kampus yang menyediakannya"
             back-route="siswa.dashboard"
         />
@@ -67,12 +67,22 @@
             </div>
         @endforeach
 
-        {{-- Pagination --}}
         <div class="mt-8">
             {{ $jurusans->links() }}
-
             <x-paginate :jurusans="$jurusans" />
+        </div>
+
+        <div class="mt-10 text-center">
+            <a href="{{ route('siswa.eksplorasi-jurusan.index') }}"
+               class="ajax-link inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold transition-all duration-300 hover:gap-3 group">
+                <span class="relative">
+                    Lihat Eksplorasi Jurusan Kuliah
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+                </span>
+                <svg class="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+            </a>
         </div>
     </div>
 @endsection
-
