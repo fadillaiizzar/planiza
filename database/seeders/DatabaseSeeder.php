@@ -856,49 +856,49 @@ class DatabaseSeeder extends Seeder
         // Jurusan Kuliah
         $jurusanKuliahPerJurusan = [
             'TKR' => [
-                ['nama_jurusan_kuliah' => 'Teknik Mesin', 'deskripsi' => 'Mempelajari sistem mekanik, energi, dan manufaktur.', 'info_matkul' => 'Mekanika Teknik, Termodinamika, Proses Produksi, Gambar Teknik.', 'info_prospek' => 'Teknisi mesin, operator produksi, perancang alat industri.'],
-                ['nama_jurusan_kuliah' => 'Teknik Otomotif', 'deskripsi' => 'Fokus pada sistem kendaraan modern, diagnosis, dan perawatan otomotif.', 'info_matkul' => 'Sistem Bahan Bakar, Transmisi, Diagnostik Otomotif, Manajemen Bengkel.', 'info_prospek' => 'Mekanik otomotif, teknisi kendaraan, quality control otomotif.'],
-                ['nama_jurusan_kuliah' => 'Teknik Industri', 'deskripsi' => 'Mengoptimalkan proses produksi dan manajemen industri.', 'info_matkul' => 'Manajemen Produksi, Rekayasa Sistem, Ergonomi, Analisis Proses.', 'info_prospek' => 'Planner, analis produksi, manajer operasional.'],
+                ['nama_jurusan_kuliah' => 'Teknik Mesin', 'deskripsi' => 'Mempelajari sistem mekanik, energi, dan manufaktur.', 'info_matkul' => 'Mekanika Teknik, Termodinamika, Proses Produksi, Gambar Teknik.', 'info_prospek' => 'Teknisi mesin, operator produksi, perancang alat industri.', 'info_jurusan' => 'TKR'],
+                ['nama_jurusan_kuliah' => 'Teknik Otomotif', 'deskripsi' => 'Fokus pada sistem kendaraan modern, diagnosis, dan perawatan otomotif.', 'info_matkul' => 'Sistem Bahan Bakar, Transmisi, Diagnostik Otomotif, Manajemen Bengkel.', 'info_prospek' => 'Mekanik otomotif, teknisi kendaraan, quality control otomotif.', 'info_jurusan' => 'TKR'],
+                ['nama_jurusan_kuliah' => 'Teknik Industri', 'deskripsi' => 'Mengoptimalkan proses produksi dan manajemen industri.', 'info_matkul' => 'Manajemen Produksi, Rekayasa Sistem, Ergonomi, Analisis Proses.', 'info_prospek' => 'Planner, analis produksi, manajer operasional.', 'info_jurusan' => 'TKR'],
             ],
             'SIJA' => [
-                ['nama_jurusan_kuliah' => 'Teknik Informatika', 'deskripsi' => 'Mempelajari pemrograman, jaringan, dan rekayasa perangkat lunak.', 'info_matkul' => 'Algoritma, Basis Data, Struktur Data, Jaringan Komputer.', 'info_prospek' => 'Programmer, software engineer, web developer.'],
-                ['nama_jurusan_kuliah' => 'Sistem Informasi', 'deskripsi' => 'Menggabungkan teknologi dan bisnis untuk mengelola informasi.', 'info_matkul' => 'Analisis Sistem, Database, E-Business, Manajemen Proyek TI.', 'info_prospek' => 'System analyst, IT consultant, database administrator.'],
-                ['nama_jurusan_kuliah' => 'Teknologi Informasi', 'deskripsi' => 'Fokus pada penerapan teknologi di berbagai sektor industri.', 'info_matkul' => 'Cloud Computing, IoT, Keamanan Jaringan, Pemrograman Web.', 'info_prospek' => 'Network engineer, IT support, cybersecurity specialist.'],
+                ['nama_jurusan_kuliah' => 'Teknik Informatika', 'deskripsi' => 'Mempelajari pemrograman, jaringan, dan rekayasa perangkat lunak.', 'info_matkul' => 'Algoritma, Basis Data, Struktur Data, Jaringan Komputer.', 'info_prospek' => 'Programmer, software engineer, web developer.', 'info_jurusan' => 'SIJA'],
+                ['nama_jurusan_kuliah' => 'Sistem Informasi', 'deskripsi' => 'Menggabungkan teknologi dan bisnis untuk mengelola informasi.', 'info_matkul' => 'Analisis Sistem, Database, E-Business, Manajemen Proyek TI.', 'info_prospek' => 'System analyst, IT consultant, database administrator.', 'info_jurusan' => 'SIJA'],
+                ['nama_jurusan_kuliah' => 'Teknologi Informasi', 'deskripsi' => 'Fokus pada penerapan teknologi di berbagai sektor industri.', 'info_matkul' => 'Cloud Computing, IoT, Keamanan Jaringan, Pemrograman Web.', 'info_prospek' => 'Network engineer, IT support, cybersecurity specialist.', 'info_jurusan' => 'SIJA'],
             ],
             'TAV' => [
-                ['nama_jurusan_kuliah' => 'Teknik Audio Video', 'deskripsi' => 'Mengembangkan sistem siaran dan produksi multimedia.', 'info_matkul' => 'Audio System, Video Editing, Elektronika Dasar, Sistem Transmisi.', 'info_prospek' => 'Teknisi broadcasting, editor video, teknisi studio.'],
-                ['nama_jurusan_kuliah' => 'Film dan Televisi', 'deskripsi' => 'Mempelajari produksi film, penyutradaraan, dan editing.', 'info_matkul' => 'Sinematografi, Penyutradaraan, Produksi Film, Editing.', 'info_prospek' => 'Sutradara, editor, produser media visual.'],
-                ['nama_jurusan_kuliah' => 'Seni Media Rekam', 'deskripsi' => 'Belajar produksi audio, foto, dan video profesional.', 'info_matkul' => 'Fotografi, Audio Produksi, Videografi, Editing Multimedia.', 'info_prospek' => 'Fotografer, editor audio visual, content creator.'],
+                ['nama_jurusan_kuliah' => 'Teknik Audio Video', 'deskripsi' => 'Mengembangkan sistem siaran dan produksi multimedia.', 'info_matkul' => 'Audio System, Video Editing, Elektronika Dasar, Sistem Transmisi.', 'info_prospek' => 'Teknisi broadcasting, editor video, teknisi studio.', 'info_jurusan' => 'TAV'],
+                ['nama_jurusan_kuliah' => 'Film dan Televisi', 'deskripsi' => 'Mempelajari produksi film, penyutradaraan, dan editing.', 'info_matkul' => 'Sinematografi, Penyutradaraan, Produksi Film, Editing.', 'info_prospek' => 'Sutradara, editor, produser media visual.', 'info_jurusan' => 'TAV'],
+                ['nama_jurusan_kuliah' => 'Seni Media Rekam', 'deskripsi' => 'Belajar produksi audio, foto, dan video profesional.', 'info_matkul' => 'Fotografi, Audio Produksi, Videografi, Editing Multimedia.', 'info_prospek' => 'Fotografer, editor audio visual, content creator.', 'info_jurusan' => 'TAV'],
             ],
             'TITL' => [
-                ['nama_jurusan_kuliah' => 'Teknik Elektro', 'deskripsi' => 'Fokus pada sistem kelistrikan dan kontrol otomatis.', 'info_matkul' => 'Rangkaian Listrik, Elektronika Daya, Sistem Tenaga, PLC.', 'info_prospek' => 'Teknisi listrik, kontrol sistem, perancang instalasi tenaga.'],
-                ['nama_jurusan_kuliah' => 'Teknik Telekomunikasi', 'deskripsi' => 'Mempelajari sistem komunikasi modern dan transmisi data.', 'info_matkul' => 'Sinyal dan Sistem, Komunikasi Data, Fiber Optik.', 'info_prospek' => 'Network engineer, teknisi komunikasi, maintenance fiber.'],
-                ['nama_jurusan_kuliah' => 'Teknik Komputer', 'deskripsi' => 'Gabungan antara ilmu komputer dan elektronika.', 'info_matkul' => 'Embedded System, Mikrokontroler, Pemrograman Sistem.', 'info_prospek' => 'IoT developer, embedded engineer, teknisi hardware.'],
+                ['nama_jurusan_kuliah' => 'Teknik Elektro', 'deskripsi' => 'Fokus pada sistem kelistrikan dan kontrol otomatis.', 'info_matkul' => 'Rangkaian Listrik, Elektronika Daya, Sistem Tenaga, PLC.', 'info_prospek' => 'Teknisi listrik, kontrol sistem, perancang instalasi tenaga.', 'info_jurusan' => 'TITL'],
+                ['nama_jurusan_kuliah' => 'Teknik Telekomunikasi', 'deskripsi' => 'Mempelajari sistem komunikasi modern dan transmisi data.', 'info_matkul' => 'Sinyal dan Sistem, Komunikasi Data, Fiber Optik.', 'info_prospek' => 'Network engineer, teknisi komunikasi, maintenance fiber.', 'info_jurusan' => 'TITL'],
+                ['nama_jurusan_kuliah' => 'Teknik Komputer', 'deskripsi' => 'Gabungan antara ilmu komputer dan elektronika.', 'info_matkul' => 'Embedded System, Mikrokontroler, Pemrograman Sistem.', 'info_prospek' => 'IoT developer, embedded engineer, teknisi hardware.', 'info_jurusan' => 'TITL'],
             ],
             'DKV' => [
-                ['nama_jurusan_kuliah' => 'Desain Komunikasi Visual', 'deskripsi' => 'Fokus pada komunikasi ide melalui media visual.', 'info_matkul' => 'Tipografi, Fotografi, Desain Grafis, Branding.', 'info_prospek' => 'Desainer grafis, ilustrator, creative director.'],
-                ['nama_jurusan_kuliah' => 'Animasi', 'deskripsi' => 'Mempelajari pembuatan animasi 2D/3D profesional.', 'info_matkul' => 'Storyboarding, Modeling, Rigging, Visual Effect.', 'info_prospek' => 'Animator, motion designer, 3D artist.'],
-                ['nama_jurusan_kuliah' => 'Desain Produk', 'deskripsi' => 'Mendesain produk fisik fungsional dan estetis.', 'info_matkul' => 'Desain Industri, CAD, Ergonomi, Inovasi Produk.', 'info_prospek' => 'Desainer produk, konsultan desain, R&D engineer.'],
+                ['nama_jurusan_kuliah' => 'Desain Komunikasi Visual', 'deskripsi' => 'Fokus pada komunikasi ide melalui media visual.', 'info_matkul' => 'Tipografi, Fotografi, Desain Grafis, Branding.', 'info_prospek' => 'Desainer grafis, ilustrator, creative director.', 'info_jurusan' => 'DKV'],
+                ['nama_jurusan_kuliah' => 'Animasi', 'deskripsi' => 'Mempelajari pembuatan animasi 2D/3D profesional.', 'info_matkul' => 'Storyboarding, Modeling, Rigging, Visual Effect.', 'info_prospek' => 'Animator, motion designer, 3D artist.', 'info_jurusan' => 'DKV'],
+                ['nama_jurusan_kuliah' => 'Desain Produk', 'deskripsi' => 'Mendesain produk fisik fungsional dan estetis.', 'info_matkul' => 'Desain Industri, CAD, Ergonomi, Inovasi Produk.', 'info_prospek' => 'Desainer produk, konsultan desain, R&D engineer.', 'info_jurusan' => 'DKV'],
             ],
             'DPIB' => [
-                ['nama_jurusan_kuliah' => 'Arsitektur', 'deskripsi' => 'Mempelajari perancangan dan pembangunan bangunan.', 'info_matkul' => 'Desain Arsitektur, Autocad, Struktur Bangunan.', 'info_prospek' => 'Arsitek, drafter, konsultan bangunan.'],
-                ['nama_jurusan_kuliah' => 'Desain Interior', 'deskripsi' => 'Mendesain tata ruang dalam bangunan.', 'info_matkul' => 'Estetika Ruang, Material Interior, Tata Cahaya.', 'info_prospek' => 'Desainer interior, kontraktor desain, konsultan ruang.'],
-                ['nama_jurusan_kuliah' => 'Teknik Sipil', 'deskripsi' => 'Struktur, konstruksi, dan perancangan bangunan.', 'info_matkul' => 'Mekanika Tanah, Struktur Beton, Hidrolika.', 'info_prospek' => 'Insinyur sipil, kontraktor, pengawas proyek.'],
+                ['nama_jurusan_kuliah' => 'Arsitektur', 'deskripsi' => 'Mempelajari perancangan dan pembangunan bangunan.', 'info_matkul' => 'Desain Arsitektur, Autocad, Struktur Bangunan.', 'info_prospek' => 'Arsitek, drafter, konsultan bangunan.', 'info_jurusan' => 'DPIB'],
+                ['nama_jurusan_kuliah' => 'Desain Interior', 'deskripsi' => 'Mendesain tata ruang dalam bangunan.', 'info_matkul' => 'Estetika Ruang, Material Interior, Tata Cahaya.', 'info_prospek' => 'Desainer interior, kontraktor desain, konsultan ruang.', 'info_jurusan' => 'DPIB'],
+                ['nama_jurusan_kuliah' => 'Teknik Sipil', 'deskripsi' => 'Struktur, konstruksi, dan perancangan bangunan.', 'info_matkul' => 'Mekanika Tanah, Struktur Beton, Hidrolika.', 'info_prospek' => 'Insinyur sipil, kontraktor, pengawas proyek.', 'info_jurusan' => 'DPIB'],
             ],
             'KGSP' => [
-                ['nama_jurusan_kuliah' => 'Manajemen Konstruksi', 'deskripsi' => 'Fokus pada manajemen proyek dan pembangunan gedung.', 'info_matkul' => 'Perencanaan Proyek, Estimasi Biaya, Scheduling.', 'info_prospek' => 'Project manager, estimator, pengawas proyek.'],
-                ['nama_jurusan_kuliah' => 'Teknik Bangunan Gedung', 'deskripsi' => 'Menangani konstruksi struktur dan utilitas gedung.', 'info_matkul' => 'Struktur Gedung, Gambar Teknik, Konstruksi Bangunan.', 'info_prospek' => 'Teknisi bangunan, drafter, konsultan proyek.'],
-                ['nama_jurusan_kuliah' => 'Teknik Sipil', 'deskripsi' => 'Rekayasa struktur dan bangunan sipil.', 'info_matkul' => 'Struktur Baja, Geoteknik, Drainase, Beton Bertulang.', 'info_prospek' => 'Insinyur sipil, kontraktor jalan, pengawas lapangan.'],
+                ['nama_jurusan_kuliah' => 'Manajemen Konstruksi', 'deskripsi' => 'Fokus pada manajemen proyek dan pembangunan gedung.', 'info_matkul' => 'Perencanaan Proyek, Estimasi Biaya, Scheduling.', 'info_prospek' => 'Project manager, estimator, pengawas proyek.', 'info_jurusan' => 'KGSP'],
+                ['nama_jurusan_kuliah' => 'Teknik Bangunan Gedung', 'deskripsi' => 'Menangani konstruksi struktur dan utilitas gedung.', 'info_matkul' => 'Struktur Gedung, Gambar Teknik, Konstruksi Bangunan.', 'info_prospek' => 'Teknisi bangunan, drafter, konsultan proyek.', 'info_jurusan' => 'KGSP'],
+                ['nama_jurusan_kuliah' => 'Teknik Sipil', 'deskripsi' => 'Rekayasa struktur dan bangunan sipil.', 'info_matkul' => 'Struktur Baja, Geoteknik, Drainase, Beton Bertulang.', 'info_prospek' => 'Insinyur sipil, kontraktor jalan, pengawas lapangan.', 'info_jurusan' => 'KGSP'],
             ],
             'TP' => [
-                ['nama_jurusan_kuliah' => 'Teknik Mesin', 'deskripsi' => 'Desain, produksi, dan perawatan sistem mekanik.', 'info_matkul' => 'Thermodinamika, Mekanika Fluida, Material Teknik.', 'info_prospek' => 'Desainer mesin, teknisi manufaktur, R&D mechanical.'],
-                ['nama_jurusan_kuliah' => 'Teknik Industri', 'deskripsi' => 'Efisiensi dan sistem produksi manufaktur.', 'info_matkul' => 'Optimasi Produksi, Supply Chain, Logistik Industri.', 'info_prospek' => 'Analis proses, perencana produksi, supervisor manufaktur.'],
-                ['nama_jurusan_kuliah' => 'Teknik Manufaktur', 'deskripsi' => 'Teknologi mesin dan perancangan komponen presisi.', 'info_matkul' => 'CNC, CAD/CAM, Proses Produksi, Kualitas Produk.', 'info_prospek' => 'Teknisi CNC, perancang alat, operator produksi presisi.'],
+                ['nama_jurusan_kuliah' => 'Teknik Mesin', 'deskripsi' => 'Desain, produksi, dan perawatan sistem mekanik.', 'info_matkul' => 'Thermodinamika, Mekanika Fluida, Material Teknik.', 'info_prospek' => 'Desainer mesin, teknisi manufaktur, R&D mechanical.', 'info_jurusan' => 'TP'],
+                ['nama_jurusan_kuliah' => 'Teknik Industri', 'deskripsi' => 'Efisiensi dan sistem produksi manufaktur.', 'info_matkul' => 'Optimasi Produksi, Supply Chain, Logistik Industri.', 'info_prospek' => 'Analis proses, perencana produksi, supervisor manufaktur.', 'info_jurusan' => 'TP'],
+                ['nama_jurusan_kuliah' => 'Teknik Manufaktur', 'deskripsi' => 'Teknologi mesin dan perancangan komponen presisi.', 'info_matkul' => 'CNC, CAD/CAM, Proses Produksi, Kualitas Produk.', 'info_prospek' => 'Teknisi CNC, perancang alat, operator produksi presisi.', 'info_jurusan' => 'TP'],
             ],
             'GEO' => [
-                ['nama_jurusan_kuliah' => 'Teknik Geodesi', 'deskripsi' => 'Pemodelan permukaan bumi dan pemetaan digital.', 'info_matkul' => 'Surveying, Geodesi Satelit, GIS, Fotogrametri.', 'info_prospek' => 'Surveyor, GIS specialist, konsultan pemetaan.'],
-                ['nama_jurusan_kuliah' => 'Geografi', 'deskripsi' => 'Analisis fenomena ruang dan lingkungan.', 'info_matkul' => 'Geografi Fisik, Kartografi, Penginderaan Jauh.', 'info_prospek' => 'Analis wilayah, pengembang tata ruang, peneliti geospasial.'],
-                ['nama_jurusan_kuliah' => 'Teknologi Survei dan Pemetaan', 'deskripsi' => 'Teknik pemetaan dan sistem geospasial modern.', 'info_matkul' => 'Topografi, GIS, Remote Sensing, Pemetaan Digital.', 'info_prospek' => 'Surveyor pemetaan, GIS engineer, analis geospasial.'],
+                ['nama_jurusan_kuliah' => 'Teknik Geodesi', 'deskripsi' => 'Pemodelan permukaan bumi dan pemetaan digital.', 'info_matkul' => 'Surveying, Geodesi Satelit, GIS, Fotogrametri.', 'info_prospek' => 'Surveyor, GIS specialist, konsultan pemetaan.', 'info_jurusan' => 'GEO'],
+                ['nama_jurusan_kuliah' => 'Geografi', 'deskripsi' => 'Analisis fenomena ruang dan lingkungan.', 'info_matkul' => 'Geografi Fisik, Kartografi, Penginderaan Jauh.', 'info_prospek' => 'Analis wilayah, pengembang tata ruang, peneliti geospasial.', 'info_jurusan' => 'GEO'],
+                ['nama_jurusan_kuliah' => 'Teknologi Survei dan Pemetaan', 'deskripsi' => 'Teknik pemetaan dan sistem geospasial modern.', 'info_matkul' => 'Topografi, GIS, Remote Sensing, Pemetaan Digital.', 'info_prospek' => 'Surveyor pemetaan, GIS engineer, analis geospasial.', 'info_jurusan' => 'GEO'],
             ],
         ];
         foreach ($jurusanKuliahPerJurusan as $jurusanName => $jurusanKuliahs) {
@@ -928,67 +928,139 @@ class DatabaseSeeder extends Seeder
             Kampus::create($kampus);
         }
 
-        // Kampus Jurusan
+        // Kampus Jurusan 2
         $kampusJurusanMap = [
-            // 🔧 TKR (Teknik Kendaraan Ringan)
-            ['kampus' => 'Institut Teknologi Sepuluh Nopember', 'jurusan' => 'Teknik Mesin', 'passing_grade' => 648],
-            ['kampus' => 'Universitas Gadjah Mada', 'jurusan' => 'Teknik Mesin', 'passing_grade' => 660],
-            ['kampus' => 'Universitas Indonesia', 'jurusan' => 'Teknik Industri', 'passing_grade' => 685],
-            ['kampus' => 'Universitas Diponegoro', 'jurusan' => 'Teknik Industri', 'passing_grade' => 640],
-            ['kampus' => 'Politeknik Negeri Jakarta', 'jurusan' => 'Teknik Otomotif', 'passing_grade' => 575],
-
-            // ⚙️ TP (Teknik Pemesinan)
-            ['kampus' => 'Institut Teknologi Bandung', 'jurusan' => 'Teknik Mesin', 'passing_grade' => 700],
-            ['kampus' => 'Universitas Diponegoro', 'jurusan' => 'Teknik Industri', 'passing_grade' => 665],
-            ['kampus' => 'Politeknik Manufaktur Bandung', 'jurusan' => 'Teknik Manufaktur', 'passing_grade' => 620],
-
-            // ⚡ TITL (Teknik Instalasi Tenaga Listrik)
-            ['kampus' => 'Institut Teknologi Sepuluh Nopember', 'jurusan' => 'Teknik Elektro', 'passing_grade' => 670],
-            ['kampus' => 'Universitas Gadjah Mada', 'jurusan' => 'Teknik Komputer', 'passing_grade' => 655],
-            ['kampus' => 'Telkom University', 'jurusan' => 'Teknik Telekomunikasi', 'passing_grade' => 640],
-
-            // 💻 SIJA (Sistem Informasi Jaringan & Akses)
-            ['kampus' => 'Institut Teknologi Bandung', 'jurusan' => 'Teknik Informatika', 'passing_grade' => 725],
-            ['kampus' => 'Universitas Gadjah Mada', 'jurusan' => 'Sistem Informasi', 'passing_grade' => 690],
-            ['kampus' => 'Binus University', 'jurusan' => 'Teknologi Informasi', 'passing_grade' => 660],
-            ['kampus' => 'Telkom University', 'jurusan' => 'Teknologi Informasi', 'passing_grade' => 635],
-
-            // 📺 TAV (Teknik Audio Video)
-            ['kampus' => 'Institut Seni Indonesia Yogyakarta', 'jurusan' => 'Film dan Televisi', 'passing_grade' => 590],
-            ['kampus' => 'Universitas Multimedia Nusantara', 'jurusan' => 'Seni Media Rekam', 'passing_grade' => 600],
-            ['kampus' => 'Institut Kesenian Jakarta', 'jurusan' => 'Teknik Audio Video', 'passing_grade' => 580],
-
-            // 🎨 DKV (Desain Komunikasi Visual)
-            ['kampus' => 'Institut Teknologi Bandung', 'jurusan' => 'Desain Komunikasi Visual', 'passing_grade' => 710],
-            ['kampus' => 'Universitas Multimedia Nusantara', 'jurusan' => 'Animasi', 'passing_grade' => 650],
-            ['kampus' => 'Binus University', 'jurusan' => 'Desain Produk', 'passing_grade' => 640],
-
-            // 🏗️ DPIB (Desain Pemodelan dan Informasi Bangunan)
-            ['kampus' => 'Universitas Gadjah Mada', 'jurusan' => 'Arsitektur', 'passing_grade' => 700],
-            ['kampus' => 'Institut Teknologi Bandung', 'jurusan' => 'Desain Interior', 'passing_grade' => 690],
-            ['kampus' => 'Universitas Diponegoro', 'jurusan' => 'Teknik Sipil', 'passing_grade' => 665],
-
-            // 🧱 KGSP (Konstruksi Gedung Sanitasi dan Perawatan)
-            ['kampus' => 'Universitas Diponegoro', 'jurusan' => 'Manajemen Konstruksi', 'passing_grade' => 650],
-            ['kampus' => 'Universitas Sebelas Maret', 'jurusan' => 'Teknik Bangunan Gedung', 'passing_grade' => 630],
-            ['kampus' => 'Institut Teknologi Sepuluh Nopember', 'jurusan' => 'Teknik Sipil', 'passing_grade' => 675],
-
-            // 🌍 GEO (Geomatika / Geospasial)
-            ['kampus' => 'Institut Teknologi Bandung', 'jurusan' => 'Teknik Geodesi', 'passing_grade' => 705],
-            ['kampus' => 'Universitas Gadjah Mada', 'jurusan' => 'Geografi', 'passing_grade' => 675],
-            ['kampus' => 'Politeknik Negeri Jakarta', 'jurusan' => 'Teknologi Survei dan Pemetaan', 'passing_grade' => 590],
+            'Institut Teknologi Sepuluh Nopember' => [
+                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 648],
+                ['jurusan' => 'Teknik Elektro', 'passing_grade' => 670],
+                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 675],
+            ],
+            'Universitas Gadjah Mada' => [
+                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 660],
+                ['jurusan' => 'Teknik Komputer', 'passing_grade' => 655],
+                ['jurusan' => 'Sistem Informasi', 'passing_grade' => 690],
+                ['jurusan' => 'Arsitektur', 'passing_grade' => 700],
+                ['jurusan' => 'Geografi', 'passing_grade' => 675],
+            ],
+            'Universitas Indonesia' => [
+                ['jurusan' => 'Teknik Industri', 'passing_grade' => 685],
+            ],
+            'Universitas Diponegoro' => [
+                ['jurusan' => 'Teknik Industri', 'passing_grade' => 640],
+                ['jurusan' => 'Teknik Industri', 'passing_grade' => 665],
+                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 665],
+                ['jurusan' => 'Manajemen Konstruksi', 'passing_grade' => 650],
+            ],
+            'Politeknik Negeri Jakarta' => [
+                ['jurusan' => 'Teknik Otomotif', 'passing_grade' => 575],
+                ['jurusan' => 'Teknologi Survei dan Pemetaan', 'passing_grade' => 590],
+            ],
+            'Institut Teknologi Bandung' => [
+                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 700],
+                ['jurusan' => 'Teknik Informatika', 'passing_grade' => 725],
+                ['jurusan' => 'Desain Komunikasi Visual', 'passing_grade' => 710],
+                ['jurusan' => 'Desain Interior', 'passing_grade' => 690],
+                ['jurusan' => 'Teknik Geodesi', 'passing_grade' => 705],
+            ],
+            'Politeknik Manufaktur Bandung' => [
+                ['jurusan' => 'Teknik Manufaktur', 'passing_grade' => 620],
+            ],
+            'Telkom University' => [
+                ['jurusan' => 'Teknik Telekomunikasi', 'passing_grade' => 640],
+                ['jurusan' => 'Teknologi Informasi', 'passing_grade' => 635],
+            ],
+            'Binus University' => [
+                ['jurusan' => 'Teknologi Informasi', 'passing_grade' => 660],
+                ['jurusan' => 'Desain Produk', 'passing_grade' => 640],
+            ],
+            'Institut Seni Indonesia Yogyakarta' => [
+                ['jurusan' => 'Film dan Televisi', 'passing_grade' => 590],
+            ],
+            'Universitas Multimedia Nusantara' => [
+                ['jurusan' => 'Seni Media Rekam', 'passing_grade' => 600],
+                ['jurusan' => 'Animasi', 'passing_grade' => 650],
+            ],
+            'Institut Kesenian Jakarta' => [
+                ['jurusan' => 'Teknik Audio Video', 'passing_grade' => 580],
+            ],
+            'Universitas Sebelas Maret' => [
+                ['jurusan' => 'Teknik Bangunan Gedung', 'passing_grade' => 630],
+            ],
         ];
-        foreach ($kampusJurusanMap as $data) {
-            $kampus = Kampus::where('nama_kampus', $data['kampus'])->first();
-            $jurusanKuliah = JurusanKuliah::where('nama_jurusan_kuliah', $data['jurusan'])->first();
+        $allJurusan = JurusanKuliah::pluck('id', 'nama_jurusan_kuliah')->toArray();
+        foreach ($kampusJurusanMap as $kampusName => $jurusanList) {
+            $kampus = Kampus::where('nama_kampus', $kampusName)->first();
+            if (!$kampus) continue;
 
-            if ($kampus && $jurusanKuliah) {
-                KampusJurusan::create([
-                    'kampus_id' => $kampus->id,
-                    'jurusan_kuliah_id' => $jurusanKuliah->id,
-                    'passing_grade' => $data['passing_grade'],
-                ]);
+            $attachData = [];
+            foreach ($jurusanList as $data) {
+                if (isset($allJurusan[$data['jurusan']])) {
+                    $attachData[$allJurusan[$data['jurusan']]] = ['passing_grade' => $data['passing_grade']];
+                }
+            }
+
+            if (!empty($attachData)) {
+                $kampus->jurusanKuliahs()->syncWithoutDetaching($attachData);
             }
         }
+
+        // Kampus Jurusan
+        // $kampusJurusanMap = [
+        //     // 🔧 TKR (Teknik Kendaraan Ringan)
+        //     ['kampus' => 'Institut Teknologi Sepuluh Nopember', 'jurusan' => 'Teknik Mesin', 'passing_grade' => 648],
+        //     ['kampus' => 'Universitas Gadjah Mada', 'jurusan' => 'Teknik Mesin', 'passing_grade' => 660],
+        //     ['kampus' => 'Universitas Indonesia', 'jurusan' => 'Teknik Industri', 'passing_grade' => 685],
+        //     ['kampus' => 'Universitas Diponegoro', 'jurusan' => 'Teknik Industri', 'passing_grade' => 640],
+        //     ['kampus' => 'Politeknik Negeri Jakarta', 'jurusan' => 'Teknik Otomotif', 'passing_grade' => 575],
+
+        //     // ⚙️ TP (Teknik Pemesinan)
+        //     ['kampus' => 'Institut Teknologi Bandung', 'jurusan' => 'Teknik Mesin', 'passing_grade' => 700],
+        //     ['kampus' => 'Universitas Diponegoro', 'jurusan' => 'Teknik Industri', 'passing_grade' => 665],
+        //     ['kampus' => 'Politeknik Manufaktur Bandung', 'jurusan' => 'Teknik Manufaktur', 'passing_grade' => 620],
+
+        //     // ⚡ TITL (Teknik Instalasi Tenaga Listrik)
+        //     ['kampus' => 'Institut Teknologi Sepuluh Nopember', 'jurusan' => 'Teknik Elektro', 'passing_grade' => 670],
+        //     ['kampus' => 'Universitas Gadjah Mada', 'jurusan' => 'Teknik Komputer', 'passing_grade' => 655],
+        //     ['kampus' => 'Telkom University', 'jurusan' => 'Teknik Telekomunikasi', 'passing_grade' => 640],
+
+        //     // 💻 SIJA (Sistem Informasi Jaringan & Akses)
+        //     ['kampus' => 'Institut Teknologi Bandung', 'jurusan' => 'Teknik Informatika', 'passing_grade' => 725],
+        //     ['kampus' => 'Universitas Gadjah Mada', 'jurusan' => 'Sistem Informasi', 'passing_grade' => 690],
+        //     ['kampus' => 'Binus University', 'jurusan' => 'Teknologi Informasi', 'passing_grade' => 660],
+        //     ['kampus' => 'Telkom University', 'jurusan' => 'Teknologi Informasi', 'passing_grade' => 635],
+
+        //     // 📺 TAV (Teknik Audio Video)
+        //     ['kampus' => 'Institut Seni Indonesia Yogyakarta', 'jurusan' => 'Film dan Televisi', 'passing_grade' => 590],
+        //     ['kampus' => 'Universitas Multimedia Nusantara', 'jurusan' => 'Seni Media Rekam', 'passing_grade' => 600],
+        //     ['kampus' => 'Institut Kesenian Jakarta', 'jurusan' => 'Teknik Audio Video', 'passing_grade' => 580],
+
+        //     // 🎨 DKV (Desain Komunikasi Visual)
+        //     ['kampus' => 'Institut Teknologi Bandung', 'jurusan' => 'Desain Komunikasi Visual', 'passing_grade' => 710],
+        //     ['kampus' => 'Universitas Multimedia Nusantara', 'jurusan' => 'Animasi', 'passing_grade' => 650],
+        //     ['kampus' => 'Binus University', 'jurusan' => 'Desain Produk', 'passing_grade' => 640],
+
+        //     // 🏗️ DPIB (Desain Pemodelan dan Informasi Bangunan)
+        //     ['kampus' => 'Universitas Gadjah Mada', 'jurusan' => 'Arsitektur', 'passing_grade' => 700],
+        //     ['kampus' => 'Institut Teknologi Bandung', 'jurusan' => 'Desain Interior', 'passing_grade' => 690],
+        //     ['kampus' => 'Universitas Diponegoro', 'jurusan' => 'Teknik Sipil', 'passing_grade' => 665],
+
+        //     // 🧱 KGSP (Konstruksi Gedung Sanitasi dan Perawatan)
+        //     ['kampus' => 'Universitas Diponegoro', 'jurusan' => 'Manajemen Konstruksi', 'passing_grade' => 650],
+        //     ['kampus' => 'Universitas Sebelas Maret', 'jurusan' => 'Teknik Bangunan Gedung', 'passing_grade' => 630],
+        //     ['kampus' => 'Institut Teknologi Sepuluh Nopember', 'jurusan' => 'Teknik Sipil', 'passing_grade' => 675],
+
+        //     // 🌍 GEO (Geomatika / Geospasial)
+        //     ['kampus' => 'Institut Teknologi Bandung', 'jurusan' => 'Teknik Geodesi', 'passing_grade' => 705],
+        //     ['kampus' => 'Universitas Gadjah Mada', 'jurusan' => 'Geografi', 'passing_grade' => 675],
+        //     ['kampus' => 'Politeknik Negeri Jakarta', 'jurusan' => 'Teknologi Survei dan Pemetaan', 'passing_grade' => 590],
+        // ];
+        // foreach ($kampusJurusanMap as $kampusName => $jurusanKuliahNames) {
+        //     $kampus = Kampus::where('nama_kampus', $kampusName)->first();
+        //     if (!$kampus) continue;
+
+        //     $jurusanKuliahIds = JurusanKuliah::whereIn('nama_jurusan_kuliah', $jurusanKuliahNames)->pluck('id')->toArray();
+
+        //     $kampus->jurusanKuliahs()->syncWithoutDetaching($jurusanKuliahIds);
+        // }
     }
 }
