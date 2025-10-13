@@ -2,7 +2,7 @@
 
     <!-- Floating Elements for Visual Interest -->
     <div class="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-cool-gray to-slate-navy rounded-full opacity-20 animate-pulse"></div>
-    <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-border-gray to-cool-gray rounded-full opacity-25 animate-bounce"></div>
+    <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-cool-gray to-slate-navy rounded-full opacity-25 animate-bounce"></div>
 
     <!-- Main Test Card -->
     <div class="relative bg-white rounded-3xl shadow-2xl border border-border-gray overflow-hidden group hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
@@ -62,7 +62,9 @@
                 </div>
             </div>
 
-            @include('siswa.kenali_profesi.banner_tes.button')
+            <x-siswa.kenali_karier.button-banner
+                text="Mulai Tes Sekarang"
+            />
         </div>
     </div>
 </div>

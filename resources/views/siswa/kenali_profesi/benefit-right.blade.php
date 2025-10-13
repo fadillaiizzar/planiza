@@ -1,7 +1,7 @@
 <div class="space-y-8">
 
     <!-- Header -->
-    @include('siswa.kenali_profesi.header')
+    @include('siswa.components.kenali_karier.header')
 
     <!-- Features -->
     <div class="space-y-6">
@@ -32,7 +32,7 @@
         @endphp
 
         @foreach ($features as $feature)
-            <x-siswa.kenali_profesi.feature
+            <x-siswa.kenali_karier.feature
                 :icon="$feature['icon']"
                 :gradient="$feature['gradient']"
                 :title="$feature['title']"
