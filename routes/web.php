@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TesController;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HobiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SiswaController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\KenaliKerjaController;
 use App\Http\Controllers\MateriSiswaController;
 use App\Http\Controllers\OpsiJawabanController;
 use App\Http\Controllers\TopikMateriController;
+use App\Http\Controllers\KenaliKuliahController;
 use App\Http\Controllers\PembelajaranController;
 use App\Http\Controllers\ProfesiKerjaController;
 use App\Http\Controllers\JurusanKuliahController;
@@ -98,6 +100,11 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
 
         Route::get('/kampus-jurusan/check', [KampusJurusanController::class, 'checkExists'])->name('kampus-jurusan.check');
         Route::resource('kampus-jurusan' , KampusJurusanController::class);
+    });
+
+    Route::prefix('kenali-jurusan')->name('kenali-jurusan.')->group(function () {
+        Route::get('/', [KenaliKuliahController::class, 'index'])->name('index');
+        Route::resource('hobi', HobiController::class);
     });
 
     Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('kontribusi-sdgs');
