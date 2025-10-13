@@ -37,6 +37,12 @@
                             'desc' => 'Profesi impian',
                         ],
                         [
+                            'href' => route('siswa.kenali-jurusan.index'),
+                            'icon' => 'fas fa-briefcase',
+                            'title' => 'Kenali Jurusan',
+                            'desc' => 'Profesi impian',
+                        ],
+                        [
                             'href' => '#',
                             'icon' => 'fas fa-globe',
                             'title' => 'Kontribusi SDGs',
