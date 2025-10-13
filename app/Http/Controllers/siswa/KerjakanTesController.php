@@ -37,7 +37,7 @@ class KerjakanTesController extends Controller
             ->where('tes_id', $tes->id)
             ->get();
 
-        return view('siswa.kenali_profesi.tes.index', compact('tes', 'soals', 'activeAttempt'));
+        return view('siswa.kenali_profesi.tes.tes', compact('tes', 'soals', 'activeAttempt'));
     }
 
     public function submit(Tes $tes)
