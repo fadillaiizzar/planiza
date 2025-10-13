@@ -29,6 +29,7 @@
                     ['icon' => 'fa-tools', 'label' => 'Eksplorasi Profesi', 'route' => 'admin.eksplorasi-profesi.index'],
                     ['icon' => 'fa-user-tie', 'label' => 'Kenali Profesi', 'route' => 'admin.kenali-profesi.index'],
                     ['icon' => 'fa-tools', 'label' => 'Eksplorasi Jurusan', 'route' => 'admin.eksplorasi-jurusan.index'],
+                    ['icon' => 'fa-user-tie', 'label' => 'Kenali Jurusan', 'route' => 'admin.kenali-jurusan.index'],
                     ['icon' => 'fa-leaf', 'label' => 'Kontribusi SDGs', 'route' => 'admin.kontribusi-sdgs'],
                     ['icon' => 'fa-comments', 'label' => 'Bincang Karier', 'route' => 'admin.dashboard'],
                 ];
