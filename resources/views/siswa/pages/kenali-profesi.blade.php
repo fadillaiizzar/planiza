@@ -28,7 +28,10 @@
 
         @include('siswa.kenali_profesi.tes.riwayat-tes')
 
-        @include('siswa.kenali_profesi.additional-link')
+        <x-siswa.kenali_karier.additional-link
+            :href="route('siswa.kenali-jurusan.index')"
+            text="Coba Kenali Jurusan Kuliah"
+        />
     </div>
 @endsection
 
