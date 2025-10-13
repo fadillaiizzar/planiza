@@ -25,13 +25,23 @@ class JurusanKuliah extends Model
         return $this->belongsToMany(Kampus::class, 'kampus_jurusans', 'jurusan_kuliah_id', 'kampus_id')->withTimestamps();
     }
 
-    public function kampusJurusans()
+    public function kampusJurusans(): HasMany
     {
         return $this->hasMany(KampusJurusan::class, 'jurusan_kuliah_id');
     }
 
-    public function kenaliJurusan(): HasMany
+    public function hobis(): BelongsToMany
+    {
+        return $this->belongsToMany(Hobi::class, 'hobi_jurusans', 'jurusan_kuliah_id', 'hobi_id')->withTimestamps()->withPivot('poin');
+    }
+
+    public function kenaliJurusans(): HasMany
     {
         return $this->hasMany(KenaliJurusan::class);
+    }
+
+    public function minats(): HasMany
+    {
+        return $this->hasMany(Minat::class);
     }
 }

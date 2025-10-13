@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -26,5 +27,10 @@ class KampusJurusan extends Model
     public function kampus(): BelongsTo
     {
         return $this->belongsTo(Kampus::class, 'kampus_id');
+    }
+
+    public function kenaliJurusans(): HasMany
+    {
+        return $this->hasMany(KenaliJurusan::class);
     }
 }

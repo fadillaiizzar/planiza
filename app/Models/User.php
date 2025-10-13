@@ -55,4 +55,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(KenaliProfesi::class);
     }
+
+    public function formKuliah(): HasOne
+    {
+        return $this->hasOne(FormKuliah::class);
+    }
+
+    public function kenaliJurusans()
+    {
+        return $this->hasMany(KenaliJurusan::class);
+    }
 }
