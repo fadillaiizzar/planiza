@@ -89,7 +89,7 @@
                     </div>
                 </button>
 
-                <a href="#"
+                <a href="{{ route('siswa.kenali-jurusan.form-kuliah.index') }}"
                     class="group px-10 py-3 rounded-xl flex justify-center bg-gradient-to-r from-slate-navy via-cool-gray to-slate-navy text-white font-semibold hover:shadow-xl transition-all duration-300 overflow-hidden relative">
 
                     <div class="absolute inset-0 bg-gradient-to-r from-cool-gray via-slate-navy to-cool-gray opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
