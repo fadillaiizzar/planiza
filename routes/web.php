@@ -33,6 +33,7 @@ use App\Http\Controllers\Siswa\JawabanSiswaController;
 use App\Http\Controllers\Siswa\KenaliProfesiSiswaController;
 use App\Http\Controllers\Siswa\RekomendasiProfesiController;
 use App\Http\Controllers\Siswa\EksplorasiKerjaSiswaController;
+use App\Http\Controllers\Siswa\KenaliJurusan\KenaliJurusanSiswaController;
 use App\Http\Controllers\Siswa\EksplorasiKuliah\EksplorasiKuliahSiswaController;
 
 Route::get('/', function () {
@@ -120,4 +121,8 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->na
     });
 
     Route::resource('eksplorasi-jurusan', EksplorasiKuliahSiswaController::class)->names('eksplorasi-jurusan');
+
+    Route::prefix('kenali-jurusan')->name('kenali-jurusan.')->group(function () {
+        Route::get('/', [KenaliJurusanSiswaController::class, 'index'])->name('index');
+    });
 });
