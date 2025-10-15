@@ -30,6 +30,7 @@ use App\Http\Controllers\EksplorasiKerjaController;
 use App\Http\Controllers\IndustriProfesiController;
 use App\Http\Controllers\ProfesiKategoriController;
 use App\Http\Controllers\EksplorasiKuliahController;
+use App\Http\Controllers\HobiJurusanController;
 use App\Http\Controllers\Siswa\KerjakanTesController;
 use App\Http\Controllers\Siswa\JawabanSiswaController;
 use App\Http\Controllers\Siswa\KenaliProfesiSiswaController;
@@ -105,6 +106,9 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
     Route::prefix('kenali-jurusan')->name('kenali-jurusan.')->group(function () {
         Route::get('/', [KenaliKuliahController::class, 'index'])->name('index');
         Route::resource('hobi', HobiController::class);
+
+        Route::get('/hobi-jurusan/check', [HobiJurusanController::class, 'checkExists'])->name('hobi-jurusan.check');
+        Route::resource('hobi-jurusan', HobiJurusanController::class);
     });
 
     Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('kontribusi-sdgs');
