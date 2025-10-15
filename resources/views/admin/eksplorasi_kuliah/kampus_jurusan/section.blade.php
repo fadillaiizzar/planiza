@@ -14,13 +14,13 @@
     <section class="bg-off-white rounded-2xl shadow-lg p-6">
         <x-h3>{{ $statistikTitle }}</x-h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <x-admin.eksplorasi_kuliah.kampus-jurusan-card
+            <x-admin.statistic-card
                 icon="fas fa-book"
                 :label="$labelJurusan"
                 :items="$kampusPerJurusan"
             />
 
-            <x-admin.eksplorasi_kuliah.kampus-jurusan-card
+            <x-admin.statistic-card
                 icon="fas fa-university"
                 :label="$labelKampus"
                 :items="$jurusanPerKampus"
@@ -61,13 +61,17 @@
                                         <i class="fas fa-eye w-5 h-5"></i>
                                         <span>Detail</span>
                                     </a>
+
                                     <div class="border-t border-border-gray"></div>
+
                                     <button onclick="showEdit({{ $relasi->id }})"
                                         class="px-5 py-3 hover:bg-green-50 flex items-center gap-3 text-green-600 transition-colors text-base">
                                         <i class="fas fa-edit w-5 h-5"></i>
                                         <span>Edit</span>
                                     </button>
+
                                     <div class="border-t border-border-gray"></div>
+                                    
                                     <form action="{{ route('admin.eksplorasi-jurusan.kampus-jurusan.destroy', $relasi->id) }}" method="POST" class="w-full">
                                         @csrf
                                         @method('DELETE')
