@@ -23,7 +23,7 @@ class KenaliKerjaController extends Controller
             ->sortByDesc('updated_at')
             ->take(10)
             ->map(function ($item) {
-                if ($item instanceof \App\Models\KategoriMinat) {
+                if ($item instanceof KategoriMinat) {
                     return [
                         'id' => $item->id,
                         'type' => 'Kategori Minat',
@@ -33,7 +33,7 @@ class KenaliKerjaController extends Controller
                     ];
                 }
 
-                if ($item instanceof \App\Models\ProfesiKerja) {
+                if ($item instanceof ProfesiKerja) {
                     return [
                         'id' => $item->id,
                         'type' => 'Profesi Kerja',
@@ -43,7 +43,7 @@ class KenaliKerjaController extends Controller
                     ];
                 }
 
-                if ($item instanceof \App\Models\ProfesiKategori) {
+                if ($item instanceof ProfesiKategori) {
                     return [
                         'id' => $item->id,
                         'type' => 'Profesi Kategori',
@@ -57,18 +57,11 @@ class KenaliKerjaController extends Controller
             })
             ->filter();
 
-        $profesiCount = ProfesiKerja::count();
-        $kategoriMinatCount = KategoriMinat::count();
-        $profesiKategoriCount = ProfesiKategori::count();
-
         $user = Auth::user();
         $userCount = User::count();
 
         return view('admin.pages.kenali-profesi', [
             'activities' => $activities,
-            'profesiCount' => $profesiCount,
-            'kategoriMinatCount' => $kategoriMinatCount,
-            'profesiKategoriCount' => $profesiKategoriCount,
             'user' => $user,
             'userCount' => $userCount,
         ]);
