@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Hobi extends Model
 {
+    protected $table = 'hobis';
+    
     protected $fillable = [
         'nama_hobi',
     ];
 
-    public function jurusanKuliah(): BelongsToMany
+    public function jurusanKuliahs(): BelongsToMany
     {
         return $this->belongsToMany(JurusanKuliah::class, 'hobi_jurusans', 'hobi_id', 'jurusan_kuliah_id')->withTimestamps();
     }
