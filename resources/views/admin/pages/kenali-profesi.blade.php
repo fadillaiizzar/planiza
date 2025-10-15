@@ -10,11 +10,6 @@
             @include('admin.components.header.header', [
                 'pageTitle' => 'Kenali Profesi Management',
                 'userCount' => $userCount,
-                'stats' => [
-                    ['label' => 'Total Profesi Kerja', 'count' => $profesiCount, 'icon' => 'fas fa-briefcase', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
-                    ['label' => 'Kategori Minat', 'count' => $kategoriMinatCount, 'icon' => 'fas fa-folder-open', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
-                    ['label' => 'Profesi Kategori', 'count' => $profesiKategoriCount, 'icon' => 'fas fa-clipboard-check', 'bg' => 'from-red-500 to-red-600', 'textColor' => 'text-red-100'],
-                ],
             ])
 
             <!-- Aksi Cepat -->
@@ -24,7 +19,6 @@
 
                     @php
                         $actions = [
-                            ['route' => route('admin.eksplorasi-profesi.profesi-kerja.index'), 'icon' => 'fas fa-briefcase', 'label' => 'Profesi'],
                             ['route' => route('admin.kenali-profesi.kategori-minat.index'), 'icon' => 'fas fa-folder-open', 'label' => 'Kategori Minat'],
                             ['route' => route('admin.kenali-profesi.profesi-kategori.index'), 'icon' => 'fas fa-clipboard-check', 'label' => 'Profesi Kategori'],
                             ['route' => route('admin.kenali-profesi.tes.index'), 'icon' => 'fas fa-file-alt', 'label' => 'Tes'],
@@ -56,20 +50,20 @@
                                 $detailUrl = '#';
 
                                 switch ($activity['type']) {
-                                    case 'Profesi Kerja':
-                                        $detailUrl = route('admin.eksplorasi-profesi.profesi-kerja.show', $activity['id']);
-                                        break;
                                     case 'Kategori Minat':
                                         $detailUrl = route('admin.kenali-profesi.kategori-minat.show', $activity['id']);
                                         break;
-                                    case 'tes':
-                                        $detailUrl = route('admin.tes.show', $activity['id']);
+                                    case 'Profesi Kategori':
+                                        $detailUrl = route('admin.kenali-profesi.profesi-kategori.show', $activity['id']);
                                         break;
-                                    case 'soal':
-                                        $detailUrl = route('admin.soal.show', $activity['id']);
+                                    case 'Tes':
+                                        $detailUrl = route('admin.kenali-profesi.tes.show', $activity['id']);
                                         break;
-                                    case 'jawaban':
-                                        $detailUrl = route('admin.jawaban.show', $activity['id']);
+                                    case 'Soal Tes':
+                                        $detailUrl = route('admin.kenali-profesi.soal-tes.show', $activity['id']);
+                                        break;
+                                    case 'Opsi Jawaban':
+                                        $detailUrl = route('admin.kenali-profesi.opsi-jawaban.show', $activity['id']);
                                         break;
                                 }
                             @endphp
