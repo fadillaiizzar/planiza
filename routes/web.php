@@ -126,11 +126,13 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->na
     Route::prefix('kenali-profesi')->name('kenali-profesi.')->group(function () {
         Route::get('/', [KenaliProfesiSiswaController::class, 'index'])->name('index');
 
-        Route::get('/tes', [KerjakanTesController::class, 'index'])->name('tes.index');
-        Route::post('/tes/{soal}/jawab', [JawabanSiswaController::class, 'store'])->name('tes.jawab');
+        Route::prefix('tes')->name('tes.')->group(function () {
+            Route::get('/', [KerjakanTesController::class, 'index'])->name('index');
+            Route::post('/{soal}/jawab', [JawabanSiswaController::class, 'store'])->name('jawab');
 
-        Route::post('/tes/{tes}/submit', [KerjakanTesController::class, 'submit'])->name('tes.submit');
-        Route::get('/tes/{tes}/rekomendasi/{attempt?}', [RekomendasiProfesiController::class, 'index'])->name('tes.rekomendasi');
+            Route::post('/{tes}/submit', [KerjakanTesController::class, 'submit'])->name('submit');
+            Route::get('/{tes}/rekomendasi/{attempt?}', [RekomendasiProfesiController::class, 'index'])->name('rekomendasi');
+        });
     });
 
     Route::resource('eksplorasi-jurusan', EksplorasiKuliahSiswaController::class)->names('eksplorasi-jurusan');
@@ -138,7 +140,13 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->na
     Route::prefix('kenali-jurusan')->name('kenali-jurusan.')->group(function () {
         Route::get('/', [KenaliJurusanSiswaController::class, 'index'])->name('index');
 
-        Route::get('/form-kuliah', [KerjakanFormController::class, 'index'])->name('form-kuliah.index');
-        Route::post('/form-kuliah/jawab', [MinatSiswaController::class, 'store'])->name('form-kuliah.store');
+        Route::prefix('form-kuliah')->name('form-kuliah.')->group(function () {
+            Route::get('/', [KerjakanFormController::class, 'index'])->name('index');
+
+            Route::post('/{formKuliah}/store', [MinatSiswaController::class, 'store'])->name('store');
+            Route::post('/{formKuliah}/submit', [MinatSiswaController::class, 'submit'])->name('submit');
+        });
     });
 });
+
+ // Route::post('/form-kuliah/{formKuliah}/rekomendasi/{attempt?}', [MinatSiswaController::class, 'submit'])->name('form-kuliah.rekomendasi');
