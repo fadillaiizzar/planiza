@@ -25,9 +25,4 @@ class HobiJurusan extends Model
     {
         return $this->belongsTo(JurusanKuliah::class, 'jurusan_kuliah_id');
     }
-
-    public function minats(): HasMany
-    {
-        return $this->hasMany(Minat::class);
-    }
 }

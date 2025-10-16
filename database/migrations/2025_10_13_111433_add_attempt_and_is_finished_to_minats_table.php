@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('minats', function (Blueprint $table) {
-            $table->unsignedInteger('attempt')->default(1)->after('hobi_jurusan_id');
+            $table->unsignedInteger('attempt')->default(1)->after('hobi_id');
             $table->boolean('is_finished')->default(false)->after('attempt');
         });
     }

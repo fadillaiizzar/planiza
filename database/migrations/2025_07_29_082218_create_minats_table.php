@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('form_kuliah_id')->constrained('form_kuliahs')->onDelete('cascade');
             $table->foreignId('jurusan_kuliah_id')->nullable()->constrained('jurusan_kuliahs')->onDelete('cascade');
-            $table->foreignId('hobi_jurusan_id')->nullable()->constrained('hobi_jurusans')->onDelete('cascade');
+            $table->foreignId('hobi_id')->nullable()->constrained('hobis')->onDelete('cascade');
             $table->timestamps();
         });
     }

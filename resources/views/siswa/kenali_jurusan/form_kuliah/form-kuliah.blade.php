@@ -121,15 +121,8 @@
         const saveUrl = "{{ route('siswa.kenali-jurusan.form-kuliah.store', $formKuliah->id) }}";
         const attempt = "{{ $activeAttempt }}";
 
-        // --- Select2 Setup ---
-        $('#jurusan_kuliah_ids').select2({
-            placeholder: 'Pilih maksimal 3 jurusan',
-            maximumSelectionLength: MAX_SELECTION,
-            width: '100%'
-        });
-
-        $('#hobi_ids').select2({
-            placeholder: 'Pilih maksimal 3 hobi',
+        // Inisialisasi Select2
+        $('#jurusan_kuliah_ids, #hobi_ids').select2({
             maximumSelectionLength: MAX_SELECTION,
             width: '100%'
         });
@@ -191,6 +184,35 @@
         // --- Jalankan autosave hanya saat ada perubahan ---
         $('#nilai_utbk').on('input', autoSave);
         $('#jurusan_kuliah_ids, #hobi_ids').on('change', autoSave);
+
+        const submitUrl = "{{ route('siswa.kenali-jurusan.form-kuliah.submit', $formKuliah->id) }}";
+
+        // Submit pakai FETCH (tampilkan di console hasil sukses/gagal)
+        document.getElementById('formKuliah').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = this;
+            const formData = new FormData(form);
+
+            fetch(submitUrl, {
+                method: 'POST',
+                body: formData,
+                headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('%c✅ Sukses:', 'color: #22c55e; font-weight: bold;', data.message);
+                    alert('Data berhasil dikirim!');
+                } else {
+                    console.log('%c⚠️ Gagal:', 'color: #eab308; font-weight: bold;', data.message);
+                    alert('Terjadi kesalahan saat mengirim data.');
+                }
+            })
+            .catch(err => {
+                console.error('%c❌ Error jaringan:', 'color: #ef4444; font-weight: bold;', err);
+                alert('Gagal mengirim data, cek koneksi internet!');
+            });
+        });
     </script>
 </body>
 </html>

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('form_kuliahs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->unsignedInteger('attempt')->default(1);
             $table->integer('nilai_utbk');
             $table->timestamps();
         });

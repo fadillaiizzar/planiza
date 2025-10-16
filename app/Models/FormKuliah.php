@@ -10,6 +10,7 @@ class FormKuliah extends Model
 {
     protected $fillable = [
         'user_id',
+        'attempt',
         'nilai_utbk',
     ];
 

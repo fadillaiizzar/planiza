@@ -10,7 +10,7 @@ class Minat extends Model
     protected $fillable = [
         'form_kuliah_id',
         'jurusan_kuliah_id',
-        'hobi_jurusan_id',
+        'hobi_id',
         'attempt',
         'is_finished'
     ];
@@ -25,8 +25,8 @@ class Minat extends Model
         return $this->belongsTo(JurusanKuliah::class);
     }
 
-    public function hobiJurusan(): BelongsTo
+    public function hobi(): BelongsTo
     {
-        return $this->belongsTo(HobiJurusan::class);
+        return $this->belongsTo(Hobi::class);
     }
 }
