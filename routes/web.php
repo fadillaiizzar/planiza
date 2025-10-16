@@ -39,6 +39,7 @@ use App\Http\Controllers\Siswa\EksplorasiKerjaSiswaController;
 use App\Http\Controllers\Siswa\KenaliJurusan\KerjakanFormController;
 use App\Http\Controllers\Siswa\KenaliJurusan\KenaliJurusanSiswaController;
 use App\Http\Controllers\Siswa\EksplorasiKuliah\EksplorasiKuliahSiswaController;
+use App\Http\Controllers\Siswa\KenaliJurusan\MinatSiswaController;
 
 Route::get('/', function () {
     return view('beranda');
@@ -138,6 +139,6 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->na
         Route::get('/', [KenaliJurusanSiswaController::class, 'index'])->name('index');
 
         Route::get('/form-kuliah', [KerjakanFormController::class, 'index'])->name('form-kuliah.index');
-        Route::post('/form-kuliah/jawab', [KerjakanFormController::class, 'store'])->name('form-kuliah.store');
+        Route::post('/form-kuliah/jawab', [MinatSiswaController::class, 'store'])->name('form-kuliah.store');
     });
 });
