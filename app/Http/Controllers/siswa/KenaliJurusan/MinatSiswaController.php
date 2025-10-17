@@ -28,27 +28,59 @@ class MinatSiswaController extends Controller
             'nilai_utbk' => $nilaiUtbk,
         ]);
 
-        // Hapus data lama untuk attempt yang sama
-        Minat::where('form_kuliah_id', $formKuliah->id)
+         // Ambil slot yang ada untuk attempt ini
+        $slots = Minat::where('form_kuliah_id', $formKuliah->id)
             ->where('attempt', $attempt)
-            ->delete();
+            ->orderBy('id')
+            ->get()
+            ->toArray();
 
-        // Looping gabungan jurusan dan hobi seperti yang kamu minta
-        $maxCount = max(count($jurusanIds), count($hobiIds));
+        $maxSlots = 3; // maksimal slot
 
-        for ($i = 0; $i < $maxCount; $i++) {
+        // Gabungkan input
+        $newSlots = [];
+        $countInput = max(count($jurusanIds), count($hobiIds));
+
+        for ($i = 0; $i < $countInput; $i++) {
             $jurusanId = $jurusanIds[$i] ?? null;
             $hobiId = $hobiIds[$i] ?? null;
 
-            // Buat data meski jurusan/hobi kosong, biar tampil seperti:
-            // jurusan,hobi → 1,1 / 2,2 / null,3
-            Minat::create([
-                'form_kuliah_id' => $formKuliah->id,
+            // lewati jika kosong semua
+            if ($jurusanId === null && $hobiId === null) continue;
+
+            $newSlots[] = [
                 'jurusan_kuliah_id' => $jurusanId,
                 'hobi_id' => $hobiId,
-                'attempt' => $attempt,
-                'is_finished' => false,
-            ]);
+            ];
+        }
+
+        // Perbarui slot yang ada atau buat baru
+        for ($i = 0; $i < $maxSlots; $i++) {
+            $newSlot = $newSlots[$i] ?? null;
+
+            if (isset($slots[$i])) {
+                // slot ada → update jika ada data baru, hapus jika kosong semua
+                if ($newSlot) {
+                    Minat::where('id', $slots[$i]['id'])
+                        ->update([
+                            'jurusan_kuliah_id' => $newSlot['jurusan_kuliah_id'],
+                            'hobi_id' => $newSlot['hobi_id'],
+                        ]);
+                } else {
+                    Minat::where('id', $slots[$i]['id'])->delete();
+                }
+            } else {
+                // slot belum ada → buat baru kalau ada data
+                if ($newSlot) {
+                    Minat::create([
+                        'form_kuliah_id' => $formKuliah->id,
+                        'jurusan_kuliah_id' => $newSlot['jurusan_kuliah_id'],
+                        'hobi_id' => $newSlot['hobi_id'],
+                        'attempt' => $attempt,
+                        'is_finished' => false,
+                    ]);
+                }
+            }
         }
 
         return response()->json([
