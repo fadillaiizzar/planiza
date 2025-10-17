@@ -19,9 +19,6 @@
 
             @include('siswa.kenali_jurusan.form_kuliah.rekomendasi_jurusan.rekomendasi-utbk')
 
-
-
-            {{-- Top Hobi / Jurusan --}}
             @include('siswa.kenali_jurusan.form_kuliah.rekomendasi_jurusan.rekomendasi-hobi')
 
             <x-siswa.kenali_karier.bottom-info
