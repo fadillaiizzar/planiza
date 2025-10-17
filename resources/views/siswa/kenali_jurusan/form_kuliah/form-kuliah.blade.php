@@ -198,15 +198,14 @@
             .then(data => {
                 if (data.success) {
                     console.log('%c✅ Sukses:', 'color: #22c55e; font-weight: bold;', data.message);
-                    alert('Data berhasil dikirim!');
+                    console.log('%c➡️ Redirect ke halaman rekomendasi:', 'color: #3b82f6; font-weight: bold;', data.redirect_url);
+                    window.location.href = data.redirect_url;
                 } else {
                     console.log('%c⚠️ Gagal:', 'color: #eab308; font-weight: bold;', data.message);
-                    alert('Terjadi kesalahan saat mengirim data.');
                 }
             })
             .catch(err => {
                 console.error('%c❌ Error jaringan:', 'color: #ef4444; font-weight: bold;', err);
-                alert('Gagal mengirim data, cek koneksi internet!');
             });
         });
     </script>

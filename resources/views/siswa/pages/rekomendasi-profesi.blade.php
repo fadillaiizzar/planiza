@@ -11,14 +11,19 @@
         <x-siswa.info-siswa :siswa="$siswa" />
 
         <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            @include('siswa.kenali_profesi.tes.rekomendasi_profesi.hero')
+            <x-siswa.kenali_karier.hero-rekomendasi
+                title="Karier Impianmu"
+                desc="Berdasarkan analisis mendalam, kami menemukan tiga profesi yang paling sesuai dengan minat, bakat, dan potensi unikmu"
+            />
 
             @include('siswa.kenali_profesi.tes.rekomendasi_profesi.top-profesi-card', [
                 'topProfesi' => $topProfesi,
                 'alasanFormatted' => $alasanFormatted
             ])
 
-            @include('siswa.kenali_profesi.tes.rekomendasi_profesi.bottom-info')
+            <x-siswa.kenali_karier.bottom-info
+                desc='Klik "Lihat Detail Lengkap" untuk mempelajari lebih dalam tentang setiap profesi, termasuk jalur pendidikan, skill yang dibutuhkan, dan prospek kariernya'
+            />
         </div>
     </div>
 </div>
