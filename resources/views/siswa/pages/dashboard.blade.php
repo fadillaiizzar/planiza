@@ -40,7 +40,7 @@
                             'href' => route('siswa.kenali-jurusan.index'),
                             'icon' => 'fas fa-briefcase',
                             'title' => 'Kenali Jurusan',
-                            'desc' => 'Profesi impian',
+                            'desc' => 'Kampus impian',
                         ],
                         [
                             'href' => '#',
