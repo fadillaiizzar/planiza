@@ -16,16 +16,19 @@ class RekomendasiProfesiController extends Controller
         $user = Auth::user();
         $siswa = $user->siswa;
 
+        // 🔹 Tentukan attempt aktif (pakai parameter atau ambil max attempt)
         $activeAttempt = $attempt ?? JawabanSiswa::where('user_id', $user->id)
         ->where('tes_id', $tesId)
         ->max('attempt');
 
+        // 🔹 Ambil semua jawaban di attempt ini, lengkap dengan relasi opsi → kategori → profesi
         $jawaban = $siswa->jawabanSiswa()
             ->with(['opsiJawaban.kategoriMinat.profesiKerjas', 'opsiJawaban.profesiKerja'])
             ->where('tes_id', $tesId)
             ->where('attempt', $activeAttempt)
             ->get();
 
+        // total poin dan alasan opsi per profesi
         $poinProfesi = [];
         $alasanPerProfesi = [];
 
@@ -33,7 +36,7 @@ class RekomendasiProfesiController extends Controller
             $opsi = $jwb->opsiJawaban;
             if (!$opsi) continue;
 
-            // 🔹 Single choice: lewat kategori → profesi
+            // 🔹 Kalau opsi punya kategori minat → setiap profesi di kategori itu mendapat poin
             if ($opsi->kategoriMinat) {
                 foreach ($opsi->kategoriMinat->profesiKerjas as $profesi) {
                     $poinProfesi[$profesi->id] = ($poinProfesi[$profesi->id] ?? 0) + $opsi->poin;
@@ -42,7 +45,7 @@ class RekomendasiProfesiController extends Controller
                 }
             }
 
-            // 🔹 Multi choice: langsung ke profesi
+            // 🔹 Kalau opsi langsung mengarah ke profesi (tanpa kategori)
             if ($opsi->profesi_kerja_id) {
                 $poinProfesi[$opsi->profesi_kerja_id] = ($poinProfesi[$opsi->profesi_kerja_id] ?? 0) + $opsi->poin;
 
@@ -50,7 +53,7 @@ class RekomendasiProfesiController extends Controller
             }
         }
 
-        // 🔹 Simpan / update semua profesi
+        // 🔹 Simpan hasil poin ke tabel kenali_profesi
         foreach ($poinProfesi as $profesiId => $totalPoin) {
             KenaliProfesi::updateOrCreate(
                 [
@@ -66,7 +69,7 @@ class RekomendasiProfesiController extends Controller
             );
         }
 
-        // 🔹 Ambil semua profesi urut poin
+        // 🔹 Ambil semua profesi hasil tes (urut dari poin tertinggi)
         $allProfesi = KenaliProfesi::with('profesiKerja')
             ->where('user_id', $user->id)
             ->where('tes_id', $tesId)
@@ -84,6 +87,7 @@ class RekomendasiProfesiController extends Controller
             $alasanFormatted[$profesiId] = "Karena kemampuanmu di bidang $skills, profesi ini sangat sesuai untukmu";
         }
 
+        // 🔹 Kirim semua data ke view hasil rekomendasi
         return view('siswa.pages.rekomendasi-profesi', compact(
             'tes', 'siswa', 'topProfesi', 'allProfesi', 'alasanFormatted', 'activeAttempt'
         ));

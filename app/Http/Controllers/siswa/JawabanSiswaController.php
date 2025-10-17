@@ -14,14 +14,17 @@ class JawabanSiswaController extends Controller
     {
         $user = Auth::user();
 
+        // 🔹 Validasi input jawaban harus array dan id opsi valid
         $request->validate([
             'opsi_jawaban_id' => 'required|array',
             'opsi_jawaban_id.*' => 'exists:opsi_jawabans,id',
         ]);
 
+        // 🔹 Ambil data soal
         $soal = SoalTes::findOrFail($soalId);
         $max = $soal->max_select;
 
+        // 🔹 Jika siswa memilih lebih dari batas, kirim error
         if (count($request->opsi_jawaban_id) > $max) {
             return response()->json([
                 'success' => false,
@@ -32,7 +35,7 @@ class JawabanSiswaController extends Controller
         $activeAttempt = $request->input('attempt', 1);
 
         if ($max == 1) {
-            // 🔹 Pilgan (single choice)
+            // 🔹 Soal pilihan tunggal (radio)
             JawabanSiswa::updateOrCreate(
                 [
                     'user_id' => $user->id,
@@ -46,7 +49,7 @@ class JawabanSiswaController extends Controller
                 ]
             );
         } else {
-            // 🔹 Multi choice
+            // 🔹 Soal pilihan ganda (checkbox)
             $currentAnswers = JawabanSiswa::where('user_id', $user->id)
                 ->where('soal_tes_id', $soalId)
                 ->where('tes_id', $soal->tes_id)
@@ -74,7 +77,7 @@ class JawabanSiswaController extends Controller
                     }
                 }
 
-                // tambahkan jawaban baru
+                // simpan jawaban baru
                 JawabanSiswa::create([
                     'user_id' => $user->id,
                     'soal_tes_id' => $soalId,
