@@ -46,12 +46,22 @@ class KerjakanFormController extends Controller
         // Ambil minat aktif (jika sudah ada)
         $currentMinat = Minat::where('form_kuliah_id', $formKuliah->id)
             ->where('attempt', $activeAttempt)
-            ->first();
+            ->get();
+
+        $nilaiUtbk = $formKuliah->nilai_utbk;
+
+        $jurusanSelected = $currentMinat->pluck('jurusan_kuliah_id')
+            ->filter()
+            ->toArray();
+
+        $hobiSelected = $currentMinat->pluck('hobi_id')
+            ->filter()
+            ->toArray();
 
         // Data dropdown
         $jurusanKuliah = JurusanKuliah::all();
         $hobis = Hobi::all();
 
-        return view('siswa.kenali_jurusan.form_kuliah.form-kuliah', compact('jurusanKuliah', 'hobis', 'activeAttempt', 'formKuliah', 'currentMinat'));
+        return view('siswa.kenali_jurusan.form_kuliah.form-kuliah', compact('jurusanKuliah', 'hobis', 'activeAttempt', 'formKuliah', 'jurusanSelected', 'hobiSelected', 'nilaiUtbk'));
     }
 }

@@ -43,7 +43,7 @@
                             <i class="fa-solid fa-graduation-cap text-slate-navy"></i>
                             Nilai UTBK Kamu
                         </label>
-                        <input type="number" id="nilai_utbk" name="nilai_utbk" value="{{ $currentMinat->nilai_utbk ?? '' }}" required min="0" max="1000" placeholder="Contoh : 650" class="w-full rounded-xl border-2 border-border-gray focus:border-slate-navy focus:ring-4 focus:ring-slate-navy/10 transition-all duration-300 p-3.5 text-slate-navy placeholder-cool-gray/50">
+                        <input type="number" id="nilai_utbk" name="nilai_utbk" value="{{ $nilaiUtbk ?? '' }}" required min="0" max="1000" placeholder="Contoh : 650" class="w-full rounded-xl border-2 border-border-gray focus:border-slate-navy focus:ring-4 focus:ring-slate-navy/10 transition-all duration-300 p-3.5 text-slate-navy placeholder-cool-gray/50">
                     </div>
 
                     <!-- Pilih Jurusan -->
@@ -61,9 +61,7 @@
                             class="w-full rounded-2xl border-2 border-border-gray focus:border-slate-navy focus:ring-4 focus:ring-slate-navy/10 transition-all duration-300 p-3.5 text-slate-navy">
                             @foreach ($jurusanKuliah as $jurusan)
                                 <option value="{{ $jurusan->id }}"
-                                    @if(!empty($currentMinat) && in_array($jurusan->id, json_decode($currentMinat->jurusan_kuliah_ids ?? '[]')))
-                                        selected
-                                    @endif
+                                    @if(in_array($jurusan->id, $jurusanSelected ?? [])) selected @endif
                                 >{{ $jurusan->nama_jurusan_kuliah }}</option>
                             @endforeach
                         </select>
@@ -88,9 +86,7 @@
                             class="w-full rounded-xl border-2 border-border-gray focus:border-slate-navy focus:ring-4 focus:ring-slate-navy/10 transition-all duration-300 p-3.5 text-slate-navy">
                             @foreach ($hobis as $hobi)
                                 <option value="{{ $hobi->id }}"
-                                    @if(!empty($currentMinat) && in_array($hobi->id, json_decode($currentMinat->hobi_ids ?? '[]')))
-                                        selected
-                                    @endif
+                                    @if(in_array($hobi->id, $hobiSelected ?? [])) selected @endif
                                 >{{ $hobi->nama_hobi }}</option>
                             @endforeach
                         </select>
