@@ -15,6 +15,7 @@ use App\Http\Controllers\MateriController;
 use App\Http\Controllers\SoalTesController;
 use App\Http\Controllers\HasilTesController;
 use App\Http\Controllers\IndustriController;
+use App\Http\Controllers\HobiJurusanController;
 use App\Http\Controllers\KenaliKerjaController;
 use App\Http\Controllers\MateriSiswaController;
 use App\Http\Controllers\OpsiJawabanController;
@@ -30,16 +31,16 @@ use App\Http\Controllers\EksplorasiKerjaController;
 use App\Http\Controllers\IndustriProfesiController;
 use App\Http\Controllers\ProfesiKategoriController;
 use App\Http\Controllers\EksplorasiKuliahController;
-use App\Http\Controllers\HobiJurusanController;
 use App\Http\Controllers\Siswa\KerjakanTesController;
 use App\Http\Controllers\Siswa\JawabanSiswaController;
 use App\Http\Controllers\Siswa\KenaliProfesiSiswaController;
 use App\Http\Controllers\Siswa\RekomendasiProfesiController;
 use App\Http\Controllers\Siswa\EksplorasiKerjaSiswaController;
+use App\Http\Controllers\Siswa\KenaliJurusan\MinatSiswaController;
 use App\Http\Controllers\Siswa\KenaliJurusan\KerjakanFormController;
 use App\Http\Controllers\Siswa\KenaliJurusan\KenaliJurusanSiswaController;
+use App\Http\Controllers\Siswa\KenaliJurusan\RekomendasiJurusanController;
 use App\Http\Controllers\Siswa\EksplorasiKuliah\EksplorasiKuliahSiswaController;
-use App\Http\Controllers\Siswa\KenaliJurusan\MinatSiswaController;
 
 Route::get('/', function () {
     return view('beranda');
@@ -145,6 +146,8 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->na
 
             Route::post('/{formKuliah}/store', [MinatSiswaController::class, 'store'])->name('store');
             Route::post('/{formKuliah}/submit', [MinatSiswaController::class, 'submit'])->name('submit');
+
+            Route::get('/{formKuliah}/rekomendasi/{attempt?}', [RekomendasiJurusanController::class, 'index'])->name('rekomendasi');
         });
     });
 });
