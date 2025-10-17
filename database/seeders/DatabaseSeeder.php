@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Tes;
+use App\Models\Hobi;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Kelas;
@@ -375,7 +376,7 @@ class DatabaseSeeder extends Seeder
             $kategori->profesiKerjas()->syncWithoutDetaching($profesiIds);
         }
 
-         // 🔹 Materi sekolah sesuai jurusan
+        // 🔹 Materi sekolah sesuai jurusan
         $dataTopikJurusan = [
             'SIJA' => [
                 [
@@ -909,82 +910,143 @@ class DatabaseSeeder extends Seeder
 
         // Kampus
         $kampusList = [
-            ['nama_kampus' => 'Institut Teknologi Bandung', 'website' => 'https://www.itb.ac.id', 'alamat' => 'Bandung, Jawa Barat'],
-            ['nama_kampus' => 'Universitas Indonesia', 'website' => 'https://www.ui.ac.id', 'alamat' => 'Depok, Jawa Barat'],
-            ['nama_kampus' => 'Institut Teknologi Sepuluh Nopember', 'website' => 'https://www.its.ac.id', 'alamat' => 'Surabaya, Jawa Timur'],
             ['nama_kampus' => 'Universitas Gadjah Mada', 'website' => 'https://www.ugm.ac.id', 'alamat' => 'Yogyakarta'],
-            ['nama_kampus' => 'Universitas Multimedia Nusantara', 'website' => 'https://www.umn.ac.id', 'alamat' => 'Tangerang, Banten'],
-            ['nama_kampus' => 'Binus University', 'website' => 'https://www.binus.ac.id', 'alamat' => 'Jakarta'],
-            ['nama_kampus' => 'Universitas Pendidikan Indonesia', 'website' => 'https://www.upi.edu', 'alamat' => 'Bandung, Jawa Barat'],
-            ['nama_kampus' => 'Universitas Diponegoro', 'website' => 'https://www.undip.ac.id', 'alamat' => 'Semarang, Jawa Tengah'],
-            ['nama_kampus' => 'Universitas Sebelas Maret', 'website' => 'https://www.uns.ac.id', 'alamat' => 'Surakarta, Jawa Tengah'],
+            ['nama_kampus' => 'Institut Teknologi Sepuluh Nopember', 'website' => 'https://www.its.ac.id', 'alamat' => 'Surabaya, Jawa Timur'],
+            ['nama_kampus' => 'Universitas Indonesia', 'website' => 'https://www.ui.ac.id', 'alamat' => 'Depok, Jawa Barat'],
+            ['nama_kampus' => 'Universitas Brawijaya', 'website' => 'https://www.ub.ac.id', 'alamat' => 'Malang, Jawa Timur'],
             ['nama_kampus' => 'Telkom University', 'website' => 'https://telkomuniversity.ac.id', 'alamat' => 'Bandung, Jawa Barat'],
-            ['nama_kampus' => 'Politeknik Negeri Jakarta', 'website' => 'https://www.pnj.ac.id', 'alamat' => 'Depok, Jawa Barat'],
-            ['nama_kampus' => 'Politeknik Manufaktur Bandung', 'website' => 'https://www.polman-bandung.ac.id', 'alamat' => 'Bandung, Jawa Barat'],
-            ['nama_kampus' => 'Institut Seni Indonesia Yogyakarta', 'website' => 'https://isi.ac.id', 'alamat' => 'Yogyakarta'],
-            ['nama_kampus' => 'Institut Kesenian Jakarta', 'website' => 'https://ikj.ac.id', 'alamat' => 'Jakarta'],
+            ['nama_kampus' => 'Universitas Negeri Yogyakarta', 'website' => 'https://www.uny.ac.id', 'alamat' => 'Yogyakarta'],
+            ['nama_kampus' => 'Politeknik Negeri Bandung', 'website' => 'https://www.polban.ac.id', 'alamat' => 'Bandung, Jawa Barat'],
+            ['nama_kampus' => 'Universitas Diponegoro', 'website' => 'https://www.undip.ac.id', 'alamat' => 'Semarang, Jawa Tengah'],
+            ['nama_kampus' => 'Institut Seni Indonesia Yogyakarta', 'website' => 'https://www.isi.ac.id', 'alamat' => 'Yogyakarta'],
+            ['nama_kampus' => 'Universitas Atma Jaya Yogyakarta', 'website' => 'https://www.uajy.ac.id', 'alamat' => 'Yogyakarta'],
+            ['nama_kampus' => 'Universitas Muhammadiyah Yogyakarta', 'website' => 'https://www.umy.ac.id', 'alamat' => 'Yogyakarta'],
+            ['nama_kampus' => 'Universitas Kristen Petra', 'website' => 'https://www.petra.ac.id', 'alamat' => 'Surabaya, Jawa Timur'],
+            ['nama_kampus' => 'Politeknik Negeri Semarang', 'website' => 'https://www.polines.ac.id', 'alamat' => 'Semarang, Jawa Tengah'],
+            ['nama_kampus' => 'Universitas Negeri Malang', 'website' => 'https://www.um.ac.id', 'alamat' => 'Malang, Jawa Timur'],
+            ['nama_kampus' => 'Institut Teknologi Nasional Malang', 'website' => 'https://www.itn.ac.id', 'alamat' => 'Malang, Jawa Timur'],
         ];
         foreach ($kampusList as $kampus) {
             Kampus::create($kampus);
         }
 
-        // Kampus Jurusan 2
+        // Kampus Jurusan Map
         $kampusJurusanMap = [
-            'Institut Teknologi Sepuluh Nopember' => [
-                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 648],
-                ['jurusan' => 'Teknik Elektro', 'passing_grade' => 670],
-                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 675],
-            ],
             'Universitas Gadjah Mada' => [
-                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 660],
-                ['jurusan' => 'Teknik Komputer', 'passing_grade' => 655],
-                ['jurusan' => 'Sistem Informasi', 'passing_grade' => 690],
-                ['jurusan' => 'Arsitektur', 'passing_grade' => 700],
-                ['jurusan' => 'Geografi', 'passing_grade' => 675],
-            ],
-            'Universitas Indonesia' => [
-                ['jurusan' => 'Teknik Industri', 'passing_grade' => 685],
-            ],
-            'Universitas Diponegoro' => [
-                ['jurusan' => 'Teknik Industri', 'passing_grade' => 640],
-                ['jurusan' => 'Teknik Industri', 'passing_grade' => 665],
-                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 665],
-                ['jurusan' => 'Manajemen Konstruksi', 'passing_grade' => 650],
-            ],
-            'Politeknik Negeri Jakarta' => [
-                ['jurusan' => 'Teknik Otomotif', 'passing_grade' => 575],
-                ['jurusan' => 'Teknologi Survei dan Pemetaan', 'passing_grade' => 590],
-            ],
-            'Institut Teknologi Bandung' => [
-                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 700],
+                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 690],
+                ['jurusan' => 'Teknik Industri', 'passing_grade' => 700],
                 ['jurusan' => 'Teknik Informatika', 'passing_grade' => 725],
+                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 710],
+                ['jurusan' => 'Arsitektur', 'passing_grade' => 705],
+                ['jurusan' => 'Teknik Geodesi', 'passing_grade' => 700],
+                ['jurusan' => 'Desain Produk', 'passing_grade' => 695],
+            ],
+
+            'Institut Teknologi Sepuluh Nopember' => [
+                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 685],
+                ['jurusan' => 'Teknik Elektro', 'passing_grade' => 695],
+                ['jurusan' => 'Teknik Komputer', 'passing_grade' => 700],
+                ['jurusan' => 'Teknik Industri', 'passing_grade' => 690],
+                ['jurusan' => 'Teknologi Informasi', 'passing_grade' => 675],
+                ['jurusan' => 'Desain Produk', 'passing_grade' => 665],
+                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 680],
+            ],
+
+            'Universitas Indonesia' => [
+                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 700],
+                ['jurusan' => 'Sistem Informasi', 'passing_grade' => 720],
+                ['jurusan' => 'Arsitektur', 'passing_grade' => 705],
                 ['jurusan' => 'Desain Komunikasi Visual', 'passing_grade' => 710],
-                ['jurusan' => 'Desain Interior', 'passing_grade' => 690],
-                ['jurusan' => 'Teknik Geodesi', 'passing_grade' => 705],
+                ['jurusan' => 'Teknik Industri', 'passing_grade' => 715],
+                ['jurusan' => 'Teknik Elektro', 'passing_grade' => 705],
+                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 710],
             ],
-            'Politeknik Manufaktur Bandung' => [
-                ['jurusan' => 'Teknik Manufaktur', 'passing_grade' => 620],
+
+            'Universitas Brawijaya' => [
+                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 670],
+                ['jurusan' => 'Teknik Informatika', 'passing_grade' => 690],
+                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 675],
+                ['jurusan' => 'Teknik Industri', 'passing_grade' => 680],
+                ['jurusan' => 'Desain Komunikasi Visual', 'passing_grade' => 660],
+                ['jurusan' => 'Arsitektur', 'passing_grade' => 670],
             ],
+
             'Telkom University' => [
-                ['jurusan' => 'Teknik Telekomunikasi', 'passing_grade' => 640],
-                ['jurusan' => 'Teknologi Informasi', 'passing_grade' => 635],
-            ],
-            'Binus University' => [
-                ['jurusan' => 'Teknologi Informasi', 'passing_grade' => 660],
-                ['jurusan' => 'Desain Produk', 'passing_grade' => 640],
-            ],
-            'Institut Seni Indonesia Yogyakarta' => [
-                ['jurusan' => 'Film dan Televisi', 'passing_grade' => 590],
-            ],
-            'Universitas Multimedia Nusantara' => [
-                ['jurusan' => 'Seni Media Rekam', 'passing_grade' => 600],
+                ['jurusan' => 'Teknik Informatika', 'passing_grade' => 690],
+                ['jurusan' => 'Sistem Informasi', 'passing_grade' => 685],
+                ['jurusan' => 'Teknologi Informasi', 'passing_grade' => 670],
+                ['jurusan' => 'Desain Komunikasi Visual', 'passing_grade' => 660],
                 ['jurusan' => 'Animasi', 'passing_grade' => 650],
             ],
-            'Institut Kesenian Jakarta' => [
-                ['jurusan' => 'Teknik Audio Video', 'passing_grade' => 580],
+
+            'Universitas Negeri Yogyakarta' => [
+                ['jurusan' => 'Teknik Otomotif', 'passing_grade' => 640],
+                ['jurusan' => 'Teknik Elektro', 'passing_grade' => 660],
+                ['jurusan' => 'Teknik Komputer', 'passing_grade' => 650],
+                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 655],
+                ['jurusan' => 'Pendidikan Teknik Mesin', 'passing_grade' => 645],
             ],
-            'Universitas Sebelas Maret' => [
-                ['jurusan' => 'Teknik Bangunan Gedung', 'passing_grade' => 630],
+
+            'Politeknik Negeri Bandung' => [
+                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 640],
+                ['jurusan' => 'Teknik Otomotif', 'passing_grade' => 630],
+                ['jurusan' => 'Teknik Industri', 'passing_grade' => 635],
+                ['jurusan' => 'Teknik Manufaktur', 'passing_grade' => 625],
+            ],
+
+            'Universitas Diponegoro' => [
+                ['jurusan' => 'Arsitektur', 'passing_grade' => 670],
+                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 675],
+                ['jurusan' => 'Teknik Geodesi', 'passing_grade' => 665],
+                ['jurusan' => 'Teknik Industri', 'passing_grade' => 670],
+            ],
+
+            'Institut Seni Indonesia Yogyakarta' => [
+                ['jurusan' => 'Desain Komunikasi Visual', 'passing_grade' => 640],
+                ['jurusan' => 'Animasi', 'passing_grade' => 630],
+                ['jurusan' => 'Film dan Televisi', 'passing_grade' => 620],
+                ['jurusan' => 'Seni Media Rekam', 'passing_grade' => 615],
+            ],
+
+            'Universitas Atma Jaya Yogyakarta' => [
+                ['jurusan' => 'Arsitektur', 'passing_grade' => 660],
+                ['jurusan' => 'Desain Interior', 'passing_grade' => 645],
+                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 655],
+                ['jurusan' => 'Teknik Industri', 'passing_grade' => 650],
+            ],
+
+            'Universitas Muhammadiyah Yogyakarta' => [
+                ['jurusan' => 'Teknik Informatika', 'passing_grade' => 665],
+                ['jurusan' => 'Sistem Informasi', 'passing_grade' => 660],
+                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 655],
+                ['jurusan' => 'Teknik Elektro', 'passing_grade' => 650],
+            ],
+
+            'Universitas Kristen Petra' => [
+                ['jurusan' => 'Desain Komunikasi Visual', 'passing_grade' => 650],
+                ['jurusan' => 'Desain Produk', 'passing_grade' => 640],
+                ['jurusan' => 'Arsitektur', 'passing_grade' => 645],
+                ['jurusan' => 'Manajemen Konstruksi', 'passing_grade' => 635],
+            ],
+
+            'Politeknik Negeri Semarang' => [
+                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 640],
+                ['jurusan' => 'Manajemen Konstruksi', 'passing_grade' => 630],
+                ['jurusan' => 'Teknik Bangunan Gedung', 'passing_grade' => 625],
+            ],
+
+            'Universitas Negeri Malang' => [
+                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 650],
+                ['jurusan' => 'Teknik Elektro', 'passing_grade' => 645],
+                ['jurusan' => 'Desain Produk', 'passing_grade' => 635],
+                ['jurusan' => 'Teknik Otomotif', 'passing_grade' => 640],
+            ],
+
+            'Institut Teknologi Nasional Malang' => [
+                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 645],
+                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 650],
+                ['jurusan' => 'Arsitektur', 'passing_grade' => 640],
+                ['jurusan' => 'Teknik Industri', 'passing_grade' => 635],
             ],
         ];
         $allJurusan = JurusanKuliah::pluck('id', 'nama_jurusan_kuliah')->toArray();
@@ -1004,63 +1066,80 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        // Kampus Jurusan
-        // $kampusJurusanMap = [
-        //     // 🔧 TKR (Teknik Kendaraan Ringan)
-        //     ['kampus' => 'Institut Teknologi Sepuluh Nopember', 'jurusan' => 'Teknik Mesin', 'passing_grade' => 648],
-        //     ['kampus' => 'Universitas Gadjah Mada', 'jurusan' => 'Teknik Mesin', 'passing_grade' => 660],
-        //     ['kampus' => 'Universitas Indonesia', 'jurusan' => 'Teknik Industri', 'passing_grade' => 685],
-        //     ['kampus' => 'Universitas Diponegoro', 'jurusan' => 'Teknik Industri', 'passing_grade' => 640],
-        //     ['kampus' => 'Politeknik Negeri Jakarta', 'jurusan' => 'Teknik Otomotif', 'passing_grade' => 575],
+        $hobiList = [
+            ['nama_hobi' => 'Rekayasa Mesin'],
+            ['nama_hobi' => 'Perawatan Kendaraan'],
+            ['nama_hobi' => 'Analisis Produksi'],
+            ['nama_hobi' => 'Pemrograman'],
+            ['nama_hobi' => 'Analisis Data'],
+            ['nama_hobi' => 'Jaringan Komputer'],
+            ['nama_hobi' => 'Elektronika'],
+            ['nama_hobi' => 'Sinematografi'],
+            ['nama_hobi' => 'Fotografi'],
+            ['nama_hobi' => 'Kelistrikan'],
+            ['nama_hobi' => 'Komunikasi Data'],
+            ['nama_hobi' => 'Perakitan Komputer'],
+            ['nama_hobi' => 'Desain Grafis'],
+            ['nama_hobi' => 'Desain Digital'],
+            ['nama_hobi' => 'Inovasi Produk'],
+            ['nama_hobi' => 'Desain Bangunan'],
+            ['nama_hobi' => 'Tata Ruang'],
+            ['nama_hobi' => 'Konstruksi Bangunan'],
+            ['nama_hobi' => 'Pengawasan Proyek'],
+            ['nama_hobi' => 'Rancang Struktur'],
+            ['nama_hobi' => 'Desain Mekanik'],
+            ['nama_hobi' => 'Pemetaan Wilayah'],
+            ['nama_hobi' => 'Eksplorasi Alam'],
+            ['nama_hobi' => 'Survei Lahan'],
+        ];
+        foreach ($hobiList as $hobi) {
+            Hobi::create($hobi);
+        }
 
-        //     // ⚙️ TP (Teknik Pemesinan)
-        //     ['kampus' => 'Institut Teknologi Bandung', 'jurusan' => 'Teknik Mesin', 'passing_grade' => 700],
-        //     ['kampus' => 'Universitas Diponegoro', 'jurusan' => 'Teknik Industri', 'passing_grade' => 665],
-        //     ['kampus' => 'Politeknik Manufaktur Bandung', 'jurusan' => 'Teknik Manufaktur', 'passing_grade' => 620],
+        // Hobi - Jurusan Map
+        $hobiJurusanMap = [
+            'Rekayasa Mesin' => [['jurusan' => 'Teknik Mesin', 'poin' => 20]],
+            'Perawatan Kendaraan' => [['jurusan' => 'Teknik Otomotif', 'poin' => 20]],
+            'Analisis Produksi' => [['jurusan' => 'Teknik Industri', 'poin' => 20]],
+            'Pemrograman' => [['jurusan' => 'Teknik Informatika', 'poin' => 20]],
+            'Analisis Data' => [['jurusan' => 'Sistem Informasi', 'poin' => 20]],
+            'Jaringan Komputer' => [['jurusan' => 'Teknologi Informasi', 'poin' => 20]],
+            'Elektronika' => [['jurusan' => 'Teknik Audio Video', 'poin' => 20]],
+            'Sinematografi' => [['jurusan' => 'Film dan Televisi', 'poin' => 20]],
+            'Fotografi' => [['jurusan' => 'Seni Media Rekam', 'poin' => 20]],
+            'Kelistrikan' => [['jurusan' => 'Teknik Elektro', 'poin' => 20]],
+            'Komunikasi Data' => [['jurusan' => 'Teknik Telekomunikasi', 'poin' => 20]],
+            'Perakitan Komputer' => [['jurusan' => 'Teknik Komputer', 'poin' => 20]],
+            'Desain Grafis' => [['jurusan' => 'Desain Komunikasi Visual', 'poin' => 20]],
+            'Desain Digital' => [['jurusan' => 'Animasi', 'poin' => 20]],
+            'Inovasi Produk' => [['jurusan' => 'Desain Produk', 'poin' => 20]],
+            'Desain Bangunan' => [['jurusan' => 'Arsitektur', 'poin' => 20]],
+            'Tata Ruang' => [['jurusan' => 'Desain Interior', 'poin' => 20]],
+            'Konstruksi Bangunan' => [['jurusan' => 'Teknik Sipil', 'poin' => 20]],
+            'Pengawasan Proyek' => [['jurusan' => 'Manajemen Konstruksi', 'poin' => 20]],
+            'Rancang Struktur' => [['jurusan' => 'Teknik Bangunan Gedung', 'poin' => 20]],
+            'Desain Mekanik' => [['jurusan' => 'Teknik Manufaktur', 'poin' => 20]],
+            'Pemetaan Wilayah' => [['jurusan' => 'Teknik Geodesi', 'poin' => 20]],
+            'Eksplorasi Alam' => [['jurusan' => 'Geografi', 'poin' => 20]],
+            'Survei Lahan' => [['jurusan' => 'Teknologi Survei dan Pemetaan', 'poin' => 20]],
+        ];
+        $allJurusan = JurusanKuliah::pluck('id', 'nama_jurusan_kuliah')->toArray();
 
-        //     // ⚡ TITL (Teknik Instalasi Tenaga Listrik)
-        //     ['kampus' => 'Institut Teknologi Sepuluh Nopember', 'jurusan' => 'Teknik Elektro', 'passing_grade' => 670],
-        //     ['kampus' => 'Universitas Gadjah Mada', 'jurusan' => 'Teknik Komputer', 'passing_grade' => 655],
-        //     ['kampus' => 'Telkom University', 'jurusan' => 'Teknik Telekomunikasi', 'passing_grade' => 640],
+        foreach ($hobiJurusanMap as $hobiName => $jurusanList) {
+            $hobi = Hobi::where('nama_hobi', $hobiName)->first();
+            if (!$hobi) continue; // skip kalau hobi belum ada di tabel
 
-        //     // 💻 SIJA (Sistem Informasi Jaringan & Akses)
-        //     ['kampus' => 'Institut Teknologi Bandung', 'jurusan' => 'Teknik Informatika', 'passing_grade' => 725],
-        //     ['kampus' => 'Universitas Gadjah Mada', 'jurusan' => 'Sistem Informasi', 'passing_grade' => 690],
-        //     ['kampus' => 'Binus University', 'jurusan' => 'Teknologi Informasi', 'passing_grade' => 660],
-        //     ['kampus' => 'Telkom University', 'jurusan' => 'Teknologi Informasi', 'passing_grade' => 635],
+            $attachData = [];
 
-        //     // 📺 TAV (Teknik Audio Video)
-        //     ['kampus' => 'Institut Seni Indonesia Yogyakarta', 'jurusan' => 'Film dan Televisi', 'passing_grade' => 590],
-        //     ['kampus' => 'Universitas Multimedia Nusantara', 'jurusan' => 'Seni Media Rekam', 'passing_grade' => 600],
-        //     ['kampus' => 'Institut Kesenian Jakarta', 'jurusan' => 'Teknik Audio Video', 'passing_grade' => 580],
+            foreach ($jurusanList as $data) {
+                if (isset($allJurusan[$data['jurusan']])) {
+                    $attachData[$allJurusan[$data['jurusan']]] = ['poin' => $data['poin']];
+                }
+            }
 
-        //     // 🎨 DKV (Desain Komunikasi Visual)
-        //     ['kampus' => 'Institut Teknologi Bandung', 'jurusan' => 'Desain Komunikasi Visual', 'passing_grade' => 710],
-        //     ['kampus' => 'Universitas Multimedia Nusantara', 'jurusan' => 'Animasi', 'passing_grade' => 650],
-        //     ['kampus' => 'Binus University', 'jurusan' => 'Desain Produk', 'passing_grade' => 640],
-
-        //     // 🏗️ DPIB (Desain Pemodelan dan Informasi Bangunan)
-        //     ['kampus' => 'Universitas Gadjah Mada', 'jurusan' => 'Arsitektur', 'passing_grade' => 700],
-        //     ['kampus' => 'Institut Teknologi Bandung', 'jurusan' => 'Desain Interior', 'passing_grade' => 690],
-        //     ['kampus' => 'Universitas Diponegoro', 'jurusan' => 'Teknik Sipil', 'passing_grade' => 665],
-
-        //     // 🧱 KGSP (Konstruksi Gedung Sanitasi dan Perawatan)
-        //     ['kampus' => 'Universitas Diponegoro', 'jurusan' => 'Manajemen Konstruksi', 'passing_grade' => 650],
-        //     ['kampus' => 'Universitas Sebelas Maret', 'jurusan' => 'Teknik Bangunan Gedung', 'passing_grade' => 630],
-        //     ['kampus' => 'Institut Teknologi Sepuluh Nopember', 'jurusan' => 'Teknik Sipil', 'passing_grade' => 675],
-
-        //     // 🌍 GEO (Geomatika / Geospasial)
-        //     ['kampus' => 'Institut Teknologi Bandung', 'jurusan' => 'Teknik Geodesi', 'passing_grade' => 705],
-        //     ['kampus' => 'Universitas Gadjah Mada', 'jurusan' => 'Geografi', 'passing_grade' => 675],
-        //     ['kampus' => 'Politeknik Negeri Jakarta', 'jurusan' => 'Teknologi Survei dan Pemetaan', 'passing_grade' => 590],
-        // ];
-        // foreach ($kampusJurusanMap as $kampusName => $jurusanKuliahNames) {
-        //     $kampus = Kampus::where('nama_kampus', $kampusName)->first();
-        //     if (!$kampus) continue;
-
-        //     $jurusanKuliahIds = JurusanKuliah::whereIn('nama_jurusan_kuliah', $jurusanKuliahNames)->pluck('id')->toArray();
-
-        //     $kampus->jurusanKuliahs()->syncWithoutDetaching($jurusanKuliahIds);
-        // }
+            if (!empty($attachData)) {
+                $hobi->jurusanKuliahs()->syncWithoutDetaching($attachData);
+            }
+        }
     }
 }
