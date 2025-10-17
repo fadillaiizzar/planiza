@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        {{-- @include('siswa.kenali_profesi.tes.riwayat-tes') --}}
+        @include('siswa.kenali_jurusan.form_kuliah.riwayat-form')
 
         <x-siswa.kenali_karier.additional-link
             :href="route('siswa.kenali-profesi.index')"
