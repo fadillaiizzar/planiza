@@ -48,7 +48,7 @@ class KerjakanFormController extends Controller
             ->where('attempt', $activeAttempt)
             ->get();
 
-        $nilaiUtbk = $formKuliah->nilai_utbk;
+        $nilaiUtbk = $formKuliah->nilai_utbk == 0 ? '' : $formKuliah->nilai_utbk;
 
         $jurusanSelected = $currentMinat->pluck('jurusan_kuliah_id')
             ->filter()
