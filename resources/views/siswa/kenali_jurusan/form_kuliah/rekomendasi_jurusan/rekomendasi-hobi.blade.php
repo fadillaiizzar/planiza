@@ -17,10 +17,6 @@
                         {{ $jurusan['jurusan']->nama_jurusan_kuliah }}
                     </h3>
 
-                    <p class="text-sm text-cool-gray mb-2">
-                        Total Poin : {{ $jurusan['total_poin'] }}
-                    </p>
-
                     <a href="{{ route('siswa.eksplorasi-jurusan.show', $jurusan['jurusan']->id) }}"
                         class="mt-auto inline-flex items-center justify-center px-6 py-3.5 bg-slate-navy text-white rounded-xl font-semibold overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-105">
                         <span class="relative z-10 flex items-center gap-2">

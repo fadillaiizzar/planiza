@@ -40,6 +40,10 @@
                                 Passing Grade : {{ $kampusData['passing_grade'] ?? 'Belum tersedia' }}
                             </p>
 
+                            <p class="text-sm text-cool-gray mb-4">
+                                Selisih Nilai : {{ $kampusData['selisih'] }}
+                            </p>
+
                             <p class="text-sm text-blue-500 mb-2 hover:underline">
                                 Website :
                                 <a href="{{ $kampusData['kampus']->website }}" target="_blank">
