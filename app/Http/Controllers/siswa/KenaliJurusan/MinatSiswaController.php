@@ -102,7 +102,10 @@ class MinatSiswaController extends Controller
 
         $formKuliah->update(['attempt' => $attempt]);
 
-        return redirect()->route('siswa.kenali-jurusan.index')
-            ->with('success', 'Data form kuliah kamu berhasil dikirim!');
+        return response()->json([
+            'success' => true,
+            'message' => 'Data form kuliah kamu berhasil dikirim!',
+            'redirect_url' => route('siswa.kenali-jurusan.form-kuliah.rekomendasi', $formKuliah->id)
+        ]);
     }
 }
