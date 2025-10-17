@@ -22,7 +22,7 @@ class JurusanKuliah extends Model
 
     public function kampus(): BelongsToMany
     {
-        return $this->belongsToMany(Kampus::class, 'kampus_jurusans', 'jurusan_kuliah_id', 'kampus_id')->withTimestamps();
+        return $this->belongsToMany(Kampus::class, 'kampus_jurusans', 'jurusan_kuliah_id', 'kampus_id')->withPivot('passing_grade')->withTimestamps();
     }
 
     public function kampusJurusans(): HasMany
