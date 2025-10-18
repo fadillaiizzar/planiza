@@ -129,7 +129,7 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->na
 
         Route::prefix('tes')->name('tes.')->group(function () {
             Route::get('/', [KerjakanTesController::class, 'index'])->name('index');
-            Route::post('/{soal}/store', [JawabanSiswaController::class, 'store'])->name('jawab');
+            Route::post('/{soal}/jawab', [JawabanSiswaController::class, 'store'])->name('jawab');
 
             Route::post('/{tes}/submit', [KerjakanTesController::class, 'submit'])->name('submit');
             Route::get('/{tes}/rekomendasi/{attempt?}', [RekomendasiProfesiController::class, 'index'])->name('rekomendasi');
