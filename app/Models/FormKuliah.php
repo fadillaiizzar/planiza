@@ -23,4 +23,9 @@ class FormKuliah extends Model
     {
         return $this->hasMany(Minat::class);
     }
+
+    public function kenaliJurusans(): HasMany
+    {
+        return $this->hasMany(KenaliJurusan::class);
+    }
 }

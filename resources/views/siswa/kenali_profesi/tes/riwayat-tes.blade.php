@@ -46,7 +46,7 @@
             </div>
         </div>
     @else
-        <div class="space-y-4 grid grid-cols-1 lg:grid-cols-2">
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 items-stretch">
             @foreach($riwayatTes as $index => $tes)
                 @php
                     $userId = Auth::id();
@@ -64,7 +64,7 @@
                         <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-slate-navy via-cool-gray to-slate-navy transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
 
                         <div class="p-5">
-                            <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+                            <div class="flex flex-col sm:flex-row md:items-center gap-4 md:gap-6">
 
                                 <!-- Nomor -->
                                 <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-slate-navy/10 to-cool-gray/10 rounded-xl flex items-center justify-center border border-border-gray/30 group-hover:scale-110 transition-transform duration-300">

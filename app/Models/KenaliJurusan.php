@@ -9,7 +9,7 @@ class KenaliJurusan extends Model
 {
     protected $fillable = [
         'user_id',
-        'kampus_jurusan_id',
+        'form_kuliah_id',
         'jurusan_kuliah_id',
         'sumber_rekomendasi',
         'status_peluang',
@@ -21,9 +21,9 @@ class KenaliJurusan extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function kampusJurusan(): BelongsTo
+    public function formKuliah(): BelongsTo
     {
-        return $this->belongsTo(KampusJurusan::class);
+        return $this->belongsTo(FormKuliah::class);
     }
 
     public function jurusanKuliah(): BelongsTo

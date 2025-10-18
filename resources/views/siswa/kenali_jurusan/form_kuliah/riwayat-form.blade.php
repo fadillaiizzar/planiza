@@ -59,12 +59,12 @@
                         <!-- Detail -->
                         <div class="flex-grow min-w-0">
                             <h3 class="font-bold text-base text-slate-navy mb-1.5 truncate group-hover:text-cool-gray transition-colors">
-                                Form Kuliah ke-{{ $item->attempt }}
+                                Form Kuliah
                             </h3>
                             <div class="flex items-center gap-3 text-xs text-cool-gray">
                                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-navy/5 text-slate-navy font-medium rounded-full border border-border-gray/30">
                                     <i class="fas fa-check-circle text-[9px]"></i>
-                                    Selesai
+                                    Selesai {{ $item->attempt }}
                                 </span>
 
                                 <span class="flex items-center gap-1.5">
@@ -85,7 +85,7 @@
                                     <div class="absolute inset-0 bg-cool-gray transform scale-x-0 group-hover/btn:scale-x-100 transition-transform origin-left duration-300"></div>
                                     <span class="relative z-10 flex items-center gap-2">
                                         <i class="fas fa-eye text-sm"></i>
-                                        Detail
+                                        Detail {{ $item->attempt }}
                                         <i class="fas fa-arrow-right text-xs transform group-hover/btn:translate-x-1 transition-transform"></i>
                                     </span>
                                 </a>

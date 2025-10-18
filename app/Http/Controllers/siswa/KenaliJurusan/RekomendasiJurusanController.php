@@ -53,9 +53,9 @@ class RekomendasiJurusanController extends Controller
                     [
                         'user_id' => $user->id,
                         'jurusan_kuliah_id' => $jurusan->id,
-                        'kampus_jurusan_id' => $kampus->pivot->id ?? null,
                         'sumber_rekomendasi' => 'utbk',
                         'attempt' => $activeAttempt,
+                        'form_kuliah_id' => $formKuliah->id,
                     ],
                     [
                         'status_peluang' => $status,

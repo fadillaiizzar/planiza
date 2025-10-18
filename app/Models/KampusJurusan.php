@@ -28,9 +28,4 @@ class KampusJurusan extends Model
     {
         return $this->belongsTo(Kampus::class, 'kampus_id');
     }
-
-    public function kenaliJurusans(): HasMany
-    {
-        return $this->hasMany(KenaliJurusan::class);
-    }
 }

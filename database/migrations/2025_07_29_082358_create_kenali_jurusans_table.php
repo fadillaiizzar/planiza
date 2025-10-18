@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kenali_jurusans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('kampus_jurusan_id')->nullable()->constrained('kampus_jurusans')->onDelete('cascade');
+            $table->foreignId('form_kuliah_id')->nullable()->constrained('form_kuliahs')->onDelete('cascade');
             $table->foreignId('jurusan_kuliah_id')->nullable()->constrained('jurusan_kuliahs')->onDelete('cascade');
             $table->enum('sumber_rekomendasi', ['utbk', 'hobi', 'sdgs']);
             $table->enum('status_peluang', ['tinggi', 'sedang', 'rendah'])->nullable();
