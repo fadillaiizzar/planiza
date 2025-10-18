@@ -6,7 +6,7 @@
     'delay' => null,
 ])
 
-<div class="group bg-white/50 backdrop-blur-sm cursor-pointer border border-border-gray hover:border-slate-navy rounded-2xl p-6 hover:shadow-2xl hover:shadow-slate-navy/10 transition-all duration-300 hover:-translate-y-2"
+<div class="group bg-white/50 backdrop-blur-sm cursor-default border border-border-gray hover:border-slate-navy rounded-2xl p-6 hover:shadow-2xl hover:shadow-slate-navy/10 transition-all duration-300 hover:-translate-y-2"
      @if($delay) style="animation-delay: {{ $delay }}ms;" @endif>
     <div class="flex items-start gap-5">
         <div class="w-10 h-10 bg-gradient-to-br {{ $gradient }} rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
