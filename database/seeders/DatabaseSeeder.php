@@ -86,77 +86,76 @@ class DatabaseSeeder extends Seeder
         // Profesi Kerja
         $profesiPerJurusan = [
             'TKR' => [
-                ['nama_profesi_kerja' => 'Teknisi Otomotif', 'gaji' => 3500000, 'deskripsi' => 'Mekanik dan perbaikan kendaraan', 'info_skill' => 'Diagnosa Mesin', 'info_jurusan' => 'TKR'],
-                ['nama_profesi_kerja' => 'Operator Mesin Industri', 'gaji' => 3300000, 'deskripsi' => 'Mengoperasikan mesin produksi', 'info_skill' => 'Pengaturan CNC', 'info_jurusan' => 'TKR'],
-                ['nama_profesi_kerja' => 'Teknisi Listrik Otomotif', 'gaji' => 3600000, 'deskripsi' => 'Perawatan sistem listrik kendaraan', 'info_skill' => 'Sistem Kelistrikan Mobil', 'info_jurusan' => 'TKR'],
-                ['nama_profesi_kerja' => 'Mekanik Motor', 'gaji' => 3200000, 'deskripsi' => 'Perawatan dan servis sepeda motor', 'info_skill' => 'Perawatan Mesin Motor', 'info_jurusan' => 'TKR'],
-                ['nama_profesi_kerja' => 'Teknisi Kendaraan Berat', 'gaji' => 3700000, 'deskripsi' => 'Perbaikan kendaraan besar seperti truk dan bus', 'info_skill' => 'Sistem Suspensi Berat', 'info_jurusan' => 'TKR'],
-                ['nama_profesi_kerja' => 'Teknisi Diagnosa Mesin', 'gaji' => 3800000, 'deskripsi' => 'Mengidentifikasi masalah mesin dengan perangkat elektronik', 'info_skill' => 'Scanner ECU', 'info_jurusan' => 'TKR'],
+                ['nama_profesi_kerja' => 'Teknisi Otomotif', 'deskripsi' => 'Mekanik dan perbaikan kendaraan', 'info_skill' => 'Diagnosa Mesin', 'info_jurusan' => 'TKR'],
+                ['nama_profesi_kerja' => 'Operator Mesin Industri', 'deskripsi' => 'Mengoperasikan mesin produksi', 'info_skill' => 'Pengaturan CNC', 'info_jurusan' => 'TKR'],
+                ['nama_profesi_kerja' => 'Teknisi Listrik Otomotif', 'deskripsi' => 'Perawatan sistem listrik kendaraan', 'info_skill' => 'Sistem Kelistrikan Mobil', 'info_jurusan' => 'TKR'],
+                ['nama_profesi_kerja' => 'Mekanik Motor', 'deskripsi' => 'Perawatan dan servis sepeda motor', 'info_skill' => 'Perawatan Mesin Motor', 'info_jurusan' => 'TKR'],
+                ['nama_profesi_kerja' => 'Teknisi Kendaraan Berat', 'deskripsi' => 'Perbaikan kendaraan besar seperti truk dan bus', 'info_skill' => 'Sistem Suspensi Berat', 'info_jurusan' => 'TKR'],
+                ['nama_profesi_kerja' => 'Teknisi Diagnosa Mesin', 'deskripsi' => 'Mengidentifikasi masalah mesin dengan perangkat elektronik', 'info_skill' => 'Scanner ECU', 'info_jurusan' => 'TKR'],
             ],
             'SIJA' => [
-                ['nama_profesi_kerja' => 'Programmer', 'gaji' => 5000000, 'deskripsi' => 'Pengembang perangkat lunak', 'info_skill' => 'Algoritma & Struktur Data', 'info_jurusan' => 'SIJA'],
-                ['nama_profesi_kerja' => 'Web Developer', 'gaji' => 4500000, 'deskripsi' => 'Membangun aplikasi web', 'info_skill' => 'Front-End Framework', 'info_jurusan' => 'SIJA'],
-                ['nama_profesi_kerja' => 'Network Engineer', 'gaji' => 4800000, 'deskripsi' => 'Mengelola jaringan komputer', 'info_skill' => 'Konfigurasi Router & Switch', 'info_jurusan' => 'SIJA'],
-                ['nama_profesi_kerja' => 'System Analyst', 'gaji' => 5100000, 'deskripsi' => 'Menganalisis kebutuhan sistem', 'info_skill' => 'Analisis Sistem', 'info_jurusan' => 'SIJA'],
-                ['nama_profesi_kerja' => 'Database Administrator', 'gaji' => 4900000, 'deskripsi' => 'Mengelola basis data', 'info_skill' => 'SQL & Optimisasi Database', 'info_jurusan' => 'SIJA'],
-                ['nama_profesi_kerja' => 'Cybersecurity Analyst', 'gaji' => 5200000, 'deskripsi' => 'Melindungi sistem dan jaringan', 'info_skill' => 'Keamanan Jaringan', 'info_jurusan' => 'SIJA'],
+                ['nama_profesi_kerja' => 'Programmer', 'deskripsi' => 'Pengembang perangkat lunak', 'info_skill' => 'Algoritma & Struktur Data', 'info_jurusan' => 'SIJA'],
+                ['nama_profesi_kerja' => 'Web Developer', 'deskripsi' => 'Membangun aplikasi web', 'info_skill' => 'Front-End Framework', 'info_jurusan' => 'SIJA'],
+                ['nama_profesi_kerja' => 'Network Engineer', 'deskripsi' => 'Mengelola jaringan komputer', 'info_skill' => 'Konfigurasi Router & Switch', 'info_jurusan' => 'SIJA'],
+                ['nama_profesi_kerja' => 'System Analyst', 'deskripsi' => 'Menganalisis kebutuhan sistem', 'info_skill' => 'Analisis Sistem', 'info_jurusan' => 'SIJA'],
+                ['nama_profesi_kerja' => 'Database Administrator', 'deskripsi' => 'Mengelola basis data', 'info_skill' => 'SQL & Optimisasi Database', 'info_jurusan' => 'SIJA'],
+                ['nama_profesi_kerja' => 'Cybersecurity Analyst', 'deskripsi' => 'Melindungi sistem dan jaringan', 'info_skill' => 'Keamanan Jaringan', 'info_jurusan' => 'SIJA'],
             ],
             'TAV' => [
-                ['nama_profesi_kerja' => 'Teknisi Audio Visual', 'gaji' => 4000000, 'deskripsi' => 'Perawatan alat audio-visual', 'info_skill' => 'Kalibrasi AV', 'info_jurusan' => 'TAV'],
-                ['nama_profesi_kerja' => 'Video Editor', 'gaji' => 4200000, 'deskripsi' => 'Mengedit video dan animasi', 'info_skill' => 'Adobe Premiere', 'info_jurusan' => 'TAV'],
-                ['nama_profesi_kerja' => 'Video Motion Specialist', 'gaji' => 4500000, 'deskripsi' => 'Membuat video animasi dan efek visual untuk kebutuhan siaran dan media digital.', 'info_skill' => '3D Animation, Motion Tracking, Compositing', 'info_jurusan' => 'TAV'],
-                ['nama_profesi_kerja' => 'Sound Designer', 'gaji' => 4300000, 'deskripsi' => 'Membuat efek suara dan mixing', 'info_skill' => 'Audio Mixing', 'info_jurusan' => 'TAV'],
-                ['nama_profesi_kerja' => 'Motion Graphics Designer', 'gaji' => 4400000, 'deskripsi' => 'Membuat animasi grafis bergerak', 'info_skill' => 'After Effects', 'info_jurusan' => 'TAV'],
-                ['nama_profesi_kerja' => 'Broadcast Technician', 'gaji' => 4100000, 'deskripsi' => 'Mengoperasikan siaran televisi', 'info_skill' => 'Pengoperasian Kamera Siaran', 'info_jurusan' => 'TAV'],
+                ['nama_profesi_kerja' => 'Teknisi Audio Visual', 'deskripsi' => 'Perawatan alat audio-visual', 'info_skill' => 'Kalibrasi AV', 'info_jurusan' => 'TAV'],
+                ['nama_profesi_kerja' => 'Video Editor', 'deskripsi' => 'Mengedit video dan animasi', 'info_skill' => 'Adobe Premiere', 'info_jurusan' => 'TAV'],
+                ['nama_profesi_kerja' => 'Video Motion Specialist', 'deskripsi' => 'Membuat video animasi dan efek visual untuk kebutuhan siaran dan media digital.', 'info_skill' => '3D Animation, Motion Tracking, Compositing', 'info_jurusan' => 'TAV'],
+                ['nama_profesi_kerja' => 'Sound Designer', 'deskripsi' => 'Membuat efek suara dan mixing', 'info_skill' => 'Audio Mixing', 'info_jurusan' => 'TAV'],
+                ['nama_profesi_kerja' => 'Motion Graphics Designer', 'deskripsi' => 'Membuat animasi grafis bergerak', 'info_skill' => 'After Effects', 'info_jurusan' => 'TAV'],
+                ['nama_profesi_kerja' => 'Broadcast Technician', 'deskripsi' => 'Mengoperasikan siaran televisi', 'info_skill' => 'Pengoperasian Kamera Siaran', 'info_jurusan' => 'TAV'],
             ],
             'TITL' => [
-                ['nama_profesi_kerja' => 'Teknisi Telekomunikasi', 'gaji' => 4200000, 'deskripsi' => 'Instalasi jaringan komunikasi', 'info_skill' => 'Konfigurasi Jaringan', 'info_jurusan' => 'TITL'],
-                ['nama_profesi_kerja' => 'Teknisi Fiber Optik', 'gaji' => 4400000, 'deskripsi' => 'Perawatan kabel dan jaringan fiber', 'info_skill' => 'Splicing Fiber', 'info_jurusan' => 'TITL'],
-                ['nama_profesi_kerja' => 'Operator BTS', 'gaji' => 4300000, 'deskripsi' => 'Mengelola tower dan komunikasi', 'info_skill' => 'Maintenance BTS', 'info_jurusan' => 'TITL'],
-                ['nama_profesi_kerja' => 'Network Installer', 'gaji' => 4100000, 'deskripsi' => 'Instalasi jaringan LAN/WAN', 'info_skill' => 'Kabelisasi LAN', 'info_jurusan' => 'TITL'],
-                ['nama_profesi_kerja' => 'Telecom Technician', 'gaji' => 4500000, 'deskripsi' => 'Perawatan perangkat telekomunikasi', 'info_skill' => 'Perangkat Switching', 'info_jurusan' => 'TITL'],
-                ['nama_profesi_kerja' => 'Satellite Technician', 'gaji' => 4600000, 'deskripsi' => 'Instalasi dan perawatan satelit', 'info_skill' => 'Parabola & Receiver', 'info_jurusan' => 'TITL'],
+                ['nama_profesi_kerja' => 'Teknisi Telekomunikasi', 'deskripsi' => 'Instalasi jaringan komunikasi', 'info_skill' => 'Konfigurasi Jaringan', 'info_jurusan' => 'TITL'],
+                ['nama_profesi_kerja' => 'Teknisi Fiber Optik', 'deskripsi' => 'Perawatan kabel dan jaringan fiber', 'info_skill' => 'Splicing Fiber', 'info_jurusan' => 'TITL'],
+                ['nama_profesi_kerja' => 'Operator BTS', 'deskripsi' => 'Mengelola tower dan komunikasi', 'info_skill' => 'Maintenance BTS', 'info_jurusan' => 'TITL'],
+                ['nama_profesi_kerja' => 'Network Installer', 'deskripsi' => 'Instalasi jaringan LAN/WAN', 'info_skill' => 'Kabelisasi LAN', 'info_jurusan' => 'TITL'],
+                ['nama_profesi_kerja' => 'Telecom Technician', 'deskripsi' => 'Perawatan perangkat telekomunikasi', 'info_skill' => 'Perangkat Switching', 'info_jurusan' => 'TITL'],
+                ['nama_profesi_kerja' => 'Satellite Technician', 'deskripsi' => 'Instalasi dan perawatan satelit', 'info_skill' => 'Parabola & Receiver', 'info_jurusan' => 'TITL'],
             ],
             'TP' => [
-                ['nama_profesi_kerja' => 'Operator Mesin Bubut', 'gaji' => 3800000, 'deskripsi' => 'Mengoperasikan mesin bubut untuk membentuk komponen logam sesuai desain teknik', 'info_skill' => 'Pengoperasian Mesin Bubut', 'info_jurusan' => 'TP'],
-                ['nama_profesi_kerja' => 'Operator Mesin CNC', 'gaji' => 4200000, 'deskripsi' => 'Menjalankan dan memprogram mesin CNC untuk proses pemesinan presisi tinggi', 'info_skill' => 'Pemrograman CNC', 'info_jurusan' => 'TP'],
-                ['nama_profesi_kerja' => 'Teknisi Produksi Manufaktur', 'gaji' => 4000000, 'deskripsi' => 'Menangani perakitan dan proses produksi komponen mekanik di industri manufaktur', 'info_skill' => 'Perakitan dan Proses Produksi', 'info_jurusan' => 'TP'],
-                ['nama_profesi_kerja' => 'Teknisi Perawatan Mesin Industri', 'gaji' => 3900000, 'deskripsi' => 'Melakukan perawatan dan perbaikan mesin produksi agar tetap berfungsi optimal', 'info_skill' => 'Maintenance Mesin Industri', 'info_jurusan' => 'TP'],
-                ['nama_profesi_kerja' => 'Quality Control Produk Mekanik', 'gaji' => 4100000, 'deskripsi' => 'Melakukan pemeriksaan kualitas hasil produksi komponen logam dan mesin', 'info_skill' => 'Pengukuran Presisi dan Kalibrasi', 'info_jurusan' => 'TP'],
-                ['nama_profesi_kerja' => 'Drafter Mesin', 'gaji' => 3900000, 'deskripsi' => 'Membuat gambar teknik dan desain komponen mesin menggunakan CAD', 'info_skill' => 'Gambar Teknik dan CAD', 'info_jurusan' => 'TP'],
+                ['nama_profesi_kerja' => 'Operator Mesin Bubut', 'deskripsi' => 'Mengoperasikan mesin bubut untuk membentuk komponen logam sesuai desain teknik', 'info_skill' => 'Pengoperasian Mesin Bubut', 'info_jurusan' => 'TP'],
+                ['nama_profesi_kerja' => 'Operator Mesin CNC', 'deskripsi' => 'Menjalankan dan memprogram mesin CNC untuk proses pemesinan presisi tinggi', 'info_skill' => 'Pemrograman CNC', 'info_jurusan' => 'TP'],
+                ['nama_profesi_kerja' => 'Teknisi Produksi Manufaktur', 'deskripsi' => 'Menangani perakitan dan proses produksi komponen mekanik di industri manufaktur', 'info_skill' => 'Perakitan dan Proses Produksi', 'info_jurusan' => 'TP'],
+                ['nama_profesi_kerja' => 'Teknisi Perawatan Mesin Industri', 'deskripsi' => 'Melakukan perawatan dan perbaikan mesin produksi agar tetap berfungsi optimal', 'info_skill' => 'Maintenance Mesin Industri', 'info_jurusan' => 'TP'],
+                ['nama_profesi_kerja' => 'Quality Control Produk Mekanik', 'deskripsi' => 'Melakukan pemeriksaan kualitas hasil produksi komponen logam dan mesin', 'info_skill' => 'Pengukuran Presisi dan Kalibrasi', 'info_jurusan' => 'TP'],
+                ['nama_profesi_kerja' => 'Drafter Mesin', 'deskripsi' => 'Membuat gambar teknik dan desain komponen mesin menggunakan CAD', 'info_skill' => 'Gambar Teknik dan CAD', 'info_jurusan' => 'TP'],
             ],
             'DPIB' => [
-                ['nama_profesi_kerja' => 'Desainer Interior', 'gaji' => 4500000, 'deskripsi' => 'Perancang interior', 'info_skill' => 'Interior Rendering', 'info_jurusan' => 'DPIB'],
-                ['nama_profesi_kerja' => 'Arsitek', 'gaji' => 5000000, 'deskripsi' => 'Perancangan bangunan', 'info_skill' => 'AutoCAD', 'info_jurusan' => 'DPIB'],
-                ['nama_profesi_kerja' => 'Desainer Furniture', 'gaji' => 4300000, 'deskripsi' => 'Mendesain dan membuat furniture', 'info_skill' => 'Furniture Modeling', 'info_jurusan' => 'DPIB'],
-                ['nama_profesi_kerja' => 'Project Architect', 'gaji' => 5200000, 'deskripsi' => 'Memimpin proyek desain bangunan', 'info_skill' => 'Project Management', 'info_jurusan' => 'DPIB'],
-                ['nama_profesi_kerja' => '3D Visualizer', 'gaji' => 4400000, 'deskripsi' => 'Membuat visualisasi 3D desain interior', 'info_skill' => '3DS Max', 'info_jurusan' => 'DPIB'],
-                ['nama_profesi_kerja' => 'Desainer Retail', 'gaji' => 4300000, 'deskripsi' => 'Mendesain toko dan display', 'info_skill' => 'Store Layout', 'info_jurusan' => 'DPIB'],
+                ['nama_profesi_kerja' => 'Desainer Interior', 'deskripsi' => 'Perancang interior', 'info_skill' => 'Interior Rendering', 'info_jurusan' => 'DPIB'],
+                ['nama_profesi_kerja' => 'Arsitek', 'deskripsi' => 'Perancangan bangunan', 'info_skill' => 'AutoCAD', 'info_jurusan' => 'DPIB'],
+                ['nama_profesi_kerja' => 'Desainer Furniture', 'deskripsi' => 'Mendesain dan membuat furniture', 'info_skill' => 'Furniture Modeling', 'info_jurusan' => 'DPIB'],
+                ['nama_profesi_kerja' => 'Project Architect', 'deskripsi' => 'Memimpin proyek desain bangunan', 'info_skill' => 'Project Management', 'info_jurusan' => 'DPIB'],
+                ['nama_profesi_kerja' => '3D Visualizer', 'deskripsi' => 'Membuat visualisasi 3D desain interior', 'info_skill' => '3DS Max', 'info_jurusan' => 'DPIB'],
+                ['nama_profesi_kerja' => 'Desainer Retail', 'deskripsi' => 'Mendesain toko dan display', 'info_skill' => 'Store Layout', 'info_jurusan' => 'DPIB'],
             ],
             'KGSP' => [
-                ['nama_profesi_kerja' => 'Manajer Fasilitas Gedung', 'gaji' => 4500000, 'deskripsi' => 'Bertanggung jawab atas pengelolaan, operasional, dan pemeliharaan seluruh fasilitas bangunan.', 'info_skill' => 'Facility Management, Building Operations, Leadership', 'info_jurusan' => 'KGSP'],
-                ['nama_profesi_kerja' => 'Teknisi Pemeliharaan Bangunan', 'gaji' => 3800000, 'deskripsi' => 'Melakukan perawatan, perbaikan, dan pengecekan rutin terhadap struktur dan fasilitas bangunan.', 'info_skill' => 'Maintenance Bangunan, Plumbing, Perbaikan Fasilitas', 'info_jurusan' => 'KGSP'],
-                ['nama_profesi_kerja' => 'Supervisor Konstruksi Gedung', 'gaji' => 4200000, 'deskripsi' => 'Mengawasi pelaksanaan proyek pembangunan dan memastikan kualitas serta keselamatan kerja di lapangan.', 'info_skill' => 'Construction Supervision, Quality Control, Manajemen Proyek', 'info_jurusan' => 'KGSP'],
-                ['nama_profesi_kerja' => 'Ahli Sanitasi Bangunan', 'gaji' => 4000000, 'deskripsi' => 'Menangani sistem sanitasi, drainase, dan pengelolaan limbah bangunan agar sesuai standar kebersihan.', 'info_skill' => 'Sistem Sanitasi, Plumbing, Drainase Bangunan', 'info_jurusan' => 'KGSP'],
-                ['nama_profesi_kerja' => 'Teknisi Instalasi Gedung', 'gaji' => 3900000, 'deskripsi' => 'Melakukan instalasi dan perawatan sistem listrik, air, dan ventilasi di dalam bangunan.', 'info_skill' => 'Electrical Wiring, HVAC System, Instalasi Gedung', 'info_jurusan' => 'KGSP'],
-                ['nama_profesi_kerja' => 'Estimator Konstruksi', 'gaji' => 4300000, 'deskripsi' => 'Menghitung kebutuhan material, biaya, dan tenaga kerja pada proyek pembangunan gedung.', 'info_skill' => 'Estimasi Biaya, Analisis Struktur, Manajemen Proyek', 'info_jurusan' => 'KGSP'],
+                ['nama_profesi_kerja' => 'Manajer Fasilitas Gedung', 'deskripsi' => 'Bertanggung jawab atas pengelolaan, operasional, dan pemeliharaan seluruh fasilitas bangunan.', 'info_skill' => 'Facility Management, Building Operations, Leadership', 'info_jurusan' => 'KGSP'],
+                ['nama_profesi_kerja' => 'Teknisi Pemeliharaan Bangunan', 'deskripsi' => 'Melakukan perawatan, perbaikan, dan pengecekan rutin terhadap struktur dan fasilitas bangunan.', 'info_skill' => 'Maintenance Bangunan, Plumbing, Perbaikan Fasilitas', 'info_jurusan' => 'KGSP'],
+                ['nama_profesi_kerja' => 'Supervisor Konstruksi Gedung', 'deskripsi' => 'Mengawasi pelaksanaan proyek pembangunan dan memastikan kualitas serta keselamatan kerja di lapangan.', 'info_skill' => 'Construction Supervision, Quality Control, Manajemen Proyek', 'info_jurusan' => 'KGSP'],
+                ['nama_profesi_kerja' => 'Ahli Sanitasi Bangunan', 'deskripsi' => 'Menangani sistem sanitasi, drainase, dan pengelolaan limbah bangunan agar sesuai standar kebersihan.', 'info_skill' => 'Sistem Sanitasi, Plumbing, Drainase Bangunan', 'info_jurusan' => 'KGSP'],
+                ['nama_profesi_kerja' => 'Teknisi Instalasi Gedung', 'deskripsi' => 'Melakukan instalasi dan perawatan sistem listrik, air, dan ventilasi di dalam bangunan.', 'info_skill' => 'Electrical Wiring, HVAC System, Instalasi Gedung', 'info_jurusan' => 'KGSP'],
+                ['nama_profesi_kerja' => 'Estimator Konstruksi', 'deskripsi' => 'Menghitung kebutuhan material, biaya, dan tenaga kerja pada proyek pembangunan gedung.', 'info_skill' => 'Estimasi Biaya, Analisis Struktur, Manajemen Proyek', 'info_jurusan' => 'KGSP'],
             ],
             'DKV' => [
-                ['nama_profesi_kerja' => 'Desainer Grafis', 'gaji' => 4000000, 'deskripsi' => 'Membuat desain visual', 'info_skill' => 'Adobe Illustrator', 'info_jurusan' => 'DKV'],
-                ['nama_profesi_kerja' => 'Ilustrator', 'gaji' => 4200000, 'deskripsi' => 'Membuat ilustrasi digital', 'info_skill' => 'Digital Painting', 'info_jurusan' => 'DKV'],
-                ['nama_profesi_kerja' => 'Animator', 'gaji' => 4500000, 'deskripsi' => 'Membuat animasi kreatif', 'info_skill' => '2D Animation', 'info_jurusan' => 'DKV'],
-                ['nama_profesi_kerja' => 'Motion Designer', 'gaji' => 4400000, 'deskripsi' => 'Membuat animasi grafis', 'info_skill' => 'After Effects', 'info_jurusan' => 'DKV'],
-                ['nama_profesi_kerja' => 'Visual Storyteller', 'gaji' => 4300000, 'deskripsi' => 'Menyampaikan cerita lewat visual', 'info_skill' => 'Storyboarding', 'info_jurusan' => 'DKV'],
-                ['nama_profesi_kerja' => 'Art Director', 'gaji' => 4800000, 'deskripsi' => 'Mengonsep dan mengarahkan tampilan visual dalam proyek kreatif seperti iklan, kampanye, dan branding.', 'info_skill' => 'Creative Direction, Branding, Visual Concept', 'info_jurusan' => 'DKV'],
-
+                ['nama_profesi_kerja' => 'Desainer Grafis', 'deskripsi' => 'Membuat desain visual', 'info_skill' => 'Adobe Illustrator', 'info_jurusan' => 'DKV'],
+                ['nama_profesi_kerja' => 'Ilustrator', 'deskripsi' => 'Membuat ilustrasi digital', 'info_skill' => 'Digital Painting', 'info_jurusan' => 'DKV'],
+                ['nama_profesi_kerja' => 'Animator', 'deskripsi' => 'Membuat animasi kreatif', 'info_skill' => '2D Animation', 'info_jurusan' => 'DKV'],
+                ['nama_profesi_kerja' => 'Motion Designer', 'deskripsi' => 'Membuat animasi grafis', 'info_skill' => 'After Effects', 'info_jurusan' => 'DKV'],
+                ['nama_profesi_kerja' => 'Visual Storyteller', 'deskripsi' => 'Menyampaikan cerita lewat visual', 'info_skill' => 'Storyboarding', 'info_jurusan' => 'DKV'],
+                ['nama_profesi_kerja' => 'Art Director', 'deskripsi' => 'Mengonsep dan mengarahkan tampilan visual dalam proyek kreatif seperti iklan, kampanye, dan branding.', 'info_skill' => 'Creative Direction, Branding, Visual Concept', 'info_jurusan' => 'DKV'],
             ],
             'GEO' => [
-                ['nama_profesi_kerja' => 'Surveyor', 'gaji' => 3800000, 'deskripsi' => 'Pengukuran tanah dan pemetaan', 'info_skill' => 'Total Station', 'info_jurusan' => 'GEO'],
-                ['nama_profesi_kerja' => 'Geomatik', 'gaji' => 4000000, 'deskripsi' => 'Pengolahan data geospasial', 'info_skill' => 'GIS Analysis', 'info_jurusan' => 'GEO'],
-                ['nama_profesi_kerja' => 'Teknisi Pemetaan', 'gaji' => 3900000, 'deskripsi' => 'Membuat peta dan survei lapangan', 'info_skill' => 'GPS Mapping', 'info_jurusan' => 'GEO'],
-                ['nama_profesi_kerja' => 'Cartographer', 'gaji' => 4100000, 'deskripsi' => 'Membuat peta tematik dan digital', 'info_skill' => 'Mapping Software', 'info_jurusan' => 'GEO'],
-                ['nama_profesi_kerja' => 'Remote Sensing Analyst', 'gaji' => 4200000, 'deskripsi' => 'Analisis citra satelit', 'info_skill' => 'Satellite Imagery', 'info_jurusan' => 'GEO'],
-                ['nama_profesi_kerja' => 'Ahli Sistem Informasi Geografis', 'gaji' => 4500000, 'deskripsi' => 'Mengelola, menganalisis, dan memvisualisasikan data spasial menggunakan sistem GIS.', 'info_skill' => 'ArcGIS, Spatial Database, Data Visualization', 'info_jurusan' => 'GEO'],
+                ['nama_profesi_kerja' => 'Surveyor', 'deskripsi' => 'Pengukuran tanah dan pemetaan', 'info_skill' => 'Total Station', 'info_jurusan' => 'GEO'],
+                ['nama_profesi_kerja' => 'Geomatik', 'deskripsi' => 'Pengolahan data geospasial', 'info_skill' => 'GIS Analysis', 'info_jurusan' => 'GEO'],
+                ['nama_profesi_kerja' => 'Teknisi Pemetaan', 'deskripsi' => 'Membuat peta dan survei lapangan', 'info_skill' => 'GPS Mapping', 'info_jurusan' => 'GEO'],
+                ['nama_profesi_kerja' => 'Cartographer', 'deskripsi' => 'Membuat peta tematik dan digital', 'info_skill' => 'Mapping Software', 'info_jurusan' => 'GEO'],
+                ['nama_profesi_kerja' => 'Remote Sensing Analyst', 'deskripsi' => 'Analisis citra satelit', 'info_skill' => 'Satellite Imagery', 'info_jurusan' => 'GEO'],
+                ['nama_profesi_kerja' => 'Ahli Sistem Informasi Geografis', 'deskripsi' => 'Mengelola, menganalisis, dan memvisualisasikan data spasial menggunakan sistem GIS.', 'info_skill' => 'ArcGIS, Spatial Database, Data Visualization', 'info_jurusan' => 'GEO'],
             ],
         ];
         foreach ($profesiPerJurusan as $jurusanName => $profesis) {
@@ -172,14 +171,13 @@ class DatabaseSeeder extends Seeder
             ['nama_industri' => 'Toyota Motor Manufacturing Indonesia', 'website' => 'https://www.toyota.co.id', 'alamat' => 'Jl. MT Haryono Kav.8, Jakarta'],
             ['nama_industri' => 'PT. Suzuki Indomobil Motor', 'website' => 'https://www.suzuki.co.id', 'alamat' => 'Jl. Raya Cakung Cilincing, Jakarta Timur'],
             ['nama_industri' => 'Honda Prospect Motor', 'website' => 'https://www.honda-indonesia.com', 'alamat' => 'Jl. Gaya Motor Raya No.1, Sunter, Jakarta Utara'],
-            ['nama_industri' => 'Mitsubishi Motors Krama Yudha Sales Indonesia', 'website' => 'https://www.mitsubishi-motors.co.id', 'alamat' => 'Jl. Raya Bogor KM.26, Jakarta Timur'],
+            ['nama_industri' => 'Mitsubishi Motors', 'website' => 'https://www.mitsubishi-motors.co.id', 'alamat' => 'Jl. Raya Bogor KM.26, Jakarta Timur'],
             ['nama_industri' => 'Yamaha Indonesia Motor Manufacturing', 'website' => 'https://www.yamaha-motor.co.id', 'alamat' => 'Jl. Industri Selatan V, Kawasan Industri Pulo Gadung, Jakarta Timur'],
             ['nama_industri' => 'PT. Astra Honda Motor', 'website' => 'https://www.astra-honda.com', 'alamat' => 'Jl. Gaya Motor No.8, Sunter, Jakarta Utara'],
             ['nama_industri' => 'PO Haryanto', 'website' => 'https://www.haryanto.co.id', 'alamat' => 'Jl. Raya Bogor KM.33, Jakarta'],
             ['nama_industri' => 'PO Sumber Alam', 'website' => 'https://www.sumberalam.com', 'alamat' => 'Jl. Raya Solo KM.12, Yogyakarta'],
             ['nama_industri' => 'BMW Astra', 'website' => 'https://www.bmw.astra.co.id', 'alamat' => 'Jl. Gaya Motor Raya No.9, Sunter, Jakarta Utara'],
             ['nama_industri' => 'Nissan-Datsun Indonesia', 'website' => 'https://www.nissan.co.id', 'alamat' => 'Jl. Gaya Motor Selatan No.2, Jakarta'],
-
             ['nama_industri' => 'Gojek', 'website' => 'https://www.gojek.com', 'alamat' => 'Menara GoTo, Jakarta'],
             ['nama_industri' => 'Tokopedia', 'website' => 'https://www.tokopedia.com', 'alamat' => 'Jl. H. R. Rasuna Said Kav. B-11, Jakarta'],
             ['nama_industri' => 'Bukalapak', 'website' => 'https://www.bukalapak.com', 'alamat' => 'Jl. Asemka No.3, Jakarta'],
@@ -197,12 +195,9 @@ class DatabaseSeeder extends Seeder
             ['nama_industri' => 'BSSN', 'website' => 'https://www.bssn.go.id', 'alamat' => 'Jl. Raya Lapan No.70, Bogor'],
             ['nama_industri' => 'Telkomsigma', 'website' => 'https://www.telkomsigma.co.id', 'alamat' => 'Jl. TB Simatupang No.39, Jakarta'],
             ['nama_industri' => 'Vaksincom', 'website' => 'https://www.vaksincom.com', 'alamat' => 'Jl. Kebon Jeruk No.21, Jakarta'],
-
             ['nama_industri' => 'RCTI', 'website' => 'https://www.rcti.tv', 'alamat' => 'Jl. Raya Kebon Jeruk No.20, Jakarta'],
             ['nama_industri' => 'Trans7', 'website' => 'https://www.trans7.co.id', 'alamat' => 'Jl. Kapten Tendean No.12, Jakarta'],
             ['nama_industri' => 'NET TV', 'website' => 'https://www.netmedia.co.id', 'alamat' => 'Jl. Kebon Jeruk No.5, Jakarta'],
-            ['nama_industri' => 'Go-Tix', 'website' => 'https://www.gotix.id', 'alamat' => 'Jl. M.H. Thamrin No.10, Jakarta'],
-            ['nama_industri' => 'Netflix Indonesia', 'website' => 'https://www.netflix.com/id', 'alamat' => 'Menara Thamrin, Jakarta'],
             ['nama_industri' => 'YouTube Content Creators', 'website' => 'https://www.youtube.com', 'alamat' => 'Jl. Rasuna Said No.19, Jakarta'],
             ['nama_industri' => 'Studio Ghibli', 'website' => 'https://www.ghibli.jp', 'alamat' => 'Tokyo, Jepang'],
             ['nama_industri' => 'DreamWorks Animation', 'website' => 'https://www.dreamworks.com', 'alamat' => 'Glendale, California, USA'],
@@ -213,15 +208,12 @@ class DatabaseSeeder extends Seeder
             ['nama_industri' => 'Ogilvy Indonesia', 'website' => 'https://www.ogilvy.com', 'alamat' => 'Jakarta, Indonesia'],
             ['nama_industri' => 'Leo Burnett', 'website' => 'https://www.leoburnett.com', 'alamat' => 'Jakarta, Indonesia'],
             ['nama_industri' => 'VGI Global Media', 'website' => 'https://www.vgiglobalmedia.com', 'alamat' => 'Jakarta, Indonesia'],
-            ['nama_industri' => 'SCTV', 'website' => 'https://www.sctv.co.id', 'alamat' => 'Jl. Daan Mogot No.10, Jakarta'],
             ['nama_industri' => 'Metro TV', 'website' => 'https://www.metrotvnews.com', 'alamat' => 'Jl. H.R. Rasuna Said, Jakarta'],
             ['nama_industri' => 'Kompas TV', 'website' => 'https://www.kompas.tv', 'alamat' => 'Jl. Palmerah Barat No.30, Jakarta'],
-
             ['nama_industri' => 'PT. FiberStar', 'website' => 'https://www.fiberstar.co.id', 'alamat' => 'Jl. Raya Serpong No.10, Tangerang'],
             ['nama_industri' => 'PT. Telekomunikasi Indonesia', 'website' => 'https://www.telkom.co.id', 'alamat' => 'Jl. Gatot Subroto No.52, Jakarta'],
             ['nama_industri' => 'Smartfren', 'website' => 'https://www.smartfren.com', 'alamat' => 'Jl. Raya Kebayoran Lama No.18, Jakarta'],
             ['nama_industri' => '3 (Tri) Indonesia', 'website' => 'https://www.tri.co.id', 'alamat' => 'Jl. Kebon Sirih No.33, Jakarta'],
-
             ['nama_industri' => 'PT. LG Electronics Indonesia', 'website' => 'https://www.lg.com/id', 'alamat' => 'Jakarta, Indonesia'],
             ['nama_industri' => 'PT. Samsung Electronics Indonesia', 'website' => 'https://www.samsung.com/id', 'alamat' => 'Jakarta, Indonesia'],
             ['nama_industri' => 'PT. Indofood Sukses Makmur', 'website' => 'https://www.indofood.com', 'alamat' => 'Jakarta, Indonesia'],
@@ -230,14 +222,10 @@ class DatabaseSeeder extends Seeder
             ['nama_industri' => 'PT. Total Bangun Persada', 'website' => 'https://www.totalbp.com', 'alamat' => 'Jakarta, Indonesia'],
             ['nama_industri' => 'PT. Lippo Karawaci', 'website' => 'https://www.lippokarawaci.co.id', 'alamat' => 'Jakarta, Indonesia'],
             ['nama_industri' => 'PT. Ciputra Development', 'website' => 'https://www.ciputra.com', 'alamat' => 'Jakarta, Indonesia'],
-
             ['nama_industri' => 'IKEA Indonesia', 'website' => 'https://www.ikea.co.id', 'alamat' => 'Jakarta, Indonesia'],
             ['nama_industri' => 'Informa', 'website' => 'https://www.informa.co.id', 'alamat' => 'Jakarta, Indonesia'],
             ['nama_industri' => 'PT. Airmas Asri', 'website' => 'https://www.airmasasri.co.id', 'alamat' => 'Jakarta, Indonesia'],
             ['nama_industri' => 'PT. Urban+ Indonesia', 'website' => 'https://www.urbanplus.co.id', 'alamat' => 'Jakarta, Indonesia'],
-            ['nama_industri' => 'Matahari Department Store', 'website' => 'https://www.matahari.com', 'alamat' => 'Jakarta, Indonesia'],
-            ['nama_industri' => 'PT. Ramayana Lestari Sentosa', 'website' => 'https://www.ramayana.co.id', 'alamat' => 'Jakarta, Indonesia'],
-
             ['nama_industri' => 'PT. Securindo Packatama Indonesia', 'website' => 'https://www.securindo.co.id', 'alamat' => 'Jakarta, Indonesia'],
             ['nama_industri' => 'PT. Garda Utama Indonesia', 'website' => 'https://www.gardautama.co.id', 'alamat' => 'Jakarta, Indonesia'],
             ['nama_industri' => 'PT. Pembangunan Perumahan', 'website' => 'https://www.pp.co.id', 'alamat' => 'Jakarta, Indonesia'],
@@ -246,84 +234,346 @@ class DatabaseSeeder extends Seeder
             Industri::create($industri);
         }
 
-        // Industri Profesi
+        // Industri Profesi Map New
         $industriProfesiMap = [
-            'Astra Daihatsu Motor' => ['Teknisi Otomotif', 'Operator Mesin Industri', 'Teknisi Listrik Otomotif', 'Teknisi Diagnosa Mesin'],
-            'Auto2000' => ['Teknisi Otomotif', 'Teknisi Diagnosa Mesin'],
-            'Toyota Motor Manufacturing Indonesia' => ['Operator Mesin Industri'],
-            'PT. Suzuki Indomobil Motor' => ['Operator Mesin Industri'],
-            'Honda Prospect Motor' => ['Teknisi Listrik Otomotif'],
-            'Mitsubishi Motors Krama Yudha Sales Indonesia' => ['Teknisi Listrik Otomotif'],
-            'Yamaha Indonesia Motor Manufacturing' => ['Mekanik Motor'],
-            'PT. Astra Honda Motor' => ['Mekanik Motor'],
-            'PO Haryanto' => ['Montir Truk dan Bus'],
-            'PO Sumber Alam' => ['Montir Truk dan Bus'],
-            'BMW Astra' => ['Teknisi Diagnosa Mesin'],
-            'Nissan-Datsun Indonesia' => ['Teknisi Diagnosa Mesin'],
-            'Gojek' => ['Programmer'],
-            'Tokopedia' => ['Programmer', 'Web Developer'],
-            'Bukalapak' => ['Programmer', 'Web Developer'],
-            'Traveloka' => ['Web Developer'],
-            'Katalon' => ['Web Developer'],
-            'Telkom Indonesia' => ['Network Engineer', 'Teknisi Telekomunikasi', 'Network Installer'],
-            'Indosat Ooredoo' => ['Network Engineer', 'Teknisi Telekomunikasi', 'Network Installer', 'Operator BTS', 'Telecom Technician', 'Satellite Technician'],
-            'XL Axiata' => ['Network Engineer', 'Teknisi Telekomunikasi', 'Network Installer'],
-            'Accenture' => ['System Analyst'],
-            'IBM Indonesia' => ['System Analyst'],
-            'Deloitte' => ['System Analyst'],
-            'Bank Mandiri' => ['Database Administrator'],
-            'Bank BCA' => ['Database Administrator'],
-            'Bank Negara Indonesia' => ['Database Administrator'],
-            'BSSN' => ['Cybersecurity Analyst'],
-            'Telkomsigma' => ['Cybersecurity Analyst'],
-            'Vaksincom' => ['Cybersecurity Analyst'],
-            'RCTI' => ['Teknisi Audio Visual', 'Broadcast Technician'],
-            'Trans7' => ['Teknisi Audio Visual', 'Broadcast Technician'],
-            'NET TV' => ['Teknisi Audio Visual', 'Broadcast Technician'],
-            'Go-Tix' => ['Video Editor'],
-            'Netflix Indonesia' => ['Video Editor'],
-            'YouTube Content Creators' => ['Video Editor'],
-            'Studio Ghibli' => ['Animator'],
-            'DreamWorks Animation' => ['Animator'],
-            'MNC Animation' => ['Animator'],
-            'Electronic Arts' => ['Sound Designer'],
-            'Ubisoft' => ['Sound Designer'],
-            'Square Enix' => ['Sound Designer'],
-            'Ogilvy Indonesia' => ['Motion Graphics Designer', 'Desainer Grafis', 'Ilustrator', 'Motion Designer', 'Visual Storyteller'],
-            'Leo Burnett' => ['Motion Graphics Designer', 'Desainer Grafis', 'Ilustrator', 'Motion Designer', 'Visual Storyteller'],
-            'VGI Global Media' => ['Motion Graphics Designer', 'Desainer Grafis', 'Ilustrator', 'Motion Designer', 'Visual Storyteller'],
-            'SCTV' => ['Broadcast Technician'],
-            'Metro TV' => ['Broadcast Technician'],
-            'Kompas TV' => ['Broadcast Technician'],
-            'PT. FiberStar' => ['Teknisi Fiber Optik'],
-            'PT. Telekomunikasi Indonesia' => ['Teknisi Fiber Optik', 'Telecom Technician', 'Teknisi Telekomunikasi'],
-            'Smartfren' => ['Operator BTS'],
-            '3 (Tri) Indonesia' => ['Operator BTS'],
-            'PT. LG Electronics Indonesia' => ['Teknisi Pendingin'],
-            'PT. Samsung Electronics Indonesia' => ['Teknisi Pendingin'],
-            'PT. Indofood Sukses Makmur' => ['Teknisi Refrigerasi', 'Teknisi Kulkas Industri'],
-            'PT. Nestlé Indonesia' => ['Teknisi Refrigerasi', 'Teknisi Kulkas Industri'],
-            'PT. Wijaya Karya' => ['Instalasi HVAC', 'Teknisi Ventilasi', 'Desainer Interior', 'Project Architect', '3D Visualizer', 'Teknisi Listrik Gedung'],
-            'PT. Total Bangun Persada' => ['Instalasi HVAC', 'Teknisi Ventilasi', 'Desainer Interior', '3D Visualizer', 'Teknisi Listrik Gedung'],
-            'PT. Lippo Karawaci' => ['Maintenance AC Gedung', 'Pengelola Gedung', 'Cleaning Service Manager'],
-            'PT. Ciputra Development' => ['Maintenance AC Gedung', 'Pengelola Gedung', 'Cleaning Service Manager'],
-            'IKEA Indonesia' => ['Desainer Furniture'],
-            'Informa' => ['Desainer Furniture'],
-            'PT. Airmas Asri' => ['Arsitek'],
-            'PT. Urban+ Indonesia' => ['Arsitek'],
-            'Matahari Department Store' => ['Desainer Retail'],
-            'PT. Ramayana Lestari Sentosa' => ['Desainer Retail'],
-            'PT. Securindo Packatama Indonesia' => ['Satpam'],
-            'PT. Garda Utama Indonesia' => ['Satpam'],
-            'PT. Pembangunan Perumahan' => ['Teknisi Bangunan', 'Surveyor', 'Geomatik', 'Teknisi Pemetaan', 'Cartographer', 'Project Architect'],
+            'Astra Daihatsu Motor' => [
+                ['profesi' => 'Teknisi Otomotif', 'gaji' => 5000000],
+                ['profesi' => 'Teknisi Diagnosa Mesin', 'gaji' => 5200000],
+            ],
+            'Toyota Motor Manufacturing Indonesia' => [
+                ['profesi' => 'Teknisi Otomotif', 'gaji' => 4800000],
+                ['profesi' => 'Operator Mesin Industri', 'gaji' => 5000000],
+                ['profesi' => 'Teknisi Listrik Otomotif', 'gaji' => 5200000],
+                ['profesi' => 'Teknisi Diagnosa Mesin', 'gaji' => 5300000],
+
+                ['profesi' => 'Operator Mesin Bubut', 'gaji' => 5000000],
+                ['profesi' => 'Teknisi Produksi Manufaktur', 'gaji' => 5400000],
+            ],
+            'Honda Prospect Motor' => [
+                ['profesi' => 'Teknisi Otomotif', 'gaji' => 5100000],
+                ['profesi' => 'Teknisi Diagnosa Mesin', 'gaji' => 5200000],
+            ],
+            'Mitsubishi Motors' => [
+                ['profesi' => 'Teknisi Otomotif', 'gaji' => 5000000],
+                ['profesi' => 'Teknisi Kendaraan Berat', 'gaji' => 5500000],
+            ],
+            'PT. Suzuki Indomobil Motor' => [
+                ['profesi' => 'Teknisi Otomotif', 'gaji' => 4900000],
+                ['profesi' => 'Operator Mesin Industri', 'gaji' => 4900000],
+
+                ['profesi' => 'Teknisi Perawatan Mesin Industri', 'gaji' => 5100000],
+                ['profesi' => 'Quality Control Produk Mekanik', 'gaji' => 5200000],
+            ],
+            'Auto2000' => [
+                ['profesi' => 'Teknisi Otomotif', 'gaji' => 5000000],
+                ['profesi' => 'Mekanik Motor', 'gaji' => 4700000],
+
+                ['profesi' => 'Mekanik Motor', 'gaji' => 4600000],
+            ],
+            'BMW Astra' => [
+                ['profesi' => 'Teknisi Otomotif', 'gaji' => 5500000],
+                ['profesi' => 'Teknisi Diagnosa Mesin', 'gaji' => 5600000],
+            ],
+            'PT. Astra Honda Motor' => [
+                ['profesi' => 'Operator Mesin Industri', 'gaji' => 5000000],
+                ['profesi' => 'Teknisi Listrik Otomotif', 'gaji' => 5200000],
+                ['profesi' => 'Mekanik Motor', 'gaji' => 4800000],
+
+                ['profesi' => 'Operator Mesin CNC', 'gaji' => 5200000],
+                ['profesi' => 'Teknisi Produksi Manufaktur', 'gaji' => 5300000],
+            ],
+            'PT. Indofood Sukses Makmur' => [
+                ['profesi' => 'Operator Mesin Industri', 'gaji' => 4900000],
+
+                ['profesi' => 'Teknisi Perawatan Mesin Industri', 'gaji' => 4800000],
+                ['profesi' => 'Operator Mesin CNC', 'gaji' => 4900000],
+            ],
+            'PT. Nestlé Indonesia' => [
+                ['profesi' => 'Operator Mesin Industri', 'gaji' => 5000000],
+
+                ['profesi' => 'Teknisi Produksi Manufaktur', 'gaji' => 5300000],
+                ['profesi' => 'Quality Control Produk Mekanik', 'gaji' => 5200000],
+            ],
+            'Yamaha Indonesia Motor Manufacturing' => [
+                ['profesi' => 'Teknisi Listrik Otomotif', 'gaji' => 5100000],
+                ['profesi' => 'Mekanik Motor', 'gaji' => 4700000],
+            ],
+            'Nissan-Datsun Indonesia' => [
+                ['profesi' => 'Teknisi Listrik Otomotif', 'gaji' => 5000000],
+                ['profesi' => 'Teknisi Diagnosa Mesin', 'gaji' => 5200000],
+            ],
+            'PO Sumber Alam' => [
+                ['profesi' => 'Mekanik Motor', 'gaji' => 4700000],
+                ['profesi' => 'Teknisi Kendaraan Berat', 'gaji' => 5300000],
+            ],
+            'PO Haryanto' => [
+                ['profesi' => 'Teknisi Kendaraan Berat', 'gaji' => 5400000],
+            ],
+            'PT. Wijaya Karya' => [
+                ['profesi' => 'Teknisi Kendaraan Berat', 'gaji' => 5500000],
+
+                ['profesi' => 'Network Installer', 'gaji' => 7600000],
+                ['profesi' => 'Satellite Technician', 'gaji' => 7800000],
+
+                ['profesi' => 'Drafter Mesin', 'gaji' => 5500000],
+                ['profesi' => 'Teknisi Perawatan Mesin Industri', 'gaji' => 5100000],
+
+                ['profesi' => 'Manajer Fasilitas Gedung', 'gaji' => 9000000],
+                ['profesi' => 'Supervisor Konstruksi Gedung', 'gaji' => 7600000],
+
+                ['profesi' => 'Surveyor', 'gaji' => 7000000],
+                ['profesi' => 'Teknisi Pemetaan', 'gaji' => 6500000],
+            ],
+            'Gojek' => [
+                ['profesi' => 'Programmer', 'gaji' => 7500000],
+                ['profesi' => 'Web Developer', 'gaji' => 8000000],
+            ],
+            'Tokopedia' => [
+                ['profesi' => 'Web Developer', 'gaji' => 8500000],
+                ['profesi' => 'Database Administrator', 'gaji' => 9000000],
+            ],
+            'Bukalapak' => [
+                ['profesi' => 'System Analyst', 'gaji' => 8200000],
+                ['profesi' => 'Programmer', 'gaji' => 7800000],
+            ],
+            'Traveloka' => [
+                ['profesi' => 'Web Developer', 'gaji' => 8800000],
+                ['profesi' => 'Cybersecurity Analyst', 'gaji' => 9500000],
+            ],
+            'Telkom Indonesia' => [
+                ['profesi' => 'Network Engineer', 'gaji' => 8700000],
+                ['profesi' => 'System Analyst', 'gaji' => 9000000],
+
+                ['profesi' => 'Ahli Sistem Informasi Geografis', 'gaji' => 10000000],
+                ['profesi' => 'Remote Sensing Analyst', 'gaji' => 9500000],
+            ],
+            'Indosat Ooredoo' => [
+                ['profesi' => 'Network Engineer', 'gaji' => 8500000],
+                ['profesi' => 'Cybersecurity Analyst', 'gaji' => 9300000],
+            ],
+            'XL Axiata' => [
+                ['profesi' => 'Network Engineer', 'gaji' => 8300000],
+                ['profesi' => 'Database Administrator', 'gaji' => 8800000],
+            ],
+            'Telkomsigma' => [
+                ['profesi' => 'System Analyst', 'gaji' => 9200000],
+                ['profesi' => 'Database Administrator', 'gaji' => 9400000],
+            ],
+            'Accenture' => [
+                ['profesi' => 'Programmer', 'gaji' => 10000000],
+                ['profesi' => 'System Analyst', 'gaji' => 11000000],
+            ],
+            'IBM Indonesia' => [
+                ['profesi' => 'Cybersecurity Analyst', 'gaji' => 12000000],
+                ['profesi' => 'Database Administrator', 'gaji' => 11500000],
+            ],
+            'Deloitte' => [
+                ['profesi' => 'System Analyst', 'gaji' => 10000000],
+                ['profesi' => 'Cybersecurity Analyst', 'gaji' => 11000000],
+            ],
+            'Bank Mandiri' => [
+                ['profesi' => 'Database Administrator', 'gaji' => 9500000],
+                ['profesi' => 'System Analyst', 'gaji' => 9700000],
+            ],
+            'Bank BCA' => [
+                ['profesi' => 'Database Administrator', 'gaji' => 9800000],
+                ['profesi' => 'Programmer', 'gaji' => 9000000],
+            ],
+            'Bank Negara Indonesia' => [
+                ['profesi' => 'Cybersecurity Analyst', 'gaji' => 10500000],
+                ['profesi' => 'System Analyst', 'gaji' => 9600000],
+            ],
+            'BSSN' => [
+                ['profesi' => 'Cybersecurity Analyst', 'gaji' => 11500000],
+                ['profesi' => 'Network Engineer', 'gaji' => 9500000],
+
+                ['profesi' => 'Ahli Sistem Informasi Geografis', 'gaji' => 9500000],
+                ['profesi' => 'Geomatik', 'gaji' => 8800000],
+            ],
+            'Vaksincom' => [
+                ['profesi' => 'Cybersecurity Analyst', 'gaji' => 10000000],
+                ['profesi' => 'Programmer', 'gaji' => 8700000],
+            ],
+            'Katalon' => [
+                ['profesi' => 'Programmer', 'gaji' => 9500000],
+                ['profesi' => 'System Analyst', 'gaji' => 9700000],
+            ],
+            'RCTI' => [
+                ['profesi' => 'Broadcast Technician', 'gaji' => 6000000],
+                ['profesi' => 'Teknisi Audio Visual', 'gaji' => 5800000],
+            ],
+            'Trans7' => [
+                ['profesi' => 'Video Editor', 'gaji' => 6200000],
+                ['profesi' => 'Sound Designer', 'gaji' => 6100000],
+            ],
+            'NET TV' => [
+                ['profesi' => 'Motion Graphics Designer', 'gaji' => 7000000],
+                ['profesi' => 'Video Motion Specialist', 'gaji' => 7200000],
+
+                ['profesi' => 'Motion Designer', 'gaji' => 7500000],
+                ['profesi' => 'Visual Storyteller', 'gaji' => 8000000],
+            ],
+            'MNC Animation' => [
+                ['profesi' => 'Video Motion Specialist', 'gaji' => 7500000],
+                ['profesi' => 'Motion Graphics Designer', 'gaji' => 7400000],
+
+                ['profesi' => 'Animator', 'gaji' => 8500000],
+                ['profesi' => 'Ilustrator', 'gaji' => 7000000],
+            ],
+            'Kompas TV' => [
+                ['profesi' => 'Broadcast Technician', 'gaji' => 6100000],
+                ['profesi' => 'Teknisi Audio Visual', 'gaji' => 5800000],
+
+                ['profesi' => 'Visual Storyteller', 'gaji' => 7800000],
+                ['profesi' => 'Desainer Grafis', 'gaji' => 7200000],
+            ],
+            'Metro TV' => [
+                ['profesi' => 'Video Editor', 'gaji' => 6300000],
+                ['profesi' => 'Sound Designer', 'gaji' => 6200000],
+            ],
+            'DreamWorks Animation' => [
+                ['profesi' => 'Motion Graphics Designer', 'gaji' => 12000000],
+                ['profesi' => 'Video Motion Specialist', 'gaji' => 13000000],
+
+                ['profesi' => 'Animator', 'gaji' => 15000000],
+                ['profesi' => 'Art Director', 'gaji' => 20000000],
+            ],
+            'Ogilvy Indonesia' => [
+                ['profesi' => 'Motion Graphics Designer', 'gaji' => 9000000],
+                ['profesi' => 'Video Editor', 'gaji' => 8500000],
+
+                ['profesi' => 'Desainer Grafis', 'gaji' => 7000000],
+                ['profesi' => 'Art Director', 'gaji' => 12000000],
+            ],
+            'YouTube Content Creators' => [
+                ['profesi' => 'Video Editor', 'gaji' => 7000000],
+                ['profesi' => 'Sound Designer', 'gaji' => 6800000],
+
+                ['profesi' => 'Visual Storyteller', 'gaji' => 10000000],
+                ['profesi' => 'Ilustrator', 'gaji' => 9000000],
+            ],
+            'VGI Global Media' => [
+                ['profesi' => 'Motion Graphics Designer', 'gaji' => 8800000],
+                ['profesi' => 'Teknisi Audio Visual', 'gaji' => 6200000],
+
+                ['profesi' => 'Motion Designer', 'gaji' => 8000000],
+                ['profesi' => 'Animator', 'gaji' => 8500000],
+            ],
+            'PT. Telekomunikasi Indonesia' => [
+                ['profesi' => 'Teknisi Telekomunikasi', 'gaji' => 7500000],
+                ['profesi' => 'Network Installer', 'gaji' => 7300000],
+            ],
+            'PT. FiberStar' => [
+                ['profesi' => 'Teknisi Fiber Optik', 'gaji' => 7000000],
+                ['profesi' => 'Network Installer', 'gaji' => 7200000],
+            ],
+            'Smartfren' => [
+                ['profesi' => 'Operator BTS', 'gaji' => 7100000],
+                ['profesi' => 'Teknisi Telekomunikasi', 'gaji' => 7300000],
+            ],
+            '3 (Tri) Indonesia' => [
+                ['profesi' => 'Operator BTS', 'gaji' => 7000000],
+                ['profesi' => 'Telecom Technician', 'gaji' => 7200000],
+            ],
+            'PT. LG Electronics Indonesia' => [
+                ['profesi' => 'Teknisi Telekomunikasi', 'gaji' => 7800000],
+                ['profesi' => 'Teknisi Fiber Optik', 'gaji' => 7400000],
+            ],
+            'PT. Samsung Electronics Indonesia' => [
+                ['profesi' => 'Telecom Technician', 'gaji' => 8000000],
+                ['profesi' => 'Teknisi Telekomunikasi', 'gaji' => 7700000],
+            ],
+            'PT. Total Bangun Persada' => [
+                ['profesi' => 'Teknisi Telekomunikasi', 'gaji' => 7500000],
+                ['profesi' => 'Network Installer', 'gaji' => 7400000],
+
+                ['profesi' => 'Arsitek', 'gaji' => 7000000],
+                ['profesi' => 'Project Architect', 'gaji' => 8500000],
+
+                ['profesi' => 'Teknisi Instalasi Gedung', 'gaji' => 6200000],
+                ['profesi' => 'Estimator Konstruksi', 'gaji' => 7100000],
+
+                ['profesi' => 'Teknisi Pemetaan', 'gaji' => 6800000],
+                ['profesi' => 'Geomatik', 'gaji' => 7000000],
+            ],
+            'PT. Ciputra Development' => [
+                ['profesi' => 'Satellite Technician', 'gaji' => 7200000],
+                ['profesi' => 'Teknisi Fiber Optik', 'gaji' => 7100000],
+
+                ['profesi' => 'Desainer Interior', 'gaji' => 7500000],
+                ['profesi' => 'Desainer Retail', 'gaji' => 6800000],
+
+                ['profesi' => 'Manajer Fasilitas Gedung', 'gaji' => 8800000],
+                ['profesi' => 'Teknisi Pemeliharaan Bangunan', 'gaji' => 5800000],
+
+                ['profesi' => 'Surveyor', 'gaji' => 7200000],
+                ['profesi' => 'Geomatik', 'gaji' => 7500000],
+            ],
+            'PT. Airmas Asri' => [
+                ['profesi' => 'Telecom Technician', 'gaji' => 7300000],
+                ['profesi' => 'Network Installer', 'gaji' => 7000000],
+
+                ['profesi' => 'Arsitek', 'gaji' => 8000000],
+                ['profesi' => 'Desainer Furniture', 'gaji' => 6800000],
+            ],
+            'PT. Lippo Karawaci' => [
+                ['profesi' => '3D Visualizer', 'gaji' => 7200000],
+                ['profesi' => 'Desainer Interior', 'gaji' => 7400000],
+            ],
+            'Informa' => [
+                ['profesi' => 'Desainer Furniture', 'gaji' => 6500000],
+            ],
+            'IKEA Indonesia' => [
+                ['profesi' => 'Desainer Interior', 'gaji' => 7000000],
+                ['profesi' => 'Desainer Furniture', 'gaji' => 6700000],
+            ],
+            'PT. Pembangunan Perumahan' => [
+                ['profesi' => 'Supervisor Konstruksi Gedung', 'gaji' => 7500000],
+                ['profesi' => 'Estimator Konstruksi', 'gaji' => 7200000],
+
+                ['profesi' => 'Surveyor', 'gaji' => 7500000],
+                ['profesi' => 'Ahli Sistem Informasi Geografis', 'gaji' => 9000000],
+            ],
+            'PT. Garda Utama Indonesia' => [
+                ['profesi' => 'Teknisi Pemeliharaan Bangunan', 'gaji' => 5600000],
+                ['profesi' => 'Ahli Sanitasi Bangunan', 'gaji' => 6000000],
+            ],
+            'PT. Securindo Packatama Indonesia' => [
+                ['profesi' => 'Manajer Fasilitas Gedung', 'gaji' => 8500000],
+                ['profesi' => 'Teknisi Instalasi Gedung', 'gaji' => 6100000],
+            ],
+            'Leo Burnett' => [
+                ['profesi' => 'Desainer Grafis', 'gaji' => 7500000],
+                ['profesi' => 'Visual Storyteller', 'gaji' => 8500000],
+            ],
+            'Studio Ghibli' => [
+                ['profesi' => 'Ilustrator', 'gaji' => 16000000],
+                ['profesi' => 'Animator', 'gaji' => 18000000],
+            ],
+            'Electronic Arts' => [
+                ['profesi' => 'Motion Designer', 'gaji' => 17000000],
+                ['profesi' => 'Art Director', 'gaji' => 22000000],
+            ],
+            'PT. Urban+ Indonesia' => [
+                ['profesi' => 'Cartographer', 'gaji' => 7000000],
+                ['profesi' => 'Remote Sensing Analyst', 'gaji' => 7200000],
+            ],
         ];
-        foreach ($industriProfesiMap as $industriName => $profesiNames) {
+        $allProfesi = ProfesiKerja::pluck('id', 'nama_profesi_kerja')->toArray();
+        foreach ($industriProfesiMap as $industriName => $profesiList) {
             $industri = Industri::where('nama_industri', $industriName)->first();
             if (!$industri) continue;
 
-            $profesiIds = ProfesiKerja::whereIn('nama_profesi_kerja', $profesiNames)->pluck('id')->toArray();
+            $attachData = [];
+            foreach ($profesiList as $data) {
+                if (isset($allProfesi[$data['profesi']])) {
+                    $attachData[$allProfesi[$data['profesi']]] = ['gaji' => $data['gaji']];
+                }
+            }
 
-            $industri->profesiKerjas()->syncWithoutDetaching($profesiIds);
+            if (!empty($attachData)) {
+                $industri->profesiKerjas()->syncWithoutDetaching($attachData);
+            }
         }
 
         // Kategori Minat (RIASEC)
@@ -365,7 +615,7 @@ class DatabaseSeeder extends Seeder
             ],
             'Conventional' => [
                 'Database Administrator', 'Pengelola Gedung', 'Cleaning Service Manager'
-            ]
+            ],
         ];
         foreach ($kategoriProfesiMap as $kategoriName => $profesiNames) {
             $kategori = KategoriMinat::where('nama_kategori', $kategoriName)->first();
