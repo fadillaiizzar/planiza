@@ -64,7 +64,7 @@ class EksplorasiKerjaSiswaController extends Controller
         $user = Auth::user();
         $siswa = $user->siswa ?? null;
 
-        $profesi = ProfesiKerja::with('industris')->findOrFail($id);
+        $profesi = ProfesiKerja::with('industriProfesis.industri')->findOrFail($id);
 
         return view('siswa.eksplorasi_kerja.show', compact('profesi', 'siswa'));
     }
