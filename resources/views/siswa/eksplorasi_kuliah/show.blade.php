@@ -137,15 +137,25 @@
                         </div>
 
                         <div class="p-6">
-                            <h3 class="font-bold text-slate-navy text-lg mb-3 line-clamp-2 min-h-14">
+                            <h3 class="font-bold text-slate-navy text-lg mb-3 line-clamp-1 min-h-14">
                                 {{ $kampus->nama_kampus }}
                             </h3>
-                            <div class="flex items-start gap-2 mb-4">
+
+                            <div class="flex items-start gap-2 mb-2">
                                 <i class="fas fa-map-marker-alt text-cool-gray text-sm mt-1 flex-shrink-0"></i>
                                 <p class="text-cool-gray text-sm line-clamp-2">
                                     {{ $kampus->alamat ?? 'Alamat tidak tersedia' }}
                                 </p>
                             </div>
+
+                            <div class="flex items-start gap-2 mb-4">
+                                <i class="fas fa-chart-line text-cool-gray text-sm mt-1 flex-shrink-0"></i>
+                                <p class="text-cool-gray text-sm line-clamp-2">
+                                    <span>Passing Grade :</span>
+                                    {{ $relasi->passing_grade ? $relasi->passing_grade . ' / 1000' : 'Belum tersedia' }}
+                                </p>
+                            </div>
+
                             <a href="{{ $kampus->website ?? '#' }}" target="_blank"
                                class="block text-center bg-slate-navy text-off-white px-4 py-3 rounded-2xl transition-all duration-300 hover:bg-slate-navy/90 hover:shadow-lg font-medium">
                                 <span class="flex items-center justify-center gap-2">

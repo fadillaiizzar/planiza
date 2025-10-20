@@ -38,7 +38,7 @@
                     </div>
 
                     <!-- Poin Score dengan Visual Bar -->
-                    <div class="mb-6">
+                    {{-- <div class="mb-6">
                         <div class="flex items-center justify-between mb-2">
                             <span class="text-sm font-medium text-cool-gray">Total Poin</span>
                             <span class="text-lg font-bold text-slate-navy">{{ $profesi->total_poin }}</span>
@@ -48,7 +48,7 @@
                                     style="width: {{ min(($profesi->total_poin / 100) * 100, 100) }}%">
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <!-- Alasan Section -->
                     <div class="p-4 bg-gradient-to-br from-slate-navy/5 to-transparent rounded-xl mb-6 border border-border-gray/20">

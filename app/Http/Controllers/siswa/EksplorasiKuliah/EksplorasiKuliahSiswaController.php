@@ -64,7 +64,7 @@ class EksplorasiKuliahSiswaController extends Controller
         $user = Auth::user();
         $siswa = $user->siswa ?? null;
 
-        $jurusanKuliah = JurusanKuliah::with('kampus')->findOrFail($id);
+        $jurusanKuliah = JurusanKuliah::with('kampusJurusans.kampus')->findOrFail($id);
 
         return view('siswa.eksplorasi_kuliah.show', compact('jurusanKuliah', 'siswa'));
     }
