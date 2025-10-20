@@ -51,18 +51,18 @@
                 <p class="text-cool-gray leading-relaxed">{{ $profesi->deskripsi ?? 'Belum ada deskripsi untuk profesi ini.' }}</p>
             </div>
 
-            {{-- Skill Dibutuhkan --}}
+            {{-- Jurusan Terkait --}}
             <div class="bg-white rounded-3xl shadow-lg p-6 sm:p-8 hover:shadow-xl transition-shadow duration-300">
                 <div class="flex items-start gap-3 mb-4">
                     <div class="w-10 h-10 rounded-full bg-slate-navy/10 flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-star text-slate-navy text-sm"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-slate-navy text-xl mb-1">Skill Dibutuhkan</h4>
+                        <h4 class="font-bold text-slate-navy text-xl mb-1">Jurusan Terkait</h4>
                         <div class="w-16 h-1 bg-slate-navy rounded-full"></div>
                     </div>
                 </div>
-                <p class="text-cool-gray leading-relaxed">{{ $profesi->info_skill ?? 'Informasi skill sedang diperbarui.' }}</p>
+                <p class="text-cool-gray leading-relaxed">{{ $profesi->info_jurusan ?? 'Informasi skill sedang diperbarui.' }}</p>
             </div>
 
         </div>
@@ -70,18 +70,18 @@
         {{-- Secondary Info Grid --}}
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
 
-            {{-- Jurusan Terkait --}}
+            {{-- Skill Dibutuhkan --}}
             <div class="bg-white rounded-3xl shadow-lg p-6 sm:p-8 hover:shadow-xl transition-shadow duration-300">
                 <div class="flex items-start gap-3 mb-4">
                     <div class="w-10 h-10 rounded-full bg-slate-navy/10 flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-graduation-cap text-slate-navy text-sm"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-slate-navy text-xl mb-1">Jurusan Terkait</h4>
+                        <h4 class="font-bold text-slate-navy text-xl mb-1">Skill Dibutuhkan</h4>
                         <div class="w-16 h-1 bg-slate-navy rounded-full"></div>
                     </div>
                 </div>
-                <p class="text-cool-gray leading-relaxed">{{ $profesi->info_jurusan ?? 'Informasi jurusan sedang diperbarui.' }}</p>
+                <p class="text-cool-gray leading-relaxed">{{ $profesi->info_skill ?? 'Informasi jurusan sedang diperbarui.' }}</p>
             </div>
 
             {{-- Motivasi Card with Accent --}}
@@ -119,10 +119,9 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                @forelse($profesi->industris as $industri)
+                @forelse($profesi->industriProfesis as $relasi)
+                @php $industri = $relasi->industri; @endphp
                     <div class="group bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-
-                        {{-- Image Container --}}
                         <div class="relative w-full h-48 bg-gradient-to-br from-slate-navy/5 to-cool-gray/5 overflow-hidden">
                             @if($industri->gambar)
                                 <img src="{{ asset('storage/' . $industri->gambar) }}"
@@ -136,7 +135,6 @@
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-navy/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </div>
 
-                        {{-- Content --}}
                         <div class="p-6">
                             <h3 class="font-bold text-slate-navy text-lg mb-3 line-clamp-2 min-h-14">
                                 {{ $industri->nama_industri }}
@@ -146,6 +144,14 @@
                                 <i class="fas fa-map-marker-alt text-cool-gray text-sm mt-1 flex-shrink-0"></i>
                                 <p class="text-cool-gray text-sm line-clamp-2">
                                     {{ $industri->alamat ?? 'Alamat tidak tersedia' }}
+                                </p>
+                            </div>
+
+                            <div class="flex items-start gap-2 mb-4">
+                                <i class="fas fa-money-bill-wave text-cool-gray text-sm mt-1 flex-shrink-0"></i>
+                                <p class="text-cool-gray text-sm line-clamp-2">
+                                    <span>Gaji : </span>
+                                    {{ $relasi->gaji ? 'Rp' . number_format($relasi->gaji, 0, ',', '.') : 'Belum tersedia' }}
                                 </p>
                             </div>
 
@@ -171,7 +177,6 @@
                 @endforelse
             </div>
         </div>
-
     </div>
 </div>
 @endsection

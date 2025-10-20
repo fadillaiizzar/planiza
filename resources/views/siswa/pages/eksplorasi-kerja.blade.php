@@ -46,9 +46,9 @@
                                 </h3>
 
                                 <div class="flex gap-3 justify-start w-full">
-                                    <p class="flex-1 text-sm text-center border border-border-gray px-4 py-2 rounded-lg transition">
+                                    {{-- <p class="flex-1 text-sm text-center border border-border-gray px-4 py-2 rounded-lg transition">
                                         <i class="fas fa-money-bill-wave"></i> Rp{{ number_format($profesi->gaji, 0, ',', '.') }}
-                                    </p>
+                                    </p> --}}
 
                                     <a href="{{ route('siswa.eksplorasi-profesi.show', $profesi->id) }}"
                                     class="flex-1 text-sm text-center bg-slate-navy text-white px-4 py-2 rounded-lg transition">
