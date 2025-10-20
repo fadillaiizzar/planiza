@@ -857,9 +857,9 @@ class DatabaseSeeder extends Seeder
         // Jurusan Kuliah
         $jurusanKuliahPerJurusan = [
             'TKR' => [
-                ['nama_jurusan_kuliah' => 'Teknik Mesin', 'deskripsi' => 'Mempelajari sistem mekanik, energi, dan manufaktur.', 'info_matkul' => 'Mekanika Teknik, Termodinamika, Proses Produksi, Gambar Teknik.', 'info_prospek' => 'Teknisi mesin, operator produksi, perancang alat industri.', 'info_jurusan' => 'TKR'],
-                ['nama_jurusan_kuliah' => 'Teknik Otomotif', 'deskripsi' => 'Fokus pada sistem kendaraan modern, diagnosis, dan perawatan otomotif.', 'info_matkul' => 'Sistem Bahan Bakar, Transmisi, Diagnostik Otomotif, Manajemen Bengkel.', 'info_prospek' => 'Mekanik otomotif, teknisi kendaraan, quality control otomotif.', 'info_jurusan' => 'TKR'],
-                ['nama_jurusan_kuliah' => 'Teknik Industri', 'deskripsi' => 'Mengoptimalkan proses produksi dan manajemen industri.', 'info_matkul' => 'Manajemen Produksi, Rekayasa Sistem, Ergonomi, Analisis Proses.', 'info_prospek' => 'Planner, analis produksi, manajer operasional.', 'info_jurusan' => 'TKR'],
+                ['nama_jurusan_kuliah' => 'Teknik Mesin Otomotif', 'deskripsi' => 'Fokus pada sistem mekanik kendaraan, perawatan, dan inovasi otomotif.', 'info_matkul' => 'Mekanika Otomotif, Termodinamika, Teknologi Kendaraan, Manufaktur Komponen Otomotif.', 'info_prospek' => 'Engineer otomotif, teknisi permesinan, perancang sistem kendaraan.', 'info_jurusan' => 'TKR',],
+                ['nama_jurusan_kuliah' => 'Teknik Otomotif', 'deskripsi' => 'Mempelajari sistem kendaraan, diagnosis, dan teknologi otomotif modern.', 'info_matkul' => 'Sistem Bahan Bakar, Transmisi, Diagnostik Otomotif, Manajemen Bengkel.', 'info_prospek' => 'Mekanik kendaraan, teknisi otomotif, quality control kendaraan.', 'info_jurusan' => 'TKR',],
+                ['nama_jurusan_kuliah' => 'Teknik Elektro Otomotif', 'deskripsi' => 'Mengkaji manajemen produksi dan efisiensi sistem manufaktur kendaraan.', 'info_matkul' => 'Manajemen Produksi, Ergonomi Industri, Supply Chain Otomotif, Analisis Proses.', 'info_prospek' => 'Planner produksi otomotif, analis sistem industri, manajer lini produksi.', 'info_jurusan' => 'TKR',],
             ],
             'SIJA' => [
                 ['nama_jurusan_kuliah' => 'Teknik Informatika', 'deskripsi' => 'Mempelajari pemrograman, jaringan, dan rekayasa perangkat lunak.', 'info_matkul' => 'Algoritma, Basis Data, Struktur Data, Jaringan Komputer.', 'info_prospek' => 'Programmer, software engineer, web developer.', 'info_jurusan' => 'SIJA'],
@@ -882,19 +882,19 @@ class DatabaseSeeder extends Seeder
                 ['nama_jurusan_kuliah' => 'Desain Produk', 'deskripsi' => 'Mendesain produk fisik fungsional dan estetis.', 'info_matkul' => 'Desain Industri, CAD, Ergonomi, Inovasi Produk.', 'info_prospek' => 'Desainer produk, konsultan desain, R&D engineer.', 'info_jurusan' => 'DKV'],
             ],
             'DPIB' => [
-                ['nama_jurusan_kuliah' => 'Arsitektur', 'deskripsi' => 'Mempelajari perancangan dan pembangunan bangunan.', 'info_matkul' => 'Desain Arsitektur, Autocad, Struktur Bangunan.', 'info_prospek' => 'Arsitek, drafter, konsultan bangunan.', 'info_jurusan' => 'DPIB'],
-                ['nama_jurusan_kuliah' => 'Desain Interior', 'deskripsi' => 'Mendesain tata ruang dalam bangunan.', 'info_matkul' => 'Estetika Ruang, Material Interior, Tata Cahaya.', 'info_prospek' => 'Desainer interior, kontraktor desain, konsultan ruang.', 'info_jurusan' => 'DPIB'],
-                ['nama_jurusan_kuliah' => 'Teknik Sipil', 'deskripsi' => 'Struktur, konstruksi, dan perancangan bangunan.', 'info_matkul' => 'Mekanika Tanah, Struktur Beton, Hidrolika.', 'info_prospek' => 'Insinyur sipil, kontraktor, pengawas proyek.', 'info_jurusan' => 'DPIB'],
+                ['nama_jurusan_kuliah' => 'Arsitektur', 'deskripsi' => 'Fokus pada desain dan konstruksi bangunan hunian dan publik.', 'info_matkul' => 'Desain Arsitektur, Autocad, Struktur Bangunan, Estetika Desain.', 'info_prospek' => 'Arsitek, drafter, konsultan desain arsitektur.', 'info_jurusan' => 'DPIB'],
+                ['nama_jurusan_kuliah' => 'Desain Interior', 'deskripsi' => 'Mempelajari tata ruang dan estetika interior bangunan modern.', 'info_matkul' => 'Estetika Ruang, Material Interior, Pencahayaan, Tata Ruang.', 'info_prospek' => 'Desainer interior, kontraktor desain, visualisasi ruang.', 'info_jurusan' => 'DPIB'],
+                ['nama_jurusan_kuliah' => 'Teknologi Rekayasa Konstruksi', 'deskripsi' => 'Menitikberatkan pada perancangan dan pembangunan struktur sipil.', 'info_matkul' => 'Mekanika Tanah, Struktur Beton, Hidrolika, Gambar Konstruksi.', 'info_prospek' => 'Insinyur sipil, pengawas proyek, konsultan konstruksi.', 'info_jurusan' => 'DPIB'],
             ],
             'KGSP' => [
-                ['nama_jurusan_kuliah' => 'Manajemen Konstruksi', 'deskripsi' => 'Fokus pada manajemen proyek dan pembangunan gedung.', 'info_matkul' => 'Perencanaan Proyek, Estimasi Biaya, Scheduling.', 'info_prospek' => 'Project manager, estimator, pengawas proyek.', 'info_jurusan' => 'KGSP'],
-                ['nama_jurusan_kuliah' => 'Teknik Bangunan Gedung', 'deskripsi' => 'Menangani konstruksi struktur dan utilitas gedung.', 'info_matkul' => 'Struktur Gedung, Gambar Teknik, Konstruksi Bangunan.', 'info_prospek' => 'Teknisi bangunan, drafter, konsultan proyek.', 'info_jurusan' => 'KGSP'],
-                ['nama_jurusan_kuliah' => 'Teknik Sipil', 'deskripsi' => 'Rekayasa struktur dan bangunan sipil.', 'info_matkul' => 'Struktur Baja, Geoteknik, Drainase, Beton Bertulang.', 'info_prospek' => 'Insinyur sipil, kontraktor jalan, pengawas lapangan.', 'info_jurusan' => 'KGSP'],
+                ['nama_jurusan_kuliah' => 'Manajemen Konstruksi', 'deskripsi' => 'Fokus pada perencanaan, pengawasan, dan evaluasi proyek konstruksi.', 'info_matkul' => 'Estimasi Biaya, Scheduling, Manajemen Proyek, Analisis Risiko.', 'info_prospek' => 'Project manager, estimator, pengawas lapangan.', 'info_jurusan' => 'KGSP'],
+                ['nama_jurusan_kuliah' => 'Teknik Bangunan Gedung', 'deskripsi' => 'Mempelajari metode pembangunan, utilitas, dan perawatan gedung.', 'info_matkul' => 'Struktur Gedung, Utilitas Bangunan, Gambar Teknik, Keselamatan Kerja.', 'info_prospek' => 'Teknisi bangunan, drafter, pengawas proyek konstruksi.', 'info_jurusan' => 'KGSP'],
+                ['nama_jurusan_kuliah' => 'Teknik Sipil', 'deskripsi' => 'Menitikberatkan pada perancangan jalan, jembatan, dan drainase.', 'info_matkul' => 'Struktur Baja, Geoteknik, Drainase, Beton Bertulang.', 'info_prospek' => 'Insinyur sipil, kontraktor jalan, konsultan infrastruktur.', 'info_jurusan' => 'KGSP'],
             ],
             'TP' => [
-                ['nama_jurusan_kuliah' => 'Teknik Mesin', 'deskripsi' => 'Desain, produksi, dan perawatan sistem mekanik.', 'info_matkul' => 'Thermodinamika, Mekanika Fluida, Material Teknik.', 'info_prospek' => 'Desainer mesin, teknisi manufaktur, R&D mechanical.', 'info_jurusan' => 'TP'],
-                ['nama_jurusan_kuliah' => 'Teknik Industri', 'deskripsi' => 'Efisiensi dan sistem produksi manufaktur.', 'info_matkul' => 'Optimasi Produksi, Supply Chain, Logistik Industri.', 'info_prospek' => 'Analis proses, perencana produksi, supervisor manufaktur.', 'info_jurusan' => 'TP'],
-                ['nama_jurusan_kuliah' => 'Teknik Manufaktur', 'deskripsi' => 'Teknologi mesin dan perancangan komponen presisi.', 'info_matkul' => 'CNC, CAD/CAM, Proses Produksi, Kualitas Produk.', 'info_prospek' => 'Teknisi CNC, perancang alat, operator produksi presisi.', 'info_jurusan' => 'TP'],
+                ['nama_jurusan_kuliah' => 'Teknik Mesin Manufaktur', 'deskripsi' => 'Menitikberatkan pada desain dan perawatan sistem manufaktur mekanik.', 'info_matkul' => 'Thermodinamika, Mekanika Fluida, Material Teknik, Proses Produksi.', 'info_prospek' => 'Desainer mesin, teknisi pabrik, engineer manufaktur.', 'info_jurusan' => 'TP'],
+                ['nama_jurusan_kuliah' => 'Teknik Industri', 'deskripsi' => 'Fokus pada optimasi proses produksi dan efisiensi sistem kerja.', 'info_matkul' => 'Optimasi Produksi, Logistik Industri, Supply Chain Management.', 'info_prospek' => 'Analis proses industri, supervisor manufaktur, manajer produksi.', 'info_jurusan' => 'TP'],
+                ['nama_jurusan_kuliah' => 'Teknik Manufaktur', 'deskripsi' => 'Mempelajari teknologi permesinan presisi dan pengendalian kualitas.', 'info_matkul' => 'CNC, CAD/CAM, Pengukuran Presisi, Kontrol Kualitas Produk.', 'info_prospek' => 'Operator CNC, quality control, perancang alat presisi.', 'info_jurusan' => 'TP'],
             ],
             'GEO' => [
                 ['nama_jurusan_kuliah' => 'Teknik Geodesi', 'deskripsi' => 'Pemodelan permukaan bumi dan pemetaan digital.', 'info_matkul' => 'Surveying, Geodesi Satelit, GIS, Fotogrametri.', 'info_prospek' => 'Surveyor, GIS specialist, konsultan pemetaan.', 'info_jurusan' => 'GEO'],
@@ -925,6 +925,8 @@ class DatabaseSeeder extends Seeder
             ['nama_kampus' => 'Politeknik Negeri Semarang', 'website' => 'https://www.polines.ac.id', 'alamat' => 'Semarang, Jawa Tengah'],
             ['nama_kampus' => 'Universitas Negeri Malang', 'website' => 'https://www.um.ac.id', 'alamat' => 'Malang, Jawa Timur'],
             ['nama_kampus' => 'Institut Teknologi Nasional Malang', 'website' => 'https://www.itn.ac.id', 'alamat' => 'Malang, Jawa Timur'],
+            ['nama_kampus' => 'Universitas Negeri Jakarta', 'website' => 'https://www.unj.ac.id', 'alamat' => 'Jakarta Timur, DKI Jakarta'],
+            ['nama_kampus' => 'Politeknik Negeri Jakarta', 'website' => 'https://www.pnj.ac.id', 'alamat' => 'Jakarta, DKI Jakarta'],
         ];
         foreach ($kampusList as $kampus) {
             Kampus::create($kampus);
@@ -933,27 +935,27 @@ class DatabaseSeeder extends Seeder
         // Kampus Jurusan Map
         $kampusJurusanMap = [
             'Universitas Gadjah Mada' => [
-                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 690],
+                ['jurusan' => 'Teknik Mesin Otomotif', 'passing_grade' => 690],
                 ['jurusan' => 'Teknik Industri', 'passing_grade' => 700],
                 ['jurusan' => 'Teknik Informatika', 'passing_grade' => 725],
-                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 710],
+                ['jurusan' => 'Teknologi Rekayasa Konstruksi', 'passing_grade' => 599],
                 ['jurusan' => 'Arsitektur', 'passing_grade' => 705],
                 ['jurusan' => 'Teknik Geodesi', 'passing_grade' => 700],
                 ['jurusan' => 'Desain Produk', 'passing_grade' => 695],
             ],
 
             'Institut Teknologi Sepuluh Nopember' => [
-                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 685],
+                ['jurusan' => 'Teknik Mesin Manufaktur', 'passing_grade' => 685],
                 ['jurusan' => 'Teknik Elektro', 'passing_grade' => 695],
                 ['jurusan' => 'Teknik Komputer', 'passing_grade' => 700],
                 ['jurusan' => 'Teknik Industri', 'passing_grade' => 690],
                 ['jurusan' => 'Teknologi Informasi', 'passing_grade' => 675],
                 ['jurusan' => 'Desain Produk', 'passing_grade' => 665],
-                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 680],
+                ['jurusan' => 'Teknologi Rekayasa Konstruksi', 'passing_grade' => 441],
             ],
 
             'Universitas Indonesia' => [
-                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 700],
+                ['jurusan' => 'Teknik Mesin Manufaktur', 'passing_grade' => 700],
                 ['jurusan' => 'Sistem Informasi', 'passing_grade' => 720],
                 ['jurusan' => 'Arsitektur', 'passing_grade' => 705],
                 ['jurusan' => 'Desain Komunikasi Visual', 'passing_grade' => 710],
@@ -963,7 +965,7 @@ class DatabaseSeeder extends Seeder
             ],
 
             'Universitas Brawijaya' => [
-                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 670],
+                ['jurusan' => 'Teknik Mesin Manufaktur', 'passing_grade' => 670],
                 ['jurusan' => 'Teknik Informatika', 'passing_grade' => 690],
                 ['jurusan' => 'Teknik Sipil', 'passing_grade' => 675],
                 ['jurusan' => 'Teknik Industri', 'passing_grade' => 680],
@@ -984,14 +986,14 @@ class DatabaseSeeder extends Seeder
                 ['jurusan' => 'Teknik Elektro', 'passing_grade' => 660],
                 ['jurusan' => 'Teknik Komputer', 'passing_grade' => 650],
                 ['jurusan' => 'Teknik Sipil', 'passing_grade' => 655],
-                ['jurusan' => 'Pendidikan Teknik Mesin', 'passing_grade' => 645],
+                ['jurusan' => 'Teknik Elektro Otomotif', 'passing_grade' => 589],
             ],
 
             'Politeknik Negeri Bandung' => [
-                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 640],
+                ['jurusan' => 'Teknik Mesin Otomotif', 'passing_grade' => 640],
                 ['jurusan' => 'Teknik Otomotif', 'passing_grade' => 630],
-                ['jurusan' => 'Teknik Industri', 'passing_grade' => 635],
                 ['jurusan' => 'Teknik Manufaktur', 'passing_grade' => 625],
+                ['jurusan' => 'Teknik Elektro Otomotif', 'passing_grade' => 563],
             ],
 
             'Universitas Diponegoro' => [
@@ -1011,14 +1013,11 @@ class DatabaseSeeder extends Seeder
             'Universitas Atma Jaya Yogyakarta' => [
                 ['jurusan' => 'Arsitektur', 'passing_grade' => 660],
                 ['jurusan' => 'Desain Interior', 'passing_grade' => 645],
-                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 655],
-                ['jurusan' => 'Teknik Industri', 'passing_grade' => 650],
             ],
 
             'Universitas Muhammadiyah Yogyakarta' => [
                 ['jurusan' => 'Teknik Informatika', 'passing_grade' => 665],
                 ['jurusan' => 'Sistem Informasi', 'passing_grade' => 660],
-                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 655],
                 ['jurusan' => 'Teknik Elektro', 'passing_grade' => 650],
             ],
 
@@ -1030,23 +1029,28 @@ class DatabaseSeeder extends Seeder
             ],
 
             'Politeknik Negeri Semarang' => [
-                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 640],
                 ['jurusan' => 'Manajemen Konstruksi', 'passing_grade' => 630],
                 ['jurusan' => 'Teknik Bangunan Gedung', 'passing_grade' => 625],
             ],
 
             'Universitas Negeri Malang' => [
-                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 650],
+                ['jurusan' => 'Teknik Mesin Otomotif', 'passing_grade' => 650],
                 ['jurusan' => 'Teknik Elektro', 'passing_grade' => 645],
                 ['jurusan' => 'Desain Produk', 'passing_grade' => 635],
                 ['jurusan' => 'Teknik Otomotif', 'passing_grade' => 640],
             ],
 
             'Institut Teknologi Nasional Malang' => [
-                ['jurusan' => 'Teknik Sipil', 'passing_grade' => 645],
-                ['jurusan' => 'Teknik Mesin', 'passing_grade' => 650],
+                ['jurusan' => 'Teknik Mesin Manufaktur', 'passing_grade' => 650],
                 ['jurusan' => 'Arsitektur', 'passing_grade' => 640],
-                ['jurusan' => 'Teknik Industri', 'passing_grade' => 635],
+            ],
+
+            'Universitas Negeri Jakarta' => [
+                ['jurusan' => 'Teknologi Rekayasa Konstruksi', 'passing_grade' => 582],
+            ],
+
+            'Politeknik Negeri Jakarta' => [
+                ['jurusan' => 'Teknik Elektro Otomotif', 'passing_grade' => 638],
             ],
         ];
         $allJurusan = JurusanKuliah::pluck('id', 'nama_jurusan_kuliah')->toArray();
@@ -1068,7 +1072,7 @@ class DatabaseSeeder extends Seeder
 
         $hobiList = [
             ['nama_hobi' => 'Rekayasa Mesin'],
-            ['nama_hobi' => 'Perawatan Kendaraan'],
+            ['nama_hobi' => 'Servis Kendaraan'],
             ['nama_hobi' => 'Analisis Produksi'],
             ['nama_hobi' => 'Pemrograman'],
             ['nama_hobi' => 'Analisis Data'],
@@ -1084,10 +1088,13 @@ class DatabaseSeeder extends Seeder
             ['nama_hobi' => 'Inovasi Produk'],
             ['nama_hobi' => 'Desain Bangunan'],
             ['nama_hobi' => 'Tata Ruang'],
-            ['nama_hobi' => 'Konstruksi Bangunan'],
+            ['nama_hobi' => 'Manajemen Proyek'],
             ['nama_hobi' => 'Pengawasan Proyek'],
             ['nama_hobi' => 'Rancang Struktur'],
+            ['nama_hobi' => 'Konstruksi Bangunan'],
             ['nama_hobi' => 'Desain Mekanik'],
+            ['nama_hobi' => 'Optimasi Proses'],
+            ['nama_hobi' => 'Rakit Mesin'],
             ['nama_hobi' => 'Pemetaan Wilayah'],
             ['nama_hobi' => 'Eksplorasi Alam'],
             ['nama_hobi' => 'Survei Lahan'],
@@ -1098,9 +1105,9 @@ class DatabaseSeeder extends Seeder
 
         // Hobi - Jurusan Map
         $hobiJurusanMap = [
-            'Rekayasa Mesin' => [['jurusan' => 'Teknik Mesin', 'poin' => 20]],
-            'Perawatan Kendaraan' => [['jurusan' => 'Teknik Otomotif', 'poin' => 20]],
-            'Analisis Produksi' => [['jurusan' => 'Teknik Industri', 'poin' => 20]],
+            'Rekayasa Mesin' => [['jurusan' => 'Teknik Mesin Otomotif', 'poin' => 20]],
+            'Servis Kendaraan' => [['jurusan' => 'Teknik Otomotif', 'poin' => 20]],
+            'Analisis Produksi' => [['jurusan' => 'Teknik Elektro Otomotif', 'poin' => 20]],
             'Pemrograman' => [['jurusan' => 'Teknik Informatika', 'poin' => 20]],
             'Analisis Data' => [['jurusan' => 'Sistem Informasi', 'poin' => 20]],
             'Jaringan Komputer' => [['jurusan' => 'Teknologi Informasi', 'poin' => 20]],
@@ -1115,10 +1122,13 @@ class DatabaseSeeder extends Seeder
             'Inovasi Produk' => [['jurusan' => 'Desain Produk', 'poin' => 20]],
             'Desain Bangunan' => [['jurusan' => 'Arsitektur', 'poin' => 20]],
             'Tata Ruang' => [['jurusan' => 'Desain Interior', 'poin' => 20]],
-            'Konstruksi Bangunan' => [['jurusan' => 'Teknik Sipil', 'poin' => 20]],
+            'Manajemen Proyek' => [['jurusan' => 'Teknologi Rekayasa Konstruksi', 'poin' => 20]],
             'Pengawasan Proyek' => [['jurusan' => 'Manajemen Konstruksi', 'poin' => 20]],
             'Rancang Struktur' => [['jurusan' => 'Teknik Bangunan Gedung', 'poin' => 20]],
-            'Desain Mekanik' => [['jurusan' => 'Teknik Manufaktur', 'poin' => 20]],
+            'Konstruksi Bangunan' => [['jurusan' => 'Teknik Sipil', 'poin' => 20]],
+            'Desain Mekanik' => [['jurusan' => 'Teknik Mesin Manufaktur', 'poin' => 20]],
+            'Optimasi Proses' => [['jurusan' => 'Teknik Industri', 'poin' => 20]],
+            'Rakit Mesin' => [['jurusan' => 'Teknik Manufaktur', 'poin' => 20]],
             'Pemetaan Wilayah' => [['jurusan' => 'Teknik Geodesi', 'poin' => 20]],
             'Eksplorasi Alam' => [['jurusan' => 'Geografi', 'poin' => 20]],
             'Survei Lahan' => [['jurusan' => 'Teknologi Survei dan Pemetaan', 'poin' => 20]],
