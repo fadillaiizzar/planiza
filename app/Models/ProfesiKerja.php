@@ -14,11 +14,20 @@ class ProfesiKerja extends Model
     protected $fillable = [
         'nama_profesi_kerja',
         'gambar',
-        'gaji',
         'deskripsi',
         'info_skill',
         'info_jurusan',
     ];
+
+    public function industris(): BelongsToMany
+    {
+        return $this->belongsToMany(Industri::class, 'industri_profesis', 'profesi_kerja_id', 'industri_id')->withPivot('gaji')->withTimestamps();
+    }
+
+    public function industriProfesis(): HasMany
+    {
+        return $this->hasMany(IndustriProfesi::class, 'profesi_kerja_id');
+    }
 
     public function opsiJawabans(): HasMany
     {
@@ -28,11 +37,6 @@ class ProfesiKerja extends Model
     public function kenaliProfesi(): HasMany
     {
         return $this->hasMany(KenaliProfesi::class);
-    }
-
-    public function industris(): BelongsToMany
-    {
-        return $this->belongsToMany(Industri::class, 'industri_profesis', 'profesi_kerja_id', 'industri_id')->withTimestamps();
     }
 
     public function kategoriMinats(): BelongsToMany

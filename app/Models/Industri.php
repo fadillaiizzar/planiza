@@ -10,6 +10,8 @@ class Industri extends Model
 {
     use HasFactory;
 
+    protected $table = 'industris';
+
     protected $fillable = [
         'nama_industri',
         'website',
@@ -18,6 +20,6 @@ class Industri extends Model
 
     public function profesiKerjas(): BelongsToMany
     {
-        return $this->belongsToMany(ProfesiKerja::class, 'industri_profesis', 'industri_id', 'profesi_kerja_id')->withTimestamps();
+        return $this->belongsToMany(ProfesiKerja::class, 'industri_profesis', 'industri_id', 'profesi_kerja_id')->withTimestamps()->withPivot('gaji');
     }
 }

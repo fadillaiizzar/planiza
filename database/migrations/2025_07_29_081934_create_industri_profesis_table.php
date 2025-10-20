@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('profesi_kerja_id')->constrained('profesi_kerjas')->onDelete('cascade');
             $table->foreignId('industri_id')->constrained('industris')->onDelete('cascade');
+            $table->decimal('gaji', 15, 2);
             $table->timestamps();
         });
     }

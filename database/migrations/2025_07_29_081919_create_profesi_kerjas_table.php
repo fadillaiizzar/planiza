@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nama_profesi_kerja');
             $table->string('gambar')->nullable();
-            $table->decimal('gaji', 15, 2);
             $table->text('deskripsi');
             $table->text('info_skill');
             $table->text('info_jurusan');

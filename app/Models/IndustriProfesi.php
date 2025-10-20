@@ -15,9 +15,8 @@ class IndustriProfesi extends Model
     protected $fillable = [
         'profesi_kerja_id',
         'industri_id',
+        'gaji',
     ];
-
-    protected $with = ['profesiKerja', 'industri'];
 
     public function profesiKerja(): BelongsTo
     {
