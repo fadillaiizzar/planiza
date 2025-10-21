@@ -56,14 +56,18 @@
 
     <input type="hidden" id="activeAttempt" value="{{ $activeAttempt }}">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @php
+        $answeredSoalFromDB = [];
+        foreach ($soals as $soal) {
+            $answeredSoalFromDB[$soal->id] = $soal->jawabanSiswa
+                ? $soal->jawabanSiswa->pluck('opsi_jawaban_id')->toArray()
+                : [];
+        }
+    @endphp
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        const answeredSoal = {
-            @foreach($soals as $soal)
-                '{{ $soal->id }}': @json($soal->jawabanSiswa ? $soal->jawabanSiswa->pluck('opsi_jawaban_id') : []),
-            @endforeach
-        };
+        const answeredSoal = @json($answeredSoalFromDB);
 
         const soalItems = document.querySelectorAll('.soal-item');
         let currentIndex = 0;
@@ -75,6 +79,33 @@
         const questionCounter = document.getElementById('question-counter');
         const loadingOverlay = document.getElementById('loading-overlay');
         const totalSoal = soalItems.length;
+
+        // 🔹 Fungsi utama untuk simpan jawaban (bisa dipanggil dari next/submit)
+        async function saveAnswer(soalId) {
+            if (!answeredSoal[soalId] || answeredSoal[soalId].length === 0) {
+                showCustomAlert('Harap pilih jawaban terlebih dahulu sebelum lanjut.');
+                return false;
+            }
+
+            loadingOverlay.classList.remove('hidden');
+            try {
+                await $.ajax({
+                    url: `/siswa/kenali-profesi/tes/${soalId}/jawab`,
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        opsi_jawaban_id: answeredSoal[soalId],
+                        attempt: $('#activeAttempt').val()
+                    }
+                });
+                return true; // sukses
+            } catch (err) {
+                showCustomAlert('Gagal menyimpan jawaban. Silakan coba lagi.');
+                return false; // gagal
+            } finally {
+                loadingOverlay.classList.add('hidden');
+            }
+        }
 
         // 🔹 Update progress bar + counter
         function updateProgress() {
@@ -104,25 +135,32 @@
             });
         }
 
-        // 🔹 Navigasi soal
+        // 🔹 Navigasi soal - prev
         prevBtn.onclick = () => { if (currentIndex > 0) showSoal(--currentIndex); };
 
-        // 🔹 Tambahan validasi di tombol next
-        nextBtn.onclick = () => {
+        // 🔹 Navigasi soal - next (async & auto-update showSoal)
+        nextBtn.onclick = async () => {
             const soalId = soalItems[currentIndex].dataset.id;
-            if (!answeredSoal[soalId] || answeredSoal[soalId].length === 0) {
-                showCustomAlert('Harap pilih jawaban terlebih dahulu sebelum lanjut.');
-                return;
-            }
+
+            const success = await saveAnswer(soalId);
+            if (!success) return;
+
             if (currentIndex < totalSoal - 1) showSoal(++currentIndex);
         };
 
-        // 🔹 Tambahan keyboard
-        document.addEventListener('keydown', e => {
-            if (e.code === 'ArrowLeft') prevBtn.click();
-            if (e.code === 'ArrowRight' || e.code === 'Space') nextBtn.click();
+        // 🔹 Tombol "Submit"
+        submitForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const soalId = soalItems[currentIndex].dataset.id;
+
+            const success = await saveAnswer(soalId);
+            if (!success) return;
+
+            e.target.submit();
         });
 
+        // 🔹 Tambahan keyboard
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Space' && !nextBtn.classList.contains('hidden')) {
                 e.preventDefault();
@@ -136,7 +174,7 @@
             }
         });
 
-        // 🔹 Tambahan Popup
+        // 🔹 Custom Popup
         function showCustomAlert(message) {
             document.getElementById('custom-alert-message').textContent = message;
             document.getElementById('custom-alert').classList.remove('hidden');
@@ -184,73 +222,43 @@
         $(document).on('click', '.opsi-btn', function () {
             const soalId = $(this).data('soal');
             const opsiId = $(this).data('opsi');
-            const btn = $(this);
             const soalItem = $(this).closest('.soal-item');
             const maxSelect = parseInt(soalItem.data('max'));
 
-            loadingOverlay.classList.remove('hidden');
-
             // toggle multi select
-            if (!answeredSoal[soalId]) {
-                answeredSoal[soalId] = [];
-            }
+            if (!answeredSoal[soalId]) answeredSoal[soalId] = [];
 
             if (maxSelect === 1) {
                 answeredSoal[soalId] = [opsiId];
+
+                // update tampilan
+                $(soalItem).find('.opsi-btn').each(function () {
+                    const opsi = $(this).data('opsi');
+                    if (opsi === opsiId) setSelectedOptionStyles($(this));
+                    else resetOptionStyles($(this));
+                });
             } else {
                 const idx = answeredSoal[soalId].indexOf(opsiId);
-
                 if (idx === -1) {
                     if (answeredSoal[soalId].length < maxSelect) {
                         answeredSoal[soalId].push(opsiId);
                     } else {
-                        answeredSoal[soalId].shift();
-                        answeredSoal[soalId].push(opsiId);
+                        showCustomAlert(`Maksimal ${maxSelect} jawaban. Silakan uncheck salah satu`);
                     }
                 } else {
                     answeredSoal[soalId].splice(idx, 1);
                 }
+
+                // 🔹 Update tampilan opsi
+                $(soalItem).find('.opsi-btn').each(function () {
+                    const opsi = $(this).data('opsi');
+                    if (answeredSoal[soalId].includes(opsi)) setSelectedOptionStyles($(this));
+                    else resetOptionStyles($(this));
+                });
             }
-
-            $.ajax({
-                url: `/siswa/kenali-profesi/tes/${soalId}/jawab`,
-                type: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    opsi_jawaban_id: answeredSoal[soalId],
-                    attempt: $('#activeAttempt').val()
-                },
-                success: function (res) {
-                    loadingOverlay.classList.add('hidden');
-
-                    if (res.success) {
-                        btn.parent().find('.opsi-btn').each(function () {
-                            const opsi = $(this).data('opsi');
-                            if (answeredSoal[soalId].includes(opsi)) {
-                                setSelectedOptionStyles($(this));
-                            } else {
-                                resetOptionStyles($(this));
-                            }
-                        });
-
-                        if (res.jenis_soal === "single") {
-                            setTimeout(() => {
-                                if (currentIndex < soalItems.length - 1) {
-                                    nextBtn.click();
-                                }
-                            }, 800);
-                        }
-                    }
-                },
-                error: function () {
-                    loadingOverlay.classList.add('hidden');
-                    showCustomAlert('Gagal menyimpan jawaban. Silakan coba lagi.');
-                }
-            });
         });
 
         showSoal(currentIndex);
-
         document.documentElement.style.scrollBehavior = 'smooth';
     </script>
 </body>

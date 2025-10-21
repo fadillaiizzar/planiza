@@ -29,11 +29,7 @@ class KerjakanTesController extends Controller
             ->max('attempt');
 
         // 🔹 Tentukan attempt aktif (kalau sudah → +1, kalau belum pernah → 1 )
-        if ($lastAttempt) {
-            $activeAttempt = $lastAttempt + 1;
-        } else {
-            $activeAttempt = 1;
-        }
+        $activeAttempt = $lastAttempt ? $lastAttempt + 1 : 1;
 
         // 🔹 Ambil semua soal + opsi jawaban + jawaban siswa di attempt aktif
         $soals = SoalTes::with(['opsiJawabans', 'jawabanSiswa' => function($q) use($userId, $activeAttempt) {
