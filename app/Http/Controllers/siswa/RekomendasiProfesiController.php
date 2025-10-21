@@ -50,7 +50,7 @@ class RekomendasiProfesiController extends Controller
             // 🔹 Soal Single
             if ($soal->jenis_soal === 'single' && $opsi->kategoriMinat) {
                 $jumlahProfesi = $opsi->kategoriMinat->profesiKerjas->count();
-                $poinPerProfesi = ($bobotSingle / max($totalSingle, 1)) / max($jumlahProfesi, 1);
+                $$poinPerProfesi = ($bobotSingle / max($totalSingle, 1)) * (1 / sqrt($jumlahProfesi));
 
                 foreach ($opsi->kategoriMinat->profesiKerjas as $profesi) {
                     $poinProfesi[$profesi->id] = ($poinProfesi[$profesi->id] ?? 0) + $poinPerProfesi;
@@ -102,10 +102,7 @@ class RekomendasiProfesiController extends Controller
 
         foreach ($allProfesi as $index => $profesi) {
             if ($prevScore !== null && $profesi->total_poin < $prevScore) {
-                $rank += $tieCount;
-                $tieCount = 1;
-            } else {
-                $tieCount++;
+                $rank = $index + 1;
             }
 
             $profesi->update(['ranking' => $rank]);

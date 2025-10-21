@@ -1,12 +1,8 @@
 @php
-    // Ambil skor setelah 3 besar
-    $tieScore = $allProfesi->skip(3)->first()->total_poin ?? null;
-
-    // Ambil profesi yang punya skor tie setelah 3 besar
-    $tieProfesi = $allProfesi->filter(fn($p) => $p->total_poin == $tieScore && !$topProfesi->take(3)->contains($p));
-
-    // Hitung berapa banyak tie
+    $minTop3Score = $allProfesi->take(3)->last()->total_poin ?? null;
+    $tieProfesi = $allProfesi->filter(fn($p) => $p->total_poin == $minTop3Score && !$allProfesi->take(3)->contains($p));
     $extraCount = $tieProfesi->count();
+    $tieScore = $extraCount > 0 ? $minTop3Score : null;
 @endphp
 
 <div id="topProfesiGrid" class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mb-16 relative">
