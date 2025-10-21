@@ -80,7 +80,7 @@
 </div>
 
 @if($extraCount > 0)
-    <div class="text-center mt-6">
+    <div class="text-center mt-6 mb-10">
         <button id="toggleMore"
             class="px-5 py-2.5 text-sm font-semibold rounded-full bg-slate-navy text-white hover:bg-cool-gray transition-all duration-300">
             +{{ $extraCount }} lainnya (tie pada skor {{ $tieScore }})

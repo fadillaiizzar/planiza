@@ -17,6 +17,7 @@
             />
 
             @include('siswa.kenali_profesi.tes.rekomendasi_profesi.top-profesi-card', [
+                'allProfesi' => $allProfesi,
                 'topProfesi' => $topProfesi,
                 'alasanFormatted' => $alasanFormatted
             ])

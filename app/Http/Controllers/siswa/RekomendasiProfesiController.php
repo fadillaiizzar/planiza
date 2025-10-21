@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Siswa;
 
 use App\Models\Tes;
+use App\Models\SoalTes;
 use App\Models\JawabanSiswa;
 use App\Models\KenaliProfesi;
 use App\Http\Controllers\Controller;
@@ -23,7 +24,7 @@ class RekomendasiProfesiController extends Controller
 
         // 🔹 Ambil semua jawaban di attempt ini, lengkap dengan relasi opsi → kategori → profesi
         $jawaban = $siswa->jawabanSiswa()
-            ->with(['opsiJawaban.kategoriMinat.profesiKerjas', 'opsiJawaban.profesiKerja'])
+            ->with(['opsiJawaban.kategoriMinat.profesiKerjas', 'opsiJawaban.profesiKerja', 'opsiJawaban.soalTes'])
             ->where('tes_id', $tesId)
             ->where('attempt', $activeAttempt)
             ->get();
@@ -32,23 +33,40 @@ class RekomendasiProfesiController extends Controller
         $poinProfesi = [];
         $alasanPerProfesi = [];
 
+        // total soal single dan multi
+        $totalSingle = SoalTes::where('jenis_soal', 'single')->count();
+        $totalMulti = SoalTes::where('jenis_soal', 'multi')->count();
+
+        // bobot global
+        $bobotSingle = 30;
+        $bobotMulti = 70;
+
         foreach ($jawaban as $jwb) {
             $opsi = $jwb->opsiJawaban;
             if (!$opsi) continue;
 
-            // 🔹 Kalau opsi punya kategori minat → setiap profesi di kategori itu mendapat poin
-            if ($opsi->kategoriMinat) {
-                foreach ($opsi->kategoriMinat->profesiKerjas as $profesi) {
-                    $poinProfesi[$profesi->id] = ($poinProfesi[$profesi->id] ?? 0) + $opsi->poin;
+            $soal = $opsi->soalTes;
 
+            // 🔹 Soal Single
+            if ($soal->jenis_soal === 'single' && $opsi->kategoriMinat) {
+                $jumlahProfesi = $opsi->kategoriMinat->profesiKerjas->count();
+                $poinPerProfesi = ($bobotSingle / max($totalSingle, 1)) / max($jumlahProfesi, 1);
+
+                foreach ($opsi->kategoriMinat->profesiKerjas as $profesi) {
+                    $poinProfesi[$profesi->id] = ($poinProfesi[$profesi->id] ?? 0) + $poinPerProfesi;
                     $alasanPerProfesi[$profesi->id][] = $opsi->isi_opsi;
                 }
             }
 
-            // 🔹 Kalau opsi langsung mengarah ke profesi (tanpa kategori)
-            if ($opsi->profesi_kerja_id) {
-                $poinProfesi[$opsi->profesi_kerja_id] = ($poinProfesi[$opsi->profesi_kerja_id] ?? 0) + $opsi->poin;
+            // 🔹 Soal Multi
+            if ($soal->jenis_soal === 'multi' && $opsi->profesi_kerja_id) {
+                $jumlahJawabanSiswa = $jawaban
+                    ->filter(fn($j) => $j->opsiJawaban->soal_tes_id === $soal->id)
+                    ->count();
 
+                $poinPerProfesi = ( ($bobotMulti / max($totalMulti, 1)) * 1.2 ) / max($jumlahJawabanSiswa, 1);
+
+                $poinProfesi[$opsi->profesi_kerja_id] = ($poinProfesi[$opsi->profesi_kerja_id] ?? 0) + $poinPerProfesi;
                 $alasanPerProfesi[$opsi->profesi_kerja_id][] = $opsi->isi_opsi;
             }
         }
