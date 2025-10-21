@@ -35,16 +35,22 @@ class RekomendasiJurusanController extends Controller
 
             foreach ($kampusList as $kampus) {
                 $passingGrade = $kampus->pivot->passing_grade ?? 0;
-                $persen = $passingGrade ? ($nilaiUtbk / $passingGrade) * 100 : 0;
 
-                if ($persen >= 80) $status = 'Tinggi';
-                elseif ($persen >= 60) $status = 'Sedang';
-                else $status = 'Rendah';
+                // 🔹 Logika status peluang yang disesuaikan
+                if ($passingGrade == 0) {
+                    $status = 'Belum tersedia';
+                } elseif ($nilaiUtbk >= $passingGrade) {
+                    $status = 'Tinggi';
+                } elseif ($nilaiUtbk >= 0.8 * $passingGrade) {
+                    $status = 'Sedang';
+                } else {
+                    $status = 'Rendah';
+                }
 
                 $kampusRekom[] = [
                     'kampus' => $kampus,
                     'passing_grade' => $passingGrade,
-                    'status' => ucfirst($status),
+                    'status' => $status,
                     'selisih' => $nilaiUtbk - $passingGrade,
                 ];
 
