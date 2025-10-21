@@ -9,7 +9,6 @@
                     <th class="px-6 py-4 text-left text-slate-navy">No</th>
                     <th class="px-6 py-4 text-left text-slate-navy">Pertanyaan</th>
                     <th class="px-6 py-4 text-left text-slate-navy">Jawaban</th>
-                    <th class="px-6 py-4 text-left text-slate-navy">Poin</th>
                     <th class="px-6 py-4 text-left text-slate-navy">Profesi</th>
                 </tr>
             </thead>
@@ -29,11 +28,6 @@
                                 </td>
                             @endif
                             <td class="px-6 py-4 text-sm text-cool-gray">{{ $jwb['isi_opsi'] }}</td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center justify-center min-w-[2.5rem] px-3 py-1.5 rounded-lg bg-gradient-to-r from-slate-navy to-cool-gray text-white text-xs font-bold shadow-sm">
-                                    {{ $jwb['poin'] }}
-                                </span>
-                            </td>
                             <td class="px-6 py-4 text-sm text-slate-navy font-medium">{{ $jwb['profesi_tujuan'] ?? '-' }}</td>
                         </tr>
                     @endforeach
