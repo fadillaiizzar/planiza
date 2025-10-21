@@ -133,6 +133,8 @@
                     resetOptionStyles($(this));
                 }
             });
+
+            localStorage.setItem('lastSoalIndex', index);
         }
 
         // 🔹 Navigasi soal - prev
@@ -257,6 +259,12 @@
                 });
             }
         });
+
+        // 🔹 Cek posisi terakhir sebelum tampilkan soal pertama
+        const savedIndex = localStorage.getItem('lastSoalIndex');
+        if (savedIndex !== null && !isNaN(savedIndex) && savedIndex < totalSoal) {
+            currentIndex = parseInt(savedIndex);
+        }
 
         showSoal(currentIndex);
         document.documentElement.style.scrollBehavior = 'smooth';
