@@ -68,6 +68,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         const answeredSoal = @json($answeredSoalFromDB);
+        const savedAnswers = localStorage.getItem('answeredSoal');
+        if (savedAnswers) {
+            Object.assign(answeredSoal, JSON.parse(savedAnswers));
+        }
 
         const soalItems = document.querySelectorAll('.soal-item');
         let currentIndex = 0;
@@ -80,10 +84,15 @@
         const loadingOverlay = document.getElementById('loading-overlay');
         const totalSoal = soalItems.length;
 
+        // 🔹 Simpan ke localStorage setiap kali answeredSoal berubah
+        function saveToLocal() {
+            localStorage.setItem('answeredSoal', JSON.stringify(answeredSoal));
+        }
+
         // 🔹 Fungsi utama untuk simpan jawaban (bisa dipanggil dari next/submit)
         async function saveAnswer(soalId) {
             if (!answeredSoal[soalId] || answeredSoal[soalId].length === 0) {
-                showCustomAlert('Harap pilih jawaban terlebih dahulu sebelum lanjut.');
+                showCustomAlert('Harap pilih jawaban terlebih dahulu sebelum lanjut');
                 return false;
             }
 
@@ -100,8 +109,8 @@
                 });
                 return true; // sukses
             } catch (err) {
-                showCustomAlert('Gagal menyimpan jawaban. Silakan coba lagi.');
-                return false; // gagal
+                showCustomAlert('Gagal menyimpan jawaban. Silakan coba lagi');
+                return false;
             } finally {
                 loadingOverlay.classList.add('hidden');
             }
@@ -155,9 +164,11 @@
             e.preventDefault();
 
             const soalId = soalItems[currentIndex].dataset.id;
-
             const success = await saveAnswer(soalId);
             if (!success) return;
+
+            localStorage.removeItem('lastSoalIndex');
+            localStorage.removeItem('answeredSoal');
 
             e.target.submit();
         });
@@ -258,6 +269,8 @@
                     else resetOptionStyles($(this));
                 });
             }
+
+            saveToLocal();
         });
 
         // 🔹 Cek posisi terakhir sebelum tampilkan soal pertama
