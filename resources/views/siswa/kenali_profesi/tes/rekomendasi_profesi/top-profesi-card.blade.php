@@ -79,7 +79,7 @@
     <div class="text-center mt-6 mb-10">
         <button id="toggleMore"
             class="px-5 py-2.5 text-sm font-semibold rounded-full bg-slate-navy text-white hover:bg-cool-gray transition-all duration-300">
-            +{{ $extraCount }} lainnya (tie pada skor {{ $tieScore }})
+            +{{ $extraCount }} lainnya (persentase sama: {{ $profesi->total_poin_normalized }}%)
         </button>
     </div>
 
@@ -91,7 +91,7 @@
         btn.addEventListener('click', () => {
             expanded = !expanded;
             hiddenCards.forEach(card => card.classList.toggle('hidden'));
-            btn.textContent = expanded ? 'Tutup' : '+{{ $extraCount }} lainnya (tie pada skor {{ $tieScore }})';
+            btn.textContent = expanded ? 'Tutup' : '+{{ $extraCount }} lainnya (persentase sama: {{ $profesi->total_poin_normalized }}%)';
         });
     </script>
 @endif
