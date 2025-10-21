@@ -68,7 +68,6 @@ class OpsiJawabanController extends Controller
         $request->validate([
             'soal_tes_id' => 'required|exists:soal_tes,id',
             'isi_opsi.*' => 'required|string',
-            'poin.*' => 'required|integer',
         ]);
 
         $soalTes = SoalTes::findOrFail($request->soal_tes_id);
@@ -89,7 +88,6 @@ class OpsiJawabanController extends Controller
                         'kategori_minat_id' => $kategoriId,
                         'profesi_kerja_id'  => null,
                         'isi_opsi'          => $opsi,
-                        'poin'              => $request->poin[$i],
                     ]);
                 }
             }
@@ -107,7 +105,6 @@ class OpsiJawabanController extends Controller
                         'profesi_kerja_id'  => $profesiId,
                         'kategori_minat_id' => null,
                         'isi_opsi'          => $opsi,
-                        'poin'              => $request->poin[$i],
                     ]);
                 }
             }
@@ -151,7 +148,6 @@ class OpsiJawabanController extends Controller
         $request->validate([
             'soal_tes_id' => 'required|exists:soal_tes,id',
             'isi_opsi' => 'required|string',
-            'poin' => 'required|integer',
         ]);
 
         $opsiJawaban = $this->findOpsiJawaban($id);
@@ -167,7 +163,6 @@ class OpsiJawabanController extends Controller
                 'kategori_minat_id' => $request->kategori_minat_id,
                 'profesi_kerja_id'  => null,
                 'isi_opsi'          => $request->isi_opsi,
-                'poin'              => $request->poin,
             ]);
         } else {
             $request->validate([
@@ -179,7 +174,6 @@ class OpsiJawabanController extends Controller
                 'profesi_kerja_id'  => $request->profesi_kerja_id,
                 'kategori_minat_id' => null,
                 'isi_opsi'          => $request->isi_opsi,
-                'poin'              => $request->poin,
             ]);
         }
 

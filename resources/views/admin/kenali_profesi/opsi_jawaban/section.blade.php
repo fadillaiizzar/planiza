@@ -31,14 +31,12 @@
                         <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors opsi-jawaban-row"
                             data-soal="{{ strtolower($item->soalTes->isi_pertanyaan ?? '') }}"
                             data-opsi="{{ strtolower($item->isi_opsi) }}"
-                            data-poin="{{ $item->poin }}"
                         >
                             <td class="p-4">{{ $item->id }}</td>
                             <td class="p-4 font-medium text-slate-700">
                                 {{ Str::limit($item->soalTes->isi_pertanyaan ?? '-', 25) }}
                             </td>
                             <td class="p-4">{{ Str::limit($item->isi_opsi, 30) }}</td>
-                            <td class="p-4">{{ $item->poin }}</td>
                             <td class="p-4">
                                 @if($item->kategoriMinat)
                                     <span class="text-blue-600">{{ $item->kategoriMinat->nama_kategori }}</span>

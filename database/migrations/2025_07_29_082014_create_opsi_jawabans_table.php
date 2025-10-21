@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('kategori_minat_id')->nullable()->constrained('kategori_minats')->onDelete('cascade');
             $table->foreignId('profesi_kerja_id')->nullable()->constrained('profesi_kerjas')->onDelete('cascade');
             $table->text('isi_opsi');
-            $table->integer('poin')->default(0);
             $table->timestamps();
         });
     }

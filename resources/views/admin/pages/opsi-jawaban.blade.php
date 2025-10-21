@@ -24,7 +24,7 @@
             'searchPlaceholder' => 'Cari berdasarkan opsi jawaban',
             'itemCount' => $opsiJawabanCount,
             'tableTitle' => 'Daftar Opsi Jawaban',
-            'tableHeaders' => ['ID', 'Soal Tes', 'Isi Opsi', 'Poin', 'Kategori / Profesi', 'Jumlah', 'Aksi'],
+            'tableHeaders' => ['ID', 'Soal Tes', 'Isi Opsi', 'Kategori / Profesi', 'Jumlah', 'Aksi'],
             'items' => $opsiJawaban,
         ])
         @endcomponent

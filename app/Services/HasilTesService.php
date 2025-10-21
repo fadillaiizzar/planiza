@@ -148,7 +148,6 @@ class HasilTesService
                 'soal_tes.id as soal_id',
                 'soal_tes.isi_pertanyaan',
                 'opsi_jawabans.isi_opsi',
-                'opsi_jawabans.poin',
                 DB::raw("
                     TRIM(BOTH ', ' FROM CONCAT_WS(
                         ', ',
@@ -160,7 +159,7 @@ class HasilTesService
             ->where('jawaban_siswas.tes_id', $tesId)
             ->where('jawaban_siswas.user_id', $userId)
             ->where('jawaban_siswas.attempt', $attempt)
-            ->groupBy('soal_tes.id', 'soal_tes.isi_pertanyaan', 'opsi_jawabans.isi_opsi', 'opsi_jawabans.poin')
+            ->groupBy('soal_tes.id', 'soal_tes.isi_pertanyaan', 'opsi_jawabans.isi_opsi')
             ->orderBy('soal_tes.id', 'asc')
             ->get();
 
@@ -171,7 +170,6 @@ class HasilTesService
             $listJawaban = $items->map(function ($item) {
                 return [
                     'isi_opsi' => $item->isi_opsi,
-                    'poin' => $item->poin,
                     'profesi_tujuan' => $item->profesi_tujuan,
                 ];
             })->values();

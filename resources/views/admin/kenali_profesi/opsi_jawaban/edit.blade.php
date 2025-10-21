@@ -51,15 +51,6 @@
                        class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm text-slate-900 bg-white">
             </div>
 
-            <!-- Poin -->
-            <div class="space-y-1">
-                <label for="poin" class="block text-sm font-semibold text-slate-700">Poin</label>
-                <input type="number" name="poin" id="poin"
-                       value="{{ old('poin', $opsiJawaban->poin) }}"
-                       required
-                       class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm text-slate-900 bg-white">
-            </div>
-
             <!-- Kategori Minat (jika single) -->
             @if($opsiJawaban->soalTes->jenis_soal === 'single')
                 <div class="space-y-1">

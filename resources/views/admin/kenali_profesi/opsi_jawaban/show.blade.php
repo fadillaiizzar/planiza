@@ -65,12 +65,6 @@
                         'label' => 'Isi Opsi',
                         'value' => $opsiJawaban->isi_opsi,
                     ],
-                    [
-                        'icon' => 'fas fa-star',
-                        'color' => 'text-yellow-500',
-                        'label' => 'Poin',
-                        'value' => $opsiJawaban->poin,
-                    ],
                 ];
             @endphp
 

@@ -92,13 +92,6 @@
                         <input type="text" name="isi_opsi[]" class="w-full px-5 py-3 border border-slate-200 rounded-2xl shadow-sm focus:ring-2 focus:ring-indigo-400" required>
                     </div>
 
-                    <div class="group space-y-1 mb-4">
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">
-                            <i class="fas fa-star mr-2 text-yellow-500"></i> Poin
-                        </label>
-                        <input type="number" name="poin[]" class="w-full px-5 py-3 border border-slate-200 rounded-2xl shadow-sm focus:ring-2 focus:ring-indigo-400" required>
-                    </div>
-
                     {{-- Placeholder kategori/profesi (ditampilkan dinamis via JS sesuai jenis soal) --}}
                     <div class="group space-y-1 mb-4 kategori-field hidden">
                         <label class="block text-sm font-semibold text-slate-700 mb-2">

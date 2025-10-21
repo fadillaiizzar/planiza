@@ -13,7 +13,6 @@ class OpsiJawaban extends Model
         'kategori_minat_id',
         'profesi_kerja_id',
         'isi_opsi',
-        'poin',
     ];
 
     public function jawabanSiswas(): HasMany
