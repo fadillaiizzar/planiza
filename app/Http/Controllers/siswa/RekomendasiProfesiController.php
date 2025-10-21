@@ -77,8 +77,38 @@ class RekomendasiProfesiController extends Controller
             ->orderByDesc('total_poin')
             ->get();
 
-        // 🔹 Ambil 3 profesi poin tertinggi
-        $topProfesi = $allProfesi->take(3);
+        // 🔹 Hitung ranking manual dengan memperhatikan tie (skor sama)
+        $rank = 1;
+        $prevScore = null;
+        $tieCount = 0;
+
+        foreach ($allProfesi as $index => $profesi) {
+            if ($prevScore !== null && $profesi->total_poin < $prevScore) {
+                $rank += $tieCount;
+                $tieCount = 1;
+            } else {
+                $tieCount++;
+            }
+
+            $profesi->update(['ranking' => $rank]);
+            $prevScore = $profesi->total_poin;
+        }
+
+        // 🔹 Tentukan 3 besar + deteksi tie di posisi ke-3
+        $top3 = $allProfesi->where('ranking', '<=', 3);
+        $minTop3Score = $top3->last()->total_poin ?? 0;
+
+        // cek ada yang skornya sama dengan posisi ke-3
+        $tiedWithThird = $allProfesi->filter(fn($p) =>
+            $p->total_poin === $minTop3Score && $p->ranking > 3
+        );
+
+        $extraCount = $tiedWithThird->count();
+
+        // gabungkan ke koleksi tampilan (3 utama + tie kalau ada)
+        $topProfesi = $extraCount > 0
+            ? $allProfesi->filter(fn($p) => $p->total_poin >= $minTop3Score)
+            : $top3;
 
         // 🔹 Buat alasan per profesi dalam kalimat
         $alasanFormatted = [];
