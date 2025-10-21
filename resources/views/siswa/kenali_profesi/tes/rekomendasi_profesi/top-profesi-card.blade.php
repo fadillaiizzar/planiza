@@ -45,11 +45,11 @@
                     <div class="mb-6">
                         <div class="flex items-center justify-between mb-2">
                             <span class="text-sm font-medium text-cool-gray">Total Poin</span>
-                            <span class="text-lg font-bold text-slate-navy">{{ $profesi->total_poin }}</span>
+                            <span class="text-lg font-bold text-slate-navy">{{ $profesi->total_poin_normalized }}%</span>
                         </div>
                         <div class="w-full h-2 bg-border-gray/30 rounded-full overflow-hidden">
                             <div class="h-full bg-gradient-to-r from-slate-navy to-cool-gray rounded-full transition-all duration-1000"
-                                style="width: {{ min(($profesi->total_poin / 100) * 100, 100) }}%">
+                                style="width: {{ min($profesi->total_poin_normalized, 100) }}%">
                             </div>
                         </div>
                     </div>

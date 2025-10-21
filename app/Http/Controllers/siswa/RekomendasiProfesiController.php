@@ -50,7 +50,9 @@ class RekomendasiProfesiController extends Controller
             // 🔹 Soal Single
             if ($soal->jenis_soal === 'single' && $opsi->kategoriMinat) {
                 $jumlahProfesi = $opsi->kategoriMinat->profesiKerjas->count();
-                $$poinPerProfesi = ($bobotSingle / max($totalSingle, 1)) * (1 / sqrt($jumlahProfesi));
+                if ($jumlahProfesi === 0) continue;
+
+                $poinPerProfesi = ($bobotSingle / max($totalSingle, 1)) * (1 / sqrt($jumlahProfesi));
 
                 foreach ($opsi->kategoriMinat->profesiKerjas as $profesi) {
                     $poinProfesi[$profesi->id] = ($poinProfesi[$profesi->id] ?? 0) + $poinPerProfesi;
@@ -64,7 +66,9 @@ class RekomendasiProfesiController extends Controller
                     ->filter(fn($j) => $j->opsiJawaban->soal_tes_id === $soal->id)
                     ->count();
 
-                $poinPerProfesi = ( ($bobotMulti / max($totalMulti, 1)) * 1.2 ) / max($jumlahJawabanSiswa, 1);
+                if ($jumlahJawabanSiswa === 0) continue;
+
+                $poinPerProfesi = ( ($bobotMulti / max($totalMulti, 1)) * 1.5 ) / max($jumlahJawabanSiswa, 1);
 
                 $poinProfesi[$opsi->profesi_kerja_id] = ($poinProfesi[$opsi->profesi_kerja_id] ?? 0) + $poinPerProfesi;
                 $alasanPerProfesi[$opsi->profesi_kerja_id][] = $opsi->isi_opsi;
@@ -130,6 +134,12 @@ class RekomendasiProfesiController extends Controller
         foreach ($alasanPerProfesi as $profesiId => $listAlasan) {
             $skills = implode(', ', array_unique($listAlasan));
             $alasanFormatted[$profesiId] = "Karena kemampuanmu di bidang $skills, profesi ini sangat sesuai untukmu";
+        }
+
+        $maxScore = $allProfesi->max('total_poin') ?: 1; // biar ga division by zero
+
+        foreach ($allProfesi as $profesi) {
+            $profesi->total_poin_normalized = round(($profesi->total_poin / $maxScore) * 100, 2);
         }
 
         // 🔹 Kirim semua data ke view hasil rekomendasi
