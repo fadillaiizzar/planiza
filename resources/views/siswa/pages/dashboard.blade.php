@@ -17,7 +17,7 @@
                             'href' => route('siswa.materi.index'),
                             'icon' => 'fas fa-book',
                             'title' => 'Materi',
-                            'desc' => 'Pembelajaran',
+                            'desc' => 'Pembelajaran materi',
                         ],
                         [
                             'href' => $rencanaSiswa === 'Kerja'
@@ -31,16 +31,25 @@
                                     : ($rencanaSiswa === 'Kuliah' ? 'Jelajahi jurusan' : 'Jelajahi jurusan'),
                         ],
                         [
-                            'href' => route('siswa.kenali-profesi.index'),
-                            'icon' => 'fas fa-briefcase',
+                            'href' => $rencanaSiswa === 'Kerja'
+                                ? route('siswa.kenali-profesi.index')
+                                : ($rencanaSiswa === 'Kuliah'
+                                    ? route('siswa.kenali-jurusan.index')
+                                    : route('siswa.kenali-profesi.index')),
+
+                            'icon' => $rencanaSiswa === 'Kerja'
+                                ? 'fas fa-briefcase'
+                                : ($rencanaSiswa === 'Kuliah'
+                                    ? 'fas fa-graduation-cap'
+                                    : 'fas fa-compass'),
+
                             'title' => 'Kenali Karier',
-                            'desc' => 'Profesi impian',
-                        ],
-                        [
-                            'href' => route('siswa.kenali-jurusan.index'),
-                            'icon' => 'fas fa-briefcase',
-                            'title' => 'Kenali Jurusan',
-                            'desc' => 'Kampus impian',
+
+                            'desc' => $rencanaSiswa === 'Kerja'
+                                ? 'Temukan profesi'
+                                : ($rencanaSiswa === 'Kuliah'
+                                    ? 'Temukan kampus jurusan'
+                                    : 'Temukan arah masa depan mu'),
                         ],
                         [
                             'href' => '#',
