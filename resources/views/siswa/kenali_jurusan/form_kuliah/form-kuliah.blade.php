@@ -150,37 +150,6 @@
             }
         });
 
-        // --- Fungsi autosave ---
-        function autoSave() {
-            const data = {
-                _token: "{{ csrf_token() }}",
-                attempt: attempt,
-                nilai_utbk: $('#nilai_utbk').val(),
-                jurusan_kuliah_ids: $('#jurusan_kuliah_ids').val(),
-                hobi_ids: $('#hobi_ids').val()
-            };
-
-            $.post(saveUrl, data)
-                .done(res => {
-                    console.log(
-                        `%c💾 Data tersimpan sementara!`,
-                        'color: #22c55e; font-weight: bold;'
-                    );
-                    console.log(res.message);
-                })
-                .fail(err => {
-                    console.log(
-                        `%c❌ Gagal menyimpan data sementara:`,
-                        'color: #ef4444; font-weight: bold;'
-                    );
-                    console.log(err.responseText);
-                });
-        }
-
-        // --- Jalankan autosave hanya saat ada perubahan ---
-        $('#nilai_utbk').on('input', autoSave);
-        $('#jurusan_kuliah_ids, #hobi_ids').on('change', autoSave);
-
         const submitUrl = "{{ route('siswa.kenali-jurusan.form-kuliah.submit', $formKuliah->id) }}";
 
         // Submit pakai FETCH (tampilkan di console hasil sukses/gagal)

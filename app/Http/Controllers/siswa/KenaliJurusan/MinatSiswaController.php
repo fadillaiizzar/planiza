@@ -13,74 +13,40 @@ class MinatSiswaController extends Controller
     public function store(Request $request, FormKuliah $formKuliah)
     {
         $userId = Auth::id();
+
+        // Pastikan formKuliah milik user
         if ($formKuliah->user_id !== $userId) {
-            return response()->json(['success' => false, 'message' => 'Unauthorized'], 403);
+            abort(403, 'Akses tidak sah.');
         }
 
-        $attempt = (int) $request->input('attempt', 1);
+        $attempt = (int) $request->input('attempt');
         $jurusanIds = (array) $request->input('jurusan_kuliah_ids', []);
         $hobiIds = (array) $request->input('hobi_ids', []);
         $nilaiUtbk = (int) $request->input('nilai_utbk', 0);
 
         // Pastikan attempt juga disimpan di form_kuliahs
         $formKuliah->update([
-            'attempt' => $attempt,
             'nilai_utbk' => $nilaiUtbk,
+            'attempt' => $attempt,
         ]);
 
-         // Ambil slot yang ada untuk attempt ini
-        $slots = Minat::where('form_kuliah_id', $formKuliah->id)
+        // Hapus data minat lama pada attempt ini agar tidak ganda
+        Minat::where('form_kuliah_id', $formKuliah->id)
             ->where('attempt', $attempt)
-            ->orderBy('id')
-            ->get()
-            ->toArray();
+            ->delete();
 
-        $maxSlots = 3; // maksimal slot
-
-        // Gabungkan input
-        $newSlots = [];
+        // Simpan minat baru
+        $maxSlots = 3;
         $countInput = max(count($jurusanIds), count($hobiIds));
 
-        for ($i = 0; $i < $countInput; $i++) {
-            $jurusanId = $jurusanIds[$i] ?? null;
-            $hobiId = $hobiIds[$i] ?? null;
-
-            // lewati jika kosong semua
-            if ($jurusanId === null && $hobiId === null) continue;
-
-            $newSlots[] = [
-                'jurusan_kuliah_id' => $jurusanId,
-                'hobi_id' => $hobiId,
-            ];
-        }
-
-        // Perbarui slot yang ada atau buat baru
-        for ($i = 0; $i < $maxSlots; $i++) {
-            $newSlot = $newSlots[$i] ?? null;
-
-            if (isset($slots[$i])) {
-                // slot ada → update jika ada data baru, hapus jika kosong semua
-                if ($newSlot) {
-                    Minat::where('id', $slots[$i]['id'])
-                        ->update([
-                            'jurusan_kuliah_id' => $newSlot['jurusan_kuliah_id'],
-                            'hobi_id' => $newSlot['hobi_id'],
-                        ]);
-                } else {
-                    Minat::where('id', $slots[$i]['id'])->delete();
-                }
-            } else {
-                // slot belum ada → buat baru kalau ada data
-                if ($newSlot) {
-                    Minat::create([
-                        'form_kuliah_id' => $formKuliah->id,
-                        'jurusan_kuliah_id' => $newSlot['jurusan_kuliah_id'],
-                        'hobi_id' => $newSlot['hobi_id'],
-                        'attempt' => $attempt,
-                        'is_finished' => false,
-                    ]);
-                }
-            }
+        for ($i = 0; $i < $countInput && $i < $maxSlots; $i++) {
+            Minat::create([
+                'form_kuliah_id' => $formKuliah->id,
+                'jurusan_kuliah_id' => $jurusanIds[$i] ?? null,
+                'hobi_id' => $hobiIds[$i] ?? null,
+                'attempt' => $attempt,
+                'is_finished' => false,
+            ]);
         }
 
         return response()->json([
@@ -94,13 +60,35 @@ class MinatSiswaController extends Controller
         $userId = Auth::id();
         $formKuliah = FormKuliah::where('user_id', $userId)->latest()->firstOrFail();
 
-        $attempt = $request->input('attempt');
+        $attempt = (int) $request->input('attempt');
+        $jurusanIds = (array) $request->input('jurusan_kuliah_ids', []);
+        $hobiIds = (array) $request->input('hobi_ids', []);
+        $nilaiUtbk = (int) $request->input('nilai_utbk', 0);
 
+        // 🧩 Pastikan data jurusan, hobi, dan nilai UTBK juga tersimpan saat submit
+        $formKuliah->update([
+            'nilai_utbk' => $nilaiUtbk,
+            'attempt' => $attempt,
+        ]);
+
+        // Hapus data minat lama di attempt ini
         Minat::where('form_kuliah_id', $formKuliah->id)
             ->where('attempt', $attempt)
-            ->update(['is_finished' => true]);
+            ->delete();
 
-        $formKuliah->update(['attempt' => $attempt]);
+        // Simpan ulang data baru dan tandai langsung selesai
+        $maxSlots = 3;
+        $countInput = max(count($jurusanIds), count($hobiIds));
+
+        for ($i = 0; $i < $countInput && $i < $maxSlots; $i++) {
+            Minat::create([
+                'form_kuliah_id' => $formKuliah->id,
+                'jurusan_kuliah_id' => $jurusanIds[$i] ?? null,
+                'hobi_id' => $hobiIds[$i] ?? null,
+                'attempt' => $attempt,
+                'is_finished' => true,
+            ]);
+        }
 
         return response()->json([
             'success' => true,
