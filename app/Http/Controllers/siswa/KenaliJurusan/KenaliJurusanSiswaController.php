@@ -24,7 +24,7 @@ class KenaliJurusanSiswaController extends Controller
             })
             ->select('attempt', DB::raw('MAX(updated_at) as last_updated'))
             ->groupBy('attempt')
-            ->orderByDesc('last_updated')
+            ->orderBy('last_updated', 'asc')
             ->get();
 
         // 🔹 Ambil form kuliah yang sesuai dengan attempt tersebut
