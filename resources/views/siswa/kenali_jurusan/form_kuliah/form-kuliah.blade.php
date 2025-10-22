@@ -168,6 +168,7 @@
                 if (data.success) {
                     console.log('%c✅ Sukses:', 'color: #22c55e; font-weight: bold;', data.message);
                     console.log('%c➡️ Redirect ke halaman rekomendasi:', 'color: #3b82f6; font-weight: bold;', data.redirect_url);
+                    clearLocalStorage();
                     window.location.href = data.redirect_url;
                 } else {
                     console.log('%c⚠️ Gagal:', 'color: #eab308; font-weight: bold;', data.message);
@@ -177,6 +178,41 @@
                 console.error('%c❌ Error jaringan:', 'color: #ef4444; font-weight: bold;', err);
             });
         });
+
+        // --- Tambahan fitur localStorage ---
+        const STORAGE_KEY = "formKuliahData";
+
+        function saveToLocalStorage() {
+            const nilaiUtbk = document.getElementById('nilai_utbk').value;
+            const jurusan = $('#jurusan_kuliah_ids').val();
+            const hobi = $('#hobi_ids').val();
+            const data = { nilaiUtbk, jurusan, hobi };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+
+        function restoreFromLocalStorage() {
+            const savedData = localStorage.getItem(STORAGE_KEY);
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                if (data.nilaiUtbk) document.getElementById('nilai_utbk').value = data.nilaiUtbk;
+                if (data.jurusan?.length) {
+                    $('#jurusan_kuliah_ids').val(data.jurusan).trigger('change');
+                    updateCounter('jurusan_kuliah_ids', 'jurusanCounter');
+                }
+                if (data.hobi?.length) {
+                    $('#hobi_ids').val(data.hobi).trigger('change');
+                    updateCounter('hobi_ids', 'hobiCounter');
+                }
+            }
+        }
+
+        function clearLocalStorage() {
+            localStorage.removeItem(STORAGE_KEY);
+        }
+
+        document.addEventListener("DOMContentLoaded", restoreFromLocalStorage);
+        document.getElementById('nilai_utbk').addEventListener('input', saveToLocalStorage);
+        $('#jurusan_kuliah_ids, #hobi_ids').on('change', saveToLocalStorage);
     </script>
 </body>
 </html>
