@@ -14,7 +14,10 @@ class RekomendasiJurusanController extends Controller
     public function index($formKuliahId)
     {
         $formKuliah = FormKuliah::with(['minats', 'minats.jurusanKuliah'])->findOrFail($formKuliahId);
+
         $user = Auth::user();
+        $namaSiswa = $user->siswa->nama_siswa ?? $user->name;
+
         $nilaiUtbk = $formKuliah->nilai_utbk;
 
         // Cek attempt terakhir user
@@ -36,22 +39,30 @@ class RekomendasiJurusanController extends Controller
             foreach ($kampusList as $kampus) {
                 $passingGrade = $kampus->pivot->passing_grade ?? 0;
 
-                // 🔹 Logika status peluang yang disesuaikan
+                // 🔹 Logika status peluang berdasarkan perbandingan UTBK vs Passing Grade
                 if ($passingGrade == 0) {
-                    $status = 'Belum tersedia';
-                } elseif ($nilaiUtbk >= $passingGrade) {
-                    $status = 'Tinggi';
-                } elseif ($nilaiUtbk >= 0.8 * $passingGrade) {
-                    $status = 'Sedang';
+                    $keterangan = 'Data passing grade belum tersedia untuk kampus ini.';
                 } else {
-                    $status = 'Rendah';
+                    $persentase = ($nilaiUtbk / $passingGrade) * 100;
+
+                    if ($persentase >= 100) {
+                        $status = 'Tinggi';
+                        $keterangan = 'Nilai kamu sudah melebihi Passing Grade 🎉';
+                    } elseif ($persentase >= 80) {
+                        $status = 'Sedang';
+                        $keterangan = 'Nilai kamu mendekati Passing Grade, masih ada peluang!';
+                    } else {
+                        $status = 'Rendah';
+                        $keterangan = 'Nilai kamu masih jauh dari Passing Grade, perlu ditingkatkan.';
+                    }
                 }
 
                 $kampusRekom[] = [
                     'kampus' => $kampus,
                     'passing_grade' => $passingGrade,
                     'status' => $status,
-                    'selisih' => $nilaiUtbk - $passingGrade,
+                    'keterangan' => $keterangan,
+                    'persentase' => round($persentase ?? 0, 1),
                 ];
 
                 // 🔸 Simpan ke tabel kenali_jurusans
@@ -69,7 +80,7 @@ class RekomendasiJurusanController extends Controller
                 );
             }
 
-            usort($kampusRekom, fn($a,$b)=>$b['selisih'] <=> $a['selisih']);
+            usort($kampusRekom, fn($a, $b) => $b['persentase'] <=> $a['persentase']);
 
             $rekomUTBK[] = [
                 'jurusan' => $jurusan,
@@ -90,6 +101,7 @@ class RekomendasiJurusanController extends Controller
                 $poin = $jurusan->pivot->poin;
                 $jurusanPoin[$jurusan->id]['jurusan'] = $jurusan;
                 $jurusanPoin[$jurusan->id]['total_poin'] = ($jurusanPoin[$jurusan->id]['total_poin'] ?? 0) + $poin;
+                $jurusanPoin[$jurusan->id]['hobi_asal'][] = $hobi->nama_hobi;
             }
         }
 
@@ -114,6 +126,6 @@ class RekomendasiJurusanController extends Controller
         // ----------------------------
         // Return ke view gabungan
         // ----------------------------
-        return view('siswa.pages.rekomendasi-jurusan', compact('rekomUTBK', 'rekomHobi', 'nilaiUtbk'));
+        return view('siswa.pages.rekomendasi-jurusan', compact( 'namaSiswa', 'rekomUTBK', 'rekomHobi', 'nilaiUtbk'));
     }
 }

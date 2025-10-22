@@ -1,35 +1,69 @@
-<h2 class="text-2xl font-bold text-slate-navy mb-6 text-center">Rekomendasi Berdasarkan Hobi</h2>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-slate-navy mb-3">
+            Rekomendasi Berdasarkan Hobi
+        </h2>
+        <div class="w-24 h-1 bg-slate-navy mx-auto"></div>
+    </div>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16">
-    @forelse($rekomHobi as $index => $jurusan)
-        <div class="group relative transition-all duration-500 hover:scale-105 hover:-translate-y-2">
-            <div class="bg-white rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden border border-border-gray/20 h-full flex flex-col relative">
+    @if(count($rekomHobi) > 0)
 
-                {{-- Card Icon --}}
-                <div class="relative h-40 bg-gradient-to-br from-slate-navy/5 to-cool-gray/10 flex items-center justify-center overflow-hidden">
-                    <div class="relative z-10 w-20 h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center transform group-hover:scale-110 transition-all duration-500">
-                        <i class="fas fa-university text-3xl text-slate-navy"></i>
-                    </div>
-                </div>
+        {{-- Grid Jurusan --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach($rekomHobi as $jurusan)
+                @foreach(($jurusan['jurusan_list'] ?? [$jurusan['jurusan'] ?? null]) as $item)
+                    @if($item)
+                        <div class="group relative">
+                            <div class="bg-white rounded-3xl border border-border-gray hover:border-slate-navy transition-all duration-300 overflow-hidden h-full flex flex-col shadow-sm hover:shadow-lg">
 
-                <div class="p-6 flex-grow flex flex-col">
-                    <h3 class="font-bold text-xl text-slate-navy mb-2">
-                        {{ $jurusan['jurusan']->nama_jurusan_kuliah }}
-                    </h3>
+                                {{-- Header Card --}}
+                                <div class="relative bg-gradient-to-br from-slate-navy/5 to-cool-gray/5 p-8 flex items-center justify-center">
+                                    <div class="w-16 h-16 bg-slate-navy rounded-2xl flex items-center justify-center shadow-md group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                                        <i class="fas fa-graduation-cap text-2xl text-off-white"></i>
+                                    </div>
+                                </div>
 
-                    <a href="{{ route('siswa.eksplorasi-jurusan.show', $jurusan['jurusan']->id) }}"
-                        class="mt-auto inline-flex items-center justify-center px-6 py-3.5 bg-slate-navy text-white rounded-xl font-semibold overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-105">
-                        <span class="relative z-10 flex items-center gap-2">
-                            Lihat Detail Jurusan
-                            <i class="fas fa-arrow-right transform transition-transform"></i>
-                        </span>
-                    </a>
-                </div>
-            </div>
+                                {{-- Content --}}
+                                <div class="p-5 flex-grow flex flex-col">
+                                    <h4 class="font-bold text-lg text-slate-navy line-clamp-2 min-h-[3rem]">
+                                        {{ $item->nama_jurusan_kuliah }}
+                                    </h4>
+
+                                    @if(!empty($jurusan['hobi_asal']))
+                                        <p class="text-slate-navy mt-2 mb-5 text-base leading-relaxed">
+                                            Jurusan ini direkomendasikan karena kamu memiliki minat dalam
+                                            <span>
+                                                {{ implode(', ', $jurusan['hobi_asal']) }}
+                                            </span>
+                                        </p>
+                                    @else
+                                        <p class="text-slate-navy mt-2 mb-5 text-base leading-relaxed">
+                                            Jurusan ini sesuai dengan beberapa hobi yang kamu pilih
+                                        </p>
+                                    @endif
+
+                                    <div class="mt-auto ">
+                                        <a href="{{ route('siswa.eksplorasi-jurusan.show', $item->id) }}"
+                                           class="flex items-center justify-center gap-1.5 w-full px-5 py-2.5 bg-slate-navy text-off-white font-semibold rounded-full hover:bg-cool-gray transition-all duration-300 shadow-md hover:shadow-lg">
+                                            <span>Lihat Detail</span>
+                                            <i class="fas fa-arrow-right transition-transform duration-300 group-hover:translate-x-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            @endforeach
         </div>
-    @empty
-        <p class="text-center text-cool-gray italic mb-12">
-            Belum ada rekomendasi berdasarkan hobi tersedia
-        </p>
-    @endforelse
+    @else
+        {{-- Fallback --}}
+        <div class="text-center py-20">
+            <div class="w-24 h-24 bg-slate-navy/5 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-heart text-4xl text-cool-gray"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-navy mb-2">Belum Ada Rekomendasi</h3>
+            <p class="text-cool-gray text-lg">Belum ada rekomendasi jurusan berdasarkan hobi Anda</p>
+        </div>
+    @endif
 </div>

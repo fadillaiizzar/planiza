@@ -22,7 +22,7 @@
             @include('siswa.kenali_jurusan.form_kuliah.rekomendasi_jurusan.rekomendasi-hobi')
 
             <x-siswa.kenali_karier.bottom-info
-                desc='Klik "Lihat Detail Jurusan" untuk mempelajari lebih dalam tentang setiap jurusan, termasuk kampus, passing grade, dan peluang diterima'
+                desc='Klik "Lihat Detail" untuk mempelajari lebih dalam tentang setiap jurusan, termasuk kampus, passing grade, dan peluang diterima'
             />
         </div>
     </div>
