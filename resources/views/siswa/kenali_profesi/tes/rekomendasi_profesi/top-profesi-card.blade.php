@@ -5,7 +5,7 @@
     $tieScore = $extraCount > 0 ? $minTop3Score : null;
 @endphp
 
-<div id="topProfesiGrid" class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mb-16 relative">
+<div id="topProfesiGrid" class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mb-16 relative py-12">
     @foreach($topProfesi as $index => $profesi)
         @php
             $isHidden = $index >= 3 ? 'hidden tie-card' : '';
