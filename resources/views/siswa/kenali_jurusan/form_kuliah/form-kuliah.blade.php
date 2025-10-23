@@ -24,7 +24,7 @@
             <div class="relative bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-border-gray/30 p-8 sm:p-10 lg:p-12">
                 <!-- Tombol Kembali (ikon silang) -->
                 <button id="btnKembali"
-                    class="absolute top-6 right-6 text-slate-navy hover:text-red-500 transition-all duration-200"
+                    class="absolute top-4 right-4 text-red-500 hover:text-red-600 bg-red-50 hover:bg-red-100 transition-all rounded-full w-9 h-9 flex items-center justify-center shadow-sm"
                     title="Kembali">
                     <i class="fa-solid fa-xmark text-2xl"></i>
                 </button>
