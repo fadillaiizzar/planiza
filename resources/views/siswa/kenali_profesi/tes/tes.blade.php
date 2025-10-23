@@ -26,6 +26,12 @@
 
             <!-- Test Container -->
             <div class="bg-white/70 backdrop-blur-xl rounded-3xl shadow-xl border border-white/20 p-6 sm:p-8 lg:p-12">
+                <button id="btn-exit"
+                    class="absolute top-4 right-4 text-red-500 hover:text-red-600 bg-red-50 hover:bg-red-100 transition-all rounded-full w-9 h-9 flex items-center justify-center shadow-sm"
+                    title="Keluar Tes">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+
                 <div id="soal-container" class="min-h-[400px]">
                     @foreach ($soals as $index => $soal)
                         <div class="soal-item {{ $index === 0 ? '' : 'hidden' }}" data-index="{{ $index }}" data-id="{{ $soal->id }}" data-max="{{ $soal->max_select }}">
@@ -51,8 +57,8 @@
     </main>
 
     @include('siswa.kenali_profesi.tes.loading')
-
     @include('siswa.kenali_profesi.tes.popup-custom')
+    @include('siswa.kenali_profesi.tes.popup-konfirmasi-keluar')
 
     <input type="hidden" id="activeAttempt" value="{{ $activeAttempt }}">
 
@@ -281,6 +287,16 @@
 
         showSoal(currentIndex);
         document.documentElement.style.scrollBehavior = 'smooth';
+
+        // Function Popup Keluar
+        document.getElementById('btn-exit')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('popupKeluarTes').classList.remove('hidden');
+        });
+
+        document.getElementById('batalKeluarTes')?.addEventListener('click', () => {
+            document.getElementById('popupKeluarTes').classList.add('hidden');
+        });
     </script>
 </body>
 </html>
