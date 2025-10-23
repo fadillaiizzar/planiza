@@ -21,6 +21,7 @@
                         $actions = [
                             ['route' => route('admin.kenali-jurusan.hobi.index'), 'icon' => 'fas fa-briefcase', 'label' => 'Hobi'],
                             ['route' => route('admin.kenali-jurusan.hobi-jurusan.index'), 'icon' => 'fas fa-briefcase', 'label' => 'Hobi Jurusan'],
+                            ['route' => route('admin.kenali-jurusan.hasil-form.index'), 'icon' => 'fas fa-briefcase', 'label' => 'Hasil Form'],
                         ];
                     @endphp
 

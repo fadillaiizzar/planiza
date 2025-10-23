@@ -31,6 +31,7 @@ use App\Http\Controllers\EksplorasiKerjaController;
 use App\Http\Controllers\IndustriProfesiController;
 use App\Http\Controllers\ProfesiKategoriController;
 use App\Http\Controllers\EksplorasiKuliahController;
+use App\Http\Controllers\HasilFormController;
 use App\Http\Controllers\Siswa\KerjakanTesController;
 use App\Http\Controllers\Siswa\JawabanSiswaController;
 use App\Http\Controllers\Siswa\KenaliProfesiSiswaController;
@@ -85,14 +86,14 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
 
         Route::post('/tes/{id}/set-active', [TesController::class, 'setActive'])->name('tes.setActive');
 
-        Route::prefix('hasil-tes')->group(function () {
-            Route::get('/', [HasilTesController::class, 'index'])->name('hasil-tes.index');
-            Route::get('/{tes_id}', [HasilTesController::class, 'show'])->name('hasil-tes.show');
+        Route::prefix('hasil-tes')->name('hasil-tes.')->group(function () {
+            Route::get('/', [HasilTesController::class, 'index'])->name('index');
+            Route::get('/{tes_id}', [HasilTesController::class, 'show'])->name('show');
 
-            Route::get('/{tes_id}/users', [HasilTesController::class, 'showUsers'])->name('hasil-tes.users');
-            Route::get('/{tes_id}/user/{user_id}', [HasilTesController::class, 'showUserHistory'])->name('hasil-tes.user-history');
+            Route::get('/{tes_id}/users', [HasilTesController::class, 'showUsers'])->name('users');
+            Route::get('/{tes_id}/user/{user_id}', [HasilTesController::class, 'showUserHistory'])->name('user-history');
 
-            Route::get('/{tes_id}/user/{user_id}/attempt/{attempt}', [HasilTesController::class, 'showAttempt'])->name('hasil-tes.attempt');
+            Route::get('/{tes_id}/user/{user_id}/attempt/{attempt}', [HasilTesController::class, 'showAttempt'])->name('attempt');
         });
     });
 
@@ -111,6 +112,12 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
 
         Route::get('/hobi-jurusan/check', [HobiJurusanController::class, 'checkExists'])->name('hobi-jurusan.check');
         Route::resource('hobi-jurusan', HobiJurusanController::class);
+
+        Route::prefix('hasil-form')->name('hasil-form.')->group(function () {
+            Route::get('/', [HasilFormController::class, 'index'])->name('index');
+
+            Route::get('/user/{user_id}', [HasilFormController::class, 'showUserHistory'])->name('user-history');
+        });
     });
 
     Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('kontribusi-sdgs');

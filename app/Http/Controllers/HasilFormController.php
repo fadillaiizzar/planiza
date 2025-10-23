@@ -17,12 +17,18 @@ class HasilFormController extends Controller
     public function index()
     {
         $data = $this->service->getSummary();
+        $totals = $this->service->getTotals();
 
-        $totalUser = $data->sum('jumlah_user');
-        $totalPengerjaan = $data->sum('jumlah_pengerjaan');
+        return view('admin.kenali_jurusan.hasil_form.hasil-form', [
+            'data' => $data,
+            'totalUser' => $totals['totalUser'],
+            'totalPengerjaan' => $totals['totalPengerjaan'],
+        ]);
+    }
 
-        return view('admin.pages.hasil-form', compact(
-            'data', 'totalUser', 'totalPengerjaan'
-        ));
+    public function showUserHistory($user_id)
+    {
+        $history = $this->service->getUserHistory($user_id);
+        return response()->json($history);
     }
 }
