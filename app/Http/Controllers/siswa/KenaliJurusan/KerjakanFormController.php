@@ -19,25 +19,31 @@ class KerjakanFormController extends Controller
             ->latest('id')
             ->first();
 
-        // Cek apakah form terakhir punya minat yang belum selesai
-        $hasUnfinished = false;
+        $formKuliah = $lastForm;
+
         if ($lastForm) {
-            $hasUnfinished = Minat::where('form_kuliah_id', $lastForm->id)
-                ->where('is_finished', false)
+            // Cek apakah form terakhir sudah pernah ada minat
+            $hasMinat = Minat::where('form_kuliah_id', $lastForm->id)
                 ->exists();
-        }
 
-        // Jika belum ada form kuliah atau form terakhir sudah selesai semua → buat form baru
-        if (!$lastForm || !$hasUnfinished) {
-            $nextAttempt = $lastForm ? $lastForm->attempt + 1 : 1;
-
+            if (!$hasMinat) {
+                // Belum ada minat → pakai form terakhir (jangan buat baru)
+                $formKuliah = $lastForm;
+            } else {
+                // Sudah ada minat → buat form baru
+                $formKuliah = FormKuliah::create([
+                    'user_id' => $userId,
+                    'nilai_utbk' => 0,
+                    'attempt' => $lastForm->attempt + 1,
+                ]);
+            }
+        } else {
+            // Belum ada form sama sekali → buat form pertama
             $formKuliah = FormKuliah::create([
                 'user_id' => $userId,
                 'nilai_utbk' => 0,
-                'attempt' => $nextAttempt, // <── ditambah kolom attempt di form_kuliahs
+                'attempt' => 1,
             ]);
-        } else {
-            $formKuliah = $lastForm;
         }
 
         // Attempt aktif diambil dari form kuliah sekarang

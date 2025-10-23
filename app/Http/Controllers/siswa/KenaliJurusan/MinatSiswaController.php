@@ -24,6 +24,18 @@ class MinatSiswaController extends Controller
         $hobiIds = (array) $request->input('hobi_ids', []);
         $nilaiUtbk = (int) $request->input('nilai_utbk', 0);
 
+        // 🧩 Cegah duplikasi minat untuk attempt yang sama
+        $existingMinat = Minat::where('form_kuliah_id', $formKuliah->id)
+            ->where('attempt', $attempt)
+            ->exists();
+
+        if ($existingMinat) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data minat untuk attempt ini sudah tersimpan sebelumnya.'
+            ]);
+        }
+
         // Pastikan attempt juga disimpan di form_kuliahs
         $formKuliah->update([
             'nilai_utbk' => $nilaiUtbk,
