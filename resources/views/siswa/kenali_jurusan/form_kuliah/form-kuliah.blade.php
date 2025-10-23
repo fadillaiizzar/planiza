@@ -21,7 +21,13 @@
     <!-- Konten utama -->
     <div class="relative z-10 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="w-full max-w-2xl">
-            <div class="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-border-gray/30 p-8 sm:p-10 lg:p-12">
+            <div class="relative bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-border-gray/30 p-8 sm:p-10 lg:p-12">
+                <!-- Tombol Kembali (ikon silang) -->
+                <button id="btnKembali"
+                    class="absolute top-6 right-6 text-slate-navy hover:text-red-500 transition-all duration-200"
+                    title="Kembali">
+                    <i class="fa-solid fa-xmark text-2xl"></i>
+                </button>
 
                 <div class="text-center mb-8">
                     <h1 class="text-3xl sm:text-4xl font-bold text-slate-navy mb-3">
@@ -108,6 +114,9 @@
             </div>
         </div>
     </div>
+
+    <!-- Popup Konfirmasi Keluar -->
+    @include('siswa.kenali_jurusan.form_kuliah.form_kuliah.popup-konfirmasi-keluar')
 
     <!-- Script -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -213,6 +222,28 @@
         document.addEventListener("DOMContentLoaded", restoreFromLocalStorage);
         document.getElementById('nilai_utbk').addEventListener('input', saveToLocalStorage);
         $('#jurusan_kuliah_ids, #hobi_ids').on('change', saveToLocalStorage);
+
+        // --- Tombol Kembali pakai Popup Custom ---
+        const btnKembali = document.getElementById('btnKembali');
+        const popupKeluar = document.getElementById('popupKeluar');
+        const batalKeluar = document.getElementById('batalKeluar');
+        const konfirmasiKeluar = document.getElementById('konfirmasiKeluar');
+
+        btnKembali.addEventListener('click', function (e) {
+            e.preventDefault();
+            popupKeluar.classList.remove('hidden');
+        });
+
+        batalKeluar.addEventListener('click', function () {
+            popupKeluar.classList.add('hidden');
+        });
+
+        // Tutup popup kalau klik di luar kontennya
+        popupKeluar.addEventListener('click', function (e) {
+            if (e.target === popupKeluar) {
+                popupKeluar.classList.add('hidden');
+            }
+        });
     </script>
 </body>
 </html>
