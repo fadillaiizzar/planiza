@@ -48,51 +48,60 @@ class HasilFormController extends Controller
 
     public function showUserHistory($user_id)
     {
-        // Ambil user hanya user yang punya data form
-        $user = User::with(['siswa.kelas', 'siswa.jurusan', 'formKuliahs'])
-            ->where('id', $user_id)
-            ->firstOrFail();
+        // Ambil user target (student)
+        $student = User::with([
+            'siswa.kelas',
+            'siswa.jurusan',
+            'formKuliahs.minats' => function ($query) {
+                $query->latest('updated_at');
+            },
+        ])->findOrFail($user_id);
 
-        // Ambil riwayat pengerjaan user
-        $history = FormKuliah::where('user_id', $user_id)
-            ->orderBy('updated_at', 'asc')
+        // Ambil semua form_kuliah yang punya minat (berarti sudah submit)
+        // Urutkan misalnya berdasarkan created_at atau attempt
+        $forms = $student->formKuliahs()
+            ->whereHas('minats')
+            ->with(['minats' => function ($q) {
+                $q->latest('updated_at');
+            }])
+            ->orderBy('created_at', 'asc') // konsisten urutan attempt
             ->get();
 
-        // Mapping riwayat ke format yang dibutuhkan
-        $riwayat = $history->map(function($item, $index) {
-            return [
-                'ke' => $index + 1,
-                'tanggal' => \Carbon\Carbon::parse($item->updated_at)->format('d M Y H:i'),
-                'id_form' => $item->id,
+        // Mapping attempts: nomor attempt, update terakhir, form_id
+        $attempts = $forms->map(function ($form, $index) {
+            $latestMinat = $form->minats->sortByDesc('updated_at')->first();
+
+            return (object) [
+                'attempt_number' => $index + 1,   // attempt ke-n
+                'update_terakhir' => $latestMinat?->updated_at,
+                'form_id' => $form->id,
+                'form_model' => $form, // opsional, kalau butuh nanti
             ];
         });
 
-        // Kirim data langsung ke view
         return view('admin.kenali_jurusan.hasil_form.user-detail', [
-            'user' => $user,
-            'data' => [
-                'nama' => $user->name, // pastikan kolom di DB 'name' atau 'nama'
-                'riwayat' => $riwayat,
-                'total' => $riwayat->count(),
-            ],
-            'attempts' => $history,
+            // kirim student bukan 'user' supaya tidak tertimpa oleh include header
+            'student' => $student,
+            'attempts' => $attempts,
         ]);
     }
 
-    public function showAttempt ($user_id, $attempt)
+    public function showAttempt($user_id, $form_id)
     {
-        $user = User::findOrFail($user_id);
+        // Pastikan student ada
+        $student = User::findOrFail($user_id);
 
-        // Ambil semua attempt dari FormKuliah milik user
-        $attempts = FormKuliah::with(['minats.jurusanKuliah', 'minats.hobi'])
+        // Ambil form spesifik dan verifikasi form milik user
+        $form = FormKuliah::with(['minats.jurusanKuliah.kampus', 'minats.hobi'])
+            ->where('id', $form_id)
             ->where('user_id', $user_id)
-            ->orderBy('attempt', 'asc')
-            ->get();
+            ->firstOrFail();
 
+        // Kirim form dan student ke view
         return view('admin.kenali_jurusan.hasil_form.user-attempt', [
-            'user' => $user,
-            'attempts' => $attempts,
-            'selectedAttempt' => $attempt,
+            // gunakan nama student supaya konsisten dengan perubahan di showUserHistory
+            'student' => $student,
+            'form' => $form,
         ]);
     }
 }

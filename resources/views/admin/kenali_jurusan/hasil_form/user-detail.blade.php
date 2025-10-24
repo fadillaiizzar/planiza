@@ -1,54 +1,53 @@
 @extends('layouts.admin')
 
-@section('title', 'Detail Pengerjaan - ' . ($user->name ?? '-'))
+@section('title', 'Riwayat Pengerjaan - ' . ($student->name ?? '-'))
 
 @section('content')
-<div class="mx-auto w-full space-y-6 p-4 md:p-6">
+<div class="mx-auto max-w-6xl space-y-6 p-4 md:p-6">
     <x-admin.breadcrumb :links="[
         ['href' => route('admin.dashboard'), 'icon' => 'fas fa-home', 'title' => 'Dashboard'],
-        ['href' => route('admin.kenali-jurusan.hasil-form.index'), 'icon' => 'fas fa-file-alt', 'title' => 'Hasil Form'],
-        ['href' => '#', 'icon' => 'fas fa-user', 'title' => $user->name],
+        ['href' => route('admin.kenali-jurusan.hasil-form.index'), 'icon' => 'fas fa-clipboard-list', 'title' => 'Hasil Form'],
+        ['title' => $student->name, 'icon' => 'fas fa-user'],
     ]" />
 
-    <section class="bg-white rounded-xl shadow p-6 mt-6">
-        <h3 class="text-lg font-semibold text-slate-navy mb-4">Detail Pengerjaan {{ $user->name }}</h3>
+    <div class="mb-6">
+        <h1 class="text-2xl font-semibold text-slate-800">{{ $student->name }}</h1>
+        <p class="text-slate-500">
+            {{ ($student->siswa?->kelas?->nama_kelas ?? '-') . ' ' . ($student->siswa?->jurusan?->nama_jurusan ?? '-') }}
+        </p>
+    </div>
 
-        <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm">
-                <thead class="bg-off-white">
-                    <tr>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-navy">Pengerjaan ke</th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-navy">Tanggal</th>
-                        <th class="px-6 py-4 text-center text-xs font-semibold text-slate-navy">Aksi</th>
+    <div class="overflow-x-auto bg-white shadow-md rounded-xl border border-gray-100">
+        <table class="w-full text-left border-collapse">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="p-4 font-semibold text-gray-600">Attempt</th>
+                    <th class="p-4 font-semibold text-gray-600">Update Terakhir</th>
+                    <th class="p-4 font-semibold text-gray-600">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($attempts as $item)
+                    <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors">
+                        <td class="p-4 text-gray-700">Attempt {{ $item->attempt_number }}</td>
+                        <td class="p-4 text-gray-700">
+                            {{ $item->update_terakhir ? \Carbon\Carbon::parse($item->update_terakhir)->format('d M Y H:i') : '-' }}
+                        </td>
+                        <td class="p-4">
+                            <a href="{{ route('admin.kenali-jurusan.hasil-form.user-attempt', ['user_id' => $student->id, 'form_id' => $item->form_id]) }}"
+                                class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full hover:shadow-md transition">
+                                Lihat Form
+                            </a>
+                        </td>
                     </tr>
-                </thead>
-                <tbody class="divide-y divide-border-gray">
-                    @foreach ($data['riwayat'] as $r)
-                        <tr class="hover:bg-off-white transition-colors duration-150">
-                            <td class="px-6 py-4 text-slate-navy font-medium">{{ $r['ke'] }}</td>
-                            <td class="px-6 py-4 text-cool-gray">{{ $r['tanggal'] }}</td>
-                            <td class="px-6 py-4 text-center">
-                                <a href="{{ route('admin.kenali-jurusan.hasil-form.user-attempt', [
-                                    'userId' => request()->route('user_id'),
-                                    'attempt' => $r['ke']
-                                ]) }}"
-                                class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-slate-navy rounded-lg hover:bg-opacity-90 transition">
-                                    Lihat Form
-                                </a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-
-            <div class="mt-4 text-sm text-cool-gray">
-                Total <span class="font-semibold text-slate-navy">{{ $data['total'] }}</span> pengerjaan
-            </div>
-        </div>
-    </section>
+                @empty
+                    <x-empty-state
+                        icon="fas fa-list"
+                        message="Belum ada attempt form"
+                    />
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 </div>
 @endsection
-
-@push('scripts')
-    <script src="{{ asset('js/app.js') }}"></script>
-@endpush
