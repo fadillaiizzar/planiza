@@ -117,7 +117,7 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
             Route::get('/', [HasilFormController::class, 'index'])->name('index');
 
             Route::get('/user/{user_id}', [HasilFormController::class, 'showUserHistory'])->name('user-history');
-            Route::get('/user/{userId}/attempt/{attempt}', [HasilFormController::class, 'showAttempt'])->name('user-attempt');
+            Route::get('/user/{user_id}/attempt/{attempt}', [HasilFormController::class, 'showAttempt'])->name('user-attempt');
         });
     });
 

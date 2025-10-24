@@ -29,14 +29,14 @@
                     @forelse ($items as $index => $item)
                         <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors">
                             <td class="p-4">{{ $index + 1 }}</td>
-                            <td class="p-4 font-medium text-slate-700">{{ $item->nama_user ?? '-' }}</td>
+                            <td class="p-4 font-medium text-slate-700">{{ $item->name ?? '-' }}</td>
                             <td class="p-4 text-slate-navy hidden md:table-cell">
-                                {{ ($item->nama_kelas ?? '-') . ' ' . ($item->nama_jurusan ?? '') }}
+                                {{ ($item->siswa?->kelas?->nama_kelas ?? '-') . ' ' . ($item->siswa?->jurusan?->nama_jurusan ?? '-') }}
                             </td>
-                            <td class="p-4">{{ $item->jumlah_pengerjaan ?? 0 }}</td>
-                            <td class="p-4">{{ \Carbon\Carbon::parse($item->update_terakhir)->format('d M H:i') ?? '-' }}</td>
+                            <td class="p-4">{{ $item->form_kuliahs_count ?? 0 }}</td>
+                            <td class="p-4">{{ $item->update_terakhir ?? '-' }}</td>
                             <td class="p-4">
-                                <a href="{{ route('admin.kenali-jurusan.hasil-form.user-history', $item->user_id) }}"
+                                <a href="{{ route('admin.kenali-jurusan.hasil-form.user-history', $item->id) }}"
                                 class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full hover:shadow-md transition">
                                     Detail
                                 </a>

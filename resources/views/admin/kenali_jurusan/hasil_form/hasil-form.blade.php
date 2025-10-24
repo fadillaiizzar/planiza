@@ -20,10 +20,10 @@
             ],
             'filterOptions' => [],
             'searchPlaceholder' => 'Cari berdasarkan nama user',
-            'itemCount' => $data->count(),
+            'itemCount' => $items->count(),
             'tableTitle' => 'Daftar Hasil Form Kuliah',
             'tableHeaders' => ['No', 'Nama User', 'Kelas', 'Jumlah Pengerjaan', 'Update Terakhir', 'Aksi'],
-            'items' => $data,
+            'items' => $items,
         ])
         @endcomponent
     </main>
