@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Kelas;
 use App\Models\FormKuliah;
 
 class HasilFormController extends Controller
@@ -36,11 +37,14 @@ class HasilFormController extends Controller
             ->sortBy('update_terakhir')
             ->values();
 
+        $filterOptions = Kelas::select('nama_kelas as label', 'nama_kelas as value')->get()->toArray();
+
         $totalUser = $items->count();
         $totalPengerjaan = $items->sum('form_kuliahs_count');
 
         return view('admin.kenali_jurusan.hasil_form.hasil-form', [
             'items' => $items,
+            'filterOptions' => $filterOptions,
             'totalUser' => $totalUser,
             'totalPengerjaan' => $totalPengerjaan,
         ]);

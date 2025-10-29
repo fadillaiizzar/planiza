@@ -27,7 +27,13 @@
                 </thead>
                 <tbody>
                     @forelse ($items as $index => $item)
-                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors">
+                        <tr class="hasil-form-row border-b border-border-gray hover:bg-off-white/50 transition-colors"
+                            data-name="{{ strtolower($item->name ?? '') }}"
+                            data-kelas="{{ strtolower($item->siswa?->kelas?->nama_kelas ?? '') }}"
+                            data-jurusan="{{ strtolower($item->siswa?->jurusan?->nama_jurusan ?? '') }}"
+                            data-count="{{ $item->form_kuliahs_count ?? 0 }}"
+                            data-update="{{ strtolower($item->update_terakhir ?? '') }}"
+                        >
                             <td class="p-4">{{ $index + 1 }}</td>
                             <td class="p-4 font-medium text-slate-700">{{ $item->name ?? '-' }}</td>
                             <td class="p-4 text-slate-navy hidden md:table-cell">

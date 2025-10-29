@@ -152,7 +152,7 @@
         const resultCount = document.getElementById('resultCount');
 
         const rowClasses = [
-            'user-row', 'topik-row', 'materi-row', 'profesi-row', 'industri-row', 'industri-profesi-row', 'kategori-minat-row', 'profesi-kategori-row', 'tes-row', 'soal-tes-row'
+            'user-row', 'topik-row', 'materi-row', 'profesi-row', 'industri-row', 'industri-profesi-row', 'kategori-minat-row', 'profesi-kategori-row', 'tes-row', 'soal-tes-row', 'hasil-form-row'
         ];
 
         let rows = rowClasses.map(cls=> document.querySelectorAll(`.${cls}`))
@@ -229,7 +229,14 @@
                     search: [tes, pertanyaan, jenis, max],
                     filter: tes
                 };
-            }
+            },
+            'hasil-form-row': row => {
+                const { name='', kelas='', jurusan='', count='', update='' } = row.dataset;
+                return {
+                    search: [name, kelas, jurusan, count, update],
+                    filter: kelas
+                };
+            },
         };
 
         function filterItems() {
