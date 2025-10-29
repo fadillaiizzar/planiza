@@ -55,7 +55,7 @@
                                         break;
                                     case 'Hasil Form Siswa':
                                         $detailUrl = route('admin.kenali-jurusan.hasil-form.user-attempt', [
-                                            'user_id' => $item->user_id ?? ($activity['user_id'] ?? null),
+                                            'user_id' => $activity['user_id'],
                                             'form_id' => $activity['id'],
                                         ]);
                                         break;
