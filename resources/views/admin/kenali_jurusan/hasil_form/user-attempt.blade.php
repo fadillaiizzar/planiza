@@ -4,10 +4,17 @@
 
 @section('content')
 <div class="mx-auto max-w-4xl p-6">
+    <div class="mb-4">
+        <a href="{{ route('admin.kenali-jurusan.hasil-form.user-history', $student->id) }}"
+           class="inline-flex items-center gap-2 px-4 py-2 bg-slate-600 text-white rounded-xl hover:bg-slate-700 transition">
+            <i class="fas fa-arrow-left"></i>
+            Kembali
+        </a>
+    </div>
+
     <div class="bg-white rounded-2xl p-8 shadow border border-border-gray/30">
         <div class="flex items-center gap-4 mb-4">
             <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-navy to-cool-gray flex items-center justify-center shadow-lg">
-                {{-- kalau form punya kolom attempt_number, pakai; kalau tidak pakai ID --}}
                 <span class="text-white font-bold text-lg">#{{ $form->id }}</span>
             </div>
             <div>
@@ -45,3 +52,7 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/app.js') }}"></script>
+@endpush
