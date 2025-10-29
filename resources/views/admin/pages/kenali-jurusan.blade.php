@@ -53,6 +53,12 @@
                                     case 'Hobi Jurusan':
                                         $detailUrl = route('admin.kenali-jurusan.hobi-jurusan.show', $activity['id']);
                                         break;
+                                    case 'Hasil Form Siswa':
+                                        $detailUrl = route('admin.kenali-jurusan.hasil-form.user-attempt', [
+                                            'user_id' => $item->user_id ?? ($activity['user_id'] ?? null),
+                                            'form_id' => $activity['id'],
+                                        ]);
+                                        break;
                                 }
                             @endphp
 
@@ -66,6 +72,10 @@
                                         <span class="p-2 rounded-full bg-blue-100 text-blue-600">
                                             <i class="fas fa-pen"></i>
                                         </span>
+                                    @elseif($activity['action'] === 'submit')
+                                        <span class="p-2 rounded-full bg-emerald-100 text-emerald-600">
+                                            <i class="fas fa-paper-plane"></i>
+                                        </span>
                                     @else
                                         <span class="p-2 rounded-full bg-slate-100 text-slate-500">
                                             <i class="fas fa-clock"></i>
@@ -78,7 +88,9 @@
                                             @if($activity['action'] === 'create')
                                                 berhasil dibuat ✨
                                             @elseif($activity['action'] === 'update')
-                                                diperbarui 🔄
+                                                berhasil diperbarui 🔄
+                                            @elseif($activity['action'] === 'submit')
+                                                berhasil disubmit ke-{{ $activity['attempt'] }} ✨
                                             @else
                                                 dicatat ⏳
                                             @endif
