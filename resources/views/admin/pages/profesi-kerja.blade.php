@@ -21,7 +21,6 @@
             'stats' => [
                 ['label' => 'Total Profesi', 'count' => $profesiCount, 'icon' => 'fas fa-briefcase', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
             ],
-            'filterOptions' => $filterOptions,
             'searchPlaceholder' => 'Cari berdasarkan nama profesi',
             'itemCount' => $profesiCount,
             'statistikTitle' => 'Statistik Profesi',
@@ -29,7 +28,7 @@
             'labelProfesi' => 'Profesi per Industri',
             'allProfesi' => $allProfesi,
             'tableTitle' => 'Daftar Profesi Kerja',
-            'tableHeaders' => ['ID', 'Nama Profesi', 'Gambar', 'Gaji', 'Deskripsi', 'Skill', 'Jurusan', 'Aksi'],
+            'tableHeaders' => ['ID', 'Nama Profesi', 'Gambar', 'Deskripsi', 'Skill', 'Jurusan', 'Aksi'],
             'items' => $profesiKerjas,
         ])
         @endcomponent

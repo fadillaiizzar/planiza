@@ -28,7 +28,6 @@
                     @forelse ($items as $item)
                         <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors profesi-row"
                             data-nama="{{ strtolower($item->nama_profesi_kerja) }}"
-                            data-gaji="{{ strtolower($item->gaji) }}"
                             data-deskripsi="{{ strtolower($item->deskripsi) }}"
                             data-skill="{{ strtolower($item->info_skill) }}"
                             data-jurusan="{{ strtolower($item->info_jurusan) }}"
@@ -42,7 +41,6 @@
                                     <span class="text-gray-400">-</span>
                                 @endif
                             </td>
-                            <td class="p-4">Rp{{ number_format($item->gaji, 0, ',', '.') }}</td>
                             <td class="p-4">{{ Str::limit($item->deskripsi, 12) }}</td>
                             <td class="p-4">{{ Str::limit($item->info_skill, 12) }}</td>
                             <td class="p-4">{{ Str::limit($item->info_jurusan, 12) }}</td>

@@ -22,23 +22,12 @@ class ProfesiKerjaController extends Controller
         $user = Auth::user();
         $userCount = User::count();
 
-        $filterOptions = ProfesiKerja::select('gaji')
-            ->distinct()
-            ->orderBy('gaji', 'asc')
-            ->get()
-            ->map(fn($profesi) => [
-                'label' => $profesi->gaji,
-                'value' => $profesi->gaji
-            ])
-            ->toArray();
-
         return view('admin.pages.profesi-kerja', [
             'profesiKerjas' => $profesiKerjas,
             'profesiCount' => $profesiCount,
             'allProfesi' => $allProfesi,
             'user' => $user,
             'userCount' => $userCount,
-            'filterOptions' => $filterOptions,
         ]);
     }
 

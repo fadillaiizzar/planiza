@@ -146,6 +146,7 @@
 
 @push('scripts')
 <script>
+    document.addEventListener('DOMContentLoaded', initializeFilters);
     function initializeFilters() {
         const searchInput = document.getElementById('searchInput');
         const filterSelect = document.getElementById('filterSelect');
@@ -182,10 +183,9 @@
                 };
             },
             'profesi-row': row => {
-                const { nama='', gaji='', deskripsi='', skill='', jurusan='' } = row.dataset;
+                const { nama='', deskripsi='', skill='', jurusan='' } = row.dataset;
                 return {
-                    search: [nama, gaji, deskripsi, skill, jurusan],
-                    filter: gaji
+                    search: [nama, deskripsi, skill, jurusan],
                 };
             },
             'industri-row': row => {
@@ -275,8 +275,6 @@
         searchInput.addEventListener('input', filterItems);
         filterSelect.addEventListener('change', filterItems);
     }
-
-    document.addEventListener('DOMContentLoaded', initializeFilters);
 
     function openModal() {
         const modal = document.getElementById('modalCreate');
