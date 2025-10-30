@@ -17,7 +17,9 @@ return new class extends Migration
             $table->foreignId('kategori_sdgs_id')->constrained('kategori_sdgs')->onDelete('cascade');
             $table->string('judul_kegiatan');
             $table->text('deskripsi_refleksi');
+            $table->date('tanggal_pelaksanaan');
             $table->string('bukti_upload');
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }
