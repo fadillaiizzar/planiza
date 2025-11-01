@@ -32,6 +32,8 @@ use App\Http\Controllers\IndustriProfesiController;
 use App\Http\Controllers\ProfesiKategoriController;
 use App\Http\Controllers\EksplorasiKuliahController;
 use App\Http\Controllers\HasilFormController;
+use App\Http\Controllers\KategoriSdgsController;
+use App\Http\Controllers\SdgsController;
 use App\Http\Controllers\Siswa\KerjakanTesController;
 use App\Http\Controllers\Siswa\JawabanSiswaController;
 use App\Http\Controllers\Siswa\KenaliProfesiSiswaController;
@@ -121,7 +123,11 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
         });
     });
 
-    Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('kontribusi-sdgs');
+    Route::prefix('sdgs')->name('sdgs.')->group(function () {
+        Route::get('/', [SdgsController::class, 'index'])->name('index');
+
+        Route::resource('kategori-sdgs', KategoriSdgsController::class);
+    });
 });
 
 Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->name('siswa.')->group(function () {
@@ -159,5 +165,3 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->na
         });
     });
 });
-
- // Route::post('/form-kuliah/{formKuliah}/rekomendasi/{attempt?}', [MinatSiswaController::class, 'submit'])->name('form-kuliah.rekomendasi');
