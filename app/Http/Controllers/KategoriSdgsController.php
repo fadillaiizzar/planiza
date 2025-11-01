@@ -21,20 +21,11 @@ class KategoriSdgsController extends Controller
         $user = Auth::user();
         $userCount = User::count();
 
-        $filterOptions = KategoriSdgs::distinct('nama_kategori')
-            ->orderBy('nama_kategori')
-            ->pluck('nama_kategori')
-            ->map(fn($n) => ['label' => $n, 'value' => $n])
-            ->toArray();
+        $filterOptions = [];
 
-        return view('admin.sdgs.kategori_sdgs.kategori-sdgs', [
-            'kategoriSdgs' => $kategoriSdgs,
-            'kategoriSdgsCount' => $kategoriSdgsCount,
-            'allKategoriSdgs' => $allKategoriSdgs,
-            'user' => $user,
-            'userCount' => $userCount,
-            'filterOptions' => $filterOptions,
-        ]);
+        return view('admin.sdgs.kategori_sdgs.kategori-sdgs', compact(
+            'kategoriSdgs', 'kategoriSdgsCount', 'allKategoriSdgs', 'user', 'userCount', 'filterOptions'
+        ));
     }
 
     /**

@@ -153,7 +153,7 @@
         const resultCount = document.getElementById('resultCount');
 
         const rowClasses = [
-            'user-row', 'topik-row', 'materi-row', 'profesi-row', 'industri-row', 'industri-profesi-row', 'kategori-minat-row', 'profesi-kategori-row', 'tes-row', 'soal-tes-row', 'hasil-form-row'
+            'user-row', 'topik-row', 'materi-row', 'profesi-row', 'industri-row', 'industri-profesi-row', 'kategori-minat-row', 'profesi-kategori-row', 'tes-row', 'soal-tes-row', 'hasil-form-row', 'kategori-sdgs-row'
         ];
 
         let rows = rowClasses.map(cls=> document.querySelectorAll(`.${cls}`))
@@ -237,11 +237,17 @@
                     filter: kelas
                 };
             },
+            'kategori-sdgs-row': row => {
+                const { nomor = '', nama = '', deskripsi = '' } = row.dataset;
+                return {
+                    search: [nomor, nama, deskripsi],
+                };
+            },
         };
 
         function filterItems() {
             const searchTerm = searchInput.value.toLowerCase().trim();
-            const selectedFilter = filterSelect.value.toLowerCase();
+            const selectedFilter = filterSelect ? filterSelect.value.toLowerCase() : '';
             let visibleCount = 0;
 
             rows.forEach(row => {
@@ -273,7 +279,7 @@
         }
 
         searchInput.addEventListener('input', filterItems);
-        filterSelect.addEventListener('change', filterItems);
+        if (filterSelect) filterSelect.addEventListener('change', filterItems);
     }
 
     function openModal() {

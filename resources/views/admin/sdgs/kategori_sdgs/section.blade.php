@@ -28,6 +28,7 @@
                 <tbody>
                     @forelse ($items as $item)
                         <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors kategori-sdgs-row"
+                            data-nomor="{{ strtolower($item->nomor_kategori) }}"
                             data-nama="{{ strtolower($item->nama_kategori) }}"
                             data-deskripsi="{{ strtolower($item->deskripsi) }}">
 
