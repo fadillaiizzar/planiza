@@ -66,4 +66,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(KenaliJurusan::class);
     }
+
+    public function kontribusiSdgs(): HasMany
+    {
+        return $this->hasMany(KontribusiSdgs::class);
+    }
 }

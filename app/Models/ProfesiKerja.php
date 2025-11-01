@@ -43,4 +43,15 @@ class ProfesiKerja extends Model
     {
         return $this->belongsToMany(KategoriMinat::class, 'profesi_kategoris', 'profesi_kerja_id', 'kategori_minat_id')->withTimestamps();
     }
+
+    // Relasi Fitur Kontribusi SDGs
+    public function hubunganSdgs(): HasMany
+    {
+        return $this->hasMany(HubunganSdgs::class, 'profesi_kerja_id');
+    }
+
+    public function kategoriSdgs(): BelongsToMany
+    {
+        return $this->belongsToMany(KategoriSdgs::class, 'hubungan_sdgs', 'profesi_kerja_id', 'kategori_sdgs_id')->withTimestamps();
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class KontribusiSdgs extends Model
 {
@@ -15,4 +16,14 @@ class KontribusiSdgs extends Model
         'bukti_upload',
         'status',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function kategoriSdgs(): BelongsTo
+    {
+        return $this->belongsTo(KategoriSdgs::class);
+    }
 }

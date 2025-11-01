@@ -44,4 +44,15 @@ class JurusanKuliah extends Model
     {
         return $this->hasMany(Minat::class);
     }
+
+    // Relasi Fitur Kontribusi SDGs
+    public function hubunganSdgs(): HasMany
+    {
+        return $this->hasMany(HubunganSdgs::class, 'jurusan_kuliah_id');
+    }
+
+    public function kategoriSdgs(): BelongsToMany
+    {
+        return $this->belongsToMany(KategoriSdgs::class, 'hubungan_sdgs', 'jurusan_kuliah_id', 'kategori_sdgs_id')->withTimestamps();
+    }
 }
