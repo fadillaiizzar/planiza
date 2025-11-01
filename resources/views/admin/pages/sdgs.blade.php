@@ -42,7 +42,7 @@
 
             {{-- Aktivitas Terbaru --}}
             <section>
-                <h2 class="text-xl font-semibold text-slate-800 mb-4">📊 Aktivitas Terbaru</h2>
+                <h2 class="text-xl font-semibold text-slate-800 mb-4">📌 Aktivitas Terbaru</h2>
                 <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-5">
                     <ul class="space-y-3">
                         @forelse($activities as $activity)

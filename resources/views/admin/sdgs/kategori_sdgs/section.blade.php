@@ -32,10 +32,9 @@
                             data-nama="{{ strtolower($item->nama_kategori) }}"
                             data-deskripsi="{{ strtolower($item->deskripsi) }}">
 
-                            <td class="p-4 w-[5%]">{{ $loop->iteration }}</td>
                             <td class="p-4 w-[15%]">{{ $item->nomor_kategori }}</td>
-                            <td class="p-4 w-[25%]">{{ Str::limit($item->nama_kategori, 30) }}</td>
-                            <td class="p-4 w-[40%]">{{ Str::limit($item->deskripsi, 55) }}</td>
+                            <td class="p-4 w-[25%]">{{ Str::limit($item->nama_kategori, 28) }}</td>
+                            <td class="p-4 w-[40%]">{{ Str::limit($item->deskripsi, 48) }}</td>
                             <td class="p-4 relative overflow-visible w-[10%]">
                                 <button onclick="toggleDropdown({{ $item->id }})"
                                     class="p-2 rounded-lg hover:bg-off-white focus:outline-none focus:ring-2 focus:ring-green-200 transition-all">

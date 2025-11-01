@@ -7,7 +7,7 @@
 
     <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-green-50 to-emerald-50 p-4 md:p-6">
         <x-admin.breadcrumb :links="[
-            ['href' => route('admin.sdgs.kategori-sdgs.index'), 'icon' => 'fas fa-globe', 'title' => 'SDGs'],
+            ['href' => route('admin.sdgs.index'), 'icon' => 'fas fa-globe', 'title' => 'SDGs'],
             ['href' => '#', 'icon' => 'fas fa-folder-open', 'title' => 'Kategori SDGs'],
         ]" />
 
@@ -23,7 +23,7 @@
             'searchPlaceholder' => 'Cari berdasarkan nama kategori SDGs',
             'itemCount' => $kategoriSdgsCount,
             'tableTitle' => 'Daftar Kategori SDGs',
-            'tableHeaders' => ['No', 'Nomor Kategori', 'Nama Kategori', 'Deskripsi', 'Aksi'],
+            'tableHeaders' => ['Nomor Kategori', 'Nama Kategori', 'Deskripsi', 'Aksi'],
             'items' => $kategoriSdgs,
         ])
         @endcomponent
