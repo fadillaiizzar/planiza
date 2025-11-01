@@ -22,6 +22,7 @@
                     @php
                         $actions = [
                             ['route' => route('admin.sdgs.kategori-sdgs.index'), 'icon' => 'fas fa-layer-group', 'label' => 'Kategori SDGs'],
+                            // kalau nanti ada resource lain aktifkan baris berikut:
                             // ['route' => route('admin.sdgs.kontribusi.index'), 'icon' => 'fas fa-hands-helping', 'label' => 'Kontribusi SDGs'],
                             // ['route' => route('admin.sdgs.hubungan.index'), 'icon' => 'fas fa-link', 'label' => 'Hubungan SDGs'],
                         ];
@@ -45,15 +46,61 @@
                 <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-5">
                     <ul class="space-y-3">
                         @forelse($activities as $activity)
+                            @php
+                                // default ke '#'
+                                $detailUrl = '#';
+
+                                // mapping ke route berdasarkan type (sesuaikan nama route bila beda)
+                                switch ($activity['type']) {
+                                    case 'Kategori SDGs':
+                                        // resource: admin.sdgs.kategori-sdgs.show
+                                        $detailUrl = route('admin.sdgs.kategori-sdgs.show', $activity['id']);
+                                        break;
+
+                                    case 'Kontribusi SDGs':
+                                        // jika sudah ada resource, aktifkan:
+                                        // $detailUrl = route('admin.sdgs.kontribusi.show', $activity['id']);
+                                        $detailUrl = route('admin.sdgs.kategori-sdgs.show', $activity['id'] ?? 0); // fallback supaya tidak null
+                                        break;
+
+                                    case 'Hubungan SDGs':
+                                        // jika sudah ada resource, aktifkan:
+                                        // $detailUrl = route('admin.sdgs.hubungan.show', $activity['id']);
+                                        $detailUrl = route('admin.sdgs.kategori-sdgs.show', $activity['id'] ?? 0); // fallback
+                                        break;
+
+                                    // contoh lain: jika aktivitas berasal dari submission/attempt siswa, bisa diarahkan beda
+                                    case 'Hasil Form Siswa':
+                                        if (!empty($activity['user_id']) && !empty($activity['id'])) {
+                                            $detailUrl = route('admin.kenali-jurusan.hasil-form.user-attempt', [
+                                                'user_id' => $activity['user_id'],
+                                                'form_id' => $activity['id'],
+                                            ]);
+                                        }
+                                        break;
+
+                                    default:
+                                        $detailUrl = '#';
+                                }
+                            @endphp
+
                             <li class="flex items-center justify-between gap-3 p-3 rounded-xl border border-slate-100 hover:bg-slate-50 transition">
                                 <div class="flex items-center gap-3">
                                     @if($activity['action'] === 'create')
                                         <span class="p-2 rounded-full bg-green-100 text-green-600">
                                             <i class="fas fa-plus"></i>
                                         </span>
-                                    @else
+                                    @elseif($activity['action'] === 'update')
                                         <span class="p-2 rounded-full bg-blue-100 text-blue-600">
                                             <i class="fas fa-pen"></i>
+                                        </span>
+                                    @elseif($activity['action'] === 'submit')
+                                        <span class="p-2 rounded-full bg-emerald-100 text-emerald-600">
+                                            <i class="fas fa-paper-plane"></i>
+                                        </span>
+                                    @else
+                                        <span class="p-2 rounded-full bg-slate-100 text-slate-500">
+                                            <i class="fas fa-clock"></i>
                                         </span>
                                     @endif
 
@@ -61,17 +108,20 @@
                                         <span class="text-slate-700">
                                             <b>{{ $activity['name'] }}</b> pada <span class="capitalize">{{ $activity['type'] }}</span>
                                             @if($activity['action'] === 'create')
-                                                berhasil dibuat 🌱
-                                            @else
+                                                berhasil dibuat ✨
+                                            @elseif($activity['action'] === 'update')
                                                 berhasil diperbarui 🔄
+                                            @elseif($activity['action'] === 'submit')
+                                                berhasil disubmit{{ !empty($activity['attempt']) ? ' ke-'.$activity['attempt'] : '' }} ✨
+                                            @else
+                                                dicatat ⏳
                                             @endif
                                         </span>
-                                        <span class="text-xs text-slate-500">{{ $activity['created_at']->diffForHumans() }}</span>
+                                        <span class="text-xs text-slate-500">{{ \Carbon\Carbon::parse($activity['created_at'])->diffForHumans() }}</span>
                                     </div>
                                 </div>
 
-                                <a href=""
-                                   class="text-xs px-3 py-1 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 transition">
+                                <a href="{{ $detailUrl }}" class="text-xs px-3 py-1 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 transition">
                                     Detail
                                 </a>
                             </li>
