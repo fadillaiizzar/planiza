@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Siswa\KontribusiSdgs;
 
 use App\Models\KategoriSdgs;
 use Illuminate\Http\Request;
+use App\Models\KontribusiSdgs;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,5 +18,41 @@ class KontribusiSdgsSiswaController extends Controller
         $kategoriSdgs = KategoriSdgs::orderBy('nomor_kategori')->get();
 
        return view('siswa.pages.kontribusi-sdgs', compact('siswa', 'kategoriSdgs'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:user,id',
+            'kategori_sdgs_id' => 'required|exists:kategori_sdgs,id',
+            'judul_kegiatan' => 'required|string|max:255',
+            'deskripsi_refleksi' => 'required|string',
+            'tanggal_pelaksanaan' => 'required|date',
+            'bukti_upload' => 'required|array',
+            'bukti_upload.*' => 'image|mimes:jpg,png,jpeg|max:2048',
+        ]);
+
+        $user = Auth::user();
+
+        // Simpan file bukti kegiatan
+        $paths = [];
+        if ($request->hasFile('bukti_upload')) {
+            foreach ($request->file('bukti_upload') as $file) {
+                $paths[] = $file->store('bukti_upload', 'public');
+            }
+        }
+
+        // Simpan data ke database
+        KontribusiSdgs::create([
+            'user_id' => $user->id,
+            'kategori_sdgs_id' => $request->kategori_sdgs_id,
+            'judul_kegiatan' => $request->judul_kegiatan,
+            'deskripsi_refleksi' => $request->deskripsi_refleksi,
+            'tanggal_pelaksanaan' => $request->tanggal_pelaksanaan,
+            'bukti_upload' => json_encode($paths),
+            'status' => 'pending',
+        ]);
+
+        return redirect()->route('siswa.kontribusi-sdgs.index')->with('success', 'Kontribusi SDGs berhasil disimpan!');
     }
 }

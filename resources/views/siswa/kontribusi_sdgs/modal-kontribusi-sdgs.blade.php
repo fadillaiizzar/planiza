@@ -9,8 +9,14 @@
             <button onclick="closeKontribusiModal()" class="text-white hover:text-blue-200 text-3xl font-light transition-colors">×</button>
         </div>
 
+        @if(session('success'))
+            <div class="mb-4 p-4 bg-green-100 text-green-700 rounded-lg">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <!-- Form - Scrollable without scrollbar -->
-        <form id="kontribusiForm" action="" method="POST" enctype="multipart/form-data" class="flex flex-col flex-1 overflow-hidden">
+        <form id="kontribusiForm" action="{{ route('siswa.kontribusi-sdgs.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col flex-1 overflow-hidden">
             @csrf
 
             <!-- Content Area - Custom Scrollbar Hidden -->
@@ -39,7 +45,7 @@
                             <label class="block text-sm font-bold text-slate-navy mb-3">Tanggal Kegiatan <span class="text-red-500">*</span></label>
                             <input
                                 type="date"
-                                name="tanggal_kegiatan"
+                                name="tanggal_pelaksanaan"
                                 id="tanggalKegiatan"
                                 class="w-full px-5 py-4 border-2 border-border-gray rounded-xl focus:ring-2 focus:ring-slate-navy focus:border-slate-navy transition-all text-slate-navy"
                                 required
@@ -83,8 +89,8 @@
                         <div>
                             <label class="block text-sm font-bold text-slate-navy mb-3">Refleksi Kegiatan <span class="text-red-500">*</span></label>
                             <textarea
-                                name="refleksi"
-                                id="refleksi"
+                                name="deskripsi_refleksi"
+                                id="deskripsi_refleksi"
                                 rows="5"
                                 placeholder="Ceritakan pengalaman dan pelajaran yang kamu dapat dari kegiatan ini..."
                                 class="w-full px-5 py-4 border-2 border-border-gray rounded-xl focus:ring-2 focus:ring-slate-navy focus:border-slate-navy transition-all resize-none text-slate-navy placeholder-cool-gray"
@@ -93,25 +99,31 @@
                         </div>
 
                         <div>
-                            <label class="block text-sm font-bold text-slate-navy mb-3">Upload Bukti Kegiatan <span class="text-red-500">*</span></label>
-                            <div class="border-2 border-dashed border-border-gray rounded-xl p-8 text-center hover:border-slate-navy hover:bg-blue-50 transition-all cursor-pointer group" onclick="document.getElementById('buktiFile').click()">
+                            <label class="block text-sm font-bold text-slate-navy mb-3">
+                                Upload Bukti Kegiatan <span class="text-red-500">*</span>
+                            </label>
+
+                            <label
+                                for="buktiFile"
+                                class="border-2 border-dashed border-border-gray rounded-xl p-8 text-center hover:border-slate-navy hover:bg-blue-50 transition-all cursor-pointer block"
+                            >
                                 <div class="text-5xl mb-3 group-hover:scale-110 transition-transform">📸</div>
                                 <p class="text-slate-navy font-semibold mb-1">Klik untuk upload foto</p>
                                 <p class="text-cool-gray text-sm">Format: JPG, PNG (Maks. 2MB)</p>
-                                <input
-                                    type="file"
-                                    name="bukti_kegiatan"
-                                    id="buktiFile"
-                                    accept="image/*"
-                                    class="hidden"
-                                    onchange="showFileName(this)"
-                                    required
-                                >
-                            </div>
-                            <p id="fileName" class="text-sm text-green-600 font-semibold mt-3 hidden flex items-center gap-2">
-                                <span>✓</span>
-                                <span id="fileNameText"></span>
-                            </p>
+                            </label>
+
+                            <input
+                                type="file"
+                                id="buktiFile"
+                                name="bukti_upload[]"
+                                accept="image/*"
+                                multiple
+                                onchange="showFileName(this)"
+                                required
+                                class="sr-only"
+                            >
+
+                            <div id="fileName" class="hidden mt-3 space-y-1"></div>
                         </div>
                     </div>
                 </div>
@@ -149,3 +161,83 @@
         </form>
     </div>
 </div>
+
+<script>
+let selectedFiles = [];
+
+function showFileName(input) {
+    const fileList = document.getElementById('fileName');
+    const files = Array.from(input.files);
+
+    // Gabungkan file baru ke list lama tanpa duplikat nama
+    files.forEach(file => {
+        if (!selectedFiles.some(f => f.name === file.name)) {
+            selectedFiles.push(file);
+        }
+    });
+
+    fileList.innerHTML = '';
+    fileList.classList.remove("hidden");
+
+    // Tampilkan semua file yg sudah dipilih
+    selectedFiles.forEach((file, index) => {
+        const fileItem = document.createElement("div");
+        fileItem.className = "flex items-center justify-between bg-gray-50 px-4 py-2 rounded-xl border border-border-gray";
+
+        // preview gambar kecil
+        const reader = new FileReader();
+        reader.onload = e => {
+            fileItem.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <img src="${e.target.result}" class="w-12 h-12 rounded-lg object-cover border">
+                    <div>
+                        <p class="text-sm font-semibold text-slate-navy">${file.name}</p>
+                        <p class="text-xs text-cool-gray">${(file.size / 1024).toFixed(1)} KB</p>
+                    </div>
+                </div>
+                <button type="button" onclick="removeFile(${index})" class="text-red-500 hover:text-red-700 font-bold">✕</button>
+            `;
+            fileList.appendChild(fileItem);
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+function removeFile(index) {
+    selectedFiles.splice(index, 1);
+    showFileName({ files: [] }); // render ulang daftar
+}
+
+// Saat submit, masukkan file2 ke FormData manual
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("kontribusiForm");
+
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        // tambahkan semua file ke formData
+        selectedFiles.forEach(file => formData.append("bukti_upload[]", file));
+
+        try {
+            const response = await fetch(form.action, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value
+                }
+            });
+
+            if (response.ok) {
+                console.log("✅ Kontribusi berhasil dikirim!");
+                window.location.href = response.url; // redirect otomatis
+            } else {
+                 console.error("❌ Gagal mengirim data:", await response.text());
+            }
+        } catch (error) {
+            console.error("⚠️ Error:", error);
+        }
+    });
+});
+</script>
