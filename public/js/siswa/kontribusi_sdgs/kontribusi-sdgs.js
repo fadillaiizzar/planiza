@@ -58,14 +58,6 @@ function prevStep() {
     showStep(1);
 }
 
-function showFileName(input) {
-    const fileName = input.files[0]?.name;
-    if (fileName) {
-        document.getElementById('fileNameText').textContent = `File dipilih: ${fileName}`;
-        document.getElementById('fileName').classList.remove('hidden');
-    }
-}
-
 // SDGs Guide Modal
 let currentGuidePage = 1;
 const itemsPerPage = 6;
