@@ -23,7 +23,6 @@ class KontribusiSdgsSiswaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:user,id',
             'kategori_sdgs_id' => 'required|exists:kategori_sdgs,id',
             'judul_kegiatan' => 'required|string|max:255',
             'deskripsi_refleksi' => 'required|string',

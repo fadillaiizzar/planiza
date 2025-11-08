@@ -17,6 +17,10 @@ class KontribusiSdgs extends Model
         'status',
     ];
 
+    protected $casts = [
+        'bukti_upload' => 'array', 
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
