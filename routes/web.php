@@ -44,6 +44,7 @@ use App\Http\Controllers\Siswa\KenaliJurusan\KerjakanFormController;
 use App\Http\Controllers\Siswa\KenaliJurusan\KenaliJurusanSiswaController;
 use App\Http\Controllers\Siswa\KenaliJurusan\RekomendasiJurusanController;
 use App\Http\Controllers\Siswa\EksplorasiKuliah\EksplorasiKuliahSiswaController;
+use App\Http\Controllers\Siswa\KontribusiSdgs\KontribusiSdgsSiswaController;
 
 Route::get('/', function () {
     return view('beranda');
@@ -163,5 +164,9 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->na
 
             Route::get('/{formKuliah}/rekomendasi/{attempt?}', [RekomendasiJurusanController::class, 'index'])->name('rekomendasi');
         });
+    });
+
+    Route::prefix('kontribusi-sdgs')->name('kontribusi-sdgs.')->group(function () {
+        Route::get('/', [KontribusiSdgsSiswaController::class, 'index'])->name('index');
     });
 });
