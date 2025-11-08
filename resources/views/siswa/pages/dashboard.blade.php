@@ -52,7 +52,7 @@
                                     : 'Temukan arah masa depan mu'),
                         ],
                         [
-                            'href' => '#',
+                            'href' => route('siswa.kontribusi-sdgs.index'),
                             'icon' => 'fas fa-globe',
                             'title' => 'Kontribusi SDGs',
                             'desc' => 'Perubahan nyata',
