@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-6">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="group bg-white rounded-3xl p-8 border-2 border-border-gray hover:border-green-500 transition-all hover:shadow-2xl relative overflow-hidden transform hover:-translate-y-2 duration-300">
             <!-- Animated Blob -->
             <div class="absolute top-0 right-0 w-32 h-32 bg-green-100 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>

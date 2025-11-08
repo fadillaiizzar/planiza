@@ -31,7 +31,7 @@
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
                 onclick="openKontribusiModal()"
-                class="group/btn relative inline-flex items-center gap-3 bg-white text-slate-navy px-10 py-5 rounded-2xl font-black text-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+                class="group/btn relative inline-flex items-center gap-3 bg-white text-slate-navy p-5 rounded-2xl font-black text-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
             >
                 <div class="absolute inset-0 bg-gradient-to-r from-blue-50 to-green-50 opacity-0 group-hover/btn:opacity-100 transition-opacity"></div>
                 <span class="relative flex items-center gap-3">
