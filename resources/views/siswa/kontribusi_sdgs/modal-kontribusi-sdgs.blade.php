@@ -117,13 +117,13 @@
                 </div>
             </div>
 
-            <!-- Footer Buttons - Fixed -->
-            <div class="bg-off-white border-t-2 border-border-gray px-8 py-5 flex justify-between gap-4 flex-shrink-0">
+           <!-- Footer Buttons - Responsive -->
+            <div class="bg-off-white border-t-2 border-border-gray px-8 py-5 flex flex-col sm:flex-row justify-between gap-4 flex-shrink-0">
                 <button
                     type="button"
                     id="prevBtn"
                     onclick="prevStep()"
-                    class="px-8 py-4 border-2 border-border-gray text-cool-gray rounded-xl font-bold hover:border-slate-navy hover:text-slate-navy hover:bg-white transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                    class="px-8 py-4 border-2 border-border-gray text-cool-gray rounded-xl font-bold hover:border-slate-navy hover:text-slate-navy hover:bg-white transition-all disabled:opacity-30 disabled:cursor-not-allowed w-full sm:w-auto"
                     disabled
                 >
                     ← Sebelumnya
@@ -133,7 +133,7 @@
                     type="button"
                     id="nextBtn"
                     onclick="nextStep()"
-                    class="px-8 py-4 bg-slate-navy text-white rounded-xl font-bold hover:bg-blue-900 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+                    class="px-8 py-4 bg-slate-navy text-white rounded-xl font-bold hover:bg-blue-900 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg w-full sm:w-auto"
                 >
                     Selanjutnya →
                 </button>
@@ -141,7 +141,7 @@
                 <button
                     type="submit"
                     id="submitBtn"
-                    class="hidden px-8 py-4 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 transition-all shadow-lg"
+                    class="hidden px-8 py-4 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 transition-all shadow-lg w-full sm:w-auto"
                 >
                     ✓ Submit Kontribusi
                 </button>
