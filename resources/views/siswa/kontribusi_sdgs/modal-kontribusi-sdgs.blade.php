@@ -6,7 +6,6 @@
                 <h3 class="text-2xl font-bold text-white">Tambah Kontribusi SDGs</h3>
                 <p class="text-blue-200 text-sm mt-1" id="stepIndicator">Step 1 dari 2</p>
             </div>
-            <button onclick="closeKontribusiModal()" class="text-white hover:text-blue-200 text-3xl font-light transition-colors">×</button>
         </div>
 
         @if(session('success'))

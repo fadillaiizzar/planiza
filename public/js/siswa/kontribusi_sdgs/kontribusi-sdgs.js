@@ -294,3 +294,56 @@ $(document).ready(function () {
         });
     });
 });
+
+/* ==========================================================
+   🟨 7. LOAD DATA DARI LOCALSTORAGE SAAT REFRESH
+   ========================================================== */
+function loadKontribusiDataOnRefresh() {
+    const savedForm = JSON.parse(localStorage.getItem("kontribusiFormData") || "{}");
+
+    // Kalau ada data tersimpan, buka modal
+    if (Object.keys(savedForm).length > 0) {
+        document.getElementById('kontribusiModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+
+        // Isi form dengan data tersimpan
+        if (savedForm.judul_kegiatan) document.getElementById("judulKegiatan").value = savedForm.judul_kegiatan;
+        if (savedForm.tanggal_pelaksanaan) document.getElementById("tanggalKegiatan").value = savedForm.tanggal_pelaksanaan;
+        if (savedForm.kategori_sdgs_id) document.getElementById("kategoriSdgs").value = savedForm.kategori_sdgs_id;
+        if (savedForm.deskripsi_refleksi) document.getElementById("deskripsi_refleksi").value = savedForm.deskripsi_refleksi;
+        if (savedForm.files && savedForm.files.length > 0) {
+            selectedFiles = savedForm.files.map(f => ({ name: f.name, size: f.size, data: f.data }));
+            renderFileList();
+        }
+
+        // Set step terakhir
+        currentStep = savedForm.currentStep || 1;
+        showStep(currentStep);
+    }
+}
+
+// Simpan otomatis saat input berubah (tambahkan currentStep)
+function saveFormData() {
+    const formData = {
+        currentStep,
+        judul_kegiatan: document.getElementById("judulKegiatan").value,
+        tanggal_pelaksanaan: document.getElementById("tanggalKegiatan").value,
+        kategori_sdgs_id: document.getElementById("kategoriSdgs").value,
+        deskripsi_refleksi: document.getElementById("deskripsi_refleksi").value,
+        files: selectedFiles
+    };
+    localStorage.setItem("kontribusiFormData", JSON.stringify(formData));
+}
+
+// Panggil saat halaman siap
+document.addEventListener("DOMContentLoaded", loadKontribusiDataOnRefresh);
+
+/* ==========================================================
+   🟩 8. SHOW DATEPICKER
+   ========================================================== */
+const tanggalInput = document.getElementById('tanggalKegiatan');
+tanggalInput.addEventListener('click', () => {
+    if (tanggalInput.showPicker) {
+        tanggalInput.showPicker(); 
+    }
+});
