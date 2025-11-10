@@ -162,6 +162,15 @@
     </div>
 </div>
 
+<!-- Loading Overlay -->
+<div id="loadingOverlay"
+     class="hidden fixed inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center z-[9999]">
+    <div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center gap-3">
+        <div class="w-10 h-10 border-4 border-slate-navy border-t-transparent rounded-full animate-spin"></div>
+        <p class="text-slate-navy font-semibold">Mengirim kontribusi...</p>
+    </div>
+</div>
+
 <script>
 let selectedFiles = [];
 
@@ -215,9 +224,15 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", async function (e) {
         e.preventDefault();
 
-        const formData = new FormData(form);
+        if (selectedFiles.length === 0) {
+            alert("📸 Bukti kegiatan wajib diupload sebelum mengirim!");
+            return;
+        }
 
-        // tambahkan semua file ke formData
+        document.getElementById("loadingOverlay").classList.remove("hidden");
+
+        const formData = new FormData(form);
+        formData.delete("bukti_upload[]");
         selectedFiles.forEach(file => formData.append("bukti_upload[]", file));
 
         try {
@@ -229,13 +244,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
 
+            document.getElementById("loadingOverlay").classList.add("hidden");
+
             if (response.ok) {
                 console.log("✅ Kontribusi berhasil dikirim!");
-                window.location.href = response.url; // redirect otomatis
+                selectedFiles = [];
+                document.getElementById("fileName").classList.add("hidden");
+                form.reset();
+                window.location.reload();
             } else {
-                 console.error("❌ Gagal mengirim data:", await response.text());
+                console.error("❌ Gagal mengirim data:", await response.text());
             }
         } catch (error) {
+            document.getElementById("loadingOverlay").classList.add("hidden");
             console.error("⚠️ Error:", error);
         }
     });

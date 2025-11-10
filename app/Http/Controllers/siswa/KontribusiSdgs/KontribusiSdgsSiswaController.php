@@ -37,7 +37,11 @@ class KontribusiSdgsSiswaController extends Controller
         $paths = [];
         if ($request->hasFile('bukti_upload')) {
             foreach ($request->file('bukti_upload') as $file) {
-                $paths[] = $file->store('bukti_upload', 'public');
+                $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $extension = $file->getClientOriginalExtension();
+                $timestamp = now()->format('Ymd_His');
+                $newName = $originalName . '_' . $timestamp . '.' . $extension;
+                $paths[] = $file->storeAs('bukti_upload', $newName, 'public');
             }
         }
 
