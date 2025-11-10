@@ -20,6 +20,7 @@
 
         <!-- CTA Banner - Ultra Modern -->
         @include('siswa.kontribusi_sdgs.banner-kontribusi')
+        @include('siswa.kontribusi_sdgs.riwayat-kontribusi')
 
         <!-- Benefits Section - Modern Cards -->
         @include('siswa.kontribusi_sdgs.benefit-section')
