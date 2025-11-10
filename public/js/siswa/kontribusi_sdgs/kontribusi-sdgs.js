@@ -39,6 +39,9 @@ function closeKontribusiModal() {
 }
 
 function showStep(step) {
+    currentStep = step;
+    saveFormData();
+
     document.getElementById('step1').classList.toggle('hidden', step !== 1);
     document.getElementById('step2').classList.toggle('hidden', step !== 2);
     document.getElementById('prevBtn').disabled = step === 1;
@@ -87,7 +90,6 @@ function prevStep() {
 }
 
 function showFileName(input) {
-    const fileList = document.getElementById('fileName');
     const files = Array.from(input.files);
 
     files.forEach(file => {
@@ -97,6 +99,7 @@ function showFileName(input) {
     });
 
     renderFileList();
+    saveFormData();
 }
 
 function renderFileList() {
@@ -313,13 +316,61 @@ function loadKontribusiDataOnRefresh() {
         if (savedForm.deskripsi_refleksi) document.getElementById("deskripsi_refleksi").value = savedForm.deskripsi_refleksi;
         if (savedForm.files && savedForm.files.length > 0) {
             selectedFiles = savedForm.files.map(f => ({ name: f.name, size: f.size, data: f.data }));
-            renderFileList();
+            renderFileList(true);
         }
 
         // Set step terakhir
         currentStep = savedForm.currentStep || 1;
         showStep(currentStep);
     }
+}
+
+function renderFileList(fromStorage = false) {
+    const fileList = document.getElementById('fileName');
+    fileList.innerHTML = '';
+    if (selectedFiles.length === 0) { fileList.classList.add("hidden"); return; }
+    fileList.classList.remove("hidden");
+
+    selectedFiles.forEach((file, index) => {
+        const fileItem = document.createElement("div");
+        fileItem.className = "flex items-center justify-between bg-gray-50 px-4 py-2 rounded-xl border border-border-gray";
+
+        if (fromStorage && file.data) {
+            // Pakai preview dari data URL
+            fileItem.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <img src="${file.data}" class="w-12 h-12 rounded-lg object-cover border">
+                    <div>
+                        <p class="text-sm font-semibold text-slate-navy">${file.name}</p>
+                        <p class="text-xs text-cool-gray">${(file.size / 1024).toFixed(1)} KB</p>
+                    </div>
+                </div>
+                <button type="button" onclick="removeFile(${index})" class="text-red-500 hover:text-red-700 font-bold">✕</button>
+            `;
+        } else {
+            // Pakai FileReader untuk file baru
+            const reader = new FileReader();
+            reader.onload = e => {
+                fileItem.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <img src="${e.target.result}" class="w-12 h-12 rounded-lg object-cover border">
+                        <div>
+                            <p class="text-sm font-semibold text-slate-navy">${file.name}</p>
+                            <p class="text-xs text-cool-gray">${(file.size / 1024).toFixed(1)} KB</p>
+                        </div>
+                    </div>
+                    <button type="button" onclick="removeFile(${index})" class="text-red-500 hover:text-red-700 font-bold">✕</button>
+                `;
+                file.data = e.target.result; // simpan data URL ke localStorage
+                saveFormData();
+                fileList.appendChild(fileItem);
+            };
+            reader.readAsDataURL(file);
+            return; // jangan append di sini, tunggu reader
+        }
+
+        fileList.appendChild(fileItem);
+    });
 }
 
 // Simpan otomatis saat input berubah (tambahkan currentStep)
@@ -330,7 +381,11 @@ function saveFormData() {
         tanggal_pelaksanaan: document.getElementById("tanggalKegiatan").value,
         kategori_sdgs_id: document.getElementById("kategoriSdgs").value,
         deskripsi_refleksi: document.getElementById("deskripsi_refleksi").value,
-        files: selectedFiles
+        files: selectedFiles.map(f => ({
+            name: f.name,
+            size: f.size,
+            data: f.data || null
+        }))
     };
     localStorage.setItem("kontribusiFormData", JSON.stringify(formData));
 }
@@ -338,12 +393,17 @@ function saveFormData() {
 // Panggil saat halaman siap
 document.addEventListener("DOMContentLoaded", loadKontribusiDataOnRefresh);
 
+// Panggil saveFormData setiap ada perubahan input
+document.querySelectorAll("#kontribusiForm input, #kontribusiForm textarea, #kontribusiForm select").forEach(el => {
+    el.addEventListener("input", saveFormData);
+});
+
 /* ==========================================================
    🟩 8. SHOW DATEPICKER
    ========================================================== */
 const tanggalInput = document.getElementById('tanggalKegiatan');
 tanggalInput.addEventListener('click', () => {
     if (tanggalInput.showPicker) {
-        tanggalInput.showPicker(); 
+        tanggalInput.showPicker();
     }
 });
