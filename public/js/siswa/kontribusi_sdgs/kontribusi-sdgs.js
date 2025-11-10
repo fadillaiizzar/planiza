@@ -1,3 +1,6 @@
+/* ==========================================================
+   🟦 1. DETAIL SDG MODAL (Lihat Penjelasan SDGs)
+   ========================================================== */
 function showSDGDetail(id) {
     const sdg = sdgsData.find(s => s.id === id);
     if (sdg) {
@@ -14,8 +17,11 @@ function closeSDGDetail() {
     document.body.style.overflow = 'auto';
 }
 
-// Kontribusi Modal
+/* ==========================================================
+   🟩 2. KONTRIBUSI MODAL (Step Form Tambah Kontribusi)
+   ========================================================== */
 let currentStep = 1;
+let selectedFiles = [];
 
 function openKontribusiModal() {
     document.getElementById('kontribusiModal').classList.remove('hidden');
@@ -29,6 +35,7 @@ function closeKontribusiModal() {
     document.body.style.overflow = 'auto';
     document.getElementById('kontribusiForm').reset();
     document.getElementById('fileName').classList.add('hidden');
+    selectedFiles = [];
 }
 
 function showStep(step) {
@@ -40,25 +47,108 @@ function showStep(step) {
     document.getElementById('stepIndicator').textContent = `Step ${step} dari 2`;
 }
 
-function nextStep() {
-    const judul = document.getElementById('judulKegiatan').value;
-    const tanggal = document.getElementById('tanggalKegiatan').value;
-
-    if (!judul || !tanggal) {
-        alert('Mohon lengkapi semua field yang wajib diisi');
-        return;
+function validateForm(step) {
+    let inputs = [];
+    if (step === 1) {
+        inputs = [document.getElementById('judulKegiatan'), document.getElementById('tanggalKegiatan')];
+    } else if (step === 2) {
+        inputs = [document.getElementById('kategoriSdgs'), document.getElementById('deskripsi_refleksi')];
     }
 
-    currentStep = 2;
-    showStep(2);
+    // Cek input kosong
+    for (const input of inputs) {
+        if (!input.value || input.value.trim() === "") {
+            return false;
+        }
+    }
+
+    // Step 2: cek file upload wajib
+    if (step === 2 && selectedFiles.length === 0) return false;
+
+    return true;
+}
+
+function nextStep() {
+    if (!validateForm(currentStep)) {
+        showWarningPopup();
+        return;
+    }
+    if (currentStep < 2) {
+        currentStep++;
+        showStep(currentStep);
+    }
 }
 
 function prevStep() {
-    currentStep = 1;
-    showStep(1);
+    if (currentStep > 1) {
+        currentStep--;
+        showStep(currentStep);
+    }
 }
 
-// SDGs Guide Modal
+function showFileName(input) {
+    const fileList = document.getElementById('fileName');
+    const files = Array.from(input.files);
+
+    files.forEach(file => {
+        if (!selectedFiles.some(f => f.name === file.name)) {
+            selectedFiles.push(file);
+        }
+    });
+
+    renderFileList();
+}
+
+function renderFileList() {
+    const fileList = document.getElementById('fileName');
+    fileList.innerHTML = '';
+    if (selectedFiles.length === 0) {
+        fileList.classList.add("hidden");
+        return;
+    }
+
+    fileList.classList.remove("hidden");
+    selectedFiles.forEach((file, index) => {
+        const fileItem = document.createElement("div");
+        fileItem.className = "flex items-center justify-between bg-gray-50 px-4 py-2 rounded-xl border border-border-gray";
+
+        const reader = new FileReader();
+        reader.onload = e => {
+            fileItem.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <img src="${e.target.result}" class="w-12 h-12 rounded-lg object-cover border">
+                    <div>
+                        <p class="text-sm font-semibold text-slate-navy">${file.name}</p>
+                        <p class="text-xs text-cool-gray">${(file.size / 1024).toFixed(1)} KB</p>
+                    </div>
+                </div>
+                <button type="button" onclick="removeFile(${index})" class="text-red-500 hover:text-red-700 font-bold">✕</button>
+            `;
+            fileList.appendChild(fileItem);
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+function removeFile(index) {
+    selectedFiles.splice(index, 1);
+    renderFileList();
+}
+
+/* ==========================================================
+   🟧 3. CUSTOM POPUP (Peringatan Form Belum Lengkap)
+   ========================================================== */
+function showWarningPopup() {
+    document.getElementById('warningPopup').classList.remove('hidden');
+}
+
+function closeWarningPopup() {
+    document.getElementById('warningPopup').classList.add('hidden');
+}
+
+/* ==========================================================
+   🟨 4. SDGs GUIDE MODAL (Panduan & Contoh SDGs)
+   ========================================================== */
 let currentGuidePage = 1;
 const itemsPerPage = 6;
 
@@ -112,19 +202,95 @@ function prevGuidePage() {
     }
 }
 
-// Close modals on outside click
-window.onclick = function(event) {
-    if (event.target.id === 'sdgDetailModal') closeSDGDetail();
-    if (event.target.id === 'kontribusiModal') closeKontribusiModal();
-    if (event.target.id === 'sdgsGuideModal') closeSDGsGuideModal();
+/* ==========================================================
+   🟪 5. FILE UPLOAD & PREVIEW GAMBAR (Bukti Kegiatan)
+   ========================================================== */
+function showFileName(input) {
+    const fileList = document.getElementById('fileName');
+    const files = Array.from(input.files);
+
+    // Gabungkan file baru ke list lama tanpa duplikat
+    files.forEach(file => {
+        if (!selectedFiles.some(f => f.name === file.name)) {
+            selectedFiles.push(file);
+        }
+    });
+
+    fileList.innerHTML = '';
+    fileList.classList.remove("hidden");
+
+    // Tampilkan preview semua file yang dipilih
+    selectedFiles.forEach((file, index) => {
+        const fileItem = document.createElement("div");
+        fileItem.className = "flex items-center justify-between bg-gray-50 px-4 py-2 rounded-xl border border-border-gray";
+
+        const reader = new FileReader();
+        reader.onload = e => {
+            fileItem.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <img src="${e.target.result}" class="w-12 h-12 rounded-lg object-cover border">
+                    <div>
+                        <p class="text-sm font-semibold text-slate-navy">${file.name}</p>
+                        <p class="text-xs text-cool-gray">${(file.size / 1024).toFixed(1)} KB</p>
+                    </div>
+                </div>
+                <button type="button" onclick="removeFile(${index})" class="text-red-500 hover:text-red-700 font-bold">✕</button>
+            `;
+            fileList.appendChild(fileItem);
+        };
+        reader.readAsDataURL(file);
+    });
 }
 
-// Prevent body scroll when modal is open
-document.addEventListener('DOMContentLoaded', function() {
-    const modals = document.querySelectorAll('[id$="Modal"]');
-    modals.forEach(modal => {
-        modal.addEventListener('wheel', function(e) {
-            e.stopPropagation();
+function removeFile(index) {
+    selectedFiles.splice(index, 1);
+    showFileName({ files: [] });
+}
+
+/* ==========================================================
+   🟫 6. SUBMIT FORM (AJAX JQUERY + LOADING OVERLAY)
+   ========================================================== */
+$(document).ready(function () {
+    const $form = $("#kontribusiForm");
+
+    $form.on("submit", function (e) {
+        e.preventDefault();
+
+        // Validasi step 2 + file wajib
+        if (!validateForm(2)) {
+            showWarningPopup();
+            return;
+        }
+
+        $("#loadingOverlay").removeClass("hidden");
+
+        const formData = new FormData(this);
+        formData.delete("bukti_upload[]");
+        selectedFiles.forEach(file => formData.append("bukti_upload[]", file));
+
+        $.ajax({
+            url: $form.attr("action"),
+            method: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            headers: {
+                "X-CSRF-TOKEN": $('input[name="_token"]').val()
+            },
+            success: function () {
+                $("#loadingOverlay").addClass("hidden");
+                console.log("✅ Kontribusi berhasil dikirim!");
+
+                // Reset form
+                selectedFiles = [];
+                $("#fileName").addClass("hidden");
+                $form.trigger("reset");
+                closeKontribusiModal();
+            },
+            error: function (xhr) {
+                $("#loadingOverlay").addClass("hidden");
+                console.error("❌ Gagal mengirim data:", xhr.responseText);
+            }
         });
     });
 });

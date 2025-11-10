@@ -37,7 +37,6 @@
                                 id="judulKegiatan"
                                 placeholder="Contoh: Aksi Tanam Pohon di Bantaran Sungai"
                                 class="w-full px-5 py-4 border-2 border-border-gray rounded-xl focus:ring-2 focus:ring-slate-navy focus:border-slate-navy transition-all text-slate-navy placeholder-cool-gray"
-                                required
                             >
                         </div>
 
@@ -48,7 +47,6 @@
                                 name="tanggal_pelaksanaan"
                                 id="tanggalKegiatan"
                                 class="w-full px-5 py-4 border-2 border-border-gray rounded-xl focus:ring-2 focus:ring-slate-navy focus:border-slate-navy transition-all text-slate-navy"
-                                required
                             >
                         </div>
                     </div>
@@ -68,7 +66,6 @@
                                 name="kategori_sdgs_id"
                                 id="kategoriSdgs"
                                 class="w-full px-5 py-4 border-2 border-border-gray rounded-xl focus:ring-2 focus:ring-slate-navy focus:border-slate-navy transition-all text-slate-navy"
-                                required
                             >
                                 <option value="">-- Pilih SDGs --</option>
                                 @foreach($kategoriSdgs as $kategori)
@@ -94,7 +91,6 @@
                                 rows="5"
                                 placeholder="Ceritakan pengalaman dan pelajaran yang kamu dapat dari kegiatan ini..."
                                 class="w-full px-5 py-4 border-2 border-border-gray rounded-xl focus:ring-2 focus:ring-slate-navy focus:border-slate-navy transition-all resize-none text-slate-navy placeholder-cool-gray"
-                                required
                             ></textarea>
                         </div>
 
@@ -119,7 +115,6 @@
                                 accept="image/*"
                                 multiple
                                 onchange="showFileName(this)"
-                                required
                                 class="sr-only"
                             >
 
@@ -171,94 +166,11 @@
     </div>
 </div>
 
-<script>
-let selectedFiles = [];
-
-function showFileName(input) {
-    const fileList = document.getElementById('fileName');
-    const files = Array.from(input.files);
-
-    // Gabungkan file baru ke list lama tanpa duplikat nama
-    files.forEach(file => {
-        if (!selectedFiles.some(f => f.name === file.name)) {
-            selectedFiles.push(file);
-        }
-    });
-
-    fileList.innerHTML = '';
-    fileList.classList.remove("hidden");
-
-    // Tampilkan semua file yg sudah dipilih
-    selectedFiles.forEach((file, index) => {
-        const fileItem = document.createElement("div");
-        fileItem.className = "flex items-center justify-between bg-gray-50 px-4 py-2 rounded-xl border border-border-gray";
-
-        // preview gambar kecil
-        const reader = new FileReader();
-        reader.onload = e => {
-            fileItem.innerHTML = `
-                <div class="flex items-center gap-3">
-                    <img src="${e.target.result}" class="w-12 h-12 rounded-lg object-cover border">
-                    <div>
-                        <p class="text-sm font-semibold text-slate-navy">${file.name}</p>
-                        <p class="text-xs text-cool-gray">${(file.size / 1024).toFixed(1)} KB</p>
-                    </div>
-                </div>
-                <button type="button" onclick="removeFile(${index})" class="text-red-500 hover:text-red-700 font-bold">✕</button>
-            `;
-            fileList.appendChild(fileItem);
-        };
-        reader.readAsDataURL(file);
-    });
-}
-
-function removeFile(index) {
-    selectedFiles.splice(index, 1);
-    showFileName({ files: [] }); // render ulang daftar
-}
-
-// Saat submit, masukkan file2 ke FormData manual
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("kontribusiForm");
-
-    form.addEventListener("submit", async function (e) {
-        e.preventDefault();
-
-        if (selectedFiles.length === 0) {
-            alert("📸 Bukti kegiatan wajib diupload sebelum mengirim!");
-            return;
-        }
-
-        document.getElementById("loadingOverlay").classList.remove("hidden");
-
-        const formData = new FormData(form);
-        formData.delete("bukti_upload[]");
-        selectedFiles.forEach(file => formData.append("bukti_upload[]", file));
-
-        try {
-            const response = await fetch(form.action, {
-                method: "POST",
-                body: formData,
-                headers: {
-                    "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value
-                }
-            });
-
-            document.getElementById("loadingOverlay").classList.add("hidden");
-
-            if (response.ok) {
-                console.log("✅ Kontribusi berhasil dikirim!");
-                selectedFiles = [];
-                document.getElementById("fileName").classList.add("hidden");
-                form.reset();
-                window.location.reload();
-            } else {
-                console.error("❌ Gagal mengirim data:", await response.text());
-            }
-        } catch (error) {
-            document.getElementById("loadingOverlay").classList.add("hidden");
-            console.error("⚠️ Error:", error);
-        }
-    });
-});
-</script>
+<!-- Custom Popup -->
+<div id="warningPopup" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[9999] flex items-center justify-center">
+    <div class="bg-white rounded-2xl shadow-2xl px-8 py-6 max-w-sm text-center animate-fadeIn">
+        <h3 class="text-xl font-bold text-red-600 mb-3">⚠️ Form Belum Lengkap</h3>
+        <p class="text-slate-navy mb-5">Semua kolom wajib diisi sebelum melanjutkan.</p>
+        <button onclick="closeWarningPopup()" class="px-6 py-3 bg-slate-navy text-white rounded-xl font-semibold hover:bg-blue-900 transition-all">Oke, Saya Lengkapi</button>
+    </div>
+</div>
