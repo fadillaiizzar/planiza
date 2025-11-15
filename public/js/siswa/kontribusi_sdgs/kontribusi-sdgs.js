@@ -17,9 +17,8 @@ function closeSDGDetail() {
     document.body.style.overflow = 'auto';
 }
 
-/* ==========================================================
-   🟩 2. KONTRIBUSI MODAL (Step Form Tambah Kontribusi)
-   ========================================================== */
+
+
 let currentStep = 1;
 let selectedFiles = [];
 
@@ -87,55 +86,6 @@ function prevStep() {
         currentStep--;
         showStep(currentStep);
     }
-}
-
-function showFileName(input) {
-    const files = Array.from(input.files);
-
-    files.forEach(file => {
-        if (!selectedFiles.some(f => f.name === file.name)) {
-            selectedFiles.push(file);
-        }
-    });
-
-    renderFileList();
-    saveFormData();
-}
-
-function renderFileList() {
-    const fileList = document.getElementById('fileName');
-    fileList.innerHTML = '';
-    if (selectedFiles.length === 0) {
-        fileList.classList.add("hidden");
-        return;
-    }
-
-    fileList.classList.remove("hidden");
-    selectedFiles.forEach((file, index) => {
-        const fileItem = document.createElement("div");
-        fileItem.className = "flex items-center justify-between bg-gray-50 px-4 py-2 rounded-xl border border-border-gray";
-
-        const reader = new FileReader();
-        reader.onload = e => {
-            fileItem.innerHTML = `
-                <div class="flex items-center gap-3">
-                    <img src="${e.target.result}" class="w-12 h-12 rounded-lg object-cover border">
-                    <div>
-                        <p class="text-sm font-semibold text-slate-navy">${file.name}</p>
-                        <p class="text-xs text-cool-gray">${(file.size / 1024).toFixed(1)} KB</p>
-                    </div>
-                </div>
-                <button type="button" onclick="removeFile(${index})" class="text-red-500 hover:text-red-700 font-bold">✕</button>
-            `;
-            fileList.appendChild(fileItem);
-        };
-        reader.readAsDataURL(file);
-    });
-}
-
-function removeFile(index) {
-    selectedFiles.splice(index, 1);
-    renderFileList();
 }
 
 /* ==========================================================
@@ -210,39 +160,68 @@ function prevGuidePage() {
    ========================================================== */
 function showFileName(input) {
     const fileList = document.getElementById('fileName');
-    const files = Array.from(input.files);
+    const files = input.files ? Array.from(input.files) : [];
 
-    // Gabungkan file baru ke list lama tanpa duplikat
+    // Gabungkan file baru tanpa duplikat nama
     files.forEach(file => {
         if (!selectedFiles.some(f => f.name === file.name)) {
-            selectedFiles.push(file);
+            selectedFiles.push(file); // file baru = tipe File
         }
     });
 
     fileList.innerHTML = '';
     fileList.classList.remove("hidden");
 
-    // Tampilkan preview semua file yang dipilih
     selectedFiles.forEach((file, index) => {
         const fileItem = document.createElement("div");
-        fileItem.className = "flex items-center justify-between bg-gray-50 px-4 py-2 rounded-xl border border-border-gray";
+        fileItem.className =
+            "flex items-center justify-between bg-gray-50 px-4 py-2 rounded-xl border border-border-gray";
 
-        const reader = new FileReader();
-        reader.onload = e => {
+        // 🟦 1. Jika file dari localStorage → langsung pakai data URL
+        if (!(file instanceof File) && file.data) {
             fileItem.innerHTML = `
                 <div class="flex items-center gap-3">
-                    <img src="${e.target.result}" class="w-12 h-12 rounded-lg object-cover border">
+                    <img src="${file.data}" class="w-12 h-12 rounded-lg object-cover border">
                     <div>
                         <p class="text-sm font-semibold text-slate-navy">${file.name}</p>
                         <p class="text-xs text-cool-gray">${(file.size / 1024).toFixed(1)} KB</p>
                     </div>
                 </div>
-                <button type="button" onclick="removeFile(${index})" class="text-red-500 hover:text-red-700 font-bold">✕</button>
+                <button type="button" onclick="removeFile(${index})"
+                    class="text-red-500 hover:text-red-700 font-bold">✕</button>
             `;
             fileList.appendChild(fileItem);
-        };
-        reader.readAsDataURL(file);
+            return;
+        }
+
+        // 🟧 2. Jika file baru (File) → pakai FileReader
+        if (file instanceof File) {
+            const reader = new FileReader();
+
+            reader.onload = e => {
+                file.data = e.target.result; // simpan preview base64
+                saveFormData();
+
+                fileItem.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <img src="${e.target.result}" class="w-12 h-12 rounded-lg object-cover border">
+                        <div>
+                            <p class="text-sm font-semibold text-slate-navy">${file.name}</p>
+                            <p class="text-xs text-cool-gray">${(file.size / 1024).toFixed(1)} KB</p>
+                        </div>
+                    </div>
+                    <button type="button" onclick="removeFile(${index})"
+                        class="text-red-500 hover:text-red-700 font-bold">✕</button>
+                `;
+                fileList.appendChild(fileItem);
+            };
+
+            reader.readAsDataURL(file);
+            return;
+        }
     });
+
+    saveFormData();
 }
 
 function removeFile(index) {
@@ -269,7 +248,16 @@ $(document).ready(function () {
 
         const formData = new FormData(this);
         formData.delete("bukti_upload[]");
-        selectedFiles.forEach(file => formData.append("bukti_upload[]", file));
+        selectedFiles.forEach(file => {
+            if (file instanceof File) {
+                // file asli
+                formData.append("bukti_upload[]", file);
+            } else if (file.data) {
+                // file dari localStorage (base64)
+                const converted = base64ToFile(file.data, file.name);
+                formData.append("bukti_upload[]", converted);
+            }
+        });
 
         $.ajax({
             url: $form.attr("action"),
@@ -286,6 +274,7 @@ $(document).ready(function () {
 
                 // Reset form
                 selectedFiles = [];
+                localStorage.removeItem("kontribusiFormData");
                 $("#fileName").addClass("hidden");
                 $form.trigger("reset");
                 closeKontribusiModal();
@@ -297,6 +286,21 @@ $(document).ready(function () {
         });
     });
 });
+
+/* ==========================================================
+   🔁 Converter Base64 → File (untuk restore upload saat refresh)
+   ========================================================== */
+function base64ToFile(dataURL, filename) {
+    let arr = dataURL.split(',');
+    let mime = arr[0].match(/:(.*?);/)[1];
+    let bstr = atob(arr[1]);
+    let n = bstr.length;
+    let u8arr = new Uint8Array(n);
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+}
 
 /* ==========================================================
    🟨 7. LOAD DATA DARI LOCALSTORAGE SAAT REFRESH
@@ -316,7 +320,7 @@ function loadKontribusiDataOnRefresh() {
         if (savedForm.deskripsi_refleksi) document.getElementById("deskripsi_refleksi").value = savedForm.deskripsi_refleksi;
         if (savedForm.files && savedForm.files.length > 0) {
             selectedFiles = savedForm.files.map(f => ({ name: f.name, size: f.size, data: f.data }));
-            renderFileList(true);
+            renderFileList();
         }
 
         // Set step terakhir
@@ -328,15 +332,22 @@ function loadKontribusiDataOnRefresh() {
 function renderFileList(fromStorage = false) {
     const fileList = document.getElementById('fileName');
     fileList.innerHTML = '';
-    if (selectedFiles.length === 0) { fileList.classList.add("hidden"); return; }
+
+    if (selectedFiles.length === 0) {
+        fileList.classList.add("hidden");
+        return;
+    }
+
     fileList.classList.remove("hidden");
 
     selectedFiles.forEach((file, index) => {
-        const fileItem = document.createElement("div");
-        fileItem.className = "flex items-center justify-between bg-gray-50 px-4 py-2 rounded-xl border border-border-gray";
 
+        const fileItem = document.createElement("div");
+        fileItem.className =
+            "flex items-center justify-between bg-gray-50 px-4 py-2 rounded-xl border border-border-gray";
+
+        // 🟦 1. Jika dari localStorage → gunakan file.data
         if (fromStorage && file.data) {
-            // Pakai preview dari data URL
             fileItem.innerHTML = `
                 <div class="flex items-center gap-3">
                     <img src="${file.data}" class="w-12 h-12 rounded-lg object-cover border">
@@ -345,12 +356,21 @@ function renderFileList(fromStorage = false) {
                         <p class="text-xs text-cool-gray">${(file.size / 1024).toFixed(1)} KB</p>
                     </div>
                 </div>
-                <button type="button" onclick="removeFile(${index})" class="text-red-500 hover:text-red-700 font-bold">✕</button>
+                <button type="button" onclick="removeFile(${index})"
+                    class="text-red-500 hover:text-red-700 font-bold">✕</button>
             `;
-        } else {
-            // Pakai FileReader untuk file baru
+            fileList.appendChild(fileItem);
+            return;
+        }
+
+        // 🟧 2. Jika file baru (bertipe File) → gunakan FileReader
+        if (file instanceof File) {
             const reader = new FileReader();
+
             reader.onload = e => {
+                file.data = e.target.result; // simpan preview ke localStorage
+                saveFormData();
+
                 fileItem.innerHTML = `
                     <div class="flex items-center gap-3">
                         <img src="${e.target.result}" class="w-12 h-12 rounded-lg object-cover border">
@@ -359,17 +379,19 @@ function renderFileList(fromStorage = false) {
                             <p class="text-xs text-cool-gray">${(file.size / 1024).toFixed(1)} KB</p>
                         </div>
                     </div>
-                    <button type="button" onclick="removeFile(${index})" class="text-red-500 hover:text-red-700 font-bold">✕</button>
+                    <button type="button" onclick="removeFile(${index})"
+                        class="text-red-500 hover:text-red-700 font-bold">✕</button>
                 `;
-                file.data = e.target.result; // simpan data URL ke localStorage
-                saveFormData();
                 fileList.appendChild(fileItem);
             };
+
             reader.readAsDataURL(file);
-            return; // jangan append di sini, tunggu reader
+            return; // tunggu reader selesai
         }
 
-        fileList.appendChild(fileItem);
+        // 🟥 3. Safety fallback (jika bukan File dan tidak punya data)
+        if (!file.data) return;
+
     });
 }
 
