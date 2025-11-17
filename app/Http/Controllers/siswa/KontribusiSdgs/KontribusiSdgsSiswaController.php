@@ -20,7 +20,7 @@ class KontribusiSdgsSiswaController extends Controller
         // 🔹 Riwayat kontribusi user yang sudah submit
         $riwayatKontribusi = KontribusiSdgs::with('kategoriSdgs')
             ->where('user_id', $user->id)
-            ->orderBy('tanggal_pelaksanaan', 'desc')
+            ->orderBy('created_at', 'asc')
             ->get();
 
        return view('siswa.pages.kontribusi-sdgs', compact('siswa', 'kategoriSdgs', 'riwayatKontribusi'));
