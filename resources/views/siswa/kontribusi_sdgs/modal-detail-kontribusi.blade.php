@@ -41,6 +41,12 @@
                 <p class="bg-off-white p-4 rounded-xl border border-border-gray text-slate-navy leading-relaxed" id="detailTanggalPelaksanaan"></p>
             </div>
 
+            <!-- Status -->
+            <div>
+                <h4 class="text-sm font-bold text-slate-navy mb-2">Status</h4>
+                <div class="bg-off-white p-4 rounded-xl border border-border-gray text-slate-navy leading-relaxed" id="detailStatus"></div>
+            </div>
+
             <!-- Bukti Foto -->
             <div>
                 <h4 class="text-sm font-bold text-slate-navy mb-3">Bukti Kegiatan</h4>

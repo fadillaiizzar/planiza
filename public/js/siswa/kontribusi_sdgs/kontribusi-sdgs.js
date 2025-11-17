@@ -447,6 +447,7 @@ function openDetailKontribusi(id) {
                 year: 'numeric'
             });
             document.getElementById('detailRefleksi').innerText = data.deskripsi_refleksi;
+            document.getElementById('detailStatus').innerText = data.status;
 
             const wrapper = document.getElementById('detailBukti');
             wrapper.innerHTML = '';
