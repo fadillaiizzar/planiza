@@ -9,12 +9,27 @@
                 ☰
             </button>
 
+            @php
+                $user = auth()->user();
+                $rencanaSiswa = $user->siswa->rencana?->nama_rencana ?? null;
+            @endphp
+
             <!-- Navigation Links (desktop) -->
             <div id="navLinksDashboard" class="hidden md:flex space-x-6 font-medium">
                 <a href="{{ route('siswa.materi.index') }}" class="text-cool-gray hover:text-slate-navy transition">Materi</a>
-                <a href="{{ route('siswa.eksplorasi-profesi.index') }}" class="text-cool-gray hover:text-slate-navy transition">Eksplorasi</a>
-                <a href="#kenali-karier" class="text-cool-gray hover:text-slate-navy transition">Kenali Karir</a>
-                <a href="#bincang-karier" class="text-cool-gray hover:text-slate-navy transition">Bincang Karir</a>
+                <a href="{{ $rencanaSiswa === 'Kerja'
+                    ? route('siswa.eksplorasi-profesi.index')
+                    : route('siswa.eksplorasi-jurusan.index') }}"
+                    class="text-cool-gray hover:text-slate-navy transition">
+                    Eksplorasi
+                </a>
+                <a href="{{ $rencanaSiswa === 'Kerja'
+                    ? route('siswa.kenali-profesi.index')
+                    : route('siswa.kenali-jurusan.index') }}"
+                    class="text-cool-gray hover:text-slate-navy transition">
+                    Kenali Karir
+                </a>
+                <a href="#" class="text-cool-gray hover:text-slate-navy transition">Bincang Karir</a>
             </div>
         </div>
 
