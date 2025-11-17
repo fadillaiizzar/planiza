@@ -73,8 +73,18 @@
     <!-- Mobile Menu Dropdown -->
     <div id="mobileMenuDashboard" class="md:hidden hidden px-6 pb-4">
         <a href="{{ route('siswa.materi.index') }}" class="block py-2 text-cool-gray hover:text-slate-navy">Materi</a>
-        <a href="{{ route('siswa.eksplorasi-profesi.index') }}" class="block py-2 text-cool-gray hover:text-slate-navy">Eksplorasi</a>
-        <a href="#kenali-karier" class="block py-2 text-cool-gray hover:text-slate-navy">Kenali Karir</a>
-        <a href="#bincang-karier" class="block py-2 text-cool-gray hover:text-slate-navy">Bincang Karir</a>
+        <a href="{{ $rencanaSiswa === 'Kerja'
+            ? route('siswa.eksplorasi-profesi.index')
+            : route('siswa.eksplorasi-jurusan.index') }}"
+            class="block py-2 text-cool-gray hover:text-slate-navy">
+            Eksplorasi
+        </a>
+        <a href="{{ $rencanaSiswa === 'Kerja'
+            ? route('siswa.kenali-profesi.index')
+            : route('siswa.kenali-jurusan.index') }}"
+            class="block py-2 text-cool-gray hover:text-slate-navy">
+            Kenali Karir
+        </a>
+        <a href="#" class="block py-2 text-cool-gray hover:text-slate-navy">Bincang Karir</a>
     </div>
 </nav>
