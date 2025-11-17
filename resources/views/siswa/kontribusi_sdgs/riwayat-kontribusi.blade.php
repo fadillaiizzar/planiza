@@ -54,12 +54,12 @@
                             <div class="flex items-center gap-3 text-xs text-cool-gray flex-wrap">
                                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-navy/5 text-slate-navy font-medium rounded-full border border-border-gray/30">
                                     <i class="fas fa-check-circle text-[9px]"></i>
-                                    {{ $item->kategori->nama_kategori ?? '-' }}
+                                    {{ $item->kategoriSdgs->nama_kategori ?? '-' }}
                                 </span>
 
                                 <span class="flex items-center gap-1.5">
                                     <i class="fas fa-calendar-alt"></i>
-                                    {{ \Carbon\Carbon::parse($item->tanggal_pelaksanaan)->format('d M Y') }}
+                                    {{ $item->created_at->format('d M Y') }}
                                 </span>
 
                                 <span class="flex items-center gap-1.5">
