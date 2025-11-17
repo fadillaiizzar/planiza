@@ -438,10 +438,14 @@ function openDetailKontribusi(id) {
     fetch(`/siswa/kontribusi-sdgs/${id}/detail`)
         .then(res => res.json())
         .then(data => {
-            document.getElementById('detailTanggal').innerText = new Date(data.created_at).toLocaleDateString();
+            document.getElementById('detailTanggal').innerText = new Date(data.created_at).toLocaleDateString('id-ID', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
             document.getElementById('detailKategori').innerText = data.kategori_sdgs.nama_kategori;
             document.getElementById('detailJudul').innerText = data.judul_kegiatan;
-            document.getElementById('detailTanggalPelaksanaan').innerText = new Date(data.created_at).toLocaleDateString('id-ID', {
+            document.getElementById('detailTanggalPelaksanaan').innerText = new Date(data.tanggal_pelaksanaan).toLocaleDateString('id-ID', {
                 day: 'numeric',
                 month: 'long',
                 year: 'numeric'
