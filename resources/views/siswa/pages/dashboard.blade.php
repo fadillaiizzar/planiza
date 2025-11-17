@@ -77,12 +77,18 @@
             <h2 class="text-2xl md:text-3xl font-bold text-slate-navy mb-12 text-center">Statistik Siswa</h2>
 
             @php
+                $kenaliProfesi = $user->kenaliProfesis()->distinct('attempt')->count('attempt');
+                $kenaliJurusan = $user->kenaliJurusans()->distinct('attempt')->count('attempt');
+                $totalKenaliKarir = $kenaliProfesi + $kenaliJurusan;
+
+                $totalKontribusi = $user->kontribusiSdgs()->count() ?? 0;
+
                 $stats = [
                     [
                         'icon' => 'fas fa-chart-bar',
                         'colorIcon' => 'text-blue-600',
                         'bgColor' => 'bg-blue-100',
-                        'number' => 0,
+                        'number' => $totalKenaliKarir,
                         'title' => 'Kenali Karir',
                         'desc' => 'Tes yang telah diselesaikan',
                     ],
@@ -90,7 +96,7 @@
                         'icon' => 'fas fa-tools',
                         'colorIcon' => 'text-green-600',
                         'bgColor' => 'bg-green-100',
-                        'number' => 0,
+                        'number' => $totalKontribusi,
                         'title' => 'Kontribusi SDGs',
                         'desc' => 'Kegiatan yang telah dikontribusikan',
                     ],
