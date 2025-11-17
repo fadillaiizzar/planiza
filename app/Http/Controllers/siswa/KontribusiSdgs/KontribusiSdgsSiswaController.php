@@ -64,4 +64,11 @@ class KontribusiSdgsSiswaController extends Controller
 
         return redirect()->route('siswa.kontribusi-sdgs.index')->with('success', 'Kontribusi SDGs berhasil disimpan!');
     }
+
+    public function show($id)
+    {
+        $data = KontribusiSdgs::with('kategoriSdgs')->findOrFail($id);
+
+        return response()->json($data);
+    }
 }

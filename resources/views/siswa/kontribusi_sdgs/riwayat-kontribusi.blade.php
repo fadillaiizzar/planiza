@@ -87,3 +87,5 @@
         </div>
     @endif
 </div>
+
+@include('siswa.kontribusi_sdgs.modal-detail-kontribusi')

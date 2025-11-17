@@ -429,3 +429,39 @@ tanggalInput.addEventListener('click', () => {
         tanggalInput.showPicker();
     }
 });
+
+/* ==========================================================
+   🟨 9. TOMBOL DETAIL RIWAYAT KONTRIBUSI
+   ========================================================== */
+
+function openDetailKontribusi(id) {
+    fetch(`/siswa/kontribusi-sdgs/${id}/detail`)
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('detailTanggal').innerText = new Date(data.created_at).toLocaleDateString();
+            document.getElementById('detailKategori').innerText = data.kategori_sdgs.nama_kategori;
+            document.getElementById('detailJudul').innerText = data.judul_kegiatan;
+            document.getElementById('detailTanggalPelaksanaan').innerText = new Date(data.created_at).toLocaleDateString('id-ID', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+            document.getElementById('detailRefleksi').innerText = data.deskripsi_refleksi;
+
+            const wrapper = document.getElementById('detailBukti');
+            wrapper.innerHTML = '';
+
+            JSON.parse(data.bukti_upload).forEach(path => {
+                wrapper.innerHTML += `
+                    <img src="/storage/${path}"
+                         class="w-28 h-28 object-cover rounded-xl border border-gray-200 shadow">
+                `;
+            });
+
+            document.getElementById('detailModal').classList.remove('hidden');
+        });
+}
+
+function closeDetailModal() {
+    document.getElementById('detailModal').classList.add('hidden');
+}

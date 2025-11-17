@@ -169,5 +169,7 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->na
     Route::prefix('kontribusi-sdgs')->name('kontribusi-sdgs.')->group(function () {
         Route::get('/', [KontribusiSdgsSiswaController::class, 'index'])->name('index');
         Route::post('/store', [KontribusiSdgsSiswaController::class, 'store'])->name('store');
+
+        Route::get('/{id}/detail', [KontribusiSdgsSiswaController::class, 'show'])->name('detail');
     });
 });
