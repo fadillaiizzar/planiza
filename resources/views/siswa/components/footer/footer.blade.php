@@ -1,4 +1,9 @@
 <footer class="bg-slate-navy text-off-white px-6 pt-10 pb-7 md:px-20">
+    @php
+        $user = auth()->user();
+        $rencanaSiswa = $user->siswa->rencana?->nama_rencana ?? null;
+    @endphp
+
     <div class="max-w-7xl mx-auto">
         <!-- Brand -->
         <div class="flex flex-col items-center text-center mb-10">
@@ -14,8 +19,8 @@
             <div>
                 <h4 class="text-xl font-bold mb-4">Informasi</h4>
                 <ul class="space-y-2 text-gray-400">
-                    <li><a href="#dashboard-siswa" class="hover:text-off-white transition-colors hover:translate-x-1 inline-block">Dashboard</a></li>
-                    <li><a href="#bincang-karier" class="hover:text-off-white transition-colors hover:translate-x-1 inline-block">Bincang Karier</a></li>
+                    <li><a href="{{ route('siswa.dashboard') }}" class="hover:text-off-white transition-colors hover:translate-x-1 inline-block">Dashboard</a></li>
+                    <li><a href="#" class="hover:text-off-white transition-colors hover:translate-x-1 inline-block">Bincang Karier</a></li>
                 </ul>
             </div>
 
@@ -23,10 +28,24 @@
             <div>
                 <h4 class="text-xl font-bold mb-4">Layanan</h4>
                 <ul class="space-y-2 text-gray-400">
-                    <li><a href="#materi" class="hover:text-white transition-colors hover:translate-x-1 inline-block">Materi</a></li>
-                    <li><a href="#eksplorasi" class="hover:text-white transition-colors hover:translate-x-1 inline-block">Eksplorasi</a></li>
-                    <li><a href="#kenali-karier" class="hover:text-white transition-colors hover:translate-x-1 inline-block">Kenali Karir</a></li>
-                    <li><a href="#kontribusi-sdgs" class="hover:text-white transition-colors hover:translate-x-1 inline-block">Kontribusi SDGs</a></li>
+                    <li><a href="{{ route('siswa.materi.index') }}" class="hover:text-white transition-colors hover:translate-x-1 inline-block">Materi</a></li>
+                    <li>
+                        <a href="{{ $rencanaSiswa === 'Kerja'
+                            ? route('siswa.eksplorasi-profesi.index')
+                            : route('siswa.eksplorasi-jurusan.index') }}"
+                            class="hover:text-white transition-colors hover:translate-x-1 inline-block">
+                            Eksplorasi
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ $rencanaSiswa === 'Kerja'
+                            ? route('siswa.kenali-profesi.index')
+                            : route('siswa.kenali-jurusan.index') }}"
+                            class="hover:text-white transition-colors hover:translate-x-1 inline-block">
+                            Kenali Karir
+                        </a>
+                    </li>
+                    <li><a href="{{ route('siswa.kontribusi-sdgs.index') }}" class="hover:text-white transition-colors hover:translate-x-1 inline-block">Kontribusi SDGs</a></li>
                 </ul>
             </div>
 
