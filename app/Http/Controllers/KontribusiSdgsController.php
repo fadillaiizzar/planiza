@@ -2,35 +2,56 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use App\Models\Kelas;
+use App\Models\KontribusiSdgs;
 
 class KontribusiSdgsController extends Controller
 {
     public function index()
     {
-        return view('admin.pages.kontribusi-sdgs', [
-            'user' => Auth::user(),
-            'userCount' => User::count(),
-            'materiCount' => 23,
-            'eksplorasiCount' => 12,
-            'aktivitas' => [
-                (object)[
-                    'created_at' => now()->subMinutes(5),
-                    'user' => (object)['name' => 'Dilla'],
-                    'aktivitas' => 'Menambahkan materi baru',
-                ],
-                (object)[
-                    'created_at' => now()->subHours(1),
-                    'user' => (object)['name' => 'Rina'],
-                    'aktivitas' => 'Mengedit eksplorasi',
-                ],
-                (object)[
-                    'created_at' => now()->subDays(1),
-                    'user' => (object)['name' => 'Budi'],
-                    'aktivitas' => 'Menghapus akun user',
-                ],
-            ],
+        // Ambil semua kontribusi lengkap dengan relasi user, siswa, kelas, kategori sdgs
+        $items = KontribusiSdgs::with([
+            'user.siswa.kelas',
+            'kategoriSdgs'
+        ])
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        // COUNT DATA
+        $totalKontribusi = $items->count();
+        $totalPending    = $items->where('status', 'pending')->count();
+        $totalApproved   = $items->where('status', 'approved')->count();
+        $totalRejected   = $items->where('status', 'rejected')->count();
+
+        // Filter kelas (opsional)
+        $filterOptions = Kelas::select('nama_kelas as label', 'nama_kelas as value')->get()->toArray();
+
+        return view('admin.sdgs.kontribusi_sdgs.kontribusi-sdgs', compact(
+            'items', 'filterOptions', 'totalKontribusi', 'totalPending', 'totalApproved', 'totalRejected'
+        ));
+    }
+
+    public function show($id)
+    {
+        $item = KontribusiSdgs::with([
+            'user.siswa.kelas',
+            'kategoriSdgs'
+        ])->findOrFail($id);
+
+        return view('admin.kontribusi_sdgs.detail', compact('item'));
+    }
+
+    public function updateStatus($id)
+    {
+        request()->validate([
+            'status' => 'required|in:pending,approved,rejected',
         ]);
+
+        $item = KontribusiSdgs::findOrFail($id);
+        $item->update([
+            'status' => request('status'),
+        ]);
+
+        return back()->with('success', 'Status berhasil diperbarui');
     }
 }
