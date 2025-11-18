@@ -128,6 +128,8 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
         Route::get('/', [SdgsController::class, 'index'])->name('index');
 
         Route::resource('kategori-sdgs', KategoriSdgsController::class);
+
+        Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('kontribusi-sdgs.index');
     });
 });
 
