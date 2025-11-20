@@ -129,7 +129,11 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
 
         Route::resource('kategori-sdgs', KategoriSdgsController::class);
 
-        Route::get('/kontribusi-sdgs', [KontribusiSdgsController::class, 'index'])->name('kontribusi-sdgs.index');
+        Route::prefix('kontribusi-sdgs')->name('kontribusi-sdgs.')->group(function () {
+            Route::get('/', [KontribusiSdgsController::class, 'index'])->name('index');
+            Route::get('/{id}', [KontribusiSdgsController::class, 'show'])->name('show');
+            Route::post('/{id}/update-status', [KontribusiSdgsController::class, 'updateStatus'])->name('update-status');
+        });
     });
 });
 

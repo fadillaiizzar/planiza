@@ -55,7 +55,7 @@
                             </td>
 
                             <td class="p-4">
-                                <a href=""
+                                <a href="{{ route('admin.sdgs.kontribusi-sdgs.show', $item->id) }}"
                                     class="inline-flex items-center px-4 py-2 text-sm rounded-full text-white bg-gradient-to-r from-blue-500 to-indigo-600">
                                     Detail
                                 </a>

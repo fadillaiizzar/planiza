@@ -38,7 +38,7 @@ class KontribusiSdgsController extends Controller
             'kategoriSdgs'
         ])->findOrFail($id);
 
-        return view('admin.kontribusi_sdgs.detail', compact('item'));
+        return view('admin.sdgs.kontribusi_sdgs.show', compact('item'));
     }
 
     public function updateStatus($id)
