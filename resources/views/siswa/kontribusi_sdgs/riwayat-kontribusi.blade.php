@@ -63,7 +63,14 @@
                                 </span>
 
                                 <span class="flex items-center gap-1.5">
-                                    <i class="fas fa-hourglass-half"></i>
+                                    @if($item->status === 'approved')
+                                        <i class="fas fa-check-circle text-green-600"></i>
+                                    @elseif($item->status === 'rejected')
+                                        <i class="fas fa-times-circle text-red-600"></i>
+                                    @else
+                                        <i class="fas fa-hourglass-half text-yellow-600"></i>
+                                    @endif
+
                                     {{ ucfirst($item->status) }}
                                 </span>
                             </div>
