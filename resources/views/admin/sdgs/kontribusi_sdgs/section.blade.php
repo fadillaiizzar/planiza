@@ -30,17 +30,17 @@
                             <td class="p-4">{{ $index + 1 }}</td>
 
                             <td class="p-4 font-medium text-slate-700">
-                                {{ $item->user?->name ?? '-' }}
+                                {{ Str::limit($item->user?->name ?? '-', 9) }}
                             </td>
 
                             <td class="p-4 text-slate-navy hidden md:table-cell">
                                 {{ $item->user?->siswa?->kelas?->nama_kelas ?? '-' }}
                             </td>
 
-                            <td class="p-4">{{ $item->judul_kegiatan }}</td>
+                            <td class="p-4">{{ Str::limit($item->judul_kegiatan, 16) }}</td>
 
                             <td class="p-4">
-                                {{ $item->kategoriSdgs?->nama_kategori ?? '-' }}
+                                {{ Str::limit($item->kategoriSdgs?->nama_kategori ?? '-', 24) }}
                             </td>
 
                             <td class="p-4">{{ $item->tanggal_pelaksanaan }}</td>
