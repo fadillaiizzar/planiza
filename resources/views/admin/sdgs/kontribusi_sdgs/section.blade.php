@@ -34,7 +34,7 @@
                             </td>
 
                             <td class="p-4 text-slate-navy hidden md:table-cell">
-                                {{ $item->user?->siswa?->kelas?->nama_kelas ?? '-' }}
+                                {{ trim(($item->user?->siswa?->kelas?->nama_kelas ?? '') . ' ' . ($item->user?->siswa?->jurusan?->nama_jurusan ?? '')) ?: '' }}
                             </td>
 
                             <td class="p-4">{{ Str::limit($item->judul_kegiatan, 16) }}</td>

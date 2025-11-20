@@ -54,7 +54,7 @@
                     <i class="fas fa-school mr-2 text-indigo-500"></i> Kelas
                 </label>
                 <div class="p-4 bg-white border rounded-2xl shadow-sm">
-                    {{ $item->user?->siswa?->kelas?->nama_kelas }}
+                    {{ trim(($item->user?->siswa?->kelas?->nama_kelas ?? '') . ' ' . ($item->user?->siswa?->jurusan?->nama_jurusan ?? '')) ?: '' }}
                 </div>
             </div>
 

@@ -24,7 +24,16 @@ class KontribusiSdgsController extends Controller
         $totalRejected   = $items->where('status', 'rejected')->count();
 
         // Filter kelas (opsional)
-        $filterOptions = Kelas::select('nama_kelas as label', 'nama_kelas as value')->get()->toArray();
+        $filterOptions = KontribusiSdgs::select('status')
+            ->distinct()
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'label' => ucfirst($item->status),
+                    'value' => $item->status,
+                ];
+            })
+            ->toArray();
 
         return view('admin.sdgs.kontribusi_sdgs.kontribusi-sdgs', compact(
             'items', 'filterOptions', 'totalKontribusi', 'totalPending', 'totalApproved', 'totalRejected'
