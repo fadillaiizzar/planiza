@@ -32,4 +32,5 @@
 
 @push('scripts')
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/admin/kontribusi_sdgs/kontribusi-sdgs.js') }}"></script>
 @endpush
