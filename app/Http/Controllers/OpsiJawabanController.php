@@ -19,13 +19,13 @@ class OpsiJawabanController extends Controller
         $opsiJawabanCount = OpsiJawaban::count();
         $allOpsiJawaban = OpsiJawaban::all();
 
-        $filterOptions = ProfesiKerja::select('nama_profesi_kerja')
+        $filterOptions = SoalTes::select('id', 'isi_pertanyaan')
             ->distinct()
-            ->orderBy('nama_profesi_kerja', 'asc')
+            ->orderBy('isi_pertanyaan', 'asc')
             ->get()
-            ->map(fn($profesi) => [
-                'label' => $profesi->nama_profesi_kerja,
-                'value' => $profesi->nama_profesi_kerja
+            ->map(fn($soal) => [
+                'label' => $soal->isi_pertanyaan,
+                'value' => $soal->isi_pertanyaan,
             ])
             ->toArray();
 

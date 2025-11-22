@@ -27,7 +27,9 @@
                 </thead>
                 <tbody>
                     @forelse ($items  as $i => $tes)
-                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors">
+                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors hasil-tes-row"
+                            data-tes="{{ strtolower($tes->nama_tes) }}"
+                        >
                             <td class="p-4">{{ $i + 1 }}</td>
                             <td class="p-4 font-medium text-slate-700">{{ Str::limit($tes->nama_tes, 65) }}</td>
                             <td class="p-4">{{ $tes->jumlah_user }}</td>
@@ -46,6 +48,8 @@
                             message="Belum ada hasil tes"
                         />
                     @endforelse
+
+                    <x-no-data-row />
                 </tbody>
             </table>
         </div>

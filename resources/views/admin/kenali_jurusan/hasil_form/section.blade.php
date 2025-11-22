@@ -54,6 +54,8 @@
                             message="Belum ada hasil form"
                         />
                     @endforelse
+
+                    <x-no-data-row />
                 </tbody>
             </table>
         </div>

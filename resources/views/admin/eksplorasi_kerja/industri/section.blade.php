@@ -8,7 +8,7 @@
         'stats' => $stats,
         'filterOptions' => $filterOptions ?? [],
         'searchPlaceholder' => $searchPlaceholder ?? 'Cari...',
-        'defaultFilterText' => 'Semua Alamat',
+        'defaultFilterText' => 'Semua Tes',
         'itemCount' => $itemCount ?? 0,
     ])
 

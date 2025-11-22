@@ -86,6 +86,8 @@
                             buttonText="+ Tambah Tes"
                         />
                     @endforelse
+
+                    <x-no-data-row />
                 </tbody>
             </table>
         </div>

@@ -29,8 +29,10 @@
                 <tbody>
                     @forelse ($items as $item)
                         <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors opsi-jawaban-row"
-                            data-soal="{{ strtolower($item->soalTes->isi_pertanyaan ?? '') }}"
+                            data-soal="{{ strtolower($item->soalTes->isi_pertanyaan) }}"
                             data-opsi="{{ strtolower($item->isi_opsi) }}"
+                            data-kategori="{{ strtolower($item->kategoriMinat->nama_kategori) }}"
+                            data-profesi="{{ strtolower($item->kategoriMinat->nama_profesi_kerja) }}"
                         >
                             <td class="p-4">{{ $item->id }}</td>
                             <td class="p-4 font-medium text-slate-700">
@@ -92,6 +94,8 @@
                             buttonText="+ Tambah Opsi Jawaban"
                         />
                     @endforelse
+
+                    <x-no-data-row />
                 </tbody>
             </table>
         </div>

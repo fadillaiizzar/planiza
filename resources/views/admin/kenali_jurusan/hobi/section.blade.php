@@ -69,6 +69,8 @@
                             buttonText="+ Tambah Hobi"
                         />
                     @endforelse
+
+                    <x-no-data-row />
                 </tbody>
             </table>
         </div>

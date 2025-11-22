@@ -73,6 +73,8 @@
                             buttonText="+ Tambah Kategori SDGs"
                         />
                     @endforelse
+
+                    <x-no-data-row />
                 </tbody>
             </table>
         </div>

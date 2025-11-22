@@ -72,8 +72,13 @@
                             </td>
                         </tr>
                     @empty
-                        <x-empty-state icon="fas fa-clipboard-list" message="Belum ada kontribusi SDGs" />
+                        <x-empty-state
+                            icon="fa-clipboard-list"
+                            message="Belum ada kontribusi SDGs"
+                        />
                     @endforelse
+
+                    <x-no-data-row />
                 </tbody>
             </table>
         </div>

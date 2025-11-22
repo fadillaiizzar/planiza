@@ -21,6 +21,7 @@
             'stats' => [
                 ['label' => 'Total Jurusan Kuliah', 'count' => $jurusanKuliahCount, 'icon' => 'fas fa-graduation-cap', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
             ],
+            'searchPlaceholder' => 'Cari berdasarkan nama jurusan kuliah',
             'itemCount' => $jurusanKuliahCount,
             'tableTitle' => 'Daftar Jurusan Kuliah',
             'tableHeaders' => ['ID', 'Nama Jurusan', 'Gambar', 'Deskripsi', 'Mata Kuliah', 'Prospek', 'Aksi'],

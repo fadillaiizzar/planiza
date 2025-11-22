@@ -29,8 +29,8 @@
                 <tbody>
                     @forelse ($items as $item)
                         <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors kategori-minat-row"
-                        data-nama="{{ strtolower($item->nama_kategori) }}"
-                        data-deskripsi="{{ strtolower($item->deskripsi) }}"
+                            data-nama="{{ strtolower($item->nama_kategori) }}"
+                            data-deskripsi="{{ strtolower($item->deskripsi) }}"
                         >
                             <td class="p-4 w-[5%]">{{ $item->id }}</td>
                             <td class="p-4 w-[40%] font-medium text-slate-700">{{ Str::limit($item->nama_kategori, 65) }}</td>
@@ -73,6 +73,8 @@
                             buttonText="+ Tambah Kategori"
                         />
                     @endforelse
+
+                    <x-no-data-row />
                 </tbody>
             </table>
         </div>

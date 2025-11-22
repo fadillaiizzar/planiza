@@ -153,7 +153,7 @@
         const resultCount = document.getElementById('resultCount');
 
         const rowClasses = [
-            'user-row', 'topik-row', 'materi-row', 'profesi-row', 'industri-row', 'industri-profesi-row', 'kategori-minat-row', 'profesi-kategori-row', 'tes-row', 'soal-tes-row', 'hasil-form-row', 'kategori-sdgs-row', 'kontribusi-sdgs-row'
+            'user-row', 'topik-row', 'materi-row', 'profesi-row', 'industri-row', 'industri-profesi-row', 'kategori-minat-row', 'profesi-kategori-row', 'tes-row', 'soal-tes-row', 'opsi-jawaban-row', 'hasil-tes-row', 'jurusan-kuliah-row', 'hasil-form-row', 'kategori-sdgs-row', 'kontribusi-sdgs-row'
         ];
 
         let rows = rowClasses.map(cls=> document.querySelectorAll(`.${cls}`))
@@ -224,10 +224,30 @@
                 };
             },
             'soal-tes-row': row => {
-                const { tes='', pertanyaan='', jenis='', max='' } = row.dataset;
+                const { tes='', jumlah='' } = row.dataset;
                 return {
-                    search: [tes, pertanyaan, jenis, max],
+                    search: [tes, jumlah],
                     filter: tes
+                };
+            },
+            'opsi-jawaban-row': row => {
+                const { soal='', opsi='', kategori='', profesi='' } = row.dataset;
+                return {
+                    search: [soal, opsi, kategori, profesi],
+                    filter: soal
+                };
+            },
+            'hasil-tes-row': row => {
+                const { tes='' } = row.dataset;
+                return {
+                    search: [tes],
+                    filter: tes
+                };
+            }
+            'jurusan-kuliah-row': row => {
+                const { jurusan='', deskripsi='', matkul='', prospek='' } = row.dataset;
+                return {
+                    search: [jurusan, deskripsi, matkul, prospek],
                 };
             },
             'hasil-form-row': row => {
@@ -238,13 +258,13 @@
                 };
             },
             'kategori-sdgs-row': row => {
-                const { nomor = '', nama = '', deskripsi = '' } = row.dataset;
+                const { nomor='', nama='', deskripsi='' } = row.dataset;
                 return {
                     search: [nomor, nama, deskripsi],
                 };
             },
             'kontribusi-sdgs-row': row => {
-                const { nama = '', kelas = '', jurusan = '', judul = '', kategori = '', tanggal = '', status = ''} = row.dataset;
+                const { nama='', kelas='', jurusan='', judul='', kategori='', tanggal='', status=''} = row.dataset;
                 return {
                     search: [nama, kelas, jurusan, judul, kategori, tanggal, status],
                 };

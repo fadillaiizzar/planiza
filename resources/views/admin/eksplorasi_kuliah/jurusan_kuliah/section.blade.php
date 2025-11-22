@@ -6,6 +6,7 @@
         'addButtonText' => $addButtonText,
         'userCount' => $userCount,
         'stats' => $stats,
+        'searchPlaceholder' => $searchPlaceholder ?? 'Cari...',
         'itemCount' => $itemCount ?? 0,
     ])
 
@@ -23,7 +24,12 @@
                 </thead>
                 <tbody>
                     @forelse ($items as $item)
-                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors">
+                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors jurusan-kuliah-row"
+                            data-jurusan='{{ strtolower($item->nama_jurusan_kuliah) }}'
+                            data-deskripsi='{{ strtolower($item->deskripsi) }}'
+                            data-matkul='{{ strtolower($item->info_matkul) }}'
+                            data-prospek='{{ strtolower($item->info_prospek) }}'
+                        >
                             <td class="p-4">{{ $item->id }}</td>
                             <td class="p-4">{{ Str::limit($item->nama_jurusan_kuliah, 20) }}</td>
                             <td class="p-4">
@@ -78,6 +84,8 @@
                             buttonText="+ Tambah Jurusan"
                         />
                     @endforelse
+
+                    <x-no-data-row />
                 </tbody>
             </table>
         </div>

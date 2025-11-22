@@ -28,7 +28,10 @@
                 </thead>
                 <tbody>
                     @forelse ($tesList as $index => $tes)
-                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors">
+                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition-colors soal-tes-row"
+                            data-tes="{{ strtolower($tes->nama_tes) }}"
+                            data-jumlah="{{ strtolower($tes->soal_tes_count) }}"
+                        >
                             <td class="p-4 w-[5%]">{{ $tesList->firstItem() + $index }}</td>
                             <td class="p-4 font-medium text-slate-700">{{ $tes->nama_tes }}</td>
                             <td class="p-4">{{ $tes->soal_tes_count }}</td>
@@ -48,6 +51,8 @@
                             buttonText="+ Tambah Tes"
                         />
                     @endforelse
+
+                    <x-no-data-row />
                 </tbody>
             </table>
         </div>
