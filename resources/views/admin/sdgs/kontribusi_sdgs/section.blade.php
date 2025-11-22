@@ -26,7 +26,15 @@
 
                 <tbody>
                     @forelse ($items as $index => $item)
-                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition">
+                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition kontribusi-sdgs-row"
+                            data-nama="{{ strtolower($item->user?->name) }}"
+                            data-kelas="{{ strtolower($item->user?->siswa?->kelas?->nama_kelas) }}"
+                            data-jurusan="{{ strtolower($item->user?->siswa?->jurusan?->nama_jurusan) }}"
+                            data-judul="{{ strtolower($item->judul_kegiatan) }}"
+                            data-kategori="{{ strtolower($item->kategoriSdgs?->nama_kategori) }}"
+                            data-tanggal="{{ strtolower($item->tanggal_pelaksanaan) }}"
+                            data-status="{{ strtolower($item->status) }}"
+                        >
                             <td class="p-4">{{ $index + 1 }}</td>
 
                             <td class="p-4 font-medium text-slate-700">
@@ -46,6 +54,13 @@
                             <td class="p-4">{{ $item->tanggal_pelaksanaan }}</td>
 
                             <td class="p-4 capitalize relative">
+                                <span class="px-3 py-1 rounded-full text-white
+                                    @if($item->status === 'approved') bg-green-500
+                                    @elseif($item->status === 'rejected') bg-red-500
+                                    @else bg-yellow-500 @endif">
+                                    {{ $item->status }}
+                                </span>
+
                                 @include('admin.sdgs.kontribusi_sdgs.status-dropdown')
                             </td>
 

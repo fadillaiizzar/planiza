@@ -153,7 +153,7 @@
         const resultCount = document.getElementById('resultCount');
 
         const rowClasses = [
-            'user-row', 'topik-row', 'materi-row', 'profesi-row', 'industri-row', 'industri-profesi-row', 'kategori-minat-row', 'profesi-kategori-row', 'tes-row', 'soal-tes-row', 'hasil-form-row', 'kategori-sdgs-row'
+            'user-row', 'topik-row', 'materi-row', 'profesi-row', 'industri-row', 'industri-profesi-row', 'kategori-minat-row', 'profesi-kategori-row', 'tes-row', 'soal-tes-row', 'hasil-form-row', 'kategori-sdgs-row', 'kontribusi-sdgs-row'
         ];
 
         let rows = rowClasses.map(cls=> document.querySelectorAll(`.${cls}`))
@@ -243,6 +243,12 @@
                     search: [nomor, nama, deskripsi],
                 };
             },
+            'kontribusi-sdgs-row': row => {
+                const { nama = '', kelas = '', jurusan = '', judul = '', kategori = '', tanggal = '', status = ''} = row.dataset;
+                return {
+                    search: [nama, kelas, jurusan, judul, kategori, tanggal, status],
+                };
+            }
         };
 
         function filterItems() {

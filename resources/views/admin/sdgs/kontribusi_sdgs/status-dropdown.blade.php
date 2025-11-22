@@ -1,10 +1,5 @@
 <!-- Badge Status -->
-<span class="px-3 py-1 rounded-full text-white
-    @if($item->status === 'approved') bg-green-500
-    @elseif($item->status === 'rejected') bg-red-500
-    @else bg-yellow-500 @endif">
-    {{ $item->status }}
-</span>
+
 
 <!-- Tombol Aksi -->
 <button onclick="toggleStatusDropdown({{ $item->id }})"
