@@ -8,7 +8,7 @@
     <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
 
         <x-admin.breadcrumb :links="[
-            ['href' => route('admin.dashboard'), 'icon' => 'fas fa-home', 'title' => 'Dashboard'],
+            ['href' => route('admin.sdgs.index'), 'icon' => 'fas fa-globe', 'title' => 'SDGs'],
             ['href' => '#', 'icon' => 'fas fa-globe-asia', 'title' => 'Kontribusi SDGs'],
         ]" />
 
@@ -21,7 +21,7 @@
                 ['label' => 'Rejected', 'count' => $totalRejected, 'icon' => 'fas fa-times-circle', 'bg' => 'from-red-500 to-red-600', 'textColor' => 'text-red-100'],
             ],
             'filterOptions' => $filterOptions,
-            'searchPlaceholder' => 'Cari nama siswa',
+            'searchPlaceholder' => 'Cari...',
             'items' => $items,
             'tableHeaders' => ['No', 'Nama', 'Kelas', 'Judul', 'SDGs', 'Tanggal', 'Status', 'Aksi'],
         ])

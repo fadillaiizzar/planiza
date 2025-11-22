@@ -54,13 +54,12 @@
                                 switch ($activity['type']) {
                                     case 'Kategori SDGs':
                                         // resource: admin.sdgs.kategori-sdgs.show
-                                        $detailUrl = route('admin.sdgs.kategori-sdgs.show', $activity['id']);
+                                        $detailUrl = route('admin.sdgs.kategori-sdgs.show', $activity['id'] ?? 0);
                                         break;
 
                                     case 'Kontribusi SDGs':
                                         // jika sudah ada resource, aktifkan:
-                                        // $detailUrl = route('admin.sdgs.kontribusi.show', $activity['id']);
-                                        $detailUrl = route('admin.sdgs.kategori-sdgs.show', $activity['id'] ?? 0); // fallback supaya tidak null
+                                        $detailUrl = route('admin.sdgs.kontribusi-sdgs.show', $activity['id'] ?? 0);
                                         break;
 
                                     case 'Hubungan SDGs':
