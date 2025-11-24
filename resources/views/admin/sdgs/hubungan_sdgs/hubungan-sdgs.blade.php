@@ -32,7 +32,7 @@
             'profesiPerKategori' => $profesiPerKategori,
             'jurusanPerKategori' => $jurusanPerKategori,
             'tableTitle' => 'Daftar Hubungan SDGs',
-            'tableHeaders' => ['ID', 'Kategori SDGs', 'Profesi', 'Jurusan', 'Aksi'],
+            'tableHeaders' => ['ID', 'Kategori SDGs', 'Profesi', 'Jurusan', 'Created At', 'Aksi'],
             'items' => $allRelations,
         ])
         @endcomponent

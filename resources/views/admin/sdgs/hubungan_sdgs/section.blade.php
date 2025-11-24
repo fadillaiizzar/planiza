@@ -50,19 +50,23 @@
                         >
                             <td class="p-4 w-[5%]">{{ $relasi->id }}</td>
 
-                           <td class="p-4 w-[25%]">
-                                {{ $relasi->kategoriSdgs->nomor_kategori }} - {{ Str::limit($relasi->kategoriSdgs->nama_kategori, 50) }}
+                            <td class="p-4 w-[20%]">
+                                {{ $relasi->kategoriSdgs->nomor_kategori }} - {{ Str::limit($relasi->kategoriSdgs->nama_kategori, 27) }}
                             </td>
 
-                            <td class="p-4 w-[30%]">
-                                {{ $relasi->profesiKerja ? Str::limit($relasi->profesiKerja->nama_profesi_kerja, 50) : '-' }}
+                            <td class="p-4 w-[23%]">
+                                {{ $relasi->profesiKerja ? Str::limit($relasi->profesiKerja->nama_profesi_kerja, 30) : '-' }}
                             </td>
 
-                            <td class="p-4 w-[30%]">
-                                {{ $relasi->jurusanKuliah ? Str::limit($relasi->jurusanKuliah->nama_jurusan_kuliah, 50) : '-' }}
+                            <td class="p-4 w-[23%]">
+                                {{ $relasi->jurusanKuliah ? Str::limit($relasi->jurusanKuliah->nama_jurusan_kuliah, 30) : '-' }}
                             </td>
 
-                            <td class="p-4 relative overflow-visible w-[10%]">
+                            <td class="p-4 w-[15%]">
+                                {{ $relasi->created_at ? $relasi->created_at->format('d M Y') : '-' }}
+                            </td>
+
+                            <td class="p-4 relative overflow-visible w-[5%]">
                                 <button onclick="toggleDropdown({{ $relasi->id }})"
                                     class="p-2 rounded-lg hover:bg-off-white">
                                     <i class="fas fa-cog text-cool-gray"></i>
