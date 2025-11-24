@@ -153,7 +153,7 @@
         const resultCount = document.getElementById('resultCount');
 
         const rowClasses = [
-            'user-row', 'topik-row', 'materi-row', 'profesi-row', 'industri-row', 'industri-profesi-row', 'kategori-minat-row', 'profesi-kategori-row', 'tes-row', 'soal-tes-row', 'opsi-jawaban-row', 'hasil-tes-row', 'jurusan-kuliah-row', 'hasil-form-row', 'kategori-sdgs-row', 'kontribusi-sdgs-row'
+            'user-row', 'topik-row', 'materi-row', 'industri-row', 'industri-profesi-row', 'kategori-minat-row', 'profesi-kategori-row', 'tes-row', 'soal-tes-row', 'opsi-jawaban-row', 'hasil-tes-row', 'hasil-form-row'
         ];
 
         let rows = rowClasses.map(cls=> document.querySelectorAll(`.${cls}`))
@@ -182,12 +182,12 @@
                     filter: topik
                 };
             },
-            'profesi-row': row => {
-                const { nama='', deskripsi='', skill='', jurusan='' } = row.dataset;
-                return {
-                    search: [nama, deskripsi, skill, jurusan],
-                };
-            },
+            // 'profesi-row': row => {
+            //     const { nama='', deskripsi='', skill='', jurusan='' } = row.dataset;
+            //     return {
+            //         search: [nama, deskripsi, skill, jurusan],
+            //     };
+            // },
             'industri-row': row => {
                 const { nama='', website='', alamat='' } = row.dataset;
                 return {
@@ -244,12 +244,12 @@
                     filter: tes
                 };
             }
-            'jurusan-kuliah-row': row => {
-                const { jurusan='', deskripsi='', matkul='', prospek='' } = row.dataset;
-                return {
-                    search: [jurusan, deskripsi, matkul, prospek],
-                };
-            },
+            // 'jurusan-kuliah-row': row => {
+            //     const { jurusan='', deskripsi='', matkul='', prospek='' } = row.dataset;
+            //     return {
+            //         search: [jurusan, deskripsi, matkul, prospek],
+            //     };
+            // },
             'hasil-form-row': row => {
                 const { name='', kelas='', jurusan='', count='', update='' } = row.dataset;
                 return {
@@ -257,18 +257,18 @@
                     filter: kelas
                 };
             },
-            'kategori-sdgs-row': row => {
-                const { nomor='', nama='', deskripsi='' } = row.dataset;
-                return {
-                    search: [nomor, nama, deskripsi],
-                };
-            },
-            'kontribusi-sdgs-row': row => {
-                const { nama='', kelas='', jurusan='', judul='', kategori='', tanggal='', status=''} = row.dataset;
-                return {
-                    search: [nama, kelas, jurusan, judul, kategori, tanggal, status],
-                };
-            }
+            // 'kategori-sdgs-row': row => {
+            //     const { nomor='', nama='', deskripsi='' } = row.dataset;
+            //     return {
+            //         search: [nomor, nama, deskripsi],
+            //     };
+            // },
+            // 'kontribusi-sdgs-row': row => {
+            //     const { nama='', kelas='', jurusan='', judul='', kategori='', tanggal='', status=''} = row.dataset;
+            //     return {
+            //         search: [nama, kelas, jurusan, judul, kategori, tanggal, status],
+            //     };
+            // }
         };
 
         function filterItems() {

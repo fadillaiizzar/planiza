@@ -26,15 +26,7 @@
 
                 <tbody>
                     @forelse ($items as $index => $item)
-                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition kontribusi-sdgs-row"
-                            data-nama="{{ strtolower($item->user?->name) }}"
-                            data-kelas="{{ strtolower($item->user?->siswa?->kelas?->nama_kelas) }}"
-                            data-jurusan="{{ strtolower($item->user?->siswa?->jurusan?->nama_jurusan) }}"
-                            data-judul="{{ strtolower($item->judul_kegiatan) }}"
-                            data-kategori="{{ strtolower($item->kategoriSdgs?->nama_kategori) }}"
-                            data-tanggal="{{ strtolower($item->tanggal_pelaksanaan) }}"
-                            data-status="{{ strtolower($item->status) }}"
-                        >
+                        <tr class="border-b border-border-gray hover:bg-off-white/50 transition">
                             <td class="p-4">{{ $index + 1 }}</td>
 
                             <td class="p-4 font-medium text-slate-700">
