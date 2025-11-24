@@ -1,12 +1,14 @@
 <?php
 
 use App\Models\Kampus;
+use App\Models\HubunganSdgs;
 use App\Models\KampusJurusan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TesController;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HobiController;
+use App\Http\Controllers\SdgsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SiswaController;
@@ -15,11 +17,14 @@ use App\Http\Controllers\MateriController;
 use App\Http\Controllers\SoalTesController;
 use App\Http\Controllers\HasilTesController;
 use App\Http\Controllers\IndustriController;
+use App\Http\Controllers\HasilFormController;
 use App\Http\Controllers\HobiJurusanController;
 use App\Http\Controllers\KenaliKerjaController;
 use App\Http\Controllers\MateriSiswaController;
 use App\Http\Controllers\OpsiJawabanController;
 use App\Http\Controllers\TopikMateriController;
+use App\Http\Controllers\HubunganSdgsController;
+use App\Http\Controllers\KategoriSdgsController;
 use App\Http\Controllers\KenaliKuliahController;
 use App\Http\Controllers\PembelajaranController;
 use App\Http\Controllers\ProfesiKerjaController;
@@ -31,9 +36,6 @@ use App\Http\Controllers\EksplorasiKerjaController;
 use App\Http\Controllers\IndustriProfesiController;
 use App\Http\Controllers\ProfesiKategoriController;
 use App\Http\Controllers\EksplorasiKuliahController;
-use App\Http\Controllers\HasilFormController;
-use App\Http\Controllers\KategoriSdgsController;
-use App\Http\Controllers\SdgsController;
 use App\Http\Controllers\Siswa\KerjakanTesController;
 use App\Http\Controllers\Siswa\JawabanSiswaController;
 use App\Http\Controllers\Siswa\KenaliProfesiSiswaController;
@@ -43,8 +45,8 @@ use App\Http\Controllers\Siswa\KenaliJurusan\MinatSiswaController;
 use App\Http\Controllers\Siswa\KenaliJurusan\KerjakanFormController;
 use App\Http\Controllers\Siswa\KenaliJurusan\KenaliJurusanSiswaController;
 use App\Http\Controllers\Siswa\KenaliJurusan\RekomendasiJurusanController;
-use App\Http\Controllers\Siswa\EksplorasiKuliah\EksplorasiKuliahSiswaController;
 use App\Http\Controllers\Siswa\KontribusiSdgs\KontribusiSdgsSiswaController;
+use App\Http\Controllers\Siswa\EksplorasiKuliah\EksplorasiKuliahSiswaController;
 
 Route::get('/', function () {
     return view('beranda');
@@ -134,6 +136,8 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
             Route::get('/{id}', [KontribusiSdgsController::class, 'show'])->name('show');
             Route::post('/{id}/update-status', [KontribusiSdgsController::class, 'updateStatus'])->name('update-status');
         });
+
+        Route::resource('hubungan-sdgs', HubunganSdgsController::class);
     });
 });
 
