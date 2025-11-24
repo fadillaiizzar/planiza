@@ -22,7 +22,6 @@
                     @php
                         $actions = [
                             ['route' => route('admin.sdgs.kategori-sdgs.index'), 'icon' => 'fas fa-layer-group', 'label' => 'Kategori SDGs'],
-                            // kalau nanti ada resource lain aktifkan baris berikut:
                             ['route' => route('admin.sdgs.kontribusi-sdgs.index'), 'icon' => 'fas fa-hands-helping', 'label' => 'Kontribusi SDGs'],
                             ['route' => route('admin.sdgs.hubungan-sdgs.index'), 'icon' => 'fas fa-link', 'label' => 'Hubungan SDGs'],
                         ];
@@ -53,19 +52,15 @@
                                 // mapping ke route berdasarkan type (sesuaikan nama route bila beda)
                                 switch ($activity['type']) {
                                     case 'Kategori SDGs':
-                                        // resource: admin.sdgs.kategori-sdgs.show
                                         $detailUrl = route('admin.sdgs.kategori-sdgs.show', $activity['id'] ?? 0);
                                         break;
 
                                     case 'Kontribusi SDGs':
-                                        // jika sudah ada resource, aktifkan:
                                         $detailUrl = route('admin.sdgs.kontribusi-sdgs.show', $activity['id'] ?? 0);
                                         break;
 
                                     case 'Hubungan SDGs':
-                                        // jika sudah ada resource, aktifkan:
-                                        // $detailUrl = route('admin.sdgs.hubungan.show', $activity['id']);
-                                        $detailUrl = route('admin.sdgs.kategori-sdgs.show', $activity['id'] ?? 0); // fallback
+                                        $detailUrl = route('admin.sdgs.hubungan-sdgs.show', $activity['id'] ?? 0);
                                         break;
 
                                     // contoh lain: jika aktivitas berasal dari submission/attempt siswa, bisa diarahkan beda
