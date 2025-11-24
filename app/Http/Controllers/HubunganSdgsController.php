@@ -35,9 +35,15 @@ class HubunganSdgsController extends Controller
         $profesiPerKategori = $allRelations
             ->groupBy(fn($r) => $r->kategoriSdgs->nomor_kategori . ' - ' . $r->kategoriSdgs->nama_kategori)
             ->map(function ($group) {
+                $profesi = $group
+                    ->pluck('profesiKerja.nama_profesi_kerja')
+                    ->filter()
+                    ->unique()
+                    ->values();
+
                 return [
-                    'count' => $group->pluck('profesiKerja.nama_profesi_kerja')->unique()->count(),
-                    'names' => $group->pluck('profesiKerja.nama_profesi_kerja')->unique()->values()
+                    'count' => $profesi->count(),
+                    'names' => $profesi
                 ];
             });
 
@@ -45,10 +51,16 @@ class HubunganSdgsController extends Controller
         $jurusanPerKategori = $allRelations
             ->groupBy(fn($r) => $r->kategoriSdgs->nomor_kategori . ' - ' . $r->kategoriSdgs->nama_kategori)
             ->map(function ($group) {
-                return [
-                    'count' => $group->pluck('jurusanKuliah.nama_jurusan_kuliah')->unique()->count(),
-                    'names' => $group->pluck('jurusanKuliah.nama_jurusan_kuliah')->unique()->values()
-                ];
+                $jurusan = $group
+                    ->pluck('jurusanKuliah.nama_jurusan_kuliah')
+                    ->filter()
+                    ->unique()
+                    ->values();
+
+            return [
+                'count' => $jurusan->count(),
+                'names' => $jurusan
+            ];
             });
 
         // Ambil semua kategori, profesi, jurusan
