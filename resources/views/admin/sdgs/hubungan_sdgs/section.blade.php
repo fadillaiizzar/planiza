@@ -123,66 +123,9 @@
     </section>
 </div>
 
-<!-- Modal Delete -->
-<div id="deleteRelasiModal"
-    class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-sm p-4">
-
-    <div class="bg-white rounded-2xl p-8 w-full max-w-lg shadow-2xl border border-[#CBD5E1] relative overflow-hidden">
-
-        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-red-600"></div>
-
-        <div class="text-center">
-            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                </svg>
-            </div>
-
-            <h3 class="text-xl font-bold text-[#1E293B] mb-2">Hapus Relasi SDGs</h3>
-
-            <p class="text-[#64748B] mb-6 leading-relaxed text-sm sm:text-base">
-                Yakin ingin menghapus relasi:
-                <br>
-                <span id="deleteKategori"></span>
-                ↔
-                <span id="deleteProfesi"></span>
-                ↔
-                <span id="deleteJurusan"></span>
-                <br>
-                <span class="text-red-500 text-sm block mt-2">Tindakan ini tidak dapat dibatalkan.</span>
-            </p>
-
-            <form id="deleteRelasiForm" method="POST" class="flex justify-center gap-5">
-                @csrf
-                @method('DELETE')
-
-                <button type="button" onclick="closeDeleteRelasiModal()"
-                    class="hover:underline text-gray-500">Batal</button>
-
-                <button type="submit"
-                    class="px-6 py-2 rounded-full bg-gradient-to-r from-red-500 to-red-600 text-white shadow-md">
-                    Hapus
-                </button>
-            </form>
-
-        </div>
-    </div>
-</div>
+@include('admin.sdgs.hubungan_sdgs.delete')
 
 <script>
-    function showDeleteRelasiModal(id, kategori, profesi, jurusan, action) {
-        document.getElementById('deleteRelasiModal').classList.remove('hidden');
-        document.getElementById('deleteKategori').innerText = kategori;
-        document.getElementById('deleteProfesi').innerText = profesi;
-        document.getElementById('deleteJurusan').innerText = jurusan;
-        document.getElementById('deleteRelasiForm').action = action;
-    }
-
-    function closeDeleteRelasiModal() {
-        document.getElementById('deleteRelasiModal').classList.add('hidden');
-    }
-
     function showEdit(id) {
         fetch(`/admin/sdgs/hubungan-sdgs/${id}/edit`)
             .then(res => res.text())
