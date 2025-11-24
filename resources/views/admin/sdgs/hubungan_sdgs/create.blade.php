@@ -88,7 +88,7 @@
                     </div>
                     @endforeach
                 </div>
-                <p class="text-xs text-slate-500 mt-1">* Bisa pilih lebih dari satu dengan klik biasa</p>
+                <p class="text-xs text-slate-500 mt-1">* Bisa pilih lebih dari satu</p>
             </div>
 
             <!-- Action Buttons -->
