@@ -48,18 +48,11 @@ class EksplorasiKuliahController extends Controller
             ->sortByDesc('created_at')
             ->take(10);
 
-        $jurusanKuliahCount = JurusanKuliah::count();
-        $kampusCount = Kampus::count();
-        $kampusJurusanCount = KampusJurusan::count();
-
         $user = Auth::user();
         $userCount = User::count();
 
         return view('admin.pages.eksplorasi-kuliah', [
             'activities' => $activities,
-            'jurusanKuliahCount' => $jurusanKuliahCount,
-            'kampusCount' => $kampusCount,
-            'kampusJurusanCount' => $kampusJurusanCount,
             'user' => $user,
             'userCount' => $userCount,
         ]);

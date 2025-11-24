@@ -37,16 +37,11 @@ class PembelajaranController extends Controller
             ->sortByDesc('created_at')
             ->take(10);
 
-        $topikMateriCount = TopikMateri::count();
-        $materiCount = Materi::count();
-
         $user = Auth::user();
         $userCount = User::count();
 
         return view('admin.pages.pembelajaran', [
             'activities' => $activities,
-            'topikMateriCount' => $topikMateriCount,
-            'materiCount' => $materiCount,
             'user' => $user,
             'userCount' => $userCount,
         ]);

@@ -12,11 +12,6 @@
             @include('admin.components.header.header', [
                 'pageTitle' => 'Eksplorasi Jurusan Management',
                 'userCount' => $userCount,
-                'stats' => [
-                    ['label' => 'Total Jurusan Kuliah', 'count' => $jurusanKuliahCount, 'icon' => 'fas fa-graduation-cap', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
-                    ['label' => 'Total Kampus', 'count' => $kampusCount, 'icon' => 'fas fa-university', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
-                    ['label' => 'Total Kampus Jurusan', 'count' => $kampusJurusanCount, 'icon' => 'fas fa-project-diagram', 'bg' => 'from-purple-500 to-purple-600', 'textColor' => 'text-purple-100'],
-                ],
             ])
 
             <!-- Aksi Cepat -->

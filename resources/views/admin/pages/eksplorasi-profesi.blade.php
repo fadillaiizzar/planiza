@@ -12,11 +12,6 @@
             @include('admin.components.header.header', [
                 'pageTitle' => 'Eksplorasi Profesi Management',
                 'userCount' => $userCount,
-                'stats' => [
-                    ['label' => 'Total Profesi', 'count' => $profesiCount, 'icon' => 'fas fa-briefcase', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
-                    ['label' => 'Total Industri', 'count' => $industriCount, 'icon' => 'fas fa-industry', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
-                    ['label' => 'Total Industri Profesi', 'count' => $industriProfesiCount, 'icon' => 'fas fa-project-diagram', 'bg' => 'from-purple-500 to-purple-600', 'textColor' => 'text-purple-100'],
-                ],
             ])
 
             <!-- Aksi Cepat -->

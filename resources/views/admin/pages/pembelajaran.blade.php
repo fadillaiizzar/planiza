@@ -11,10 +11,6 @@
             @include('admin.components.header.header', [
                 'pageTitle' => 'Pembelajaran Management',
                 'userCount' => $userCount,
-                'stats' => [
-                    ['label' => 'Total Topik Materi', 'count' => $topikMateriCount, 'icon' => 'fas fa-layer-group', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
-                    ['label' => 'Total Materi', 'count' => $materiCount, 'icon' => 'fas fa-book-open', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
-                ],
             ])
 
             <!-- Aksi Cepat -->

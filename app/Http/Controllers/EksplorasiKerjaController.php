@@ -48,18 +48,11 @@ class EksplorasiKerjaController extends Controller
             ->sortByDesc('created_at')
             ->take(10);
 
-        $profesiCount = ProfesiKerja::count();
-        $industriCount = Industri::count();
-        $industriProfesiCount = IndustriProfesi::count();
-
         $user = Auth::user();
         $userCount = User::count();
 
         return view('admin.pages.eksplorasi-profesi', [
             'activities' => $activities,
-            'profesiCount' => $profesiCount,
-            'industriCount' => $industriCount,
-            'industriProfesiCount' => $industriProfesiCount,
             'user' => $user,
             'userCount' => $userCount,
         ]);
