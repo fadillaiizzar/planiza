@@ -29,7 +29,7 @@
                         <tr class="border-b border-border-gray hover:bg-off-white/50 transition">
                             <td class="p-4">{{ $index + 1 }}</td>
 
-                            <td class="p-4 font-medium text-slate-700">
+                            <td class="p-4">
                                 {{ Str::limit($item->user?->name ?? '-', 9) }}
                             </td>
 
@@ -40,7 +40,7 @@
                             <td class="p-4">{{ Str::limit($item->judul_kegiatan, 16) }}</td>
 
                             <td class="p-4">
-                                {{ Str::limit($item->kategoriSdgs?->nama_kategori ?? '-', 24) }}
+                                {{ Str::limit(($item->kategoriSdgs?->nomor_kategori ?? '') . ' - ' . ($item->kategoriSdgs?->nama_kategori ?? '-'), 24) }}
                             </td>
 
                             <td class="p-4">{{ $item->tanggal_pelaksanaan }}</td>
