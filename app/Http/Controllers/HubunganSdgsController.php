@@ -68,15 +68,14 @@ class HubunganSdgsController extends Controller
         $profesis = ProfesiKerja::all();
         $jurusans = JurusanKuliah::all();
 
-        // Filter dropdown (berdasarkan profesi — sama seperti industri-profesi)
-        $filterOptions = HubunganSdgs::with('profesiKerja')
+        // Filter dropdown
+        $filterOptions = KategoriSdgs::query()
+            ->orderBy('nomor_kategori')
             ->get()
-            ->map(fn($relasi) => [
-                'label' => $relasi->profesiKerja->nama_profesi_kerja ?? '-',
-                'value' => strtolower($relasi->profesiKerja->nama_profesi_kerja ?? '-')
+            ->map(fn($kategori) => [
+                'label' => $kategori->nomor_kategori . ' - ' . $kategori->nama_kategori,
+                'value' => strtolower($kategori->nama_kategori),
             ])
-            ->unique('value')
-            ->sortBy('label')
             ->values()
             ->toArray();
 
