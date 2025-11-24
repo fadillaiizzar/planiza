@@ -24,7 +24,7 @@
                             ['route' => route('admin.sdgs.kategori-sdgs.index'), 'icon' => 'fas fa-layer-group', 'label' => 'Kategori SDGs'],
                             // kalau nanti ada resource lain aktifkan baris berikut:
                             ['route' => route('admin.sdgs.kontribusi-sdgs.index'), 'icon' => 'fas fa-hands-helping', 'label' => 'Kontribusi SDGs'],
-                            // ['route' => route('admin.sdgs.hubungan.index'), 'icon' => 'fas fa-link', 'label' => 'Hubungan SDGs'],
+                            ['route' => route('admin.sdgs.hubungan-sdgs.index'), 'icon' => 'fas fa-link', 'label' => 'Hubungan SDGs'],
                         ];
                     @endphp
 
