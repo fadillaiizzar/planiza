@@ -1,13 +1,3 @@
-<!-- Badge Status -->
-
-
-<!-- Tombol Aksi -->
-<button onclick="toggleStatusDropdown({{ $item->id }})"
-    class="ml-2 p-2 rounded-lg hover:bg-slate-100 focus:outline-none transition-all">
-    <i class="fas fa-cog text-slate-600"></i>
-</button>
-
-<!-- Dropdown Status -->
 <div id="status-dropdown-{{ $item->id }}"
     class="hidden absolute left-0 mt-2 bg-white border border-slate-200 rounded-lg shadow-xl z-20 min-w-[160px]">
 

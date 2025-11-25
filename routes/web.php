@@ -135,6 +135,7 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
             Route::get('/', [KontribusiSdgsController::class, 'index'])->name('index');
             Route::get('/{id}', [KontribusiSdgsController::class, 'show'])->name('show');
             Route::post('/{id}/update-status', [KontribusiSdgsController::class, 'updateStatus'])->name('update-status');
+            Route::delete('/{id}', [KontribusiSdgsController::class, 'destroy'])->name('destroy');
         });
 
         Route::resource('hubungan-sdgs', HubunganSdgsController::class);

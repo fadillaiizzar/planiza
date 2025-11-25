@@ -63,4 +63,12 @@ class KontribusiSdgsController extends Controller
 
         return back()->with('success', 'Status berhasil diperbarui');
     }
+
+    public function destroy($id)
+    {
+        $item = KontribusiSdgs::findOrFail($id);
+        $item->delete();
+
+        return back()->with('success', 'Kontribusi SDGs berhasil dihapus');
+    }
 }

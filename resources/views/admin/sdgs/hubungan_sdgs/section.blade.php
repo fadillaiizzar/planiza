@@ -104,7 +104,6 @@
                             </td>
                         </tr>
                     @empty
-
                         <x-empty-state
                             colspan="5"
                             icon="fas fa-project-diagram"
@@ -113,7 +112,6 @@
                             buttonAction="openModal()"
                             buttonText="+ Tambah Relasi"
                         />
-
                     @endforelse
 
                     <x-no-data-row />

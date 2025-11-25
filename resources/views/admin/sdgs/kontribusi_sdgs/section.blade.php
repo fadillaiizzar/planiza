@@ -46,21 +46,42 @@
                             <td class="p-4">{{ $item->tanggal_pelaksanaan }}</td>
 
                             <td class="p-4 capitalize relative">
-                                <span class="px-3 py-1 rounded-full text-white
-                                    @if($item->status === 'approved') bg-green-500
-                                    @elseif($item->status === 'rejected') bg-red-500
-                                    @else bg-yellow-500 @endif">
-                                    {{ $item->status }}
-                                </span>
+                                <button onclick="toggleStatusDropdown({{ $item->id }})" class="p-2 rounded-lg hover:bg-slate-100 focus:outline-none transition-all">
+                                    <span class="px-3 py-1 rounded-full text-white
+                                        @if($item->status === 'approved') bg-green-500
+                                        @elseif($item->status === 'rejected') bg-red-500
+                                        @else bg-yellow-500 @endif">
+                                        {{ $item->status }}
+                                    </span>
+                                </button>
 
                                 @include('admin.sdgs.kontribusi_sdgs.status-dropdown')
                             </td>
 
-                            <td class="p-4">
-                                <a href="{{ route('admin.sdgs.kontribusi-sdgs.show', $item->id) }}"
-                                    class="inline-flex items-center px-4 py-2 text-sm rounded-full text-white bg-gradient-to-r from-blue-500 to-indigo-600">
-                                    Detail
-                                </a>
+                            <td class="p-4 relative overflow-visible">
+                                <button onclick="toggleDropdown({{ $item->id }})"
+                                    class="p-2 rounded-lg hover:bg-off-white focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all">
+                                    <i class="fas fa-cog text-cool-gray"></i>
+                                </button>
+
+                                <div id="dropdown-{{ $item->id }}" class="hidden absolute right-12 mt-2 bg-white border border-border-gray rounded-lg shadow-xl z-20 min-w-[180px] overflow-visible">
+                                    <a href="{{ route('admin.sdgs.kontribusi-sdgs.show', $item->id) }}"
+                                        class="px-5 py-3 hover:bg-yellow-50 flex items-center gap-3 text-blue-600 transition-colors text-base">
+                                        <i class="fas fa-eye w-5 h-5"></i>
+                                        <span>Detail</span>
+                                    </a>
+                                    <div class="border-t border-border-gray"></div>
+                                    <form action="{{ route('admin.sdgs.kontribusi-sdgs.destroy', $item->id) }}" method="POST" class="w-full">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button"
+                                            onclick="showDeleteModal({{ $item->id }}, '{{ addslashes($item->judul_kegiatan) }}', '{{ route('admin.sdgs.kontribusi-sdgs.destroy', $item->id) }}')"
+                                            class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base">
+                                            <i class="fas fa-trash-alt w-5 h-5"></i>
+                                            <span>Hapus</span>
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty
@@ -76,3 +97,19 @@
         </div>
     </section>
 </div>
+
+@include('admin.sdgs.kontribusi_sdgs.delete')
+
+<script>
+    function showDeleteModal(id, name, action) {
+        document.getElementById('deleteKontribusiModal').classList.remove('hidden');
+        document.getElementById('deleteNamaKontribusi').innerText = name;
+        document.getElementById('deleteKontribusiForm').action = action;
+        const form = document.getElementById('deleteForm');
+        form.action = action;
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('deleteKontribusiModal').classList.add('hidden');
+    }
+</script>
