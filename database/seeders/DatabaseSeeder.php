@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             HobiSeeder::class,
             HobiJurusanSeeder::class,
             KategoriSdgsSeeder::class,
+            HubunganSdgsSeeder::class,
         ]);
     }
 }
