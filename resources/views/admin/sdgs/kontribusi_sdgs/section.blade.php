@@ -86,7 +86,7 @@
                         </tr>
                     @empty
                         <x-empty-state
-                            icon="fa-clipboard-list"
+                            icon="fas fa-hands-helping"
                             message="Belum ada kontribusi SDGs"
                         />
                     @endforelse
