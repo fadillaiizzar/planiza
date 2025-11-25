@@ -21,9 +21,9 @@
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-5">
                     @php
                         $actions = [
-                            ['route' => route('admin.sdgs.kategori-sdgs.index'), 'icon' => 'fas fa-layer-group', 'label' => 'Kategori SDGs'],
+                            ['route' => route('admin.sdgs.kategori-sdgs.index'), 'icon' => 'fas fa-folder-open', 'label' => 'Kategori SDGs'],
                             ['route' => route('admin.sdgs.kontribusi-sdgs.index'), 'icon' => 'fas fa-hands-helping', 'label' => 'Kontribusi SDGs'],
-                            ['route' => route('admin.sdgs.hubungan-sdgs.index'), 'icon' => 'fas fa-link', 'label' => 'Hubungan SDGs'],
+                            ['route' => route('admin.sdgs.hubungan-sdgs.index'), 'icon' => 'fas fa-project-diagram', 'label' => 'Hubungan SDGs'],
                         ];
                     @endphp
 

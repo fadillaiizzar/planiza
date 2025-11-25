@@ -17,7 +17,7 @@
             'addButtonText' => 'Tambah Kategori SDGs',
             'userCount' => $userCount,
             'stats' => [
-                ['label' => 'Total Kategori SDGs', 'count' => $kategoriSdgsCount, 'icon' => 'fas fa-globe', 'bg' => 'from-green-500 to-emerald-600', 'textColor' => 'text-green-100'],
+                ['label' => 'Total Kategori SDGs', 'count' => $kategoriSdgsCount, 'icon' => 'fas fa-folder-open', 'bg' => 'from-green-500 to-emerald-600', 'textColor' => 'text-green-100'],
             ],
             'filterOptions' => $filterOptions,
             'searchPlaceholder' => 'Cari berdasarkan nama kategori SDGs',

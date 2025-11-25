@@ -19,7 +19,7 @@
             'addButtonText' => 'Tambah Relasi',
             'stats' => [
                 ['label' => 'Total Relasi', 'count' => $relasiCount ?? 0, 'icon' => 'fas fa-project-diagram', 'bg' => 'from-purple-500 to-purple-600', 'textColor' => 'text-purple-100'],
-                ['label' => 'Total Kategori', 'count' => $kategoriCount ?? 0, 'icon' => 'fas fa-list', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
+                ['label' => 'Total Kategori', 'count' => $kategoriCount ?? 0, 'icon' => 'fas fa-folder-open', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
                 ['label' => 'Total Profesi', 'count' => $profesiCount ?? 0, 'icon' => 'fas fa-briefcase', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
                 ['label' => 'Total Jurusan', 'count' => $jurusanCount ?? 0, 'icon' => 'fas fa-user-graduate', 'bg' => 'from-orange-500 to-orange-600', 'textColor' => 'text-orange-100'],
             ],

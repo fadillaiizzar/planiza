@@ -7,7 +7,7 @@
 
     <main class="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
         <x-admin.breadcrumb :links="[
-            ['href' => route('admin.dashboard'), 'icon' => 'fas fa-home', 'title' => 'Dashboard'],
+            ['href' => route('admin.kenali-jurusan.index'), 'icon' => 'fas fa-user-graduate', 'title' => 'Kenali Jurusan'],
             ['href' => '#', 'icon' => 'fas fa-file-alt', 'title' => 'Hasil Form'],
         ]" />
 

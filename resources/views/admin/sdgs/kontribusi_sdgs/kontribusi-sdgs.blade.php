@@ -9,13 +9,13 @@
 
         <x-admin.breadcrumb :links="[
             ['href' => route('admin.sdgs.index'), 'icon' => 'fas fa-leaf', 'title' => 'SDGs'],
-            ['href' => '#', 'icon' => 'fas fa-globe-asia', 'title' => 'Kontribusi SDGs'],
+            ['href' => '#', 'icon' => 'fas fa-hands-helping', 'title' => 'Kontribusi SDGs'],
         ]" />
 
         @component('admin.sdgs.kontribusi_sdgs.section', [
             'pageTitle' => 'Manajemen Kontribusi SDGs',
             'stats' => [
-                ['label' => 'Total Kontribusi', 'count' => $totalKontribusi, 'icon' => 'fas fa-list', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
+                ['label' => 'Total Kontribusi', 'count' => $totalKontribusi, 'icon' => 'fas fa-hands-helping', 'bg' => 'from-blue-500 to-blue-600', 'textColor' => 'text-blue-100'],
                 ['label' => 'Pending', 'count' => $totalPending, 'icon' => 'fas fa-clock', 'bg' => 'from-yellow-500 to-yellow-600', 'textColor' => 'text-yellow-100'],
                 ['label' => 'Approved', 'count' => $totalApproved, 'icon' => 'fas fa-check-circle', 'bg' => 'from-green-500 to-green-600', 'textColor' => 'text-green-100'],
                 ['label' => 'Rejected', 'count' => $totalRejected, 'icon' => 'fas fa-times-circle', 'bg' => 'from-red-500 to-red-600', 'textColor' => 'text-red-100'],
