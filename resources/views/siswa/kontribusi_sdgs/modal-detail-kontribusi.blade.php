@@ -17,22 +17,10 @@
         <!-- Body -->
         <div class="px-8 py-6 space-y-6 max-h-[70vh] overflow-y-auto scrollbar-hide">
 
-            <!-- Kategori -->
-            <div>
-                <h4 class="text-sm font-bold text-slate-navy mb-2">Kategori SDGs</h4>
-                <p class="bg-off-white p-4 rounded-xl border border-border-gray text-slate-navy leading-relaxed" id="detailKategori"></p>
-            </div>
-
             <!-- Judul -->
             <div>
                 <h4 class="text-sm font-bold text-slate-navy mb-2">Judul Kegiatan</h4>
                 <p class="bg-off-white p-4 rounded-xl border border-border-gray text-slate-navy leading-relaxed" id="detailJudul"></p>
-            </div>
-
-            <!-- Refleksi -->
-            <div>
-                <h4 class="text-sm font-bold text-slate-navy mb-2">Refleksi Kegiatan</h4>
-                <div class="bg-off-white p-4 rounded-xl border border-border-gray text-slate-navy leading-relaxed" id="detailRefleksi"></div>
             </div>
 
             <!-- Tanggal Pelaksanaan -->
@@ -41,16 +29,46 @@
                 <p class="bg-off-white p-4 rounded-xl border border-border-gray text-slate-navy leading-relaxed" id="detailTanggalPelaksanaan"></p>
             </div>
 
-            <!-- Status -->
+            <!-- Durasi Kegiatan -->
             <div>
-                <h4 class="text-sm font-bold text-slate-navy mb-2">Status</h4>
-                <div class="bg-off-white p-4 rounded-xl border border-border-gray text-slate-navy leading-relaxed" id="detailStatus"></div>
+                <h4 class="text-sm font-bold text-slate-navy mb-2">Durasi Kegiatan</h4>
+                <p class="bg-off-white p-4 rounded-xl border border-border-gray text-slate-navy leading-relaxed" id="detailDurasi"></p>
+            </div>
+
+            <!-- Jenis Kegiatan -->
+            <div>
+                <h4 class="text-sm font-bold text-slate-navy mb-2">Jenis Kegiatan</h4>
+                <p class="bg-off-white p-4 rounded-xl border border-border-gray text-slate-navy leading-relaxed" id="detailJenis"></p>
+            </div>
+
+            <!-- Peran -->
+            <div>
+                <h4 class="text-sm font-bold text-slate-navy mb-2">Peran Dalam Kegiatan</h4>
+                <p class="bg-off-white p-4 rounded-xl border border-border-gray text-slate-navy leading-relaxed" id="detailPeran"></p>
+            </div>
+
+            <!-- Kategori -->
+            <div>
+                <h4 class="text-sm font-bold text-slate-navy mb-2">Kategori SDGs</h4>
+                <p class="bg-off-white p-4 rounded-xl border border-border-gray text-slate-navy leading-relaxed" id="detailKategori"></p>
+            </div>
+
+            <!-- Refleksi -->
+            <div>
+                <h4 class="text-sm font-bold text-slate-navy mb-2">Refleksi Kegiatan</h4>
+                <div class="bg-off-white p-4 rounded-xl border border-border-gray text-slate-navy leading-relaxed" id="detailRefleksi"></div>
             </div>
 
             <!-- Bukti Foto -->
             <div>
                 <h4 class="text-sm font-bold text-slate-navy mb-3">Bukti Kegiatan</h4>
                 <div id="detailBukti" class="flex gap-4 flex-wrap"></div>
+            </div>
+
+            <!-- Status -->
+            <div>
+                <h4 class="text-sm font-bold text-slate-navy mb-2">Status</h4>
+                <div class="bg-off-white p-4 rounded-xl border border-border-gray text-slate-navy leading-relaxed" id="detailStatus"></div>
             </div>
         </div>
     </div>

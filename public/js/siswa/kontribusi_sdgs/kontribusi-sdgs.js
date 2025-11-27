@@ -457,7 +457,6 @@ tanggalInput.addEventListener('click', () => {
 /* ==========================================================
    🟨 9. TOMBOL DETAIL RIWAYAT KONTRIBUSI
    ========================================================== */
-
 function openDetailKontribusi(id) {
     fetch(`/siswa/kontribusi-sdgs/${id}/detail`)
         .then(res => res.json())
@@ -467,25 +466,32 @@ function openDetailKontribusi(id) {
                 month: 'long',
                 year: 'numeric'
             });
-            document.getElementById('detailKategori').innerText = data.kategori_sdgs.nama_kategori;
             document.getElementById('detailJudul').innerText = data.judul_kegiatan;
             document.getElementById('detailTanggalPelaksanaan').innerText = new Date(data.tanggal_pelaksanaan).toLocaleDateString('id-ID', {
                 day: 'numeric',
                 month: 'long',
                 year: 'numeric'
             });
+            document.getElementById('detailDurasi').innerText = data.durasi_kegiatan;
+            document.getElementById('detailJenis').innerText = data.jenis_kegiatan;
+            document.getElementById('detailPeran').innerText = data.peran;
+
+            document.getElementById('detailKategori').innerText = data.kategori_sdgs.nama_kategori;
             document.getElementById('detailRefleksi').innerText = data.deskripsi_refleksi;
-            document.getElementById('detailStatus').innerText = data.status;
 
             const wrapper = document.getElementById('detailBukti');
             wrapper.innerHTML = '';
 
-            JSON.parse(data.bukti_upload).forEach(path => {
-                wrapper.innerHTML += `
-                    <img src="/storage/${path}"
-                         class="w-28 h-28 object-cover rounded-xl border border-gray-200 shadow">
-                `;
-            });
+            if (data.bukti_upload && Array.isArray(data.bukti_upload)) {
+                data.bukti_upload.forEach(path => {
+                    wrapper.innerHTML += `
+                        <img src="/storage/${path.trim()}"
+                            class="w-28 h-28 object-cover rounded-xl border border-gray-200 shadow">
+                    `;
+                });
+            }
+
+            document.getElementById('detailStatus').innerText = data.status;
 
             document.getElementById('detailModal').classList.remove('hidden');
         });
