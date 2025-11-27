@@ -33,11 +33,20 @@ class KontribusiSdgsSiswaController extends Controller
             'judul_kegiatan' => 'required|string|max:255',
             'deskripsi_refleksi' => 'required|string',
             'tanggal_pelaksanaan' => 'required|date',
+            'durasi_nilai' => 'required|integer|min:1',
+            'durasi_satuan' => 'required|in:menit,jam',
+            'jenis_kegiatan' => 'required|in:individu,kelompok,event',
+            'peran' => 'required|in:peserta,panitia,ketua',
             'bukti_upload' => 'required|array',
             'bukti_upload.*' => 'image|mimes:jpg,png,jpeg|max:2048',
         ]);
 
         $user = Auth::user();
+
+         // Konversi durasi ke menit
+        $durasi_kegiatan = $request->durasi_satuan === 'jam'
+            ? $request->durasi_nilai * 60
+            : $request->durasi_nilai;
 
         // Simpan file bukti kegiatan
         $paths = [];
@@ -58,7 +67,10 @@ class KontribusiSdgsSiswaController extends Controller
             'judul_kegiatan' => $request->judul_kegiatan,
             'deskripsi_refleksi' => $request->deskripsi_refleksi,
             'tanggal_pelaksanaan' => $request->tanggal_pelaksanaan,
-            'bukti_upload' => json_encode($paths),
+            'durasi_kegiatan' => $durasi_kegiatan,
+            'jenis_kegiatan' => $request->jenis_kegiatan,
+            'peran' => $request->peran,
+            'bukti_upload' => $paths,
             'status' => 'pending',
         ]);
 

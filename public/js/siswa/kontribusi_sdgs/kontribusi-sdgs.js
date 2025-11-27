@@ -17,8 +17,6 @@ function closeSDGDetail() {
     document.body.style.overflow = 'auto';
 }
 
-
-
 let currentStep = 1;
 let selectedFiles = [];
 
@@ -52,9 +50,19 @@ function showStep(step) {
 function validateForm(step) {
     let inputs = [];
     if (step === 1) {
-        inputs = [document.getElementById('judulKegiatan'), document.getElementById('tanggalKegiatan')];
+        inputs = [
+            document.getElementById('judulKegiatan'),
+            document.getElementById('tanggalKegiatan'),
+            document.querySelector('input[name="durasi_nilai"]'),
+            document.querySelector('select[name="durasi_satuan"]'),
+            document.querySelector('select[name="jenis_kegiatan"]'),
+            document.querySelector('select[name="peran"]'),
+        ];
     } else if (step === 2) {
-        inputs = [document.getElementById('kategoriSdgs'), document.getElementById('deskripsi_refleksi')];
+        inputs = [
+            document.getElementById('kategoriSdgs'),
+            document.getElementById('deskripsi_refleksi')
+        ];
     }
 
     // Cek input kosong
@@ -313,11 +321,19 @@ function loadKontribusiDataOnRefresh() {
         document.getElementById('kontribusiModal').classList.remove('hidden');
         document.body.style.overflow = 'hidden';
 
-        // Isi form dengan data tersimpan
+        // Step 1
         if (savedForm.judul_kegiatan) document.getElementById("judulKegiatan").value = savedForm.judul_kegiatan;
         if (savedForm.tanggal_pelaksanaan) document.getElementById("tanggalKegiatan").value = savedForm.tanggal_pelaksanaan;
+        if (savedForm.durasi_nilai) document.querySelector("input[name='durasi_nilai']").value = savedForm.durasi_nilai;
+        if (savedForm.durasi_satuan) document.querySelector("select[name='durasi_satuan']").value = savedForm.durasi_satuan;
+        if (savedForm.jenis_kegiatan) document.querySelector("select[name='jenis_kegiatan']").value = savedForm.jenis_kegiatan;
+        if (savedForm.peran)document.querySelector("select[name='peran']").value = savedForm.peran;
+
+        // Step 2
         if (savedForm.kategori_sdgs_id) document.getElementById("kategoriSdgs").value = savedForm.kategori_sdgs_id;
         if (savedForm.deskripsi_refleksi) document.getElementById("deskripsi_refleksi").value = savedForm.deskripsi_refleksi;
+
+        // File
         if (savedForm.files && savedForm.files.length > 0) {
             selectedFiles = savedForm.files.map(f => ({ name: f.name, size: f.size, data: f.data }));
             renderFileList();
@@ -399,8 +415,16 @@ function renderFileList(fromStorage = false) {
 function saveFormData() {
     const formData = {
         currentStep,
+
+        // Step 1
         judul_kegiatan: document.getElementById("judulKegiatan").value,
         tanggal_pelaksanaan: document.getElementById("tanggalKegiatan").value,
+        durasi_nilai: document.querySelector("input[name='durasi_nilai']").value,
+        durasi_satuan: document.querySelector("select[name='durasi_satuan']").value,
+        jenis_kegiatan: document.querySelector("select[name='jenis_kegiatan']").value,
+        peran: document.querySelector("select[name='peran']").value,
+
+        // Step 2
         kategori_sdgs_id: document.getElementById("kategoriSdgs").value,
         deskripsi_refleksi: document.getElementById("deskripsi_refleksi").value,
         files: selectedFiles.map(f => ({

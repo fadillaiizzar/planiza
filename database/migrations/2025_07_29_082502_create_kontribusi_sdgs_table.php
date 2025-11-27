@@ -18,7 +18,11 @@ return new class extends Migration
             $table->string('judul_kegiatan');
             $table->text('deskripsi_refleksi');
             $table->date('tanggal_pelaksanaan');
-            $table->string('bukti_upload');
+            $table->integer('durasi_kegiatan');
+            $table->enum('jenis_kegiatan', ['individu','kelompok','event']);
+            $table->enum('peran', ['peserta','panitia','ketua']);
+            $table->text('bukti_upload');
+            $table->enum('tingkat_dampak', ['rendah','sedang', 'tinggi'])->nullable();
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps();
         });

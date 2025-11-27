@@ -13,12 +13,16 @@ class KontribusiSdgs extends Model
         'judul_kegiatan',
         'deskripsi_refleksi',
         'tanggal_pelaksanaan',
+        'durasi_kegiatan',
+        'jenis_kegiatan',
+        'peran',
         'bukti_upload',
+        'tingkat_dampak',
         'status',
     ];
 
     protected $casts = [
-        'bukti_upload' => 'array', 
+        'bukti_upload' => 'array',
     ];
 
     public function user(): BelongsTo

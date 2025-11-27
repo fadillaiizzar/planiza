@@ -48,6 +48,74 @@
                                 class="w-full px-5 py-4 border-2 border-border-gray rounded-xl focus:ring-2 focus:ring-slate-navy focus:border-slate-navy transition-all text-slate-navy"
                             >
                         </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-slate-navy mb-3">
+                                Durasi Kegiatan <span class="text-red-500">*</span>
+                            </label>
+
+                            <div class="flex gap-3">
+                                <input
+                                    type="number"
+                                    name="durasi_nilai"
+                                    min="1"
+                                    placeholder="Masukkan durasi"
+                                    class="w-1/2 px-5 py-4 border-2 border-border-gray rounded-xl
+                                        focus:ring-2 focus:ring-slate-navy focus:border-slate-navy
+                                        transition-all text-slate-navy placeholder-cool-gray"
+                                    required
+                                >
+
+                                <select
+                                    name="durasi_satuan"
+                                    class="w-1/2 px-5 py-4 border-2 border-border-gray rounded-xl
+                                        focus:ring-2 focus:ring-slate-navy focus:border-slate-navy
+                                        transition-all text-slate-navy"
+                                    required
+                                >
+                                    <option value="menit">Menit</option>
+                                    <option value="jam">Jam</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-slate-navy mb-3">
+                                Jenis Kegiatan <span class="text-red-500">*</span>
+                            </label>
+
+                            <select
+                                name="jenis_kegiatan"
+                                class="w-full px-5 py-4 border-2 border-border-gray rounded-xl
+                                    focus:ring-2 focus:ring-slate-navy focus:border-slate-navy
+                                    transition-all text-slate-navy"
+                                required
+                            >
+                                <option value="">-- Pilih Jenis --</option>
+                                <option value="individu">Individu</option>
+                                <option value="kelompok">Kelompok</option>
+                                <option value="event">Event</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-slate-navy mb-3">
+                                Peran Dalam Kegiatan <span class="text-red-500">*</span>
+                            </label>
+
+                            <select
+                                name="peran"
+                                class="w-full px-5 py-4 border-2 border-border-gray rounded-xl
+                                    focus:ring-2 focus:ring-slate-navy focus:border-slate-navy
+                                    transition-all text-slate-navy"
+                                required
+                            >
+                                <option value="">-- Pilih Peran --</option>
+                                <option value="peserta">Peserta</option>
+                                <option value="panitia">Panitia</option>
+                                <option value="ketua">Ketua</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
