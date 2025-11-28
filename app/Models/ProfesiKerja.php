@@ -19,6 +19,7 @@ class ProfesiKerja extends Model
         'info_jurusan',
     ];
 
+    // Relasi Fitur Eksplorasi Profesi
     public function industris(): BelongsToMany
     {
         return $this->belongsToMany(Industri::class, 'industri_profesis', 'profesi_kerja_id', 'industri_id')->withPivot('gaji')->withTimestamps();
@@ -29,6 +30,7 @@ class ProfesiKerja extends Model
         return $this->hasMany(IndustriProfesi::class, 'profesi_kerja_id');
     }
 
+    // Relasi Fitur Kenali Profesi
     public function opsiJawabans(): HasMany
     {
         return $this->hasMany(OpsiJawaban::class);
@@ -44,7 +46,7 @@ class ProfesiKerja extends Model
         return $this->belongsToMany(KategoriMinat::class, 'profesi_kategoris', 'profesi_kerja_id', 'kategori_minat_id')->withTimestamps();
     }
 
-    // Relasi Fitur Kontribusi SDGs
+    // Relasi Fitur SDGs
     public function hubunganSdgs(): HasMany
     {
         return $this->hasMany(HubunganSdgs::class, 'profesi_kerja_id');

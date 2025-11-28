@@ -20,6 +20,27 @@
 
         <!-- CTA Banner - Ultra Modern -->
         @include('siswa.kontribusi_sdgs.banner-kontribusi')
+
+        @php
+            $kontribusiCount = Auth::user()->kontribusiSdgs()->count();
+            $target = 7;
+        @endphp
+
+        <!-- Riwayat Kontribusi + Button -->
+        <div class="my-4 flex items-center justify-between gap-4">
+            <span class="{{ $kontribusiCount >= $target ? 'text-success' : 'text-danger' }}">
+                Riwayat kontribusi: {{ $kontribusiCount }} / {{ $target }}
+            </span>
+
+            <form action="{{ route('siswa.rekomendasi.sdgs.generate') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-primary"
+                        @if($kontribusiCount < $target) disabled @endif>
+                    Hasilkan Rekomendasi SDGs
+                </button>
+            </form>
+        </div>
+
         @include('siswa.kontribusi_sdgs.riwayat-kontribusi')
 
         <!-- Benefits Section - Modern Cards -->
