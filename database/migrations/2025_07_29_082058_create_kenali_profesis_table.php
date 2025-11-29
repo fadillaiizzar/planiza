@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kenali_profesis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('tes_id')->constrained('tes')->onDelete('cascade');
+            $table->foreignId('tes_id')->nullable()->constrained('tes')->onDelete('cascade');
             $table->foreignId('profesi_kerja_id')->constrained('profesi_kerjas')->onDelete('cascade');
             $table->enum('sumber_rekomendasi', ['tes', 'sdgs']);
             $table->integer('total_poin')->default(0);
