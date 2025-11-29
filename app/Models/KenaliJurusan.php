@@ -13,6 +13,7 @@ class KenaliJurusan extends Model
         'jurusan_kuliah_id',
         'sumber_rekomendasi',
         'status_peluang',
+        'total_poin',
         'attempt'
     ];
 

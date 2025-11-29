@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('jurusan_kuliah_id')->nullable()->constrained('jurusan_kuliahs')->onDelete('cascade');
             $table->enum('sumber_rekomendasi', ['utbk', 'hobi', 'sdgs']);
             $table->enum('status_peluang', ['tinggi', 'sedang', 'rendah'])->nullable();
+            $table->integer('total_poin')->nullable();
             $table->timestamps();
         });
     }
