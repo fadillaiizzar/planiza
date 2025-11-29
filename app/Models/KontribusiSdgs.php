@@ -23,6 +23,7 @@ class KontribusiSdgs extends Model
 
     protected $casts = [
         'bukti_upload' => 'array',
+        'tanggal_pelaksanaan' => 'date',
     ];
 
     public function user(): BelongsTo
