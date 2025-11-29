@@ -56,6 +56,27 @@
         </div>
     </div>
 
+    @if($profesiLainnya && count($profesiLainnya) > 0)
+        <div class="mt-4">
+            <button id="toggleLainnya" class="text-blue-600 underline text-sm">Lihat profesi setara lainnya</button>
+        </div>
+
+        <div id="listLainnya" class="hidden mt-4">
+            @foreach($profesiLainnya as $id => $score)
+                <div class="p-4 bg-slate-100 rounded border">
+                    <p class="font-semibold">{{ \App\Models\ProfesiKerja::find($id)->nama_profesi_kerja }}</p>
+                    <p class="text-xs text-blue-600">Skor: {{ $score }}</p>
+                </div>
+            @endforeach
+        </div>
+
+        <script>
+            document.getElementById('toggleLainnya').onclick = function() {
+                document.getElementById('listLainnya').classList.toggle('hidden');
+            };
+        </script>
+    @endif
+
     {{-- Rekomendasi Jurusan --}}
     <div class="mb-8">
         <h2 class="text-xl font-semibold mb-4 text-slate-700">Jurusan yang Disarankan</h2>

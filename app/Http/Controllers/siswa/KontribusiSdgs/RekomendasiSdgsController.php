@@ -81,7 +81,13 @@ class RekomendasiSdgsController extends Controller
         }
 
         arsort($profesiScores);
-        $topProfesi = $this->getTopWithTies($profesiScores, 3);
+
+        // 3 teratas → tampil dulu
+        $topProfesi = array_slice($profesiScores, 0, 3, true);
+
+        // Sisanya simpan untuk ditampilkan jika user klik "lihat lainnya"
+        $profesiLainnya = array_slice($profesiScores, 3, null, true);
+
 
         // Jika semua skor sama atau tidak ada yang benar-benar relevan → Random 3 profesi
         if (count($topProfesi) === 0 || max($profesiScores) === 1) {
@@ -176,7 +182,10 @@ class RekomendasiSdgsController extends Controller
         }
 
         return redirect()->route('siswa.rekomendasi-sdgs.hasil')
-            ->with('success', 'Rekomendasi profesi dan jurusan berhasil dihasilkan!');
+        ->with([
+            'success' => 'Rekomendasi profesi dan jurusan berhasil dihasilkan!',
+            'profesi_lainnya' => $profesiLainnya
+        ]);
     }
 
     public function index()
@@ -222,8 +231,10 @@ class RekomendasiSdgsController extends Controller
             ->where('sumber_rekomendasi', 'sdgs')
             ->get();
 
+        $profesiLainnya = session('profesi_lainnya');
+
         return view('siswa.kontribusi_sdgs.rekomendasi_sdgs.rekomendasi-sdgs',
-            compact('profesi', 'jurusan', 'kontribusiCount', 'kategoriTerpilih', 'kategoriTertinggiPoin'));
+            compact('profesi', 'jurusan', 'kontribusiCount', 'kategoriTerpilih', 'kategoriTertinggiPoin', 'profesiLainnya'));
     }
 
     // ===============================
