@@ -82,12 +82,8 @@ class RekomendasiSdgsController extends Controller
 
         arsort($profesiScores);
 
-        // 3 teratas → tampil dulu
-        $topProfesi = $this->getTopWithTies($profesiScores, 3);
-
-        // Sisanya simpan untuk ditampilkan jika user klik "lihat lainnya"
-        $profesiLainnya = array_slice($profesiScores, 3, null, true);
-
+        // 3 teratas → tampil dulu, sisanya untuk "lihat lainnya"
+        [$topProfesi, $profesiLainnya] = $this->getTopAndSimilar($profesiScores, 3);
 
         // Jika semua skor sama atau tidak ada yang benar-benar relevan → Random 3 profesi
         if (count($topProfesi) === 0 || max($profesiScores) === 1) {
@@ -131,10 +127,7 @@ class RekomendasiSdgsController extends Controller
 
         arsort($jurusanScores);
         // 3 teratas → tampil dulu
-        $topJurusan = $this->getTopWithTies($jurusanScores, 3);
-
-        // Sisanya simpan untuk ditampilkan jika user klik "lihat lainnya"
-        $jurusanLainnya = array_slice($jurusanScores, 3, null, true);
+        [$topJurusan, $jurusanLainnya] = $this->getTopAndSimilar($jurusanScores, 3);
 
         // Jika semua skor sama atau tidak ada yang benar-benar relevan → Random 3 jurusan
         if (count($topJurusan) === 0 || max($jurusanScores) === 1) {
@@ -186,8 +179,8 @@ class RekomendasiSdgsController extends Controller
         }
 
         return redirect()->route('siswa.rekomendasi-sdgs.hasil', [
-            'profesi_lainnya' => implode(',', array_keys($profesiLainnya)),
-            'jurusan_lainnya' => implode(',', array_keys($jurusanLainnya)),
+            'profesi_lainnya' => http_build_query($profesiLainnya),
+            'jurusan_lainnya' => http_build_query($jurusanLainnya),
         ]);
     }
 
@@ -243,15 +236,11 @@ class RekomendasiSdgsController extends Controller
         $jurusanLainnya = [];
 
         if ($profesiLainnyaParam) {
-            foreach (explode(',', $profesiLainnyaParam) as $id) {
-                $profesiLainnya[$id] = 1;
-            }
+            parse_str($profesiLainnyaParam, $profesiLainnya);
         }
 
         if ($jurusanLainnyaParam) {
-            foreach (explode(',', $jurusanLainnyaParam) as $id) {
-                $jurusanLainnya[$id] = 1;
-            }
+            parse_str($jurusanLainnyaParam, $jurusanLainnya);
         }
 
         return view('siswa.kontribusi_sdgs.rekomendasi_sdgs.rekomendasi-sdgs',
@@ -261,27 +250,31 @@ class RekomendasiSdgsController extends Controller
     // ===============================
     // Helper: Top dengan ties
     // ===============================
-    private function getTopWithTies(array $scores, int $max)
+    private function getTopAndSimilar(array $scores, int $max)
     {
-        $result = [];
+        arsort($scores);
+
+        $top = [];
+        $similar = [];
+
         $i = 0;
-        $lastScore = null;
+        $scoreThreshold = null;
 
         foreach ($scores as $id => $score) {
             if ($i < $max) {
-                $result[$id] = $score;
-                $lastScore = $score;
+                $top[$id] = $score;
                 $i++;
+                $scoreThreshold = $score; // simpan skor item terakhir di top
             } else {
-                if ($score === $lastScore) {
-                    $result[$id] = $score;
-                } else {
-                    break;
+                // Masukkan ke similar jika skor sama dengan item ke-max
+                if ($score === $scoreThreshold) {
+                    $similar[$id] = $score;
                 }
+                // Skor lebih rendah dari threshold → abaikan
             }
         }
 
-        return $result;
+        return [$top, $similar];
     }
 
     // ===============================
