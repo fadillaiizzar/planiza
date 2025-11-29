@@ -101,6 +101,27 @@
         </div>
     </div>
 
+    @if($jurusanLainnya && count($jurusanLainnya) > 0)
+        <div class="mt-4">
+            <button id="toggleLainnya2" class="text-blue-600 underline text-sm">Lihat jurusan setara lainnya</button>
+        </div>
+
+        <div id="listLainnya2" class="hidden mt-4">
+            @foreach($jurusanLainnya as $id => $score)
+                <div class="p-4 bg-slate-100 rounded border">
+                    <p class="font-semibold">{{ \App\Models\JurusanKuliah::find($id)->nama_jurusan_kuliah }}</p>
+                    <p class="text-xs text-blue-600">Skor: {{ $score }}</p>
+                </div>
+            @endforeach
+        </div>
+
+        <script>
+            document.getElementById('toggleLainnya2').onclick = function() {
+                document.getElementById('listLainnya2').classList.toggle('hidden');
+            };
+        </script>
+    @endif
+
     {{-- Button kembali --}}
     <div class="mt-6">
         <a href="{{ route('siswa.kontribusi-sdgs.index') }}"

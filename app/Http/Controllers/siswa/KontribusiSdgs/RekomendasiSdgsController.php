@@ -83,7 +83,7 @@ class RekomendasiSdgsController extends Controller
         arsort($profesiScores);
 
         // 3 teratas → tampil dulu
-        $topProfesi = array_slice($profesiScores, 0, 3, true);
+        $topProfesi = $this->getTopWithTies($profesiScores, 3);
 
         // Sisanya simpan untuk ditampilkan jika user klik "lihat lainnya"
         $profesiLainnya = array_slice($profesiScores, 3, null, true);
@@ -130,7 +130,11 @@ class RekomendasiSdgsController extends Controller
         }
 
         arsort($jurusanScores);
+        // 3 teratas → tampil dulu
         $topJurusan = $this->getTopWithTies($jurusanScores, 3);
+
+        // Sisanya simpan untuk ditampilkan jika user klik "lihat lainnya"
+        $jurusanLainnya = array_slice($jurusanScores, 3, null, true);
 
         // Jika semua skor sama atau tidak ada yang benar-benar relevan → Random 3 jurusan
         if (count($topJurusan) === 0 || max($jurusanScores) === 1) {
@@ -181,10 +185,9 @@ class RekomendasiSdgsController extends Controller
             ]);
         }
 
-        return redirect()->route('siswa.rekomendasi-sdgs.hasil')
-        ->with([
-            'success' => 'Rekomendasi profesi dan jurusan berhasil dihasilkan!',
-            'profesi_lainnya' => $profesiLainnya
+        return redirect()->route('siswa.rekomendasi-sdgs.hasil', [
+            'profesi_lainnya' => implode(',', array_keys($profesiLainnya)),
+            'jurusan_lainnya' => implode(',', array_keys($jurusanLainnya)),
         ]);
     }
 
@@ -224,17 +227,35 @@ class RekomendasiSdgsController extends Controller
         $profesi = KenaliProfesi::with('profesiKerja')
             ->where('user_id', $user->id)
             ->where('sumber_rekomendasi', 'sdgs')
+            ->orderBy('total_poin', 'DESC')
             ->get();
 
         $jurusan = KenaliJurusan::with('jurusanKuliah')
             ->where('user_id', $user->id)
             ->where('sumber_rekomendasi', 'sdgs')
+            ->orderBy('total_poin', 'DESC')
             ->get();
 
-        $profesiLainnya = session('profesi_lainnya');
+        $profesiLainnyaParam = request('profesi_lainnya');
+        $jurusanLainnyaParam = request('jurusan_lainnya');
+
+        $profesiLainnya = [];
+        $jurusanLainnya = [];
+
+        if ($profesiLainnyaParam) {
+            foreach (explode(',', $profesiLainnyaParam) as $id) {
+                $profesiLainnya[$id] = 1;
+            }
+        }
+
+        if ($jurusanLainnyaParam) {
+            foreach (explode(',', $jurusanLainnyaParam) as $id) {
+                $jurusanLainnya[$id] = 1;
+            }
+        }
 
         return view('siswa.kontribusi_sdgs.rekomendasi_sdgs.rekomendasi-sdgs',
-            compact('profesi', 'jurusan', 'kontribusiCount', 'kategoriTerpilih', 'kategoriTertinggiPoin', 'profesiLainnya'));
+            compact('profesi', 'jurusan', 'kontribusiCount', 'kategoriTerpilih', 'kategoriTertinggiPoin', 'profesiLainnya', 'jurusanLainnya'));
     }
 
     // ===============================
