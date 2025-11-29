@@ -126,6 +126,7 @@ class RekomendasiSdgsController extends Controller
         }
 
         arsort($jurusanScores);
+
         // 3 teratas → tampil dulu
         [$topJurusan, $jurusanLainnya] = $this->getTopAndSimilar($jurusanScores, 3);
 
@@ -178,10 +179,15 @@ class RekomendasiSdgsController extends Controller
             ]);
         }
 
-        return redirect()->route('siswa.rekomendasi-sdgs.hasil', [
-            'profesi_lainnya' => http_build_query($profesiLainnya),
-            'jurusan_lainnya' => http_build_query($jurusanLainnya),
+        // ===============================
+        // Simpan data "lainnya" di session agar URL tetap bersih
+        // ===============================
+        session([
+            'profesi_lainnya' => $profesiLainnya,
+            'jurusan_lainnya' => $jurusanLainnya,
         ]);
+
+        return redirect()->route('siswa.rekomendasi-sdgs.hasil');
     }
 
     public function index()
@@ -229,19 +235,8 @@ class RekomendasiSdgsController extends Controller
             ->orderBy('total_poin', 'DESC')
             ->get();
 
-        $profesiLainnyaParam = request('profesi_lainnya');
-        $jurusanLainnyaParam = request('jurusan_lainnya');
-
-        $profesiLainnya = [];
-        $jurusanLainnya = [];
-
-        if ($profesiLainnyaParam) {
-            parse_str($profesiLainnyaParam, $profesiLainnya);
-        }
-
-        if ($jurusanLainnyaParam) {
-            parse_str($jurusanLainnyaParam, $jurusanLainnya);
-        }
+        $profesiLainnya = session('profesi_lainnya', []);
+        $jurusanLainnya = session('jurusan_lainnya', []);
 
         return view('siswa.kontribusi_sdgs.rekomendasi_sdgs.rekomendasi-sdgs',
             compact('profesi', 'jurusan', 'kontribusiCount', 'kategoriTerpilih', 'kategoriTertinggiPoin', 'profesiLainnya', 'jurusanLainnya'));
