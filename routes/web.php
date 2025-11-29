@@ -185,5 +185,8 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->na
         Route::get('/{id}/detail', [KontribusiSdgsSiswaController::class, 'show'])->name('detail');
     });
 
-    Route::post('/rekomendasi-sdgs', [RekomendasiSdgsController::class, 'generate'])->name('rekomendasi.sdgs.generate');
+    Route::prefix('rekomendasi-sdgs')->name('rekomendasi-sdgs.')->group(function () {
+        Route::post('/', [RekomendasiSdgsController::class, 'generate'])->name('generate');
+        Route::get('/hasil', [RekomendasiSdgsController::class, 'index'])->name('hasil');
+    });
 });
