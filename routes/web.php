@@ -35,6 +35,7 @@ use App\Http\Controllers\KontribusiSdgsController;
 use App\Http\Controllers\EksplorasiKerjaController;
 use App\Http\Controllers\IndustriProfesiController;
 use App\Http\Controllers\ProfesiKategoriController;
+use App\Http\Controllers\RekomendasiSdgsController;
 use App\Http\Controllers\EksplorasiKuliahController;
 use App\Http\Controllers\Siswa\KerjakanTesController;
 use App\Http\Controllers\Siswa\JawabanSiswaController;
@@ -43,11 +44,11 @@ use App\Http\Controllers\Siswa\RekomendasiProfesiController;
 use App\Http\Controllers\Siswa\EksplorasiKerjaSiswaController;
 use App\Http\Controllers\Siswa\KenaliJurusan\MinatSiswaController;
 use App\Http\Controllers\Siswa\KenaliJurusan\KerjakanFormController;
-use App\Http\Controllers\Siswa\KontribusiSdgsSiswa\RekomendasiSdgsSiswaController;
 use App\Http\Controllers\Siswa\KenaliJurusan\KenaliJurusanSiswaController;
 use App\Http\Controllers\Siswa\KenaliJurusan\RekomendasiJurusanController;
 use App\Http\Controllers\Siswa\KontribusiSdgs\KontribusiSdgsSiswaController;
 use App\Http\Controllers\Siswa\EksplorasiKuliah\EksplorasiKuliahSiswaController;
+use App\Http\Controllers\Siswa\KontribusiSdgsSiswa\RekomendasiSdgsSiswaController;
 
 Route::get('/', function () {
     return view('beranda');
@@ -140,6 +141,11 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
         });
 
         Route::resource('hubungan-sdgs', HubunganSdgsController::class);
+
+        Route::prefix('hasil-kontribusi')->name('hasil-kontribusi.')->group(function () {
+            Route::get('/', [RekomendasiSdgsController::class, 'index'])->name('index');
+            Route::get('/user/{user}', [RekomendasiSdgsController::class, 'show'])->name('show');
+        });
     });
 });
 
