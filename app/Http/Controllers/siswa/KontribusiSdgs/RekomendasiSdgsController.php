@@ -179,14 +179,6 @@ class RekomendasiSdgsController extends Controller
             ]);
         }
 
-        // ===============================
-        // Simpan data "lainnya" di session agar URL tetap bersih
-        // ===============================
-        session([
-            'profesi_lainnya' => $profesiLainnya,
-            'jurusan_lainnya' => $jurusanLainnya,
-        ]);
-
         return redirect()->route('siswa.rekomendasi-sdgs.hasil');
     }
 
@@ -235,11 +227,8 @@ class RekomendasiSdgsController extends Controller
             ->orderBy('total_poin', 'DESC')
             ->get();
 
-        $profesiLainnya = session('profesi_lainnya', []);
-        $jurusanLainnya = session('jurusan_lainnya', []);
-
         return view('siswa.kontribusi_sdgs.rekomendasi_sdgs.rekomendasi-sdgs',
-            compact('profesi', 'jurusan', 'kontribusiCount', 'kategoriTerpilih', 'kategoriTertinggiPoin', 'profesiLainnya', 'jurusanLainnya'));
+            compact('profesi', 'jurusan', 'kontribusiCount', 'kategoriTerpilih', 'kategoriTertinggiPoin'));
     }
 
     // ===============================
