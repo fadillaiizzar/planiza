@@ -76,4 +76,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(KontribusiSdgs::class);
     }
+
+    // Bincang dan Tanggapan Karier
+    public function bincangKarier(): HasMany
+    {
+        return $this->hasMany(BincangKarier::class);
+    }
+
+    public function tanggapanKarier(): HasMany
+    {
+        return $this->hasMany(TanggapanKarier::class);
+    }
 }
