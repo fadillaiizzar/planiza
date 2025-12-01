@@ -64,6 +64,10 @@
                                         $detailUrl = route('admin.sdgs.hubungan-sdgs.show', $activity['id'] ?? 0);
                                         break;
 
+                                    case 'Hasil Kontribusi SDGs':
+                                        $detailUrl = route('admin.sdgs.hasil-kontribusi.show', $activity['id'] ?? 0);
+                                        break;
+
                                     // contoh lain: jika aktivitas berasal dari submission/attempt siswa, bisa diarahkan beda
                                     case 'Hasil Form Siswa':
                                         if (!empty($activity['user_id']) && !empty($activity['id'])) {
