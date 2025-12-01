@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Siswa\KontribusiSdgs;
+namespace App\Http\Controllers\Siswa\KontribusiSdgsSiswa;
 
 use App\Models\KategoriSdgs;
-use Illuminate\Http\Request;
 use App\Models\KenaliJurusan;
 use App\Models\KenaliProfesi;
 use App\Models\KontribusiSdgs;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
-class RekomendasiSdgsController extends Controller
+class RekomendasiSdgsSiswaController extends Controller
 {
     public function generate()
     {

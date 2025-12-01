@@ -43,7 +43,7 @@ use App\Http\Controllers\Siswa\RekomendasiProfesiController;
 use App\Http\Controllers\Siswa\EksplorasiKerjaSiswaController;
 use App\Http\Controllers\Siswa\KenaliJurusan\MinatSiswaController;
 use App\Http\Controllers\Siswa\KenaliJurusan\KerjakanFormController;
-use App\Http\Controllers\Siswa\KontribusiSdgs\RekomendasiSdgsController;
+use App\Http\Controllers\Siswa\KontribusiSdgsSiswa\RekomendasiSdgsSiswaController;
 use App\Http\Controllers\Siswa\KenaliJurusan\KenaliJurusanSiswaController;
 use App\Http\Controllers\Siswa\KenaliJurusan\RekomendasiJurusanController;
 use App\Http\Controllers\Siswa\KontribusiSdgs\KontribusiSdgsSiswaController;
@@ -186,7 +186,7 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->na
     });
 
     Route::prefix('rekomendasi-sdgs')->name('rekomendasi-sdgs.')->group(function () {
-        Route::post('/', [RekomendasiSdgsController::class, 'generate'])->name('generate');
-        Route::get('/hasil', [RekomendasiSdgsController::class, 'index'])->name('hasil');
+        Route::post('/', [RekomendasiSdgsSiswaController::class, 'generate'])->name('generate');
+        Route::get('/hasil', [RekomendasiSdgsSiswaController::class, 'index'])->name('hasil');
     });
 });
