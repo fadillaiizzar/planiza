@@ -37,6 +37,8 @@ use App\Http\Controllers\IndustriProfesiController;
 use App\Http\Controllers\ProfesiKategoriController;
 use App\Http\Controllers\RekomendasiSdgsController;
 use App\Http\Controllers\EksplorasiKuliahController;
+use App\Http\Controllers\Siswa\BincangKarier\BincangKarierSiswaController;
+use App\Http\Controllers\Siswa\BincangKarier\TanggapanKarierSiswaController;
 use App\Http\Controllers\Siswa\KerjakanTesController;
 use App\Http\Controllers\Siswa\JawabanSiswaController;
 use App\Http\Controllers\Siswa\KenaliProfesiSiswaController;
@@ -195,4 +197,7 @@ Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->na
         Route::post('/', [RekomendasiSdgsSiswaController::class, 'generate'])->name('generate');
         Route::get('/hasil', [RekomendasiSdgsSiswaController::class, 'index'])->name('hasil');
     });
+
+    Route::resource('bincang-karier', BincangKarierSiswaController::class)->names('bincang-karier');
+    Route::resource('tanggapan-karier', TanggapanKarierSiswaController::class)->names('tanggapan-karier');
 });
