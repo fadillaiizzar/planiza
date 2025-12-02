@@ -59,14 +59,7 @@ class BincangKarierSiswaController extends Controller
      */
     public function edit($id)
     {
-        $bincangKarier = BincangKarier::findOrFail($id);
-
-        // Hanya pemilik boleh edit
-        if ($bincangKarier->user_id != Auth::id()) {
-            abort(403, 'Akses tidak diizinkan.');
-        }
-
-        return view('siswa.bincang_karier.edit', compact('bincangKarier'));
+        //
     }
 
     /**

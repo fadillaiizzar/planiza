@@ -74,11 +74,11 @@
 
                     {{-- Edit/Delete hanya untuk pemilik --}}
                     @if($item->user_id == Auth::id())
-                        <a href="{{ route('siswa.bincang-karier.edit', $item->id) }}"
+                        <button onclick="openEditBincang({{ $item->id }}, `{{ $item->isi_pertanyaan }}`)"
                             class="text-slate-600 hover:text-slate-800 text-sm flex items-center gap-1">
                             <i class="fas fa-edit"></i>
                             Edit
-                        </a>
+                        </button>
 
                         <form action="{{ route('siswa.bincang-karier.destroy', $item->id) }}"
                               method="POST"
@@ -112,10 +112,15 @@
     @include('siswa.bincang_karier.create')
 </div>
 
+<div id="modalEditBincang" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+    @include('siswa.bincang_karier.edit')
+</div>
+
 @endsection
 
 @push('scripts')
     <script>
+        // ========== CREATE ==========
         function openCreateBincang() {
             document.getElementById('modalCreateBincang').classList.remove('hidden');
             document.getElementById('modalCreateBincang').classList.add('flex');
@@ -124,6 +129,22 @@
         function closeCreateBincang() {
             document.getElementById('modalCreateBincang').classList.add('hidden');
             document.getElementById('modalCreateBincang').classList.remove('flex');
+        }
+
+        // ========== EDIT ==========
+        function openEditBincang(id, isi) {
+            // Set action form update
+            document.getElementById('formEditBincang').action = `/siswa/bincang-karier/${id}`;
+            // Set textarea value
+            document.getElementById('editIsiPertanyaan').value = isi;
+
+            document.getElementById('modalEditBincang').classList.remove('hidden');
+            document.getElementById('modalEditBincang').classList.add('flex');
+        }
+
+        function closeEditBincang() {
+            document.getElementById('modalEditBincang').classList.add('hidden');
+            document.getElementById('modalEditBincang').classList.remove('flex');
         }
     </script>
 @endpush
