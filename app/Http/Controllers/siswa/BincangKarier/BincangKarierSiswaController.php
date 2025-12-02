@@ -24,7 +24,7 @@ class BincangKarierSiswaController extends Controller
      */
     public function create()
     {
-        return view('siswa.bincang_karier.create');
+        //
     }
 
     /**
