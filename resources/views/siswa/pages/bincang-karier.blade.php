@@ -80,15 +80,11 @@
                             Edit
                         </button>
 
-                        <form action="{{ route('siswa.bincang-karier.destroy', $item->id) }}"
-                              method="POST"
-                              onsubmit="return confirm('Yakin ingin menghapus pertanyaan ini?')">
-                            @csrf
-                            @method('DELETE')
-                            <button class="text-red-600 hover:text-red-700 text-sm flex items-center gap-1">
-                                <i class="fas fa-trash"></i> Hapus
-                            </button>
-                        </form>
+                        <button type="button"
+                                onclick="openDeleteBincang({{ $item->id }}, '{{ Str::limit(addslashes($item->isi_pertanyaan), 40) }}')"
+                                class="text-red-600 hover:text-red-700 text-sm flex items-center gap-1">
+                            <i class="fas fa-trash"></i> Hapus
+                        </button>
                     @endif
 
                 </div>
@@ -114,6 +110,10 @@
 
 <div id="modalEditBincang" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
     @include('siswa.bincang_karier.edit')
+</div>
+
+<div id="modalDeleteBincang" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+    @include('siswa.bincang_karier.delete')
 </div>
 
 @endsection
@@ -145,6 +145,20 @@
         function closeEditBincang() {
             document.getElementById('modalEditBincang').classList.add('hidden');
             document.getElementById('modalEditBincang').classList.remove('flex');
+        }
+
+        // ========== DELETE ==========
+        function openDeleteBincang(id, text) {
+            document.getElementById('modalDeleteBincang').classList.remove('hidden');
+            document.getElementById('modalDeleteBincang').classList.add('flex');
+            document.getElementById('deleteBincangText').textContent = '"' + text + '"';
+
+            const form = document.getElementById('deleteBincangForm');
+            form.action = `/siswa/bincang-karier/${id}`;
+        }
+
+        function closeDeleteBincang() {
+            document.getElementById('modalDeleteBincang').classList.add('hidden');
         }
     </script>
 @endpush

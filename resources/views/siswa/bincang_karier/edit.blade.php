@@ -1,11 +1,4 @@
 <div class="bg-white w-full max-w-lg rounded-2xl shadow-xl p-6 relative">
-
-    {{-- Close --}}
-    <button onclick="closeEditBincang()"
-            class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">
-        <i class="fas fa-times text-xl"></i>
-    </button>
-
     <h2 class="text-xl font-semibold text-slate-800 mb-4">Edit Pertanyaan</h2>
 
     <form id="formEditBincang" method="POST">
