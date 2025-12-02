@@ -57,6 +57,12 @@
                             'title' => 'Kontribusi SDGs',
                             'desc' => 'Perubahan nyata',
                         ],
+                        [
+                            'href' => route('siswa.bincang-karier.index'),
+                            'icon' => 'fas fa-globe',
+                            'title' => 'Bincang Karier',
+                            'desc' => 'Perubahan nyata',
+                        ],
                     ];
                 @endphp
 
