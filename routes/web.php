@@ -11,6 +11,7 @@ use App\Http\Controllers\HobiController;
 use App\Http\Controllers\SdgsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BincangKarierController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\KampusController;
 use App\Http\Controllers\MateriController;
@@ -51,6 +52,7 @@ use App\Http\Controllers\Siswa\KenaliJurusan\RekomendasiJurusanController;
 use App\Http\Controllers\Siswa\KontribusiSdgs\KontribusiSdgsSiswaController;
 use App\Http\Controllers\Siswa\EksplorasiKuliah\EksplorasiKuliahSiswaController;
 use App\Http\Controllers\Siswa\KontribusiSdgsSiswa\RekomendasiSdgsSiswaController;
+use App\Http\Controllers\TanggapanKarierController;
 
 Route::get('/', function () {
     return view('beranda');
@@ -149,6 +151,9 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
             Route::get('/user/{user}', [RekomendasiSdgsController::class, 'show'])->name('show');
         });
     });
+
+    Route::resource('bincang-karier', BincangKarierController::class);
+    Route::resource('tanggapan-sdgs', TanggapanKarierController::class);
 });
 
 Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->name('siswa.')->group(function () {
