@@ -31,7 +31,7 @@
                     ['icon' => 'fa-tools', 'label' => 'Eksplorasi Jurusan', 'route' => 'admin.eksplorasi-jurusan.index'],
                     ['icon' => 'fa-user-graduate', 'label' => 'Kenali Jurusan', 'route' => 'admin.kenali-jurusan.index'],
                     ['icon' => 'fa-leaf', 'label' => 'SDGs', 'route' => 'admin.sdgs.index'],
-                    ['icon' => 'fa-comments', 'label' => 'Bincang Karier', 'route' => 'admin.dashboard'],
+                    ['icon' => 'fa-comments', 'label' => 'Bincang Karier', 'route' => 'admin.bincang-karier.index'],
                 ];
             @endphp
 
