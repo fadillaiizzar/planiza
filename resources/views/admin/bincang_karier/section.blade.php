@@ -4,6 +4,7 @@
 
     @include('admin.components.header.header', [
         'pageTitle' => $pageTitle,
+        'addButtonText' => $addButtonText,
         'stats' => $stats,
         'filterOptions' => $filterOptions ?? [],
         'searchPlaceholder' => $searchPlaceholder ?? 'Cari...',
@@ -82,6 +83,7 @@
 @include('admin.bincang_karier.delete')
 
 <script>
+    // DELETE
     function showDeleteModal(id, name, action) {
         document.getElementById('deleteBincangModal').classList.remove('hidden');
         document.getElementById('deleteNamaBincang').innerText = name;
