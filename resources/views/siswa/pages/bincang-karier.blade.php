@@ -25,15 +25,15 @@
     </div>
 
     {{-- Card List --}}
-    <div class="grid grid-cols-1 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         @forelse($bincangKarier as $item)
-            <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition border border-gray-100 p-6">
+            <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition border border-gray-100 p-6 h-full flex flex-col justify-between">
                 <div class="flex items-start justify-between">
 
                     {{-- Left --}}
                     <div class="flex-1">
                         <h3 class="text-lg font-semibold text-slate-800 mb-2">
-                            {{ Str::limit($item->isi_pertanyaan, 120) }}
+                            {{ Str::limit($item->isi_pertanyaan, 43) }}
                         </h3>
 
                         <p class="text-sm text-gray-500 flex items-center gap-2">
