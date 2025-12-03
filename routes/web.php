@@ -153,7 +153,7 @@ Route::prefix('admin')->middleware(['auth', RoleMiddleware::class.':administrato
     });
 
     Route::resource('bincang-karier', BincangKarierController::class);
-    Route::resource('tanggapan-sdgs', TanggapanKarierController::class);
+    Route::resource('tanggapan-karier', TanggapanKarierController::class);
 });
 
 Route::prefix('siswa')->middleware(['auth', RoleMiddleware::class.':siswa'])->name('siswa.')->group(function () {
