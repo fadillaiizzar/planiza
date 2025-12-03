@@ -1,8 +1,8 @@
 <div class="mt-5 flex justify-center items-center mx-auto">
     <div class="flex space-x-2">
         @php
-            $total = $jurusans->lastPage();
-            $current = $jurusans->currentPage();
+            $total = $items->lastPage();
+            $current = $items->currentPage();
 
             if($total <= 5){
                 $pages = range(1, $total);
@@ -33,7 +33,7 @@
             @elseif($page == $current)
                 <span class="px-3 py-1 rounded-full bg-slate-navy text-off-white">{{ $page }}</span>
             @else
-                <a href="{{ $jurusans->url($page) }}" class="px-3 py-1 rounded-full bg-off-white text-slate-navy hover:bg-slate-navy hover:text-off-white transition">{{ $page }}</a>
+                <a href="{{ $items->url($page) }}" class="px-3 py-1 rounded-full bg-off-white text-slate-navy hover:bg-slate-navy hover:text-off-white transition">{{ $page }}</a>
             @endif
         @endforeach
     </div>

@@ -69,7 +69,7 @@
 
         <div class="mt-8">
             {{ $jurusans->links() }}
-            <x-paginate :jurusans="$jurusans" />
+            <x-paginate :items="$jurusans" />
         </div>
 
         <div class="mt-10 text-center">

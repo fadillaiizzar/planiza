@@ -104,7 +104,7 @@
     {{-- Pagination --}}
     <div class="mt-8">
         {{ $bincangKarier->links() }}
-        <x-paginate :jurusans="$bincangKarier" />
+        <x-paginate :items="$bincangKarier" />
     </div>
 </div>
 
