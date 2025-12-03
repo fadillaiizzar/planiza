@@ -44,6 +44,10 @@
                         <p class="text-xs text-gray-400 mt-1">
                             {{ $item->created_at->diffForHumans() }}
                         </p>
+
+                        <p class="text-sm text-blue-600 font-semibold mt-2">
+                            {{ $item->tanggapanKarier->count() }} Tanggapan
+                        </p>
                     </div>
 
                     {{-- Icon / Status --}}

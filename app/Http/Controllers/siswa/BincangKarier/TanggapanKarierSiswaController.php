@@ -29,12 +29,14 @@ class TanggapanKarierSiswaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $bincangKarierId)
+    public function store(Request $request)
     {
         $request->validate([
-            'isi_tanggapan' => 'required|string|max:5000'
+            'isi_tanggapan' => 'required|string|max:5000',
+            'bincang_karier_id' => 'required|integer|exists:bincang_kariers,id'
         ]);
 
+        $bincangKarierId = $request->input('bincang_karier_id');
         // Pastikan pertanyaan ada
         $bincangKarier = BincangKarier::findOrFail($bincangKarierId);
 
