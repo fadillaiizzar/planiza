@@ -50,8 +50,9 @@ class BincangKarierSiswaController extends Controller
     public function show($id)
     {
         $bincangKarier = BincangKarier::with(['user', 'tanggapanKarier.user'])->findOrFail($id);
+        $tanggapanKarier = $bincangKarier->tanggapanKarier;
 
-        return view('siswa.bincang_karier.show', compact('bincangKarier'));
+        return view('siswa.bincang_karier.show', compact('bincangKarier', 'tanggapanKarier'));
     }
 
     /**
