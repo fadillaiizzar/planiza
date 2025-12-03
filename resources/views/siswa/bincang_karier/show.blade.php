@@ -49,7 +49,12 @@
     </div>
 
     {{-- Judul Komentar --}}
-    <h3 class="text-lg font-semibold text-slate-800 mb-4">Diskusi & Tanggapan</h3>
+    <h3 class="text-lg font-semibold text-slate-800 mb-4">
+        Diskusi & Tanggapan
+        <span>
+            — {{ $bincangKarier->tanggapanKarier->count() }}
+        </span>
+    </h3>
 
     {{-- Loop Tanggapan --}}
     @forelse($bincangKarier->tanggapanKarier as $tanggapan)
@@ -75,25 +80,23 @@
                     {{-- Aksi pemilik tanggapan --}}
                     @if($tanggapan->user_id == Auth::id())
                         <div class="flex items-center gap-3 mt-3">
-                            <a href="{{ route('siswa.tanggapan-karier.edit', $tanggapan->id) }}"
+                            <button onclick="openModal('modalEditTanggapan-{{ $tanggapan->id }}')"
                                 class="text-blue-600 hover:text-blue-700 text-sm flex items-center gap-1">
                                 <i class="fas fa-edit text-xs"></i> Edit
-                            </a>
+                            </button>
 
-                            <form action="{{ route('siswa.tanggapan-karier.destroy', $tanggapan->id) }}"
-                                  method="POST"
-                                  onsubmit="return confirm('Hapus tanggapan ini?')">
-                                @csrf @method('DELETE')
-                                <button type="submit"
-                                    class="text-red-600 hover:text-red-700 text-sm flex items-center gap-1">
-                                    <i class="fas fa-trash text-xs"></i> Hapus
-                                </button>
-                            </form>
+                            <button onclick="openModal('modalDeleteTanggapan-{{ $tanggapan->id }}')"
+                                class="text-red-600 hover:text-red-700 text-sm flex items-center gap-1">
+                                <i class="fas fa-trash text-xs"></i> Hapus
+                            </button>
                         </div>
                     @endif
                 </div>
             </div>
         </div>
+
+        @include('siswa.bincang_karier.tanggapan_karier.edit')
+        @include('siswa.bincang_karier.tanggapan_karier.delete')
     @empty
         <p class="text-gray-500 text-sm italic">Belum ada tanggapan. Jadilah yang pertama membalas.</p>
     @endforelse
@@ -126,3 +129,17 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script>
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+            document.getElementById(id).classList.add('flex');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+            document.getElementById(id).classList.remove('flex');
+        }
+    </script>
+@endpush
