@@ -9,6 +9,10 @@
 
             $totalKontribusi = $user->kontribusiSdgs()->count() ?? 0;
 
+            $bincangKarier = $user->bincangKarier()->count() ?? 0;
+            $tanggapanKarier = $user->tanggapanKarier()->count() ?? 0;
+            $totalBincangKarier = $bincangKarier + $tanggapanKarier;
+
             $stats = [
                 [
                     'icon' => 'fas fa-chart-bar',
@@ -30,7 +34,7 @@
                     'icon' => 'fas fa-comments',
                     'colorIcon' => 'text-purple-600',
                     'bgColor' => 'bg-purple-100',
-                    'number' => 0,
+                    'number' => $totalBincangKarier,
                     'title' => 'Bincang Karir',
                     'desc' => 'Diskusi yang telah diikuti',
                 ],
