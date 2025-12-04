@@ -15,6 +15,8 @@ class KontribusiSdgsSiswaController extends Controller
         $user = Auth::user();
         $siswa = $user->siswa ?? null;
 
+        $totalKontribusiSdgs = KontribusiSdgs::count();
+
         $kategoriSdgs = KategoriSdgs::orderBy('nomor_kategori')->get();
 
         // 🔹 Riwayat kontribusi user yang sudah submit
@@ -23,7 +25,7 @@ class KontribusiSdgsSiswaController extends Controller
             ->orderBy('created_at', 'asc')
             ->get();
 
-       return view('siswa.pages.kontribusi-sdgs', compact('siswa', 'kategoriSdgs', 'riwayatKontribusi'));
+       return view('siswa.pages.kontribusi-sdgs', compact('siswa', 'totalKontribusiSdgs', 'kategoriSdgs', 'riwayatKontribusi'));
     }
 
     public function store(Request $request)

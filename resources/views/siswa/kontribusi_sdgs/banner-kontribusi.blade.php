@@ -46,7 +46,7 @@
             <!-- Stats Preview -->
             <div class="flex items-center gap-4 bg-white bg-opacity-10 backdrop-blur-md border border-white border-opacity-30 rounded-2xl px-8 py-3">
                 <div class="text-center">
-                    <div class="text-2xl font-black text-white">5000+</div>
+                    <div class="text-2xl font-black text-white">{{ $totalKontribusiSdgs }}+</div>
                     <div class="text-xs text-blue-200">Kontribusi</div>
                 </div>
             </div>
