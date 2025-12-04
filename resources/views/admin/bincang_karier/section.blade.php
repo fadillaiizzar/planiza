@@ -51,19 +51,17 @@
                                         <span>Detail</span>
                                     </a>
                                     <div class="border-t border-border-gray"></div>
-                                    <form action="{{ route('admin.bincang-karier.destroy', $item->id) }}" method="POST" class="w-full">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="button"
-                                            onclick="showDeleteModal({{ $item->id }}, '{{ addslashes(Str::limit($item->isi_pertanyaan, 30)) }}', '{{ route('admin.bincang-karier.destroy', $item->id) }}')"
-                                            class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base">
-                                            <i class="fas fa-trash-alt w-5 h-5"></i>
-                                            <span>Hapus</span>
-                                        </button>
-                                    </form>
+                                    <button type="button"
+                                        onclick="openModalDelete('deleteBincangModal-{{ $item->id }}')"
+                                        class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base">
+                                        <i class="fas fa-trash-alt w-5 h-5"></i>
+                                        <span>Hapus</span>
+                                    </button>
                                 </div>
                             </td>
                         </tr>
+
+                        @include('admin.bincang_karier.delete')
                     @empty
                         <x-empty-state
                             icon="fas fa-comments"
@@ -75,24 +73,19 @@
                 </tbody>
             </table>
         </div>
-
-
     </section>
 </div>
 
-@include('admin.bincang_karier.delete')
+
 
 <script>
-    // DELETE
-    function showDeleteModal(id, name, action) {
-        document.getElementById('deleteBincangModal').classList.remove('hidden');
-        document.getElementById('deleteNamaBincang').innerText = name;
-        document.getElementById('deleteBincangForm').action = action;
-        const form = document.getElementById('deleteForm');
-        form.action = action;
+    function openModalDelete(id) {
+        document.getElementById(id).classList.remove('hidden');
+        document.getElementById(id).classList.add('flex');
     }
 
-    function closeDeleteModal() {
-        document.getElementById('deleteBincangModal').classList.add('hidden');
+    function closeModalDelete(id) {
+        document.getElementById(id).classList.add('hidden');
+        document.getElementById(id).classList.remove('flex');
     }
 </script>
