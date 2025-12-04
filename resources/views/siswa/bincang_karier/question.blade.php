@@ -9,22 +9,10 @@
 
             {{-- User Info & Content --}}
             <div class="flex-1 min-w-0">
-                <div class="flex items-start justify-between gap-3">
-                    <div>
-                        <h2 class="text-base font-bold text-slate-navy mb-1">
-                            {{ $bincangKarier->user->name }}
-                        </h2>
-                        <div class="flex flex-col sm:flex-row items-start gap-1 sm:gap-3 text-xs text-cool-gray">
-                            <span class="flex items-center gap-1.5">
-                                <i class="fas fa-clock"></i>
-                                {{ $bincangKarier->created_at->format('d M Y, H:i') }}
-                            </span>
-                            <span class="flex items-center gap-1.5">
-                                <i class="fas fa-comments"></i>
-                                {{ $bincangKarier->tanggapanKarier->count() }} Tanggapan
-                            </span>
-                        </div>
-                    </div>
+                <div class="flex items-start justify-between gap-3 mb-1 sm:mb-0">
+                    <h2 class="text-base font-bold text-slate-navy mb-1">
+                        {{ $bincangKarier->user->name }}
+                    </h2>
 
                     {{-- Status Badge --}}
                     @if($bincangKarier->tanggapanKarier->count() > 0)
@@ -38,6 +26,17 @@
                             Menunggu
                         </span>
                     @endif
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-start gap-1 sm:gap-3 text-xs text-cool-gray">
+                    <span class="flex items-center gap-1.5">
+                        <i class="fas fa-clock"></i>
+                        {{ $bincangKarier->created_at->format('d M Y, H:i') }}
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                        <i class="fas fa-comments"></i>
+                        {{ $bincangKarier->tanggapanKarier->count() }} Tanggapan
+                    </span>
                 </div>
             </div>
         </div>
