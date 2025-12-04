@@ -29,7 +29,7 @@
                     class="text-cool-gray hover:text-slate-navy transition">
                     Kenali Karir
                 </a>
-                <a href="#" class="text-cool-gray hover:text-slate-navy transition">Bincang Karir</a>
+                <a href="{{ route('siswa.bincang-karier.index') }}" class="text-cool-gray hover:text-slate-navy transition">Bincang Karir</a>
             </div>
         </div>
 
@@ -85,6 +85,6 @@
             class="block py-2 text-cool-gray hover:text-slate-navy">
             Kenali Karir
         </a>
-        <a href="#" class="block py-2 text-cool-gray hover:text-slate-navy">Bincang Karir</a>
+        <a href="{{ route('siswa.bincang-karier.index') }}" class="block py-2 text-cool-gray hover:text-slate-navy">Bincang Karir</a>
     </div>
 </nav>
