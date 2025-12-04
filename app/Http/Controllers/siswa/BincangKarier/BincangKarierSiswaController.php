@@ -16,7 +16,13 @@ class BincangKarierSiswaController extends Controller
     {
         $bincangKarier = BincangKarier::with('user')->latest()->paginate(10);
 
-        return view('siswa.pages.bincang-karier', compact('bincangKarier'));
+        // Stats
+        $totalQuestions = BincangKarier::count();
+        $myQuestions = BincangKarier::where('user_id', Auth::id())->count();
+        $answeredQuestions = BincangKarier::has('tanggapanKarier')->count();
+        $pendingQuestions = BincangKarier::doesntHave('tanggapanKarier')->count();
+
+        return view('siswa.pages.bincang-karier', compact('bincangKarier', 'totalQuestions', 'myQuestions', 'answeredQuestions', 'pendingQuestions'));
     }
 
     /**
