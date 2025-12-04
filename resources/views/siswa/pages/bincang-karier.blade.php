@@ -14,15 +14,13 @@
     />
 
     {{-- Button + Search --}}
-    <div class="flex flex-col sm:flex-row sm:justify-between gap-4 mb-6">
-        <x-siswa.search-bar id="search" placeholder="Cari pertanyaan..." />
+    <x-siswa.search-bar id="search" placeholder="Cari pertanyaan..." />
 
-        <button onclick="openCreateBincang()"
-            class="bg-slate-navy text-white px-4 py-2 rounded-xl shadow hover:shadow-lg transition text-sm font-semibold flex items-center gap-2">
-            <i class="fas fa-plus"></i>
-            Buat Pertanyaan
-        </button>
-    </div>
+    <button onclick="openCreateBincang()"
+        class="bg-slate-navy text-white px-4 py-2 rounded-xl shadow hover:shadow-lg transition text-sm font-semibold flex items-center gap-2 mb-4">
+        <i class="fas fa-plus"></i>
+        Buat Pertanyaan
+    </button>
 
     {{-- Card List --}}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
