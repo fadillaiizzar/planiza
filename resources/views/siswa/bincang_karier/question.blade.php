@@ -9,7 +9,7 @@
                 {{ $bincangKarier->user->name }}
             </h2>
             <p class="text-gray-400 text-xs mb-4">
-                {{ $bincangKarier->created_at->diffForHumans() }}
+                {{ $bincangKarier->created_at->format('d M Y H:i') }}
             </p>
 
             <div class="text-slate-700 leading-relaxed text-[15px]">
