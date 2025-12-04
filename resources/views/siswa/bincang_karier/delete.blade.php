@@ -14,11 +14,9 @@
         <h3 class="text-xl font-bold text-[#1E293B] mb-2">Hapus Pertanyaan</h3>
 
         <p class="text-[#64748B] mb-6 leading-relaxed text-sm sm:text-base">
-            Apakah Anda yakin ingin menghapus pertanyaan :
-            <br>
-            <span id="deleteBincangText" class="font-semibold text-slate-700"></span>
-            <br>
-            <span class="text-sm text-red-500 mt-3 block">
+            Apakah Anda yakin ingin menghapus pertanyaan
+            <span id="deleteBincangText"></span>
+            <span class="text-sm text-red-500 mt-2 block">
                 Tindakan ini tidak dapat dibatalkan
             </span>
         </p>

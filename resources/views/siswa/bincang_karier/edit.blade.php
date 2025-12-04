@@ -1,32 +1,46 @@
-<div class="bg-white w-full max-w-lg rounded-2xl shadow-xl p-6 relative">
-    <h2 class="text-xl font-semibold text-slate-800 mb-4">Edit Pertanyaan</h2>
+<div class="w-full max-w-2xl bg-white rounded-2xl shadow-xl border border-slate-200
+            overflow-hidden max-h-[90vh] overflow-y-auto scrollbar-none">
 
-    <form id="formEditBincang" method="POST">
-        @csrf
-        @method('PUT')
-
-        <div class="mb-4">
-            <label class="text-sm font-medium text-slate-700">Pertanyaan</label>
-            <textarea
-                name="isi_pertanyaan"
-                id="editIsiPertanyaan"
-                rows="5"
-                class="w-full border border-gray-300 rounded-xl p-3 mt-1 focus:ring focus:ring-blue-200"
-                placeholder="Tulis pertanyaanmu..."
-                required></textarea>
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-slate-700 to-slate-800 px-6 py-4">
+        <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 20h9M3 20h9m-9-4h6m-6-4h12M3 8h12M3 4h18" />
+                </svg>
+            </div>
+            <h2 class="text-lg font-semibold text-white">Edit Pertanyaan</h2>
         </div>
+    </div>
 
-        <div class="flex justify-end gap-3 mt-5">
-            <button type="button"
-                onclick="closeEditBincang()"
-                class="px-4 py-2 rounded-lg border">
-                Batal
-            </button>
+    <!-- Body -->
+    <div class="px-6 pt-4 pb-6">
+        <form id="formEditBincang" method="POST" class="space-y-4">
+            @csrf
+            @method('PUT')
 
-            <button type="submit"
-                class="px-4 py-2 rounded-lg bg-slate-navy text-white">
-                Simpan Perubahan
-            </button>
-        </div>
-    </form>
+            <div class="space-y-1">
+                <label class="block text-sm font-semibold text-slate-700">Pertanyaan</label>
+                <textarea name="isi_pertanyaan" id="editIsiPertanyaan" rows="5" required
+                    class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm text-slate-900 bg-white
+                           focus:ring-2 focus:ring-slate-300 focus:outline-none"
+                    placeholder="Tulis pertanyaanmu..."></textarea>
+            </div>
+
+            <div class="flex items-center justify-center pt-4 gap-5">
+                <button type="button"
+                    onclick="closeEditBincang()"
+                    class="text-slate-600 hover:text-slate-800 font-medium transition-all duration-200 hover:underline">
+                    Batal
+                </button>
+
+                <button type="submit"
+                    class="bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900
+                           text-white font-semibold px-6 py-2 rounded-xl transition-all duration-200">
+                    Simpan Perubahan
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
