@@ -3,7 +3,7 @@
 @section('title', 'Detail Bincang Karier')
 
 @section('content')
-<div class="px-4 py-8 sm:px-8">
+<div class="w-full px-4 py-8 sm:px-8">
 
     {{-- Header --}}
     <div class="flex items-center justify-between mb-6">
@@ -32,8 +32,8 @@
     </div>
 
     {{-- Tanggapan --}}
-    <div class="max-h-[500px] overflow-y-auto space-y-4">
-        @foreach($tanggapanKarier as $tanggapan)
+    @foreach($tanggapanKarier as $tanggapan)
+        <div class="max-h-[500px] overflow-y-auto space-y-4">
             <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
                 <div class="flex items-start gap-3">
                     <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
@@ -62,14 +62,13 @@
                     </div>
                 </div>
             </div>
-
+        </div>
             {{-- Modal Edit --}}
             @include('admin.bincang_karier.tanggapan_karier.edit', ['tanggapan' => $tanggapan])
 
             {{-- Modal Delete --}}
             @include('admin.bincang_karier.tanggapan_karier.delete', ['tanggapan' => $tanggapan])
-        @endforeach
-    </div>
+    @endforeach
 
     {{-- Form Tanggapan Admin --}}
     <div class="bg-white border border-gray-200 rounded-2xl shadow p-6 mt-6">
