@@ -9,7 +9,7 @@
     {{-- Header Section --}}
     <x-siswa.section-header
         title="Bincang Karier"
-        subtitle="Ajukan pertanyaan seputar pilihan karier, jurusan kuliah, dan masa depanmu. Konselor siap membantu menjelaskan jawaban terbaik untuk kamu."
+        subtitle="Ajukan pertanyaan seputar pilihan karier, jurusan kuliah, dan masa depanmu"
         back-route="siswa.dashboard"
     />
 
