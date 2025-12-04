@@ -13,30 +13,13 @@
         back-route="siswa.bincang-karier.index"
     />
 
+    {{-- Question --}}
     @include('siswa.bincang_karier.question')
 
-    @include('siswa.bincang_karier.comments_header')
+    {{-- Comments List --}}
+    @include('siswa.bincang_karier.comments')
 
-    @php
-        $total = $bincangKarier->tanggapanKarier->count();
-        $firstThree = $bincangKarier->tanggapanKarier->take(3);
-        $moreTanggapan = $bincangKarier->tanggapanKarier->skip(3);
-    @endphp
-
-    @if($total === 0)
-        <p class="text-gray-500 text-sm italic mb-4">
-            Belum ada tanggapan. Jadilah yang pertama membalas.
-        </p>
-    @else
-        <div class="max-h-72 overflow-y-auto border border-gray-200 rounded-xl bg-white divide-y divide-gray-100">
-            @foreach($bincangKarier->tanggapanKarier as $tanggapan)
-                <div class="p-4">
-                    @include('siswa.bincang_karier.item')
-                </div>
-            @endforeach
-        </div>
-    @endif
-
+    {{-- Form Reply --}}
     @include('siswa.bincang_karier.form_reply')
 </div>
 @endsection
