@@ -16,24 +16,33 @@
     <section class="bg-off-white rounded-2xl shadow-lg p-6">
         <x-h3>{{ $statistikTitle }}</x-h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            @php
+                $statCards = [
+                    [
+                        'icon' => 'fas fa-user-graduate',
+                        'label' => $labelKelas,
+                        'items' => $materiPerKelas,
+                    ],
+                    [
+                        'icon' => 'fas fa-school',
+                        'label' => $labelJurusan,
+                        'items' => $materiPerJurusan,
+                    ],
+                    [
+                        'icon' => 'fas fa-tasks',
+                        'label' => $labelRencana,
+                        'items' => $materiPerRencana,
+                    ],
+                ];
+            @endphp
 
-            @include('components.admin.materi.materi-card', [
-                'icon' => 'fas fa-user-graduate',
-                'label' => $labelKelas,
-                'items' => $materiPerKelas ?? []
-            ])
-
-            @include('components.admin.materi.materi-card', [
-                'icon' => 'fas fa-school',
-                'label' => $labelJurusan,
-                'items' => $materiPerJurusan ?? []
-            ])
-
-            @include('components.admin.materi.materi-card', [
-                'icon' => 'fas fa-tasks',
-                'label' => $labelRencana,
-                'items' => $materiPerRencana ?? []
-            ])
+            @foreach ($statCards as $card)
+                <x-admin.statistic-card
+                    :icon="$card['icon']"
+                    :label="$card['label']"
+                    :items="$card['items']"
+                />
+            @endforeach
         </div>
     </section>
 

@@ -34,11 +34,11 @@
             <section class="bg-off-white rounded-2xl shadow-lg p-6">
                 <x-h3>Statistik User</x-h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    @include('components.admin.materi.materi-card', [
-                        'icon' => 'fas fa-user-shield',
-                        'label' => 'Role',
-                        'items' => $roleCounts
-                    ])
+                    <x-admin.statistic-card
+                        icon="fas fa-user-shield"
+                        label="Role"
+                        :items="$roleCounts"
+                    />
                 </div>
             </section>
 

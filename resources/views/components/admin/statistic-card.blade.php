@@ -2,11 +2,13 @@
     <h4 class="text-lg font-semibold text-slate-navy mb-4">
         <i class="{{ $icon }}"></i> {{ $label }}
     </h4>
-    <ul class="space-y-2 text-cool-gray">
-        @forelse(($items ?? []) as $name => $group)
+
+    <!-- Wrapper scroll -->
+    <ul class="space-y-2 text-cool-gray max-h-36 overflow-y-auto pr-1">
+        @forelse(($items ?? []) as $name => $count)
             <li class="flex justify-between items-center border-b border-border-gray pb-1 last:border-none last:pb-0">
-                <span>{{ $name ?: 'Tidak ada data' }}</span>
-                <strong class="text-slate-navy">{{ $group }}</strong>
+                <span>{{ $name }}</span>
+                <strong class="text-slate-navy">{{ $count }}</strong>
             </li>
         @empty
             <li class="text-gray-500 text-sm italic">Belum ada data</li>
