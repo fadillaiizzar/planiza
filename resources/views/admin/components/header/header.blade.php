@@ -11,36 +11,41 @@
 @endphp
 
 <!-- Mobile header -->
-<div class="md:hidden flex justify-between items-center mb-4">
-    <div class="flex items-center gap-2">
-        <button onclick="toggleSidebar()" class="text-2xl text-slate-navy hover:text-cool-gray transition-colors">
-            <i class="fas fa-bars"></i>
-        </button>
-        <h1 class="text-lg ml-3 md:ml-0 font-semibold bg-gradient-to-r from-slate-navy to-cool-gray bg-clip-text text-transparent">
-            {{ $pageTitle }}
-        </h1>
+<div class="md:hidden flex flex-col mb-4 gap-3">
+    <!-- Row Judul + Sidebar Toggle -->
+    <div class="flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <button onclick="toggleSidebar()" class="text-2xl text-slate-navy hover:text-cool-gray transition-colors">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1 class="text-lg ml-3 font-semibold bg-gradient-to-r from-slate-navy to-cool-gray bg-clip-text text-transparent">
+                {{ $pageTitle }}
+            </h1>
+        </div>
     </div>
 
-    <div class="flex gap-2">
+    <!-- Button Area -->
+    <div class="flex flex-row flex-wrap gap-2">
         @if(!empty($showExport))
             <a href="{{ route($exportRoute ?? '#') }}"
-               class="px-3 py-2 bg-off-white/80 backdrop-blur-sm text-slate-navy hover:bg-off-white border border-border-gray rounded-lg transition-all shadow-sm hover:shadow-md">
+               class="px-4 py-2 bg-off-white/80 backdrop-blur-sm text-slate-navy hover:bg-off-white border border-border-gray rounded-lg transition-all shadow-sm hover:shadow-md flex items-center gap-1">
                 <i class="fas fa-download"></i>
+                <span>Export</span>
             </a>
         @endif
 
         @if(!empty($addButtonText))
             @if(!empty($addRoute))
                 <a href="{{ route($addRoute) }}"
-                   class="bg-gradient-to-r from-slate-navy to-cool-gray text-off-white px-4 py-2 rounded-lg hover:from-cool-gray hover:to-slate-navy transition-all shadow-lg hover:shadow-xl">
-                    <i class="fas fa-user-plus mr-0 sm:mr-2"></i>
-                    {{ $addButtonText }}
+                   class="px-4 py-2 bg-gradient-to-r from-slate-navy to-cool-gray text-off-white rounded-lg hover:from-cool-gray hover:to-slate-navy transition-all shadow-lg hover:shadow-xl flex items-center gap-1">
+                    <i class="fas fa-user-plus"></i>
+                    <span>{{ $addButtonText }}</span>
                 </a>
             @else
                 <button onclick="openModal()"
-                        class="bg-gradient-to-r from-slate-navy to-cool-gray text-off-white px-4 py-2 rounded-lg hover:from-cool-gray hover:to-slate-navy transition-all shadow-lg hover:shadow-xl">
-                    <i class="fas fa-user-plus mr-0 sm:mr-2"></i>
-                    {{ $addButtonText }}
+                    class="px-4 py-2 bg-gradient-to-r from-slate-navy to-cool-gray text-off-white rounded-lg hover:from-cool-gray hover:to-slate-navy transition-all shadow-lg hover:shadow-xl flex items-center gap-1">
+                    <i class="fas fa-user-plus"></i>
+                    <span>{{ $addButtonText }}</span>
                 </button>
             @endif
         @endif
