@@ -14,13 +14,13 @@
     <section class="bg-off-white rounded-2xl shadow-lg p-6">
         <x-h3>{{ $statistikTitle }}</x-h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <x-admin.eksplorasi_kerja.industri-profesi-card
+            <x-admin.statistic-card
                 icon="fas fa-briefcase"
                 :label="$labelProfesi"
                 :items="$profesiKategori"
             />
 
-            <x-admin.eksplorasi_kerja.industri-profesi-card
+            <x-admin.statistic-card
                 icon="fas fa-folder-open"
                 :label="$labelKategori"
                 :items="$kategoriProfesi"

@@ -2,7 +2,7 @@
     <h4 class="text-lg font-semibold text-slate-navy mb-4">
         <i class="{{ $icon }}"></i> {{ $label }}
     </h4>
-    <ul class="space-y-3 text-cool-gray">
+    <ul class="space-y-3 text-cool-gray max-h-36 overflow-y-auto pr-1">
         @forelse(($items ?? []) as $kategori => $data)
             <li class="border-b border-border-gray pb-2 last:border-none">
                 <!-- Judul kategori + jumlah -->
