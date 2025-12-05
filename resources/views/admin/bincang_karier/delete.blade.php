@@ -36,7 +36,7 @@
                 @method('DELETE')
 
                 <button type="button"
-                        onclick="closeModalDelete('deleteBincangModal-{{ $item->id }}')"
+                        onclick="closeActionModal('deleteBincangModal-{{ $item->id }}')"
                         class="hover:bg-gray-100 text-[#64748B] transition-all duration-200 font-medium w-full sm:w-auto px-4 py-2 rounded-full">
                     Batal
                 </button>

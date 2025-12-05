@@ -51,8 +51,18 @@
                                         <span>Detail</span>
                                     </a>
                                     <div class="border-t border-border-gray"></div>
+                                    @if ($item->user_id === Auth::id())
+                                        <button type="button"
+                                            onclick="openActionModal('editBincangModal-{{ $item->id }}')"
+                                            class="w-full text-left px-5 py-3 hover:bg-green-50 flex items-center gap-3 text-green-600 transition-colors text-base">
+                                            <i class="fas fa-edit w-5 h-5"></i>
+                                            <span>Edit</span>
+                                        </button>
+
+                                        <div class="border-t border-border-gray"></div>
+                                    @endif
                                     <button type="button"
-                                        onclick="openModalDelete('deleteBincangModal-{{ $item->id }}')"
+                                        onclick="openActionModal('deleteBincangModal-{{ $item->id }}')"
                                         class="w-full text-left px-5 py-3 hover:bg-red-50 flex items-center gap-3 text-red-600 transition-colors text-base">
                                         <i class="fas fa-trash-alt w-5 h-5"></i>
                                         <span>Hapus</span>
@@ -61,6 +71,7 @@
                             </td>
                         </tr>
 
+                        @include('admin.bincang_karier.edit')
                         @include('admin.bincang_karier.delete')
                     @empty
                         <x-empty-state
@@ -75,17 +86,3 @@
         </div>
     </section>
 </div>
-
-
-
-<script>
-    function openModalDelete(id) {
-        document.getElementById(id).classList.remove('hidden');
-        document.getElementById(id).classList.add('flex');
-    }
-
-    function closeModalDelete(id) {
-        document.getElementById(id).classList.add('hidden');
-        document.getElementById(id).classList.remove('flex');
-    }
-</script>

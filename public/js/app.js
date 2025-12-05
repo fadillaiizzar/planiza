@@ -49,3 +49,13 @@ function toggleDropdown(id) {
     });
 }
 
+// function modal edit dan delete
+function openActionModal(id) {
+    document.getElementById(id).classList.remove('hidden');
+    document.getElementById(id).classList.add('flex');
+}
+
+function closeActionModal(id) {
+    document.getElementById(id).classList.add('hidden');
+    document.getElementById(id).classList.remove('flex');
+}
