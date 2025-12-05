@@ -12,9 +12,10 @@
         <div class="flex min-h-screen">
             @include('admin.components.sidebar.sidebar')
 
-            @yield('content')
-
-            @stack('scripts')
+            <main id="mainContent" class="flex-1 h-screen overflow-y-auto">
+                @yield('content')
+                @stack('scripts')
+            </main>
         </div>
     </body>
 </html>
