@@ -15,19 +15,21 @@
         />
 
         <x-siswa.search-bar
-            id="search" placeholder="Cari profesi favoritmu..."
+            id="search-profesi"
+            placeholder="Cari profesi favoritmu..."
+            :includeSmk="true"
         />
 
         @foreach($jurusans as $jurusan)
-            <div class="mb-10">
+            <div class="jurusan-smk-group mb-10">
                 <h2 class="text-xl font-bold text-slate-700 mb-4">
                     {{ $jurusanNames[$jurusan] ?? $jurusan }}
                 </h2>
 
                 {{-- Grid Profesi per Jurusan --}}
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-search-container="search-profesi">
                     @forelse($profesiKerjas[$jurusan] ?? [] as $profesi)
-                        <div class="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden">
+                        <div class="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden" data-search-item="{{ $profesi->nama_profesi_kerja }}"  data-search-smk="{{ $jurusanNames[$jurusan] ?? '' }}">
                             <div class="w-full h-40 bg-gray-200 overflow-hidden">
                                 @if($profesi->gambar)
                                     <img src="{{ asset('storage/' . $profesi->gambar) }}"
@@ -46,10 +48,6 @@
                                 </h3>
 
                                 <div class="flex gap-3 justify-start w-full">
-                                    {{-- <p class="flex-1 text-sm text-center border border-border-gray px-4 py-2 rounded-lg transition">
-                                        <i class="fas fa-money-bill-wave"></i> Rp{{ number_format($profesi->gaji, 0, ',', '.') }}
-                                    </p> --}}
-
                                     <a href="{{ route('siswa.eksplorasi-profesi.show', $profesi->id) }}"
                                     class="flex-1 text-sm text-center bg-slate-navy text-white px-4 py-2 rounded-lg transition">
                                         Lihat Detail

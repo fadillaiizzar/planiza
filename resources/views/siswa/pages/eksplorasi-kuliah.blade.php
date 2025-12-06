@@ -12,18 +12,22 @@
 
         <x-siswa.info-siswa :siswa="$siswa" />
 
-        <x-siswa.search-bar id="search" placeholder="Cari jurusan kuliah..." />
+        <x-siswa.search-bar
+            id="search-jurusan"
+            placeholder="Cari jurusan favoritmu..."
+            :includeSmk="true"
+        />
 
         @foreach ($jurusans  as $jurusan)
-            <div class="mb-10">
+            <div class="jurusan-smk-group mb-10">
                 <h2 class="text-xl font-bold text-slate-700 mb-4">
                     {{ $jurusanNames[$jurusan] ?? $jurusan }}
                 </h2>
 
                 {{-- Grid Jurusan Kuliah per Kategori --}}
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-search-container="search-jurusan">
                     @forelse ($jurusanKuliahs[$jurusan] ?? [] as $jurusanKuliah)
-                        <div class="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden">
+                        <div class="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden" data-search-item="{{ $jurusanKuliah->nama_jurusan_kuliah }}" data-search-smk="{{ $jurusanNames[$jurusan] ?? '' }}">
                             <div class="w-full h-40 bg-gray-200 overflow-hidden">
                                 @if ($jurusanKuliah->gambar)
                                     <img src="{{ asset('storage/' . $jurusanKuliah->gambar) }}"
