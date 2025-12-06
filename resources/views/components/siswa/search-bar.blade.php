@@ -1,7 +1,7 @@
 @props([
     'id' => 'search',
     'placeholder' => 'Cari sesuatu...',
-    'includeSmk' => false // default false, kalau true search juga nama jurusan SMK
+    'includeSmk' => false
 ])
 
 <div class="mb-8">
@@ -36,13 +36,48 @@
     <script>
         const searchInput = document.getElementById('{{ $id }}');
         const includeSmk = {{ $includeSmk ? 'true' : 'false' }};
-        const containers = document.querySelectorAll('[data-search-container="{{ $id }}"]');
         const noResult = document.getElementById('{{ $id }}-no-result');
 
         searchInput.addEventListener('input', function(e) {
             const searchTerm = e.target.value.toLowerCase().trim();
             let totalVisible = 0;
 
+            // ===== Materi & Topik =====
+            const cards = document.querySelectorAll('.card-materi');
+            cards.forEach(card => {
+                const title = card.querySelector('h2').textContent.toLowerCase();
+                const panel = card.querySelector('.panel-materi');
+                const materiItems = panel ? panel.querySelectorAll('a') : [];
+
+                let matchTopik = title.includes(searchTerm);
+                let matchMateri = false;
+
+                materiItems.forEach(item => {
+                    const materiName = item.querySelector('p').textContent.toLowerCase();
+                    if (materiName.includes(searchTerm)) {
+                        matchMateri = true;
+                        item.style.display = "";
+                    } else {
+                        item.style.display = searchTerm && !matchTopik ? "none" : "";
+                    }
+                });
+
+                if (searchTerm && matchMateri) {
+                    panel.classList.remove('hidden');
+                } else if (!searchTerm) {
+                    panel.classList.add('hidden');
+                }
+
+                if (matchTopik || matchMateri) {
+                    card.style.display = '';
+                    totalVisible++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // ===== Container data-search-item (SMK / Lama) =====
+            const containers = document.querySelectorAll('[data-search-container="{{ $id }}"]');
             containers.forEach(container => {
                 const items = container.querySelectorAll('[data-search-item]');
                 let containerHasVisible = false;
@@ -62,7 +97,6 @@
                     }
                 });
 
-                // Show/hide container dan header SMK
                 const parentGroup = container.closest('.jurusan-smk-group');
                 if (parentGroup) {
                     parentGroup.style.display = containerHasVisible ? '' : 'none';
@@ -78,11 +112,20 @@
 
             // Reset kalau search kosong
             if (searchTerm === '') {
+                cards.forEach(card => {
+                    card.style.display = '';
+                    const panel = card.querySelector('.panel-materi');
+                    if (panel) panel.classList.add('hidden');
+                    const materiItems = panel ? panel.querySelectorAll('a') : [];
+                    materiItems.forEach(item => item.style.display = '');
+                });
+
                 containers.forEach(container => {
                     container.querySelectorAll('[data-search-item]').forEach(item => item.style.display = '');
                     const parentGroup = container.closest('.jurusan-smk-group');
                     if (parentGroup) parentGroup.style.display = '';
                 });
+
                 noResult.classList.add('hidden');
             }
         });

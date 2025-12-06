@@ -14,18 +14,12 @@
 
             <x-siswa.info-siswa :siswa="$siswa" />
 
-            {{-- Search Bar dengan Design Modern --}}
-            <div class="mb-8">
-                <div class="relative max-w-2xl mx-auto z-30">
-                    <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
-                        <i class="fas fa-search text-cool-gray text-lg"></i>
-                    </div>
-                    <input type="text"
-                        id="search"
-                        placeholder="Cari topik favoritmu..."
-                        class="w-full pl-14 pr-6 py-4 bg-white border-2 border-border-gray rounded-3xl shadow-lg focus:outline-none focus:border-slate-navy focus:ring-4 focus:ring-slate-navy/10 transition-all duration-300 text-slate-navy placeholder-cool-gray">
-                </div>
-            </div>
+            {{-- Search Bar --}}
+            <x-siswa.search-bar
+                id="search-materi"
+                placeholder="Cari topik atau materi favoritmu..."
+                :includeSmk="false"
+            />
 
             {{-- Grid Topik Materi --}}
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -136,115 +130,3 @@
         </div>
     </div>
 @endsection
-
-@push('scripts')
-    <script>
-        // Search Functionality
-        document.getElementById('search').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const cards = document.querySelectorAll('.card-materi');
-            const noResult = document.getElementById('no-result');
-
-            let visibleCount = 0;
-
-            cards.forEach(card => {
-                const title = card.querySelector('h2').textContent.toLowerCase();
-                const panel = card.querySelector('.panel-materi');
-                const materiItems = panel ? panel.querySelectorAll('a') : [];
-
-                let matchTopik = title.includes(searchTerm);
-                let matchMateri = false;
-
-                // RESET ALL (ketika search dihapus)
-                if (searchTerm === "") {
-                    // Tutup semua panel
-                    panel.classList.add('hidden');
-
-                    // Tampilkan semua item materi kembali
-                    materiItems.forEach(item => {
-                        item.style.display = "";
-                    });
-
-                    // Reset icon jadi chevron-down
-                    const btn = card.querySelector('button i');
-                    btn.classList.remove('fa-chevron-up', 'rotate-180');
-                    btn.classList.add('fa-chevron-down');
-                }
-
-                // CARI LEVEL 2
-                materiItems.forEach(item => {
-                    const materiName = item.querySelector('p').textContent.toLowerCase();
-                    if (materiName.includes(searchTerm)) {
-                        matchMateri = true;
-                        item.style.display = "";
-                    } else {
-                        // kalau yang cocok TOPIK → tampilkan semua item
-                        if (matchTopik) {
-                            item.style.display = "";
-                        } else {
-                            item.style.display = searchTerm ? "none" : "";
-                        }
-                    }
-                });
-
-                // Jika mencari materi → panel otomatis terbuka
-                if (searchTerm && matchMateri) {
-                    panel.classList.remove('hidden');
-                }
-
-                // Tentukan apakah card tampil
-                if (matchTopik || matchMateri) {
-                    card.style.display = '';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            // Jika tidak ada hasil
-            if (visibleCount === 0) {
-                noResult.classList.remove('hidden');
-            } else {
-                noResult.classList.add('hidden');
-            }
-        });
-
-        // Toggle Materi Function
-        function toggleMateri(id, btn) {
-            const el = document.getElementById(id);
-            const icon = btn.querySelector('i');
-            const isOpen = !el.classList.contains('hidden');
-
-            // Close all other open materis
-            document.querySelectorAll('.panel-materi').forEach(element => {
-                if (element.id && element.id !== id && !element.classList.contains('hidden')) {
-                    element.classList.add('hidden');
-                    // Reset icon for closed items
-                    const parentCard = element.closest('.group');
-                    if (parentCard) {
-                        const otherBtn = parentCard.querySelector('button');
-                        if (otherBtn) {
-                            const otherIcon = otherBtn.querySelector('i');
-                            if (otherIcon) {
-                                otherIcon.classList.remove('fa-chevron-up', 'rotate-180');
-                                otherIcon.classList.add('fa-chevron-down');
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Toggle current materi
-            el.classList.toggle('hidden');
-
-            // Update icon
-            if (isOpen) {
-                icon.classList.remove('fa-chevron-up', 'rotate-180');
-                icon.classList.add('fa-chevron-down');
-            } else {
-                icon.classList.remove('fa-chevron-down');
-                icon.classList.add('fa-chevron-up', 'rotate-180');
-            }
-        }
-    </script>
-@endpush
