@@ -149,16 +149,59 @@
 
             cards.forEach(card => {
                 const title = card.querySelector('h2').textContent.toLowerCase();
-                if (title.includes(searchTerm)) {
+                const panel = card.querySelector('.panel-materi');
+                const materiItems = panel ? panel.querySelectorAll('a') : [];
+
+                let matchTopik = title.includes(searchTerm);
+                let matchMateri = false;
+
+                // RESET ALL (ketika search dihapus)
+                if (searchTerm === "") {
+                    // Tutup semua panel
+                    panel.classList.add('hidden');
+
+                    // Tampilkan semua item materi kembali
+                    materiItems.forEach(item => {
+                        item.style.display = "";
+                    });
+
+                    // Reset icon jadi chevron-down
+                    const btn = card.querySelector('button i');
+                    btn.classList.remove('fa-chevron-up', 'rotate-180');
+                    btn.classList.add('fa-chevron-down');
+                }
+
+                // CARI LEVEL 2
+                materiItems.forEach(item => {
+                    const materiName = item.querySelector('p').textContent.toLowerCase();
+                    if (materiName.includes(searchTerm)) {
+                        matchMateri = true;
+                        item.style.display = "";
+                    } else {
+                        // kalau yang cocok TOPIK → tampilkan semua item
+                        if (matchTopik) {
+                            item.style.display = "";
+                        } else {
+                            item.style.display = searchTerm ? "none" : "";
+                        }
+                    }
+                });
+
+                // Jika mencari materi → panel otomatis terbuka
+                if (searchTerm && matchMateri) {
+                    panel.classList.remove('hidden');
+                }
+
+                // Tentukan apakah card tampil
+                if (matchTopik || matchMateri) {
                     card.style.display = '';
-                    card.classList.add('animate-fadeIn');
                     visibleCount++;
                 } else {
                     card.style.display = 'none';
                 }
             });
 
-            // Tampilkan pesan jika tidak ada kartu yang cocok
+            // Jika tidak ada hasil
             if (visibleCount === 0) {
                 noResult.classList.remove('hidden');
             } else {
